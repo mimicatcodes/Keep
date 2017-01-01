@@ -16,6 +16,10 @@
 		DD1EA64D1E0CA5220034C54B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA64C1E0CA5220034C54B /* Constants.swift */; };
 		DD1EA64F1E0CAEFF0034C54B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA64E1E0CAEFF0034C54B /* LoginViewController.swift */; };
 		DD1EA6511E0CAFEB0034C54B /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA6501E0CAFEB0034C54B /* ForgotPasswordViewController.swift */; };
+		DD1EA6531E0CE3B60034C54B /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA6521E0CE3B60034C54B /* FridgeViewController.swift */; };
+		DD1EA6551E0CE4700034C54B /* FridgerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA6541E0CE4700034C54B /* FridgerCollectionViewController.swift */; };
+		DD48537F1E196C4200BEAC02 /* Vegetables.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD48537E1E196C4200BEAC02 /* Vegetables.swift */; };
+		DD4853811E1975A900BEAC02 /* Fruits.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853801E1975A900BEAC02 /* Fruits.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		DD1EA64C1E0CA5220034C54B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DD1EA64E1E0CAEFF0034C54B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DD1EA6501E0CAFEB0034C54B /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		DD1EA6521E0CE3B60034C54B /* FridgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
+		DD1EA6541E0CE4700034C54B /* FridgerCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgerCollectionViewController.swift; sourceTree = "<group>"; };
+		DD48537E1E196C4200BEAC02 /* Vegetables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vegetables.swift; sourceTree = "<group>"; };
+		DD4853801E1975A900BEAC02 /* Fruits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fruits.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +70,9 @@
 		DD1EA6361E0CA41D0034C54B /* Keep */ = {
 			isa = PBXGroup;
 			children = (
+				DD48537D1E196C0400BEAC02 /* Controller */,
+				DD48537C1E196BF900BEAC02 /* View */,
+				DD48537B1E196BF400BEAC02 /* Model */,
 				DD1EA6371E0CA41D0034C54B /* AppDelegate.swift */,
 				DD1EA6391E0CA41D0034C54B /* ViewController.swift */,
 				DD1EA63B1E0CA41D0034C54B /* Main.storyboard */,
@@ -72,8 +83,33 @@
 				DD1EA64C1E0CA5220034C54B /* Constants.swift */,
 				DD1EA64E1E0CAEFF0034C54B /* LoginViewController.swift */,
 				DD1EA6501E0CAFEB0034C54B /* ForgotPasswordViewController.swift */,
+				DD1EA6521E0CE3B60034C54B /* FridgeViewController.swift */,
+				DD1EA6541E0CE4700034C54B /* FridgerCollectionViewController.swift */,
 			);
 			path = Keep;
+			sourceTree = "<group>";
+		};
+		DD48537B1E196BF400BEAC02 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DD48537E1E196C4200BEAC02 /* Vegetables.swift */,
+				DD4853801E1975A900BEAC02 /* Fruits.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		DD48537C1E196BF900BEAC02 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		DD48537D1E196C0400BEAC02 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,12 +185,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD4853811E1975A900BEAC02 /* Fruits.swift in Sources */,
 				DD1EA6401E0CA41D0034C54B /* Keep.xcdatamodeld in Sources */,
 				DD1EA63A1E0CA41D0034C54B /* ViewController.swift in Sources */,
 				DD1EA6511E0CAFEB0034C54B /* ForgotPasswordViewController.swift in Sources */,
 				DD1EA6381E0CA41D0034C54B /* AppDelegate.swift in Sources */,
 				DD1EA64F1E0CAEFF0034C54B /* LoginViewController.swift in Sources */,
 				DD1EA64D1E0CA5220034C54B /* Constants.swift in Sources */,
+				DD1EA6551E0CE4700034C54B /* FridgerCollectionViewController.swift in Sources */,
+				DD48537F1E196C4200BEAC02 /* Vegetables.swift in Sources */,
+				DD1EA6531E0CE3B60034C54B /* FridgeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
