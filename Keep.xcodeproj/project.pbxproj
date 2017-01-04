@@ -16,10 +16,39 @@
 		DD1EA64D1E0CA5220034C54B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA64C1E0CA5220034C54B /* Constants.swift */; };
 		DD1EA64F1E0CAEFF0034C54B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA64E1E0CAEFF0034C54B /* LoginViewController.swift */; };
 		DD1EA6511E0CAFEB0034C54B /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA6501E0CAFEB0034C54B /* ForgotPasswordViewController.swift */; };
-		DD1EA6531E0CE3B60034C54B /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA6521E0CE3B60034C54B /* FridgeViewController.swift */; };
-		DD1EA6551E0CE4700034C54B /* FridgerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA6541E0CE4700034C54B /* FridgerCollectionViewController.swift */; };
-		DD48537F1E196C4200BEAC02 /* Vegetables.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD48537E1E196C4200BEAC02 /* Vegetables.swift */; };
-		DD4853811E1975A900BEAC02 /* Fruits.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853801E1975A900BEAC02 /* Fruits.swift */; };
+		DD48537F1E196C4200BEAC02 /* Produce.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD48537E1E196C4200BEAC02 /* Produce.swift */; };
+		DD4853831E197CB500BEAC02 /* Condiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853821E197CB500BEAC02 /* Condiments.swift */; };
+		DD48539D1E198CCF00BEAC02 /* NoodlesGrainsSides.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD48539C1E198CCF00BEAC02 /* NoodlesGrainsSides.swift */; };
+		DD4853A11E19920E00BEAC02 /* Dairy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853A01E19920E00BEAC02 /* Dairy.swift */; };
+		DD4853A31E19938700BEAC02 /* Beverages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853A21E19938700BEAC02 /* Beverages.swift */; };
+		DD4853A91E199F7400BEAC02 /* Household.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853A81E199F7400BEAC02 /* Household.swift */; };
+		DD4853AB1E199F8300BEAC02 /* HealthAndPersonal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853AA1E199F8300BEAC02 /* HealthAndPersonal.swift */; };
+		DD4853AD1E199F9100BEAC02 /* CannedFoods.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853AC1E199F9100BEAC02 /* CannedFoods.swift */; };
+		DD4853AF1E199F9D00BEAC02 /* FrozenFoods.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853AE1E199F9D00BEAC02 /* FrozenFoods.swift */; };
+		DD4853B11E199FA600BEAC02 /* Bakery.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853B01E199FA600BEAC02 /* Bakery.swift */; };
+		DD4853B31E199FB700BEAC02 /* AlcoholicBeverages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853B21E199FB700BEAC02 /* AlcoholicBeverages.swift */; };
+		DD4853B51E199FC000BEAC02 /* Meat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853B41E199FC000BEAC02 /* Meat.swift */; };
+		DD4853B71E199FC800BEAC02 /* Seafood.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853B61E199FC800BEAC02 /* Seafood.swift */; };
+		DD4853B91E199FD600BEAC02 /* Deli.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853B81E199FD600BEAC02 /* Deli.swift */; };
+		DD4853BB1E199FEB00BEAC02 /* CookingAndBaking.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853BA1E199FEB00BEAC02 /* CookingAndBaking.swift */; };
+		DD4853BD1E199FF300BEAC02 /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853BC1E199FF300BEAC02 /* Pet.swift */; };
+		DD4853BF1E19A00900BEAC02 /* Other.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853BE1E19A00900BEAC02 /* Other.swift */; };
+		DD4853C11E19A01600BEAC02 /* Baby.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853C01E19A01600BEAC02 /* Baby.swift */; };
+		DD4853C31E19A02500BEAC02 /* Breakfast.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853C21E19A02500BEAC02 /* Breakfast.swift */; };
+		DD4853C51E19AE0F00BEAC02 /* Candies.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853C41E19AE0F00BEAC02 /* Candies.swift */; };
+		DD4853C71E19AF0000BEAC02 /* PackagedFoods.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853C61E19AF0000BEAC02 /* PackagedFoods.swift */; };
+		DD4853CD1E1B186200BEAC02 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853CC1E1B186200BEAC02 /* FridgeViewController.swift */; };
+		DD7B76261E1B3313001DE6E8 /* FridgeSectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B76251E1B3313001DE6E8 /* FridgeSectionVC.swift */; };
+		DD7B76281E1B3326001DE6E8 /* FreezerSectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B76271E1B3326001DE6E8 /* FreezerSectionVC.swift */; };
+		DD7B762A1E1B3337001DE6E8 /* PantrySectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B76291E1B3337001DE6E8 /* PantrySectionVC.swift */; };
+		DD7B762C1E1B3347001DE6E8 /* OtherSectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B762B1E1B3347001DE6E8 /* OtherSectionVC.swift */; };
+		DDC3E9801E1C76E100459295 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E97F1E1C76E100459295 /* SearchVC.swift */; };
+		DDC3E9821E1C93F400459295 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E9811E1C93F400459295 /* DataStore.swift */; };
+		DDC3E9871E1C957000459295 /* ShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E9861E1C957000459295 /* ShoppingListViewController.swift */; };
+		DDC3E9891E1C957E00459295 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E9881E1C957E00459295 /* FavoritesViewController.swift */; };
+		DDC3E98B1E1C958A00459295 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E98A1E1C958A00459295 /* SettingsViewController.swift */; };
+		DDC3E98D1E1CB86200459295 /* ShoppingListDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E98C1E1CB86100459295 /* ShoppingListDetailVC.swift */; };
+		DDC3E98F1E1CB87C00459295 /* AddItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E98E1E1CB87C00459295 /* AddItemVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,10 +63,39 @@
 		DD1EA64C1E0CA5220034C54B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DD1EA64E1E0CAEFF0034C54B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DD1EA6501E0CAFEB0034C54B /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
-		DD1EA6521E0CE3B60034C54B /* FridgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
-		DD1EA6541E0CE4700034C54B /* FridgerCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgerCollectionViewController.swift; sourceTree = "<group>"; };
-		DD48537E1E196C4200BEAC02 /* Vegetables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vegetables.swift; sourceTree = "<group>"; };
-		DD4853801E1975A900BEAC02 /* Fruits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fruits.swift; sourceTree = "<group>"; };
+		DD48537E1E196C4200BEAC02 /* Produce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Produce.swift; sourceTree = "<group>"; };
+		DD4853821E197CB500BEAC02 /* Condiments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Condiments.swift; sourceTree = "<group>"; };
+		DD48539C1E198CCF00BEAC02 /* NoodlesGrainsSides.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoodlesGrainsSides.swift; sourceTree = "<group>"; };
+		DD4853A01E19920E00BEAC02 /* Dairy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dairy.swift; sourceTree = "<group>"; };
+		DD4853A21E19938700BEAC02 /* Beverages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Beverages.swift; sourceTree = "<group>"; };
+		DD4853A81E199F7400BEAC02 /* Household.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Household.swift; sourceTree = "<group>"; };
+		DD4853AA1E199F8300BEAC02 /* HealthAndPersonal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthAndPersonal.swift; sourceTree = "<group>"; };
+		DD4853AC1E199F9100BEAC02 /* CannedFoods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CannedFoods.swift; sourceTree = "<group>"; };
+		DD4853AE1E199F9D00BEAC02 /* FrozenFoods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrozenFoods.swift; sourceTree = "<group>"; };
+		DD4853B01E199FA600BEAC02 /* Bakery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bakery.swift; sourceTree = "<group>"; };
+		DD4853B21E199FB700BEAC02 /* AlcoholicBeverages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlcoholicBeverages.swift; sourceTree = "<group>"; };
+		DD4853B41E199FC000BEAC02 /* Meat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meat.swift; sourceTree = "<group>"; };
+		DD4853B61E199FC800BEAC02 /* Seafood.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seafood.swift; sourceTree = "<group>"; };
+		DD4853B81E199FD600BEAC02 /* Deli.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deli.swift; sourceTree = "<group>"; };
+		DD4853BA1E199FEB00BEAC02 /* CookingAndBaking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CookingAndBaking.swift; sourceTree = "<group>"; };
+		DD4853BC1E199FF300BEAC02 /* Pet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
+		DD4853BE1E19A00900BEAC02 /* Other.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Other.swift; sourceTree = "<group>"; };
+		DD4853C01E19A01600BEAC02 /* Baby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Baby.swift; sourceTree = "<group>"; };
+		DD4853C21E19A02500BEAC02 /* Breakfast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Breakfast.swift; sourceTree = "<group>"; };
+		DD4853C41E19AE0F00BEAC02 /* Candies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Candies.swift; sourceTree = "<group>"; };
+		DD4853C61E19AF0000BEAC02 /* PackagedFoods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackagedFoods.swift; sourceTree = "<group>"; };
+		DD4853CC1E1B186200BEAC02 /* FridgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
+		DD7B76251E1B3313001DE6E8 /* FridgeSectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeSectionVC.swift; sourceTree = "<group>"; };
+		DD7B76271E1B3326001DE6E8 /* FreezerSectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreezerSectionVC.swift; sourceTree = "<group>"; };
+		DD7B76291E1B3337001DE6E8 /* PantrySectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PantrySectionVC.swift; sourceTree = "<group>"; };
+		DD7B762B1E1B3347001DE6E8 /* OtherSectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherSectionVC.swift; sourceTree = "<group>"; };
+		DDC3E97F1E1C76E100459295 /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		DDC3E9811E1C93F400459295 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		DDC3E9861E1C957000459295 /* ShoppingListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
+		DDC3E9881E1C957E00459295 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		DDC3E98A1E1C958A00459295 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		DDC3E98C1E1CB86100459295 /* ShoppingListDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingListDetailVC.swift; sourceTree = "<group>"; };
+		DDC3E98E1E1CB87C00459295 /* AddItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,21 +128,10 @@
 		DD1EA6361E0CA41D0034C54B /* Keep */ = {
 			isa = PBXGroup;
 			children = (
+				DD4853A41E199DFB00BEAC02 /* Supporting Files */,
 				DD48537D1E196C0400BEAC02 /* Controller */,
 				DD48537C1E196BF900BEAC02 /* View */,
 				DD48537B1E196BF400BEAC02 /* Model */,
-				DD1EA6371E0CA41D0034C54B /* AppDelegate.swift */,
-				DD1EA6391E0CA41D0034C54B /* ViewController.swift */,
-				DD1EA63B1E0CA41D0034C54B /* Main.storyboard */,
-				DD1EA6411E0CA41D0034C54B /* Assets.xcassets */,
-				DD1EA6431E0CA41D0034C54B /* LaunchScreen.storyboard */,
-				DD1EA6461E0CA41D0034C54B /* Info.plist */,
-				DD1EA63E1E0CA41D0034C54B /* Keep.xcdatamodeld */,
-				DD1EA64C1E0CA5220034C54B /* Constants.swift */,
-				DD1EA64E1E0CAEFF0034C54B /* LoginViewController.swift */,
-				DD1EA6501E0CAFEB0034C54B /* ForgotPasswordViewController.swift */,
-				DD1EA6521E0CE3B60034C54B /* FridgeViewController.swift */,
-				DD1EA6541E0CE4700034C54B /* FridgerCollectionViewController.swift */,
 			);
 			path = Keep;
 			sourceTree = "<group>";
@@ -92,8 +139,9 @@
 		DD48537B1E196BF400BEAC02 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DD48537E1E196C4200BEAC02 /* Vegetables.swift */,
-				DD4853801E1975A900BEAC02 /* Fruits.swift */,
+				DD4853A71E199F3600BEAC02 /* DataModel */,
+				DD4853A61E199F2400BEAC02 /* Constants */,
+				DD4853A51E199F0B00BEAC02 /* Categories */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -101,6 +149,7 @@
 		DD48537C1E196BF900BEAC02 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DD1EA63B1E0CA41D0034C54B /* Main.storyboard */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -108,8 +157,118 @@
 		DD48537D1E196C0400BEAC02 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				DDC3E9851E1C954E00459295 /* Settings */,
+				DDC3E9841E1C954800459295 /* Favorites */,
+				DDC3E9831E1C953F00459295 /* Shopping List */,
+				DD7B762E1E1B3389001DE6E8 /* Login */,
+				DD1EA6391E0CA41D0034C54B /* ViewController.swift */,
+				DD7B762D1E1B336C001DE6E8 /* Stock */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		DD4853A41E199DFB00BEAC02 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DD1EA6371E0CA41D0034C54B /* AppDelegate.swift */,
+				DD1EA6431E0CA41D0034C54B /* LaunchScreen.storyboard */,
+				DD1EA6461E0CA41D0034C54B /* Info.plist */,
+				DD1EA6411E0CA41D0034C54B /* Assets.xcassets */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DD4853A51E199F0B00BEAC02 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				DD4853B21E199FB700BEAC02 /* AlcoholicBeverages.swift */,
+				DD4853C01E19A01600BEAC02 /* Baby.swift */,
+				DD4853B01E199FA600BEAC02 /* Bakery.swift */,
+				DD4853A21E19938700BEAC02 /* Beverages.swift */,
+				DD4853C21E19A02500BEAC02 /* Breakfast.swift */,
+				DD4853AC1E199F9100BEAC02 /* CannedFoods.swift */,
+				DD4853821E197CB500BEAC02 /* Condiments.swift */,
+				DD4853BA1E199FEB00BEAC02 /* CookingAndBaking.swift */,
+				DD4853A01E19920E00BEAC02 /* Dairy.swift */,
+				DD4853B81E199FD600BEAC02 /* Deli.swift */,
+				DD48539C1E198CCF00BEAC02 /* NoodlesGrainsSides.swift */,
+				DD4853BC1E199FF300BEAC02 /* Pet.swift */,
+				DD48537E1E196C4200BEAC02 /* Produce.swift */,
+				DD4853A81E199F7400BEAC02 /* Household.swift */,
+				DD4853AA1E199F8300BEAC02 /* HealthAndPersonal.swift */,
+				DD4853AE1E199F9D00BEAC02 /* FrozenFoods.swift */,
+				DD4853B41E199FC000BEAC02 /* Meat.swift */,
+				DD4853B61E199FC800BEAC02 /* Seafood.swift */,
+				DD4853BE1E19A00900BEAC02 /* Other.swift */,
+				DD4853C41E19AE0F00BEAC02 /* Candies.swift */,
+				DD4853C61E19AF0000BEAC02 /* PackagedFoods.swift */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		DD4853A61E199F2400BEAC02 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				DD1EA64C1E0CA5220034C54B /* Constants.swift */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		DD4853A71E199F3600BEAC02 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				DDC3E9811E1C93F400459295 /* DataStore.swift */,
+				DD1EA63E1E0CA41D0034C54B /* Keep.xcdatamodeld */,
+			);
+			name = DataModel;
+			sourceTree = "<group>";
+		};
+		DD7B762D1E1B336C001DE6E8 /* Stock */ = {
+			isa = PBXGroup;
+			children = (
+				DD4853CC1E1B186200BEAC02 /* FridgeViewController.swift */,
+				DD7B76251E1B3313001DE6E8 /* FridgeSectionVC.swift */,
+				DD7B76271E1B3326001DE6E8 /* FreezerSectionVC.swift */,
+				DD7B76291E1B3337001DE6E8 /* PantrySectionVC.swift */,
+				DD7B762B1E1B3347001DE6E8 /* OtherSectionVC.swift */,
+				DDC3E97F1E1C76E100459295 /* SearchVC.swift */,
+			);
+			name = Stock;
+			sourceTree = "<group>";
+		};
+		DD7B762E1E1B3389001DE6E8 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				DD1EA64E1E0CAEFF0034C54B /* LoginViewController.swift */,
+				DD1EA6501E0CAFEB0034C54B /* ForgotPasswordViewController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		DDC3E9831E1C953F00459295 /* Shopping List */ = {
+			isa = PBXGroup;
+			children = (
+				DDC3E9861E1C957000459295 /* ShoppingListViewController.swift */,
+				DDC3E98C1E1CB86100459295 /* ShoppingListDetailVC.swift */,
+				DDC3E98E1E1CB87C00459295 /* AddItemVC.swift */,
+			);
+			name = "Shopping List";
+			sourceTree = "<group>";
+		};
+		DDC3E9841E1C954800459295 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				DDC3E9881E1C957E00459295 /* FavoritesViewController.swift */,
+			);
+			name = Favorites;
+			sourceTree = "<group>";
+		};
+		DDC3E9851E1C954E00459295 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				DDC3E98A1E1C958A00459295 /* SettingsViewController.swift */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,16 +344,45 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD4853811E1975A900BEAC02 /* Fruits.swift in Sources */,
 				DD1EA6401E0CA41D0034C54B /* Keep.xcdatamodeld in Sources */,
+				DDC3E98D1E1CB86200459295 /* ShoppingListDetailVC.swift in Sources */,
 				DD1EA63A1E0CA41D0034C54B /* ViewController.swift in Sources */,
 				DD1EA6511E0CAFEB0034C54B /* ForgotPasswordViewController.swift in Sources */,
+				DD4853AF1E199F9D00BEAC02 /* FrozenFoods.swift in Sources */,
+				DD4853A91E199F7400BEAC02 /* Household.swift in Sources */,
+				DD4853C51E19AE0F00BEAC02 /* Candies.swift in Sources */,
+				DD4853A11E19920E00BEAC02 /* Dairy.swift in Sources */,
+				DD7B762C1E1B3347001DE6E8 /* OtherSectionVC.swift in Sources */,
 				DD1EA6381E0CA41D0034C54B /* AppDelegate.swift in Sources */,
 				DD1EA64F1E0CAEFF0034C54B /* LoginViewController.swift in Sources */,
+				DDC3E9891E1C957E00459295 /* FavoritesViewController.swift in Sources */,
+				DD4853AD1E199F9100BEAC02 /* CannedFoods.swift in Sources */,
+				DD4853C31E19A02500BEAC02 /* Breakfast.swift in Sources */,
+				DDC3E9801E1C76E100459295 /* SearchVC.swift in Sources */,
+				DD7B76261E1B3313001DE6E8 /* FridgeSectionVC.swift in Sources */,
+				DDC3E98F1E1CB87C00459295 /* AddItemVC.swift in Sources */,
+				DD4853B71E199FC800BEAC02 /* Seafood.swift in Sources */,
+				DD4853BF1E19A00900BEAC02 /* Other.swift in Sources */,
+				DD4853BD1E199FF300BEAC02 /* Pet.swift in Sources */,
+				DDC3E9871E1C957000459295 /* ShoppingListViewController.swift in Sources */,
+				DD4853BB1E199FEB00BEAC02 /* CookingAndBaking.swift in Sources */,
+				DD4853B31E199FB700BEAC02 /* AlcoholicBeverages.swift in Sources */,
+				DDC3E9821E1C93F400459295 /* DataStore.swift in Sources */,
+				DD48539D1E198CCF00BEAC02 /* NoodlesGrainsSides.swift in Sources */,
 				DD1EA64D1E0CA5220034C54B /* Constants.swift in Sources */,
-				DD1EA6551E0CE4700034C54B /* FridgerCollectionViewController.swift in Sources */,
-				DD48537F1E196C4200BEAC02 /* Vegetables.swift in Sources */,
-				DD1EA6531E0CE3B60034C54B /* FridgeViewController.swift in Sources */,
+				DD4853CD1E1B186200BEAC02 /* FridgeViewController.swift in Sources */,
+				DDC3E98B1E1C958A00459295 /* SettingsViewController.swift in Sources */,
+				DD4853B51E199FC000BEAC02 /* Meat.swift in Sources */,
+				DD48537F1E196C4200BEAC02 /* Produce.swift in Sources */,
+				DD4853831E197CB500BEAC02 /* Condiments.swift in Sources */,
+				DD4853A31E19938700BEAC02 /* Beverages.swift in Sources */,
+				DD4853C11E19A01600BEAC02 /* Baby.swift in Sources */,
+				DD4853B11E199FA600BEAC02 /* Bakery.swift in Sources */,
+				DD7B76281E1B3326001DE6E8 /* FreezerSectionVC.swift in Sources */,
+				DD7B762A1E1B3337001DE6E8 /* PantrySectionVC.swift in Sources */,
+				DD4853AB1E199F8300BEAC02 /* HealthAndPersonal.swift in Sources */,
+				DD4853B91E199FD600BEAC02 /* Deli.swift in Sources */,
+				DD4853C71E19AF0000BEAC02 /* PackagedFoods.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
