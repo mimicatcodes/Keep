@@ -184,6 +184,47 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             
             print("********** The delete button is tapped ********** ")
+            let realm = try! Realm()
+            
+            switch self.store.buttonStatus {
+                case "Fridge":
+                    
+                    try! realm.write {
+                        let itemToBeDeleted = self.store.fridgeItems[indexPath.row]
+                        print("\(itemToBeDeleted) has been deleted")
+                        realm.delete(itemToBeDeleted)}
+                        self.tableView.reloadData()
+                        print("Deleted an item from a fridge")
+
+                case "Freezer":
+                    try! realm.write {
+                        let itemToBeDeleted = self.store.freezerItems[indexPath.row]
+                        print("\(itemToBeDeleted) has been deleted")
+                        realm.delete(itemToBeDeleted)}
+                        self.tableView.reloadData()
+                        print("Deleted an item from a fridge")
+
+                case "Pantry":
+                    try! realm.write {
+                        let itemToBeDeleted = self.store.pantryItems[indexPath.row]
+                        print("\(itemToBeDeleted) has been deleted")
+                        realm.delete(itemToBeDeleted)}
+                        self.tableView.reloadData()
+                        print("Deleted an item from a fridge")
+
+                case "Other":
+                    try! realm.write {
+                        let itemToBeDeleted = self.store.otherItems[indexPath.row]
+                        print("\(itemToBeDeleted) has been deleted")
+                        realm.delete(itemToBeDeleted)}
+                        self.tableView.reloadData()
+                        print("Deleted an item from a fridge")
+
+                default:
+                        break
+            }
+            
+            
             
         }
         
