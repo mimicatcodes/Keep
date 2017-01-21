@@ -56,3 +56,23 @@ var meat = [
     "Pork Tenderloin"
     
 ]
+
+var seafood = [
+    
+    "Fish",
+    "Crab",
+    "Fish Fillets",
+    "Fish Steaks",
+    "Fish Whole",
+    "Lobster",
+    "Mussels",
+    "Clams",
+    "Oysters",
+    "Salmon",
+    "Scallops",
+    "Shrimp",
+    "Prepped Fish",
+    "Prepped Shellfish"
+    
+]
+

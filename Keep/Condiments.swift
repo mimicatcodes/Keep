@@ -118,34 +118,34 @@ var condiments: [String] = [
 
 enum Categories {
     
-    case Fridge
-    case Freezer
-    case Pantry
-    case Other
+    case fridge
+    case freezer
+    case pantry
+    case other
 }
 
 
 enum ItemsCategories {
     
-    case Bakery
-    case Beverages
-    case BreakfastAndCereal
-    case CondimentsAndDressings
-    case CookingAndBaking
-    case Dairy
-    case Deli
-    case FrozenFoods
-    case Grains
-    case PastaAndSides
-    case HealthAndPersonalCare
-    case HouseholdAndCleaning
-    case Meat
-    case PetSupplies
-    case Produce
-    case Seafood
-    case Snacks
-    case SoupsAndCannedGoods
-    case WineBeerSpirits
+    case bakery
+    case beverages
+    case breakfastAndCereal
+    case condimentsAndDressings
+    case cookingAndBaking
+    case dairy
+    case deli
+    case frozenFoods
+    case grains
+    case pastaAndSides
+    case healthAndPersonalCare
+    case householdAndCleaning
+    case meat
+    case petSupplies
+    case produce
+    case seafood
+    case snacks
+    case soupsAndCannedGoods
+    case wineBeerSpirits
     case other
     
 }

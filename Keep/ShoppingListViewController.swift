@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import MGSwipeTableCell
+
+typealias MailActionCallback = (_ cancelled: Bool, _ deleted: Bool, _ actionIndex: Int) -> Void
 
 class ShoppingListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
@@ -14,56 +17,106 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBOutlet weak var tableView: UITableView!
     
-    var listTitlesTest = ["Dinner","Birthday Dinner","Costco","CVS","Wing Dinner Treat","Things to Eat"]
+    let list1 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "17 items remaining")
+    let list2 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "17 items remaining")
+    let list3 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "17 items remaining")
+    let list4 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "17 items remaining")
+    let list5 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "17 items remaining")
+    let list6 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "17 items remaining")
+    let list7 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "17 items remaining")
+    let list8 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "17 items remaining")
+    
+    var listTitlesTest = [shoppingList]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        listTitlesTest = [list1, list2, list3, list4, list5, list6, list7, list8]
 
-        // Do any additional setup after loading the view.
     }
+    
     @IBAction func addListTapped(_ sender: Any) {
         store.buttonStatus = "Create Event"
         performSegue(withIdentifier: "addList", sender: nil)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func titleForIndexPath(_ indexPath: IndexPath) -> String {
+        return listTitlesTest[indexPath.row].title
     }
+    
+    func deleteList(_ indexPath:IndexPath) {
+        listTitlesTest.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .left)
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listTitlesTest.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "shoppingListCell", for: indexPath) as! ShoppingListCell
-        cell.shoppingListTitleLabel.text = listTitlesTest[indexPath.row]
+        
+        let reuseIdentifier = "shoppingListCell"
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as! ShoppingListCell
+        
+        cell.shoppingListTitleLabel.text = listTitlesTest[indexPath.row].title
+        //cell.delegate = self //optional
+        
+        let rightButton1 = MGSwipeButton(title: "Delete", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
+            self.createAlert(withTitle: "Delete")
+            return true
+        }
+        
+        let rightButton2 = MGSwipeButton(title: "Edit", backgroundColor: UIColor.green) { (sender: MGSwipeTableCell) -> Bool in
+            self.createAlert(withTitle: "Edit")
+            return true
+        }
+        
+        let leftButton1 = MGSwipeButton(title: "Left1", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
+            self.createAlert(withTitle: "Left1")
+            return true
+        }
+        
+        let leftButton2 = MGSwipeButton(title: "Left2", backgroundColor: UIColor.yellow) { (sender: MGSwipeTableCell) -> Bool in
+            self.createAlert(withTitle: "Left2")
+            return true
+        }
+        
+        rightButton1.setPadding(38)
+        rightButton2.setPadding(38)
+        cell.rightButtons = [rightButton1, rightButton2]
+        cell.rightExpansion.buttonIndex = 1
+        
+        leftButton1.setPadding(38)
+        leftButton2.setPadding(38)
+        cell.leftButtons = [leftButton1, leftButton2]
+        cell.leftExpansion.buttonIndex = 1
         return cell
+        
     }
     
-    // MARK: - Methods
-    
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    func createAlert(withTitle:String) {
         
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            
-            print("********** The delete button is tapped ********** ")
+        let alert = UIAlertController(title: withTitle, message: "", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
             
         }
         
-        let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-            // share item at indexPath
-            
-            //self.performSegue(withIdentifier: "addEvent", sender: nil)
-            print("********** The delete button is tapped ********** ")
-            
-        }
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
         
-        return [delete, edit]
+    }
+     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 110
     }
 
 }
 
-class ShoppingListCell: UITableViewCell {
+class ShoppingListCell: MGSwipeTableCell {
     @IBOutlet weak var shoppingListTitleLabel: UILabel!
+}
+
+struct shoppingList {
+    let title: String
+    let date: NSDate
+    let itemsRemaining: String
 }

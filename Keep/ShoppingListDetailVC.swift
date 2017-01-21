@@ -2,34 +2,74 @@
 //  ShoppingListDetailVC.swift
 //  Keep
 //
-//  Created by Mirim An on 1/3/17.
+//  Created by Luna An on 1/3/17.
 //  Copyright © 2017 Mimicatcodes. All rights reserved.
 //
 
 import UIKit
+import QuartzCore
+import MGSwipeTableCell
+import M13Checkbox
 
-class ShoppingListDetailVC: UIViewController {
-
+class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
+    
+    var toDoItems = [ToDoItem]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        //tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor.clear
+        tableView.rowHeight = 100;
+        //tableView.allowsMultipleSelection = true
+        
+        toDoItems.append(ToDoItem(title: "Apple"))
+        toDoItems.append(ToDoItem(title: "Milk"))
+        toDoItems.append(ToDoItem(title: "Blue Cheese"))
+        toDoItems.append(ToDoItem(title: "Bread"))
+        toDoItems.append(ToDoItem(title: "Bagels"))
+        toDoItems.append(ToDoItem(title: "Basil Pesto"))
+        toDoItems.append(ToDoItem(title: "Pasta"))
+        toDoItems.append(ToDoItem(title: "Musseles"))
+        toDoItems.append(ToDoItem(title: "Strawberry Jam"))
+        toDoItems.append(ToDoItem(title: "Toilet Paper"))
+        toDoItems.append(ToDoItem(title: "Chicken"))
+        toDoItems.append(ToDoItem(title: "Beef"))
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+//    @IBAction func addItemBtnTapped(_ sender: Any) {
+//        
+//        performSegue(withIdentifier: "addItem", sender: nil)
+//    }
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return toDoItems.count
     }
-    */
-
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier:"listDetailCell", for: indexPath) as! ListDetailCell
+        
+        //cell.selectionStyle = .none
+        cell.titleLabel.text = toDoItems[indexPath.row].title
+        
+        return cell
+    }
+        
 }
+
+
+
+class ListDetailCell:UITableViewCell {
+
+    
+    @IBOutlet weak var titleLabel: UILabel!
+
+    @IBOutlet weak var checkBox: M13Checkbox!
+    
+}
+
+

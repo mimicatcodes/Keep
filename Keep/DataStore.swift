@@ -6,40 +6,35 @@
 //  Copyright © 2017 Mimicatcodes. All rights reserved.
 
 import Foundation
-import CoreData
+import RealmSwift
 
 class DataStore{
 
     static let sharedInstance = DataStore()
-    private init(){}
+    fileprivate init(){}
     
-    // MARK: - Core Data stack
+    var fridgeItems = try! Realm().objects(Item.self).filter("location == 'Fridge'")
+    var freezerItems = try! Realm().objects(Item.self).filter("location == 'Freezer'")
+    var pantryItems = try! Realm().objects(Item.self).filter("location == 'Pantry'")
+    var otherItems = try! Realm().objects(Item.self).filter("location == 'Other'")
     
-    lazy var persistentContainer: NSPersistentContainer = {
+    var fridgeSectionNames: [String] {
         
-        let container = NSPersistentContainer(name: "Keep")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-               
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
+        return Set(fridgeItems.value(forKeyPath: "category") as! [String]).sorted()
+    }
+
+    var freezerSectionNames: [String] {
+        return Set(freezerItems.value(forKeyPath: "category") as! [String]).sorted()
+    }
     
-    // MARK: - Core Data Saving support
+    var pantrySectionNames: [String] {
+        return Set(pantryItems.value(forKeyPath: "category") as! [String]).sorted()
+    }
     
-    func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
+    var otherSectionNames: [String] {
+        return Set(otherItems.value(forKeyPath: "category") as! [String]).sorted()
     }
     
     var buttonStatus = ""
+    
 }

@@ -9,6 +9,8 @@
 import Foundation
 
 var alhoholicBeverages = [
+    
+    // wine, beer and spirits
 
     "Beer",
     "Light Beer",

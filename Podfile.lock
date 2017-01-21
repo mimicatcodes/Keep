@@ -1,0 +1,23 @@
+PODS:
+  - M13Checkbox (3.1.2)
+  - MGSwipeTableCell (1.5.6)
+  - Realm (2.1.1):
+    - Realm/Headers (= 2.1.1)
+  - Realm/Headers (2.1.1)
+  - RealmSwift (2.1.1):
+    - Realm (= 2.1.1)
+
+DEPENDENCIES:
+  - M13Checkbox
+  - MGSwipeTableCell
+  - RealmSwift
+
+SPEC CHECKSUMS:
+  M13Checkbox: 7c7c7e8d90f514b6925523531762b768ca778e53
+  MGSwipeTableCell: 616700eb0ffd1c611ba909066cb7fd739790a0a7
+  Realm: a55959c0b171a5fe5267406d17f314fec3cefaae
+  RealmSwift: 749fd955bf8d6471c21d218b9389a47aaeccfe3f
+
+PODFILE CHECKSUM: b6a1375736ef3ec1daec5cad95586911655f10de
+
+COCOAPODS: 1.0.1

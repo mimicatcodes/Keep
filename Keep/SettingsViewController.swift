@@ -21,15 +21,24 @@ class SettingsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+
+
+//    @IBAction func switchChanged(_ sender: UISwitch) {
+//        if sender.isOn {
+//            switchStatusLabel.text = "On"
+//            categorySwitch.isOn = true
+//        } else {
+//            switchStatusLabel.text = "Off"
+//            categorySwitch.isOn = false
+//        }
+//    }
+//
+//    func styleButtons(){
+//        sortAZButton.layer.cornerRadius = 15
+//        sortAZButton.layer.masksToBounds = true
+//        sortExpButton.layer.cornerRadius = 15
+//        sortExpButton.layer.masksToBounds = true
+//
+//    }

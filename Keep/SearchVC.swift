@@ -7,40 +7,55 @@
 //
 
 import UIKit
+import RealmSwift
 
-class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
-
-    let testItems = bakery
-
+class SearchVC: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
+    
+    var sampleData = bakery
+    var filteredData = [String]()
+    let searchController = UISearchController(searchResultsController: nil)
+    
     @IBOutlet weak var searchBar: UISearchBar!
-
-    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func cancelBtnTapped(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bakery.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath)
-        cell.textLabel?.text = bakery[indexPath.row]
-        return cell
-    }
-    
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         
-        return true
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        self.tableView.tableHeaderView = searchController.searchBar
     }
-
+    
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return self.filteredData.count
+        }
+        return sampleData.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        
+        if searchController.isActive && searchController.searchBar.text != "" {
+            cell?.textLabel?.text = self.filteredData[indexPath.row]
+        } else {
+            cell?.textLabel?.text = self.sampleData[indexPath.row]
+        }
+        
+        return cell!
+    }
+    
+    func filterContentForSearch(_ searchString: String){
+        
+        self.filteredData = self.sampleData.filter(){nil != $0.range(of: searchString)}
+        self.tableView.reloadData()
+    }
+    func updateSearchResults(for searchController: UISearchController) {
+        self.filterContentForSearch(searchController.searchBar.text!)
+    }
+    
 }
+
+
