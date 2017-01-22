@@ -20,13 +20,15 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     var activeTextField:UITextField?
     let formatter = DateFormatter()
     var selectedIndex: Int = 0
-    
+    var selectedExpIndex: Int = 0
+
     @IBOutlet weak var nameTextfield: UITextField!
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var quantityMinusButton: UIButton!
     @IBOutlet weak var purchaseDateTextfield: UITextField!
     @IBOutlet weak var expDateTextfield: UITextField!
     @IBOutlet var locationButtons: [UIButton]!
+    @IBOutlet var expDateButtons: [UIButton]!
     @IBOutlet weak var categoryTextfield: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     
@@ -38,6 +40,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
         customToolBarForPickers()
         formatInitialData()
         formatDates()
+        hideKeyboard()
 
     }
     
@@ -82,7 +85,16 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     
     @IBAction func didPressExpDateBtn(_ sender: UIButton) {
         
-        switch sender.tag {
+        let previousIndex = selectedExpIndex
+        selectedExpIndex = sender.tag
+        
+        expDateButtons[selectedExpIndex].isEnabled = false
+        expDateButtons[previousIndex].isEnabled = true
+        
+        expDateButtons[previousIndex].isSelected = false
+        sender.isSelected = true
+        
+        switch selectedExpIndex {
         case 0:
             let today = Date()
             let fiveDaysLater = Calendar.current.date(byAdding: .day, value: 5, to: today)
@@ -90,24 +102,31 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
                 
                 expDateTextfield.text = formatter.string(from: date).uppercased()
             }
+            
+
         case 1:
             let today = Date()
             let aWeekLater = Calendar.current.date(byAdding: .day, value: 7, to: today)
             if let date = aWeekLater {
                 expDateTextfield.text = formatter.string(from: date).uppercased()
             }
+            
+            
         case 2:
             let today = Date()
             let twoWeeksLater = Calendar.current.date(byAdding: .day, value: 14, to: today)
             if let date = twoWeeksLater {
                 expDateTextfield.text = formatter.string(from: date).uppercased()
             }
+            
         case 3:
             expDateTextfield.text = "None"
+        
         default:
             break
             
         }
+        
     }
     
     
@@ -169,7 +188,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
         try! realm.write {
             
             realm.add(item)
-            print("***** \(item.name) is added to realm database in \(item.category) ***** ")
+            print("***** \(item.name) is added to realm database in \(item.category) in \(item.location) ***** ")
             
         }
         
@@ -241,7 +260,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
         quantity = 1
         quantityLabel.text = "\(quantity)"
         locationButtons[selectedIndex].isSelected = true
-        didPressLocationBtn(locationButtons[selectedIndex])
+        expDateButtons[selectedExpIndex].isSelected = false
         purchaseDateTextfield.text = formatter.string(from: Date()).uppercased()
         expDateTextfield.text = formatter.string(from: Date()).uppercased()
         let currentDate = Date()
@@ -275,7 +294,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
         expDateTextfield.inputView = datePicker2
         datePicker2.datePickerMode = UIDatePickerMode.date
         datePicker2.addTarget(self, action: #selector(self.datePickerChanged(sender:)), for: .valueChanged)
-        
+        expDateButtons[selectedExpIndex].isSelected = false
         formatDateForTextFields()
         
     }
@@ -314,4 +333,22 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     }
     
 }
+
+extension UIViewController
+{
+    func hideKeyboard()
+    {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(UIViewController.dismissKeyboard))
+        
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard()
+    {
+        view.endEditing(true)
+    }
+}
+
 
