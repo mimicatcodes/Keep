@@ -36,8 +36,10 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func addListTapped(_ sender: Any) {
-        store.buttonStatus = "Create Event"
+        
+        //store.buttonStatus = "Create Event"
         performSegue(withIdentifier: "addList", sender: nil)
+        
     }
     
     func titleForIndexPath(_ indexPath: IndexPath) -> String {

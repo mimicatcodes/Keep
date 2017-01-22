@@ -183,7 +183,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             
-            print("********** The delete button is tapped ********** ")
             let realm = try! Realm()
             
             switch self.store.buttonStatus {
@@ -194,7 +193,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                         print("\(itemToBeDeleted) has been deleted")
                         realm.delete(itemToBeDeleted)}
                         self.tableView.reloadData()
-                        print("Deleted an item from a fridge")
+                        print("Deleted an item from a Fridge")
 
                 case "Freezer":
                     try! realm.write {
@@ -202,7 +201,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                         print("\(itemToBeDeleted) has been deleted")
                         realm.delete(itemToBeDeleted)}
                         self.tableView.reloadData()
-                        print("Deleted an item from a fridge")
+                        print("Deleted an item from Freezer")
 
                 case "Pantry":
                     try! realm.write {
@@ -210,7 +209,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                         print("\(itemToBeDeleted) has been deleted")
                         realm.delete(itemToBeDeleted)}
                         self.tableView.reloadData()
-                        print("Deleted an item from a fridge")
+                        print("Deleted an item from Pantry")
 
                 case "Other":
                     try! realm.write {
@@ -218,13 +217,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                         print("\(itemToBeDeleted) has been deleted")
                         realm.delete(itemToBeDeleted)}
                         self.tableView.reloadData()
-                        print("Deleted an item from a fridge")
+                        print("Deleted an item from Other")
 
                 default:
                         break
             }
-            
-            
             
         }
         

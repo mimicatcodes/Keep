@@ -15,6 +15,10 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     var location:Location = .Fridge
     var quantity: Int = 1
     var labelView: UILabel!
+    let datePicker1 = UIDatePicker()
+    let datePicker2 = UIDatePicker()
+    var activeTextField:UITextField?
+    let formatter = DateFormatter()
     
     @IBOutlet weak var nameTextfield: UITextField!
     @IBOutlet weak var quantityLabel: UILabel!
@@ -24,24 +28,86 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     @IBOutlet weak var categoryTextfield: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     
-    let datePicker = UIDatePicker()
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         saveButton.isEnabled = false
         saveButton.backgroundColor = UIColor.clear
-        quantity = 1
-        quantityLabel.text = "\(quantity)"
+        customToolBarForPickers()
         formatInitialDate()
+        formatDates()
 
     }
     
-    @IBAction func purchaseDateDidBeginEditing(_ sender: UITextField) {
-        
-        formatDate()
-        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        formatInitialDate()
+        formatDates()
     }
+    
+    func formatDates(){
+        
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        formatter.dateFormat = "MMM dd, yyyy"
+    }
+    
+    func customToolBarForPickers(){
+        
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor.darkGray
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePicker))
+        
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(donePicker))
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        expDateTextfield.inputAccessoryView = toolBar
+        purchaseDateTextfield.inputAccessoryView = toolBar
+    }
+    
+    func donePicker(sender:UIBarButtonItem){
+        
+        activeTextField?.resignFirstResponder()
+    
+    }
+    
+    @IBAction func didPressExpDateBtn(_ sender: UIButton) {
+        
+        switch sender.tag {
+        case 0:
+            let today = Date()
+            let fiveDaysLater = Calendar.current.date(byAdding: .day, value: 5, to: today)
+            if let date = fiveDaysLater {
+                
+                expDateTextfield.text = formatter.string(from: date).uppercased()
+            }
+        case 1:
+            let today = Date()
+            let aWeekLater = Calendar.current.date(byAdding: .day, value: 7, to: today)
+            if let date = aWeekLater {
+                expDateTextfield.text = formatter.string(from: date).uppercased()
+            }
+        case 2:
+            let today = Date()
+            let twoWeeksLater = Calendar.current.date(byAdding: .day, value: 14, to: today)
+            if let date = twoWeeksLater {
+                expDateTextfield.text = formatter.string(from: date).uppercased()
+            }
+        case 3:
+            expDateTextfield.text = "None"
+        default:
+            break
+            
+        }
+    }
+    
     
     @IBAction func didPressLocationBtn(_ sender: UIButton) {
         
@@ -122,18 +188,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
         }
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool{
-        
-        if nameTextfield.text != nil && nameTextfield.text != "" {
-            
-            saveButton.isEnabled = true
-            saveButton.backgroundColor = UIColor.cyan
-            
-        }
-        
-        return true
-    }
-    
     func showAlert() {
         
         labelView = UILabel(frame: CGRect(x: 0, y: 60, width: self.view.frame.width, height: 50))
@@ -158,56 +212,70 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
         }
     }
     
-    
-    func formatDate() {
+    func formatDateForTextFields() {
         
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        formatter.dateFormat = "MMM dd, yyyy"
-        purchaseDateTextfield.text = formatter.string(from: datePicker.date).uppercased()
+        purchaseDateTextfield.text = formatter.string(from: datePicker1.date).uppercased()
+        expDateTextfield.text = formatter.string(from: datePicker2.date).uppercased()
         
     }
     
     func formatInitialDate() {
         
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        formatter.dateFormat = "MMM dd, yyyy"
-        purchaseDateTextfield.text = formatter.string(from: NSDate() as Date).uppercased()
-        let currentDate = NSDate()
-        datePicker.setDate(currentDate as Date, animated: false)
+        quantity = 1
+        quantityLabel.text = "\(quantity)"
+        purchaseDateTextfield.text = formatter.string(from: Date()).uppercased()
+        expDateTextfield.text = formatter.string(from: Date()).uppercased()
+        let currentDate = Date()
+        datePicker1.setDate(currentDate, animated: false)
+        datePicker2.setDate(currentDate, animated: false)
         
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField){
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool{
         
-        purchaseDateTextfield.inputView = datePicker
-        datePicker.datePickerMode = UIDatePickerMode.date
-        datePicker.addTarget(self, action: #selector(self.datePickerChanged(sender:)) , for: .valueChanged)
+        if nameTextfield.text != nil && nameTextfield.text != "" {
+            
+            saveButton.isEnabled = true
+            saveButton.backgroundColor = UIColor.cyan
+            
+        }
+        
+        return true
+    }
+    
+
+    
+    func textFieldDidBeginEditing(_ textField: UITextField){
+     
+        activeTextField = textField
+
+        purchaseDateTextfield.inputView = datePicker1
+        datePicker1.datePickerMode = UIDatePickerMode.date
+        datePicker1.addTarget(self, action: #selector(self.datePickerChanged(sender:)) , for: .valueChanged)
+        
+        expDateTextfield.inputView = datePicker2
+        datePicker2.datePickerMode = UIDatePickerMode.date
+        datePicker2.addTarget(self, action: #selector(self.datePickerChanged(sender:)), for: .valueChanged)
+        
+        formatDateForTextFields()
         
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
        
-        purchaseDateTextfield.resignFirstResponder()
+         activeTextField?.resignFirstResponder()
+
         return true
     }
     
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        
-        return true
-        
-    }
     
     func datePickerChanged(sender: UIDatePicker) {
         
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        formatter.dateFormat = "MMM dd, yyyy"
-        purchaseDateTextfield.text = formatter.string(from: sender.date).uppercased()
+        if sender == datePicker1 {
+            purchaseDateTextfield.text = formatter.string(from: sender.date).uppercased()
+        } else if sender == datePicker2 {
+            expDateTextfield.text = formatter.string(from: sender.date).uppercased()
+        }
         
     }
     

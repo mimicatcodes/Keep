@@ -14,7 +14,7 @@ class Item : Object {
     
     dynamic var name: String = ""
     dynamic var quantity : String = "1"
-    dynamic var expDate: String = "" // Use date formatter
+    dynamic var expDate: String = "" 
     dynamic var purchaseDate: String = ""
     dynamic var isConsumed: Bool = false
     dynamic var location: String = ""
