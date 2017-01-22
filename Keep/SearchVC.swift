@@ -11,12 +11,12 @@ import RealmSwift
 
 class SearchVC: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
     
-    var sampleData = bakery
-    var filteredData = [String]()
+    let store = DataStore.sharedInstance
+    var filteredItems:Results<Item>?
     let searchController = UISearchController(searchResultsController: nil)
     
     @IBOutlet weak var searchBar: UISearchBar!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,18 +30,20 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UISearchResultsUpdat
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if searchController.isActive && searchController.searchBar.text != "" {
-            return self.filteredData.count
+            if let items = self.filteredItems {
+                return items.count
+            }
         }
-        return sampleData.count
+        return store.allItems.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         
         if searchController.isActive && searchController.searchBar.text != "" {
-            cell?.textLabel?.text = self.filteredData[indexPath.row]
+            cell?.textLabel?.text = self.filteredItems?[indexPath.row].name
         } else {
-            cell?.textLabel?.text = self.sampleData[indexPath.row]
+            cell?.textLabel?.text = self.store.allItems[indexPath.row].name
         }
         
         return cell!
@@ -49,7 +51,9 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UISearchResultsUpdat
     
     func filterContentForSearch(_ searchString: String){
         
-        self.filteredData = self.sampleData.filter(){nil != $0.range(of: searchString)}
+        let allItems = store.allItems
+        let predicate = NSPredicate(format: "name contains[c] %@", searchString)
+        self.filteredItems = allItems.filter(predicate)
         self.tableView.reloadData()
     }
     func updateSearchResults(for searchController: UISearchController) {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 import MGSwipeTableCell
 
 typealias MailActionCallback = (_ cancelled: Bool, _ deleted: Bool, _ actionIndex: Int) -> Void

@@ -38,7 +38,6 @@
 		DDC3E98B1E1C958A00459295 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E98A1E1C958A00459295 /* SettingsViewController.swift */; };
 		DDC3E98D1E1CB86200459295 /* ShoppingListDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E98C1E1CB86100459295 /* ShoppingListDetailVC.swift */; };
 		DDC3E98F1E1CB87C00459295 /* AddListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E98E1E1CB87C00459295 /* AddListVC.swift */; };
-		DDC3E9CD1E204A3C00459295 /* Strikethrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E9CC1E204A3C00459295 /* Strikethrough.swift */; };
 		DDC3E9CF1E204B0600459295 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E9CE1E204B0600459295 /* ToDoItem.swift */; };
 		DDC3E9D11E20580B00459295 /* AddItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E9D01E20580B00459295 /* AddItemVC.swift */; };
 		DDC3EB9E1E2DBC3900459295 /* AddItemsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3EB9D1E2DBC3900459295 /* AddItemsVC.swift */; };
@@ -85,7 +84,6 @@
 		DDC3E98A1E1C958A00459295 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		DDC3E98C1E1CB86100459295 /* ShoppingListDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingListDetailVC.swift; sourceTree = "<group>"; };
 		DDC3E98E1E1CB87C00459295 /* AddListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListVC.swift; sourceTree = "<group>"; };
-		DDC3E9CC1E204A3C00459295 /* Strikethrough.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strikethrough.swift; sourceTree = "<group>"; };
 		DDC3E9CE1E204B0600459295 /* ToDoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		DDC3E9D01E20580B00459295 /* AddItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemVC.swift; sourceTree = "<group>"; };
 		DDC3EB9D1E2DBC3900459295 /* AddItemsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemsVC.swift; sourceTree = "<group>"; };
@@ -179,11 +177,11 @@
 		DD48537D1E196C0400BEAC02 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				DDC3E9851E1C954E00459295 /* Settings */,
-				DDC3E9841E1C954800459295 /* Favorites */,
-				DDC3E9831E1C953F00459295 /* Shopping List */,
 				DD7B762E1E1B3389001DE6E8 /* Login */,
 				DD7B762D1E1B336C001DE6E8 /* Stock */,
+				DDC3E9831E1C953F00459295 /* Shopping List */,
+				DDC3E9851E1C954E00459295 /* Settings */,
+				DDC3E9841E1C954800459295 /* Favorites */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -263,7 +261,6 @@
 				DDC3E9861E1C957000459295 /* ShoppingListViewController.swift */,
 				DDC3E98C1E1CB86100459295 /* ShoppingListDetailVC.swift */,
 				DDC3E98E1E1CB87C00459295 /* AddListVC.swift */,
-				DDC3E9CC1E204A3C00459295 /* Strikethrough.swift */,
 				DDC3E9CE1E204B0600459295 /* ToDoItem.swift */,
 				DDC3E9D01E20580B00459295 /* AddItemVC.swift */,
 			);
@@ -415,7 +412,6 @@
 				DD1EA6511E0CAFEB0034C54B /* ForgotPasswordViewController.swift in Sources */,
 				DD4853AF1E199F9D00BEAC02 /* FrozenFoods.swift in Sources */,
 				DDC3EBA01E31365B00459295 /* Category.swift in Sources */,
-				DDC3E9CD1E204A3C00459295 /* Strikethrough.swift in Sources */,
 				DD4853A91E199F7400BEAC02 /* Household.swift in Sources */,
 				DD4853A11E19920E00BEAC02 /* Dairy.swift in Sources */,
 				DD1EA6381E0CA41D0034C54B /* AppDelegate.swift in Sources */,

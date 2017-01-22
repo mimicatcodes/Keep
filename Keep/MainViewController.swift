@@ -231,7 +231,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
             // share item at indexPath
             
-            //self.performSegue(withIdentifier: "addEvent", sender: nil)
+            print("EDIT Tapped")
             
         }
         

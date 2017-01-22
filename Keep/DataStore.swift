@@ -13,6 +13,7 @@ class DataStore{
     static let sharedInstance = DataStore()
     fileprivate init(){}
     
+    var allItems = try! Realm().objects(Item.self)
     var fridgeItems = try! Realm().objects(Item.self).filter("location == 'Fridge'")
     var freezerItems = try! Realm().objects(Item.self).filter("location == 'Freezer'")
     var pantryItems = try! Realm().objects(Item.self).filter("location == 'Pantry'")
