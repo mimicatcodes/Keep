@@ -19,12 +19,14 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     let datePicker2 = UIDatePicker()
     var activeTextField:UITextField?
     let formatter = DateFormatter()
+    var selectedIndex: Int = 0
     
     @IBOutlet weak var nameTextfield: UITextField!
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var quantityMinusButton: UIButton!
     @IBOutlet weak var purchaseDateTextfield: UITextField!
     @IBOutlet weak var expDateTextfield: UITextField!
+    @IBOutlet var locationButtons: [UIButton]!
     @IBOutlet weak var categoryTextfield: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     
@@ -34,14 +36,14 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
         saveButton.isEnabled = false
         saveButton.backgroundColor = UIColor.clear
         customToolBarForPickers()
-        formatInitialDate()
+        formatInitialData()
         formatDates()
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        formatInitialDate()
+        formatInitialData()
         formatDates()
     }
     
@@ -111,7 +113,16 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     
     @IBAction func didPressLocationBtn(_ sender: UIButton) {
         
-        switch sender.tag {
+        let previousIndex = selectedIndex
+        selectedIndex = sender.tag
+        
+        locationButtons[selectedIndex].isEnabled = false
+        locationButtons[previousIndex].isEnabled = true
+        
+        locationButtons[previousIndex].isSelected = false
+        sender.isSelected = true
+        
+        switch selectedIndex {
         case 0:
             self.location = .Fridge
             print("-------Fridge btn tapped: location is \(location)")
@@ -128,6 +139,12 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
         default:
             break
             
+        }
+        
+        if locationButtons[selectedIndex].isHighlighted {
+            
+            locationButtons[selectedIndex].backgroundColor = UIColor.green
+            locationButtons[previousIndex].backgroundColor = UIColor.clear
         }
     }
     
@@ -219,10 +236,12 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
         
     }
     
-    func formatInitialDate() {
+    func formatInitialData() {
         
         quantity = 1
         quantityLabel.text = "\(quantity)"
+        locationButtons[selectedIndex].isSelected = true
+        didPressLocationBtn(locationButtons[selectedIndex])
         purchaseDateTextfield.text = formatter.string(from: Date()).uppercased()
         expDateTextfield.text = formatter.string(from: Date()).uppercased()
         let currentDate = Date()
@@ -284,7 +303,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
         nameTextfield.text = nil
         quantity = 1
         quantityLabel.text = "1"
-        formatInitialDate()
+        formatInitialData()
         expDateTextfield.text = nil
         location = .Fridge
         categoryTextfield.text = nil

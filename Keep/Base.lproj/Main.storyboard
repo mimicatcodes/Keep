@@ -607,6 +607,10 @@
                         <outlet property="quantityLabel" destination="t7B-YI-LJO" id="JH5-eA-oA4"/>
                         <outlet property="quantityMinusButton" destination="z4L-pD-lU0" id="jyk-Zc-2Jd"/>
                         <outlet property="saveButton" destination="bMH-H0-EAs" id="cli-pd-eu6"/>
+                        <outletCollection property="locationButtons" destination="uCQ-10-AR7" collectionClass="NSMutableArray" id="eC5-aZ-7OM"/>
+                        <outletCollection property="locationButtons" destination="Snn-VI-nzp" collectionClass="NSMutableArray" id="iqj-AD-VQ9"/>
+                        <outletCollection property="locationButtons" destination="oYN-Qq-60A" collectionClass="NSMutableArray" id="94n-ab-lc9"/>
+                        <outletCollection property="locationButtons" destination="bB1-pC-WSW" collectionClass="NSMutableArray" id="Yz2-VG-T2M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a5n-Wn-EqX" userLabel="First Responder" sceneMemberID="firstResponder"/>
