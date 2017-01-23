@@ -85,15 +85,23 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     
     @IBAction func didPressExpDateBtn(_ sender: UIButton) {
         
-        let previousIndex = selectedExpIndex
         selectedExpIndex = sender.tag
         
-        expDateButtons[selectedExpIndex].isEnabled = false
-        expDateButtons[previousIndex].isEnabled = true
-        
-        expDateButtons[previousIndex].isSelected = false
-        sender.isSelected = true
-        
+        expDateButtons[selectedExpIndex].isSelected = !expDateButtons[selectedExpIndex].isSelected
+
+        if expDateButtons[selectedExpIndex].isSelected {
+            
+            expDateButtons[selectedExpIndex].backgroundColor = UIColor.red
+            
+        } else {
+            
+            expDateButtons[selectedExpIndex].backgroundColor = UIColor.lightGray
+            DispatchQueue.main.async {
+                self.expDateTextfield.text = self.formatter.string(from: Date()).uppercased()
+            }
+            
+        }
+
         switch selectedExpIndex {
         case 0:
             let today = Date()
@@ -102,14 +110,17 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
                 
                 expDateTextfield.text = formatter.string(from: date).uppercased()
             }
+            print("5 Days")
+        
             
-
         case 1:
             let today = Date()
             let aWeekLater = Calendar.current.date(byAdding: .day, value: 7, to: today)
             if let date = aWeekLater {
                 expDateTextfield.text = formatter.string(from: date).uppercased()
             }
+            print("7 Days")
+
             
             
         case 2:
@@ -118,15 +129,21 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
             if let date = twoWeeksLater {
                 expDateTextfield.text = formatter.string(from: date).uppercased()
             }
+            print("14 Days")
+            selectedIndex = 2
+
             
         case 3:
+            print("Never")
             expDateTextfield.text = "None"
-        
+            selectedIndex = 3
+
+    
         default:
             break
             
         }
-        
+  
     }
     
     
@@ -137,7 +154,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
         
         locationButtons[selectedIndex].isEnabled = false
         locationButtons[previousIndex].isEnabled = true
-        
         locationButtons[previousIndex].isSelected = false
         sender.isSelected = true
         
@@ -163,8 +179,13 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
         if locationButtons[selectedIndex].isHighlighted {
             
             locationButtons[selectedIndex].backgroundColor = UIColor.green
-            locationButtons[previousIndex].backgroundColor = UIColor.clear
+            locationButtons[previousIndex].backgroundColor = UIColor.lightGray
         }
+        
+        if locationButtons[previousIndex].isSelected == false {
+            locationButtons[previousIndex].backgroundColor = UIColor.lightGray
+        }
+        
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
@@ -257,9 +278,24 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     
     func formatInitialData() {
         
+        selectedIndex = 0
+        selectedExpIndex = 0
+        nameTextfield.text = ""
+        categoryTextfield.text = ""
         quantity = 1
         quantityLabel.text = "\(quantity)"
         locationButtons[selectedIndex].isSelected = true
+        DispatchQueue.main.async {
+            self.locationButtons[0].backgroundColor = UIColor.green
+            self.locationButtons[1].backgroundColor = UIColor.lightGray
+            self.locationButtons[2].backgroundColor = UIColor.lightGray
+            self.locationButtons[3].backgroundColor = UIColor.lightGray
+
+            for button in self.expDateButtons {
+                button.backgroundColor = UIColor.lightGray
+            }
+        }
+        
         expDateButtons[selectedExpIndex].isSelected = false
         purchaseDateTextfield.text = formatter.string(from: Date()).uppercased()
         expDateTextfield.text = formatter.string(from: Date()).uppercased()
@@ -286,19 +322,29 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField){
      
         activeTextField = textField
-
-        purchaseDateTextfield.inputView = datePicker1
-        datePicker1.datePickerMode = UIDatePickerMode.date
-        datePicker1.addTarget(self, action: #selector(self.datePickerChanged(sender:)) , for: .valueChanged)
         
-        expDateTextfield.inputView = datePicker2
-        datePicker2.datePickerMode = UIDatePickerMode.date
-        datePicker2.addTarget(self, action: #selector(self.datePickerChanged(sender:)), for: .valueChanged)
-        expDateButtons[selectedExpIndex].isSelected = false
-        formatDateForTextFields()
+        if textField.tag == 1 {
+            
+            purchaseDateTextfield.inputView = datePicker1
+            datePicker1.datePickerMode = UIDatePickerMode.date
+            datePicker1.addTarget(self, action: #selector(self.datePickerChanged(sender:)) , for: .valueChanged)
+            purchaseDateTextfield.text = formatter.string(from: datePicker1.date).uppercased()
+         
+        } else if textField.tag == 2 {
+            
+            expDateTextfield.inputView = datePicker2
+            datePicker2.datePickerMode = UIDatePickerMode.date
+            datePicker2.addTarget(self, action: #selector(self.datePickerChanged(sender:)), for: .valueChanged)
+            expDateButtons[selectedExpIndex].isSelected = false
+            for button in expDateButtons {
+                button.backgroundColor = UIColor.lightGray
+            }
+            expDateTextfield.text = formatter.string(from: datePicker2.date).uppercased()
+        }
         
     }
-    
+   
+   
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
        
          activeTextField?.resignFirstResponder()
@@ -319,36 +365,10 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     
     func resetAddItems(){
         
-        nameTextfield.text = nil
-        quantity = 1
-        quantityLabel.text = "1"
         formatInitialData()
-        expDateTextfield.text = nil
-        location = .Fridge
-        categoryTextfield.text = nil
-        nameTextfield.becomeFirstResponder()
         saveButton.isEnabled = false
         saveButton.backgroundColor = UIColor.clear
         
     }
     
 }
-
-extension UIViewController
-{
-    func hideKeyboard()
-    {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(UIViewController.dismissKeyboard))
-        
-        view.addGestureRecognizer(tap)
-    }
-    
-    func dismissKeyboard()
-    {
-        view.endEditing(true)
-    }
-}
-
-

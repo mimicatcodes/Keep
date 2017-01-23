@@ -45,6 +45,7 @@
 		DDC3EBA21E31450100459295 /* StockItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3EBA11E31450100459295 /* StockItem.swift */; };
 		DDC3EBA41E31451000459295 /* ShoppingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3EBA31E31451000459295 /* ShoppingItem.swift */; };
 		DDC3EBA61E3146D500459295 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3EBA51E3146D500459295 /* Location.swift */; };
+		DDE189A91E354A9A00306449 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE189A81E354A9A00306449 /* Extensions.swift */; };
 		EEB43B8163D4806DB7C3C1BC /* Pods_Keep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BA35316A371A06E84DEF20 /* Pods_Keep.framework */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +92,7 @@
 		DDC3EBA11E31450100459295 /* StockItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockItem.swift; sourceTree = "<group>"; };
 		DDC3EBA31E31451000459295 /* ShoppingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingItem.swift; sourceTree = "<group>"; };
 		DDC3EBA51E3146D500459295 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		DDE189A81E354A9A00306449 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F17A8080E837D95CDFD38B65 /* Pods-Keep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keep.release.xcconfig"; path = "Pods/Target Support Files/Pods-Keep/Pods-Keep.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				DD1EA6361E0CA41D0034C54B /* Keep */,
+				DD4853A41E199DFB00BEAC02 /* Supporting Files */,
 				DD1EA6351E0CA41D0034C54B /* Products */,
 				D172EE28FA2053B384BD78CA /* Pods */,
 				86D9C18FBCDF483B6AF1B24D /* Frameworks */,
@@ -144,7 +147,7 @@
 		DD1EA6361E0CA41D0034C54B /* Keep */ = {
 			isa = PBXGroup;
 			children = (
-				DD4853A41E199DFB00BEAC02 /* Supporting Files */,
+				DDE189A71E354A8800306449 /* Helpers */,
 				DD48537D1E196C0400BEAC02 /* Controller */,
 				DD48537C1E196BF900BEAC02 /* View */,
 				DD48537B1E196BF400BEAC02 /* Model */,
@@ -196,6 +199,7 @@
 				DD1EA6411E0CA41D0034C54B /* Assets.xcassets */,
 			);
 			name = "Supporting Files";
+			path = Keep;
 			sourceTree = "<group>";
 		};
 		DD4853A51E199F0B00BEAC02 /* Categories */ = {
@@ -281,6 +285,14 @@
 				DDC3E98A1E1C958A00459295 /* SettingsViewController.swift */,
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		DDE189A71E354A8800306449 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DDE189A81E354A9A00306449 /* Extensions.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -427,6 +439,7 @@
 				DDC3EBA61E3146D500459295 /* Location.swift in Sources */,
 				DD4853BB1E199FEB00BEAC02 /* CookingAndBaking.swift in Sources */,
 				DDC3EB9E1E2DBC3900459295 /* AddItemsVC.swift in Sources */,
+				DDE189A91E354A9A00306449 /* Extensions.swift in Sources */,
 				DD4853B31E199FB700BEAC02 /* AlcoholicBeverages.swift in Sources */,
 				DDC3E9821E1C93F400459295 /* DataStore.swift in Sources */,
 				DD48539D1E198CCF00BEAC02 /* NoodlesGrainsSides.swift in Sources */,
