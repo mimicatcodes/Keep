@@ -20,7 +20,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     var activeTextField:UITextField?
     let formatter = DateFormatter()
     var selectedIndex: Int = 0
-    var selectedExpIndex: Int = 0
+    var selectedExpIndex: Int?
 
     @IBOutlet weak var nameTextfield: UITextField!
     @IBOutlet weak var quantityLabel: UILabel!
@@ -84,66 +84,70 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     }
     
     @IBAction func didPressExpDateBtn(_ sender: UIButton) {
-        
-        selectedExpIndex = sender.tag
-        
-        expDateButtons[selectedExpIndex].isSelected = !expDateButtons[selectedExpIndex].isSelected
-
-        if expDateButtons[selectedExpIndex].isSelected {
             
-            expDateButtons[selectedExpIndex].backgroundColor = UIColor.red
-            
-        } else {
-            
-            expDateButtons[selectedExpIndex].backgroundColor = UIColor.lightGray
-            DispatchQueue.main.async {
-                self.expDateTextfield.text = self.formatter.string(from: Date()).uppercased()
-            }
-            
-        }
-
-        switch selectedExpIndex {
-        case 0:
-            let today = Date()
-            let fiveDaysLater = Calendar.current.date(byAdding: .day, value: 5, to: today)
-            if let date = fiveDaysLater {
+            switch sender.tag {
                 
-                expDateTextfield.text = formatter.string(from: date).uppercased()
-            }
-            print("5 Days")
-        
-            
-        case 1:
-            let today = Date()
-            let aWeekLater = Calendar.current.date(byAdding: .day, value: 7, to: today)
-            if let date = aWeekLater {
-                expDateTextfield.text = formatter.string(from: date).uppercased()
-            }
-            print("7 Days")
+            case 0:
+                let today = Date()
+                let fiveDaysLater = Calendar.current.date(byAdding: .day, value: 5, to: today)
+                if let date = fiveDaysLater {
+                    
+                    expDateTextfield.text = formatter.string(from: date).uppercased()
+                }
+                expDateButtons[0].isSelected = true
+                expDateButtons[1].isSelected = false
+                expDateButtons[2].isSelected = false
+                expDateButtons[3].isSelected = false
+                print("5 Days")
+                
+            case 1:
+                let today = Date()
+                let fiveDaysLater = Calendar.current.date(byAdding: .day, value: 7, to: today)
+                if let date = fiveDaysLater {
+                    
+                    expDateTextfield.text = formatter.string(from: date).uppercased()
+                }
+                expDateButtons[1].isSelected = true
+                expDateButtons[0].isSelected = false
+                expDateButtons[2].isSelected = false
+                expDateButtons[3].isSelected = false
+                print("7 Days")
+                
+            case 2:
+                let today = Date()
+                let fiveDaysLater = Calendar.current.date(byAdding: .day, value: 14, to: today)
+                if let date = fiveDaysLater {
+                   
+                    expDateTextfield.text = formatter.string(from: date).uppercased()
+                }
+                expDateButtons[2].isSelected = true
+                expDateButtons[0].isSelected = false
+                expDateButtons[1].isSelected = false
+                expDateButtons[3].isSelected = false
+                print("14 Days")
+                
+            case 3:
+                expDateTextfield.text = "None"
+                expDateButtons[3].isSelected = true
+                expDateButtons[0].isSelected = false
+                expDateButtons[1].isSelected = false
+                expDateButtons[2].isSelected = false
+                print("Never")
+                
+            default:
+                break
 
-            
-            
-        case 2:
-            let today = Date()
-            let twoWeeksLater = Calendar.current.date(byAdding: .day, value: 14, to: today)
-            if let date = twoWeeksLater {
-                expDateTextfield.text = formatter.string(from: date).uppercased()
-            }
-            print("14 Days")
-            selectedIndex = 2
-
-            
-        case 3:
-            print("Never")
-            expDateTextfield.text = "None"
-            selectedIndex = 3
-
-    
-        default:
-            break
-            
         }
-  
+            
+            for button in expDateButtons {
+                
+                if button.isSelected {
+                    button.backgroundColor = UIColor.red
+                } else {
+                    button.backgroundColor = UIColor.lightGray
+                }
+         }
+     
     }
     
     
@@ -176,14 +180,12 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
             
         }
         
-        if locationButtons[selectedIndex].isHighlighted {
-            
-            locationButtons[selectedIndex].backgroundColor = UIColor.green
-            locationButtons[previousIndex].backgroundColor = UIColor.lightGray
-        }
-        
-        if locationButtons[previousIndex].isSelected == false {
-            locationButtons[previousIndex].backgroundColor = UIColor.lightGray
+        for button in locationButtons {
+            if button.isSelected {
+                button.backgroundColor = UIColor.green
+            } else {
+                button.backgroundColor = UIColor.lightGray
+            }
         }
         
     }
@@ -279,24 +281,15 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     func formatInitialData() {
         
         selectedIndex = 0
-        selectedExpIndex = 0
         nameTextfield.text = ""
         categoryTextfield.text = ""
         quantity = 1
         quantityLabel.text = "\(quantity)"
         locationButtons[selectedIndex].isSelected = true
-        DispatchQueue.main.async {
-            self.locationButtons[0].backgroundColor = UIColor.green
-            self.locationButtons[1].backgroundColor = UIColor.lightGray
-            self.locationButtons[2].backgroundColor = UIColor.lightGray
-            self.locationButtons[3].backgroundColor = UIColor.lightGray
-
-            for button in self.expDateButtons {
-                button.backgroundColor = UIColor.lightGray
-            }
+        locationButtons[selectedIndex].backgroundColor = UIColor.green
+        for button in expDateButtons {
+            button.isSelected = false
         }
-        
-        expDateButtons[selectedExpIndex].isSelected = false
         purchaseDateTextfield.text = formatter.string(from: Date()).uppercased()
         expDateTextfield.text = formatter.string(from: Date()).uppercased()
         let currentDate = Date()
@@ -335,7 +328,10 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
             expDateTextfield.inputView = datePicker2
             datePicker2.datePickerMode = UIDatePickerMode.date
             datePicker2.addTarget(self, action: #selector(self.datePickerChanged(sender:)), for: .valueChanged)
-            expDateButtons[selectedExpIndex].isSelected = false
+            if let indexSelected = selectedExpIndex {
+                expDateButtons[indexSelected].isSelected = false
+            }
+
             for button in expDateButtons {
                 button.backgroundColor = UIColor.lightGray
             }
