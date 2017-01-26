@@ -84,8 +84,10 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     }
     
     @IBAction func didPressExpDateBtn(_ sender: UIButton) {
+        
+        let index_ = sender.tag
             
-            switch sender.tag {
+            switch index_ {
                 
             case 0:
                 let today = Date()
@@ -94,10 +96,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
                     
                     expDateTextfield.text = formatter.string(from: date).uppercased()
                 }
-                expDateButtons[0].isSelected = true
-                expDateButtons[1].isSelected = false
-                expDateButtons[2].isSelected = false
-                expDateButtons[3].isSelected = false
+
                 print("5 Days")
                 
             case 1:
@@ -107,10 +106,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
                     
                     expDateTextfield.text = formatter.string(from: date).uppercased()
                 }
-                expDateButtons[1].isSelected = true
-                expDateButtons[0].isSelected = false
-                expDateButtons[2].isSelected = false
-                expDateButtons[3].isSelected = false
+                
                 print("7 Days")
                 
             case 2:
@@ -120,52 +116,40 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
                    
                     expDateTextfield.text = formatter.string(from: date).uppercased()
                 }
-                expDateButtons[2].isSelected = true
-                expDateButtons[0].isSelected = false
-                expDateButtons[1].isSelected = false
-                expDateButtons[3].isSelected = false
+                
                 print("14 Days")
                 
             case 3:
                 expDateTextfield.text = "None"
-                expDateButtons[3].isSelected = true
-                expDateButtons[0].isSelected = false
-                expDateButtons[1].isSelected = false
-                expDateButtons[2].isSelected = false
                 print("Never")
                 
             default:
                 break
 
         }
+        
+        for (index,button) in expDateButtons.enumerated() {
             
-            for button in expDateButtons {
-                
-                if button.isSelected {
-                    button.backgroundColor = UIColor.red
-                } else {
-                    button.backgroundColor = UIColor.lightGray
-                }
-         }
+            if index == index_ {
+                button.isSelected = true
+                button.backgroundColor = UIColor.red
+            } else {
+                button.isSelected = false
+                button.backgroundColor = UIColor.lightGray
+            }
+        }
      
     }
     
     
     @IBAction func didPressLocationBtn(_ sender: UIButton) {
         
-        let previousIndex = selectedIndex
         selectedIndex = sender.tag
-        
-        locationButtons[selectedIndex].isEnabled = false
-        locationButtons[previousIndex].isEnabled = true
-        locationButtons[previousIndex].isSelected = false
-        sender.isSelected = true
         
         switch selectedIndex {
         case 0:
             self.location = .Fridge
             print("-------Fridge btn tapped: location is \(location)")
-        // Implement button animations here
         case 1:
             self.location = .Freezer
             print("-------Freezer btn tapped: location is \(location)")
@@ -180,10 +164,12 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
             
         }
         
-        for button in locationButtons {
-            if button.isSelected {
+        for (index,button) in locationButtons.enumerated() {
+            if index == selectedIndex {
+                button.isSelected = true
                 button.backgroundColor = UIColor.green
             } else {
+                button.isSelected = false
                 button.backgroundColor = UIColor.lightGray
             }
         }
@@ -222,7 +208,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     
     @IBAction func quantityMinusBtnTapped(_ sender: Any) {
         
-        // Disable the button if the label is 1
         if quantity == 1 {
             
             quantityMinusButton.isEnabled = false
@@ -280,16 +265,25 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     
     func formatInitialData() {
         
-        selectedIndex = 0
         nameTextfield.text = ""
         categoryTextfield.text = ""
         quantity = 1
         quantityLabel.text = "\(quantity)"
-        locationButtons[selectedIndex].isSelected = true
-        locationButtons[selectedIndex].backgroundColor = UIColor.green
+        for (index,button) in locationButtons.enumerated() {
+            if index == 0 {
+                button.isSelected = true
+                button.backgroundColor = UIColor.green
+            } else {
+                button.isSelected = false
+                button.backgroundColor = UIColor.lightGray
+            }
+        }
+
         for button in expDateButtons {
             button.isSelected = false
+            button.backgroundColor = UIColor.lightGray
         }
+        
         purchaseDateTextfield.text = formatter.string(from: Date()).uppercased()
         expDateTextfield.text = formatter.string(from: Date()).uppercased()
         let currentDate = Date()
