@@ -15,4 +15,28 @@ enum Category : String {
     
 }
 
+enum ItemsCategories {
+    
+    case bakery
+    case beverages
+    case breakfastAndCereal
+    case condimentsAndDressings
+    case cookingAndBaking
+    case dairy
+    case deli
+    case frozenFoods
+    case grains
+    case pastaAndSides
+    case healthAndPersonalCare
+    case householdAndCleaning
+    case meat
+    case petSupplies
+    case produce
+    case seafood
+    case snacks
+    case soupsAndCannedGoods
+    case wineBeerSpirits
+    case other
+    
+}
 

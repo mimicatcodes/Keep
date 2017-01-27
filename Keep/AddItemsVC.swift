@@ -353,12 +353,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         }
     }
     
-    func formatDateForTextFields() {
-        
-        purchaseDateTextfield.text = formatter.string(from: datePicker1.date).uppercased()
-        expDateTextfield.text = formatter.string(from: datePicker2.date).uppercased()
-        
-    }
     
     func formatInitialData() {
         
@@ -383,8 +377,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         }
         
         purchaseDateTextfield.text = formatter.string(from: Date()).uppercased()
-        expDateTextfield.text = formatter.string(from: Date()).uppercased()
         let currentDate = Date()
+        expDateTextfield.text = formatter.string(from: Date()).uppercased()
         datePicker1.setDate(currentDate, animated: false)
         datePicker2.setDate(currentDate, animated: false)
         
@@ -414,7 +408,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             
             tableView.isHidden = true
             purchaseDateTextfield.inputView = datePicker1
-            datePicker1.datePickerMode = UIDatePickerMode.date
+            datePicker1.datePickerMode = .date
             datePicker1.addTarget(self, action: #selector(self.datePickerChanged(sender:)) , for: .valueChanged)
             purchaseDateTextfield.text = formatter.string(from: datePicker1.date).uppercased()
             

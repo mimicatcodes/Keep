@@ -18,14 +18,14 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBOutlet weak var tableView: UITableView!
     
-    let list1 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "17 items remaining")
-    let list2 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "17 items remaining")
-    let list3 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "17 items remaining")
-    let list4 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "17 items remaining")
-    let list5 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "17 items remaining")
-    let list6 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "17 items remaining")
-    let list7 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "17 items remaining")
-    let list8 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "17 items remaining")
+    let list1 = shoppingList(title: "Weekly List", date: NSDate(), itemsRemaining: "3")
+    let list2 = shoppingList(title: "Friday Dinner", date: NSDate(), itemsRemaining: "7")
+    let list3 = shoppingList(title: "Cocktail Party", date: NSDate(), itemsRemaining: "100")
+    let list4 = shoppingList(title: "Birthday Dinner", date: NSDate(), itemsRemaining: "27")
+    let list5 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "13")
+    let list6 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "1")
+    let list7 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "1")
+    let list8 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "1")
     
     var listTitlesTest = [shoppingList]()
 
@@ -61,9 +61,10 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
         let reuseIdentifier = "shoppingListCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as! ShoppingListCell
         
+        cell.numOfItemsRemainingLabel.text = listTitlesTest[indexPath.row].itemsRemaining
         cell.shoppingListTitleLabel.text = listTitlesTest[indexPath.row].title
-        //cell.delegate = self //optional
-        
+        cell.createdAtLabel.text = "Jan 16, 2017"
+
         let rightButton1 = MGSwipeButton(title: "Delete", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
             self.createAlert(withTitle: "Delete")
             return true
@@ -116,6 +117,8 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
 
 class ShoppingListCell: MGSwipeTableCell {
     @IBOutlet weak var shoppingListTitleLabel: UILabel!
+    @IBOutlet weak var createdAtLabel: UILabel!
+    @IBOutlet weak var numOfItemsRemainingLabel: UILabel!
 }
 
 struct shoppingList {

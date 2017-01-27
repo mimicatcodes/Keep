@@ -14,6 +14,7 @@ import M13Checkbox
 class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     var toDoItems = [ToDoItem]()
+    let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,12 +36,21 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
         toDoItems.append(ToDoItem(title: "Toilet Paper"))
         toDoItems.append(ToDoItem(title: "Chicken"))
         toDoItems.append(ToDoItem(title: "Beef"))
+        
+        navigationItem.title = "Friday Dinner"
+        navigationItem.rightBarButtonItem = add
+
+    
     }
     
 //    @IBAction func addItemBtnTapped(_ sender: Any) {
 //        
 //        performSegue(withIdentifier: "addItem", sender: nil)
 //    }
+    
+    func addTapped(){
+        print("Add button tapped")
+    }
     
     @IBOutlet weak var tableView: UITableView!
     
