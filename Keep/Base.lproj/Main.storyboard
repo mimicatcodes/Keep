@@ -769,49 +769,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gfb-ad-C1o">
-                                <rect key="frame" x="0.0" y="64" width="375" height="50"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n1m-eT-Mdu">
-                                        <rect key="frame" x="12" y="10" width="30" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="L4k-Gk-GjE"/>
-                                            <constraint firstAttribute="height" constant="30" id="Z3G-6y-P7m"/>
-                                        </constraints>
-                                        <state key="normal" image="fav.png"/>
-                                    </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="+ Add Item" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x7e-6p-YWJ">
-                                        <rect key="frame" x="56" y="10" width="262" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="3R6-BJ-d10"/>
-                                            <constraint firstAttribute="width" constant="262" id="5AT-CN-fr0"/>
-                                        </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tl0-NS-YOg">
-                                        <rect key="frame" x="317" y="10" width="46" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="g4y-Iy-iMO"/>
-                                            <constraint firstAttribute="width" constant="46" id="o9p-ZU-OmA"/>
-                                        </constraints>
-                                        <state key="normal" title="😻"/>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="0.61134159482758621" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="tl0-NS-YOg" secondAttribute="trailing" constant="12" id="5Mi-r2-TIK"/>
-                                    <constraint firstItem="x7e-6p-YWJ" firstAttribute="centerX" secondItem="Gfb-ad-C1o" secondAttribute="centerX" id="D0t-bt-QLC"/>
-                                    <constraint firstItem="x7e-6p-YWJ" firstAttribute="centerY" secondItem="Gfb-ad-C1o" secondAttribute="centerY" id="IdR-He-D5g"/>
-                                    <constraint firstItem="tl0-NS-YOg" firstAttribute="centerY" secondItem="Gfb-ad-C1o" secondAttribute="centerY" id="N6j-br-gkf"/>
-                                    <constraint firstItem="n1m-eT-Mdu" firstAttribute="leading" secondItem="Gfb-ad-C1o" secondAttribute="leading" constant="12" id="aod-TZ-lbe"/>
-                                    <constraint firstItem="n1m-eT-Mdu" firstAttribute="centerY" secondItem="Gfb-ad-C1o" secondAttribute="centerY" id="mDT-ZA-ETh"/>
-                                    <constraint firstAttribute="height" constant="50" id="yvE-en-I9G"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3b3-Is-Eab" userLabel="MenuBarView">
-                                <rect key="frame" x="0.0" y="114" width="375" height="110"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="110"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1jp-kr-pSW">
                                         <rect key="frame" x="10" y="16.5" width="75" height="77"/>
@@ -904,10 +863,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RWc-l2-bUN">
-                                <rect key="frame" x="0.0" y="224" width="375" height="394"/>
+                                <rect key="frame" x="0.0" y="174" width="375" height="444"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="71" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aHx-cJ-aag">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="394"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="444"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="stockCell" rowHeight="100" id="P4I-2S-4zz" customClass="StockCell" customModule="Keep" customModuleProvider="target">
@@ -969,12 +928,9 @@
                         <constraints>
                             <constraint firstItem="3b3-Is-Eab" firstAttribute="centerX" secondItem="vmO-JT-aje" secondAttribute="centerX" id="72r-k4-b1B"/>
                             <constraint firstItem="RWc-l2-bUN" firstAttribute="centerX" secondItem="vmO-JT-aje" secondAttribute="centerX" id="IdI-hD-Qui"/>
-                            <constraint firstItem="Gfb-ad-C1o" firstAttribute="centerX" secondItem="vmO-JT-aje" secondAttribute="centerX" id="QJj-cv-Aoh"/>
-                            <constraint firstItem="3b3-Is-Eab" firstAttribute="top" secondItem="f0p-Gv-lqt" secondAttribute="bottom" constant="50" id="RjJ-lZ-SF8"/>
+                            <constraint firstItem="3b3-Is-Eab" firstAttribute="top" secondItem="f0p-Gv-lqt" secondAttribute="bottom" id="RjJ-lZ-SF8"/>
                             <constraint firstItem="3b3-Is-Eab" firstAttribute="width" secondItem="vmO-JT-aje" secondAttribute="width" id="USz-XH-fYe"/>
-                            <constraint firstItem="Gfb-ad-C1o" firstAttribute="top" secondItem="f0p-Gv-lqt" secondAttribute="bottom" id="feW-D1-mRF"/>
                             <constraint firstItem="RWc-l2-bUN" firstAttribute="width" secondItem="vmO-JT-aje" secondAttribute="width" id="hGV-Qe-9mw"/>
-                            <constraint firstItem="Gfb-ad-C1o" firstAttribute="width" secondItem="vmO-JT-aje" secondAttribute="width" id="jV2-7j-Si8"/>
                             <constraint firstItem="obd-6N-VeV" firstAttribute="top" secondItem="RWc-l2-bUN" secondAttribute="bottom" id="nDd-uj-udB"/>
                             <constraint firstItem="RWc-l2-bUN" firstAttribute="top" secondItem="3b3-Is-Eab" secondAttribute="bottom" id="pCs-YF-MNb"/>
                         </constraints>
@@ -1599,7 +1555,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="fav.png" width="600" height="600"/>
         <image name="fridge-icon" width="665" height="667"/>
     </resources>
 </document>
