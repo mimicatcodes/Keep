@@ -9,20 +9,17 @@
 import Foundation
 import UIKit
 
-// Hide keyboard 
-extension UIViewController
-{
-    func hideKeyboard()
-    {
+extension UIViewController {
+    func hideKeyboard() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
             action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
         
         view.addGestureRecognizer(tap)
     }
     
-    func dismissKeyboard()
-    {
+    func dismissKeyboard() {
         view.endEditing(true)
     }
 }

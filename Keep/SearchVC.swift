@@ -16,7 +16,7 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UISearchResultsUpdat
     let searchController = UISearchController(searchResultsController: nil)
     
     @IBOutlet weak var searchBar: UISearchBar!
-
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -26,7 +26,6 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UISearchResultsUpdat
         self.tableView.tableHeaderView = searchController.searchBar
         
     }
-    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         

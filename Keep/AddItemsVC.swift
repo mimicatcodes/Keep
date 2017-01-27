@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
+class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
     var store = DataStore.sharedInstance
     var location:Location = .Fridge
@@ -21,8 +21,12 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     let formatter = DateFormatter()
     var selectedIndex: Int = 0
     var selectedExpIndex: Int?
-
-    @IBOutlet weak var nameTextfield: UITextField!
+    var allItems = Array(DataStore.sharedInstance.allItems)
+    var filteredItems = [Item]()
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tvHeight: NSLayoutConstraint!
+    @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var quantityMinusButton: UIButton!
     @IBOutlet weak var purchaseDateTextfield: UITextField!
@@ -41,14 +45,108 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
         formatInitialData()
         formatDates()
         hideKeyboard()
+        tableView.isHidden = true
+        nameTextField.delegate = self
+        categoryTextfield.delegate = self
+        nameTextField.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.touchDown)
+        
+    }
+    
+    func textFieldActive() {
+        tableView.isHidden = !tableView.isHidden
+    }
+    
+    override func viewDidLayoutSubviews() {
 
+        tvHeight.constant = 100
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         formatInitialData()
         formatDates()
+        
     }
+    
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField == nameTextField {
+            
+            let substring = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            
+            searchAutocompleteEntriesWithSubstring(substring)
+            
+            return true
+
+        }
+            
+            return true
+        
+        
+    }
+    
+
+    func searchAutocompleteEntriesWithSubstring(_ substring: String) {
+    
+        filteredItems.removeAll(keepingCapacity: false)
+        
+        for item in allItems {
+            
+            let myString: NSString! = item.name as NSString
+            let substringRange: NSRange! = myString.range(of: substring)
+            
+            if substringRange.location == 0 {
+                filteredItems.append(item)
+            }
+        }
+        
+        tableView.reloadData()
+        
+    }
+    
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if filteredItems.count == 0 {
+            
+            return allItems.count
+            
+        }
+      
+        return filteredItems.count
+    
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "nameCell")
+        
+        if filteredItems.count == 0 {
+            
+            cell?.textLabel?.text = self.allItems[indexPath.row].name
+            
+        } else {
+            
+            cell?.textLabel?.text = self.filteredItems[indexPath.row].name
+
+        }
+        
+        return cell!
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let selectedCell: UITableViewCell = tableView.cellForRow(at: indexPath)!
+        
+        nameTextField.text = selectedCell.textLabel!.text!
+        tableView.isHidden = true
+        nameTextField.endEditing(true)
+        tableView.reloadData()
+    }
+    
     
     func formatDates(){
         
@@ -66,7 +164,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
         toolBar.sizeToFit()
         
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePicker))
-        
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(donePicker))
         
@@ -80,52 +177,52 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     func donePicker(sender:UIBarButtonItem){
         
         activeTextField?.resignFirstResponder()
-    
+        
     }
     
     @IBAction func didPressExpDateBtn(_ sender: UIButton) {
         
         let index_ = sender.tag
+        
+        switch index_ {
             
-            switch index_ {
+        case 0:
+            let today = Date()
+            let fiveDaysLater = Calendar.current.date(byAdding: .day, value: 5, to: today)
+            if let date = fiveDaysLater {
                 
-            case 0:
-                let today = Date()
-                let fiveDaysLater = Calendar.current.date(byAdding: .day, value: 5, to: today)
-                if let date = fiveDaysLater {
-                    
-                    expDateTextfield.text = formatter.string(from: date).uppercased()
-                }
-
-                print("5 Days")
+                expDateTextfield.text = formatter.string(from: date).uppercased()
+            }
+            
+            print("5 Days")
+            
+        case 1:
+            let today = Date()
+            let fiveDaysLater = Calendar.current.date(byAdding: .day, value: 7, to: today)
+            if let date = fiveDaysLater {
                 
-            case 1:
-                let today = Date()
-                let fiveDaysLater = Calendar.current.date(byAdding: .day, value: 7, to: today)
-                if let date = fiveDaysLater {
-                    
-                    expDateTextfield.text = formatter.string(from: date).uppercased()
-                }
+                expDateTextfield.text = formatter.string(from: date).uppercased()
+            }
+            
+            print("7 Days")
+            
+        case 2:
+            let today = Date()
+            let fiveDaysLater = Calendar.current.date(byAdding: .day, value: 14, to: today)
+            if let date = fiveDaysLater {
                 
-                print("7 Days")
-                
-            case 2:
-                let today = Date()
-                let fiveDaysLater = Calendar.current.date(byAdding: .day, value: 14, to: today)
-                if let date = fiveDaysLater {
-                   
-                    expDateTextfield.text = formatter.string(from: date).uppercased()
-                }
-                
-                print("14 Days")
-                
-            case 3:
-                expDateTextfield.text = "None"
-                print("Never")
-                
-            default:
-                break
-
+                expDateTextfield.text = formatter.string(from: date).uppercased()
+            }
+            
+            print("14 Days")
+            
+        case 3:
+            expDateTextfield.text = "None"
+            print("Never")
+            
+        default:
+            break
+            
         }
         
         for (index,button) in expDateButtons.enumerated() {
@@ -138,7 +235,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
                 button.backgroundColor = UIColor.lightGray
             }
         }
-     
+        
     }
     
     
@@ -186,7 +283,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
         
         saveButton.isEnabled = false
         
-        guard let name = nameTextfield.text, name != "" else { return }
+        guard let name = nameTextField.text, name != "" else { return }
         guard let purchaseDate = purchaseDateTextfield.text, purchaseDate != "" else { return }
         guard let expDate = expDateTextfield.text, expDate != "" else { return }
         guard let category = categoryTextfield.text, category != "" else { return }
@@ -203,7 +300,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
         
         showAlert()
         resetAddItems()
-    
+        
     }
     
     @IBAction func quantityMinusBtnTapped(_ sender: Any) {
@@ -265,7 +362,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     
     func formatInitialData() {
         
-        nameTextfield.text = ""
+        nameTextField.text = ""
+        tableView.isHidden = true
         categoryTextfield.text = ""
         quantity = 1
         quantityLabel.text = "\(quantity)"
@@ -278,7 +376,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
                 button.backgroundColor = UIColor.lightGray
             }
         }
-
+        
         for button in expDateButtons {
             button.isSelected = false
             button.backgroundColor = UIColor.lightGray
@@ -294,38 +392,42 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool{
         
-        if nameTextfield.text != nil && nameTextfield.text != "" {
+        
+        if nameTextField.text != nil && nameTextField.text != "" {
             
             saveButton.isEnabled = true
             saveButton.backgroundColor = UIColor.cyan
             
         }
         
+        
         return true
     }
     
-
+    
     
     func textFieldDidBeginEditing(_ textField: UITextField){
-     
+        
         activeTextField = textField
         
         if textField.tag == 1 {
             
+            tableView.isHidden = true
             purchaseDateTextfield.inputView = datePicker1
             datePicker1.datePickerMode = UIDatePickerMode.date
             datePicker1.addTarget(self, action: #selector(self.datePickerChanged(sender:)) , for: .valueChanged)
             purchaseDateTextfield.text = formatter.string(from: datePicker1.date).uppercased()
-         
+            
         } else if textField.tag == 2 {
             
+            tableView.isHidden = true
             expDateTextfield.inputView = datePicker2
             datePicker2.datePickerMode = UIDatePickerMode.date
             datePicker2.addTarget(self, action: #selector(self.datePickerChanged(sender:)), for: .valueChanged)
             if let indexSelected = selectedExpIndex {
                 expDateButtons[indexSelected].isSelected = false
             }
-
+            
             for button in expDateButtons {
                 button.backgroundColor = UIColor.lightGray
             }
@@ -333,12 +435,17 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate {
         }
         
     }
-   
-   
+    
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-       
-         activeTextField?.resignFirstResponder()
-
+        
+        activeTextField?.resignFirstResponder()
+        
+        if textField == nameTextField {
+            tableView.isHidden = true
+            nameTextField.endEditing(true)
+        }
+        
         return true
     }
     
