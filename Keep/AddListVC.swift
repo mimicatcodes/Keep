@@ -39,6 +39,8 @@ class AddListVC: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPi
         guard let date = dateField.text, date != "" else { return }
 
         let list = ShoppingList(title: title, isCreatedAt: date)
+        let uuid = UUID().uuidString
+        list.uniqueID = uuid
         
         let realm = try! Realm()
         try! realm.write {
@@ -138,5 +140,5 @@ class AddListVC: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPi
         view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.35)
         createListView.backgroundColor = UIColor(red: 0.93, green: 0.94, blue: 0.95, alpha: 1.00)
     }
-      
+    
 }

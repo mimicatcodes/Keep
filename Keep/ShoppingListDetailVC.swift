@@ -10,65 +10,98 @@ import UIKit
 import RealmSwift
 import MGSwipeTableCell
 import M13Checkbox
+import NotificationCenter
 
 class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
-    var toDoItems = [ToDoItem]()
-    let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
+    let store = DataStore.sharedInstance
+    var name:String?
+    var uniqueID: String?
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //tableView.separatorStyle = .none
+        tableView.separatorStyle = .none
+        
         tableView.backgroundColor = UIColor.clear
-        tableView.rowHeight = 100;
+        tableView.rowHeight = 100
         //tableView.allowsMultipleSelection = true
+        navigationItem.title = name
+        print(uniqueID!)
+        NotificationCenter.default.addObserver(forName: REFRESH_ITEM_LIST_NOTIFICATION, object: nil, queue: nil) { (notification) in
+            print("notification is \(notification)")
+            self.tableView.reloadData()
+            
+        }
+    }
+    
+    
+    @IBAction func addItemBtnTapped(_ sender: Any) {
         
-        toDoItems.append(ToDoItem(title: "Apple"))
-        toDoItems.append(ToDoItem(title: "Milk"))
-        toDoItems.append(ToDoItem(title: "Blue Cheese"))
-        toDoItems.append(ToDoItem(title: "Bread"))
-        toDoItems.append(ToDoItem(title: "Bagels"))
-        toDoItems.append(ToDoItem(title: "Basil Pesto"))
-        toDoItems.append(ToDoItem(title: "Pasta"))
-        toDoItems.append(ToDoItem(title: "Musseles"))
-        toDoItems.append(ToDoItem(title: "Strawberry Jam"))
-        toDoItems.append(ToDoItem(title: "Toilet Paper"))
-        toDoItems.append(ToDoItem(title: "Chicken"))
-        toDoItems.append(ToDoItem(title: "Beef"))
+        performSegue(withIdentifier: "addItemToSL", sender: nil)
         
-        navigationItem.title = "Friday Dinner"
-        navigationItem.rightBarButtonItem = add
+    }
 
-    
-    }
-    
-//    @IBAction func addItemBtnTapped(_ sender: Any) {
-//        
-//        performSegue(withIdentifier: "addItem", sender: nil)
-//    }
-    
-    func addTapped(){
-        print("Add button tapped")
-    }
-    
-    @IBOutlet weak var tableView: UITableView!
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            store.listID = store.allShopingLists[indexPath.row].uniqueID
+        }
+        
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return toDoItems.count
+        
+        if let id = uniqueID {
+            
+            let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", id)
+            print("--------")
+            let filteredItems = store.allShoppingItems.filter(predicate)
+            
+            return filteredItems.count
+    
+
+        }
+        return store.allShoppingItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier:"listDetailCell", for: indexPath) as! ListDetailCell
         
-        //cell.selectionStyle = .none
-        cell.titleLabel.text = toDoItems[indexPath.row].title
+        if let id = uniqueID {
+            
+            let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", id)
+            print("--------")
+            let filteredItems = store.allShoppingItems.filter(predicate)
+            cell.titleLabel.text = filteredItems[indexPath.row].name
+            
+            // post to notification center
+            
+            
+        }
         
         return cell
     }
-        
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if segue.identifier == "addItemToSL" {
+            if let id = uniqueID {
+                print(id)
+                let dest = segue.destination as! AddItemVC
+                dest.uniqueID = id
+                
+            }
+            /*
+                let listTitleSelected = navigationItem.title
+                let dest = segue.destination as! AddItemVC
+                dest.listTitle = listTitleSelected
+             
+             
+                */
+            
+        }
+    }
+    
 }
 
 

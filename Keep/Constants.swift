@@ -16,3 +16,4 @@ struct Colors {
 }
 
 let REFRESH_TV_NOTIFICATION = NSNotification.Name("RefeshTVNotification")
+let REFRESH_ITEM_LIST_NOTIFICATION = NSNotification.Name("RefreshItemListNotification")

@@ -11,13 +11,23 @@ import RealmSwift
 import UIKit
 
 class AddItemVC: UIViewController {
+    
+    // TO DO: picker, autocomplete textfield
+    
+    let store = DataStore.sharedInstance
 
     @IBOutlet weak var createItemView: UIView!
+    var listTitle:String?
+    var uniqueID: String?
   
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        quantityField.text = "1"
     }
+    @IBOutlet weak var itemTitleField: UITextField!
+    @IBOutlet weak var quantityField: UITextField!
+    
     @IBAction func dismissVC(_ sender: Any) {
         dismiss(animated: true, completion: nil)    }
     
@@ -26,6 +36,32 @@ class AddItemVC: UIViewController {
     }
     @IBAction func saveBtnTapped(_ sender: Any) {
         
+        guard let title = itemTitleField.text, title != "" else { return }
+        guard let quantity = quantityField.text, quantity != "" else { return }
+        
+        let shoppingItem = ShoppingItem(name: title, quantity: quantity, isPurchased: false)
+        
+        guard let id = uniqueID else { return }
+        
+            let predicate = NSPredicate(format: "uniqueID contains[c] %@", id)
+            let filteredList = store.allShopingLists.filter(predicate).first
+            shoppingItem.list = filteredList
+            print("filteredList is ------------- \(filteredList?.title), \(filteredList?.uniqueID)")
+        
+        // post to notification center
+
+        let realm = try! Realm()
+        try! realm.write {
+            
+            realm.add(shoppingItem)
+            shoppingItem.list?.numOfItems += 1
+            print("***** \(shoppingItem.name) is added to realm database in \(shoppingItem.list?.uniqueID) in \(shoppingItem.quantity) ***** ")
+            
+        }
+        
+    
+     dismiss(animated: true, completion: nil)
+     NotificationCenter.default.post(name: REFRESH_ITEM_LIST_NOTIFICATION, object: nil)
         
     }
     

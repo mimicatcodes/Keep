@@ -882,7 +882,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P4I-2S-4zz" id="YZ5-Yc-0M9">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJF-xf-SvH">
@@ -1145,7 +1145,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Y7R-p5-K2Y" id="Kin-03-sv2">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="99"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xgc-G9-zvJ">
@@ -1230,7 +1230,7 @@
                                             <outlet property="createdAtLabel" destination="6VY-pX-Erv" id="Hwe-cT-Yyn"/>
                                             <outlet property="numOfItemsRemainingLabel" destination="CsI-yo-tSG" id="KHJ-y7-bOt"/>
                                             <outlet property="shoppingListTitleLabel" destination="MnC-g9-Efe" id="hN1-wB-OAu"/>
-                                            <segue destination="tgN-pG-HY1" kind="show" id="t3u-a8-7uj"/>
+                                            <segue destination="tgN-pG-HY1" kind="show" identifier="showItems" id="t3u-a8-7uj"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1286,7 +1286,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iSe-Md-VH4" id="V4a-8z-6qy">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D46-M8-cdB">
@@ -1347,7 +1347,14 @@
                             <constraint firstItem="lVL-tI-0NJ" firstAttribute="centerY" secondItem="qnt-yd-sHS" secondAttribute="centerY" id="h0X-it-OZr"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="Cju-Sn-Qm6"/>
+                    <navigationItem key="navigationItem" title="Title" id="Ba5-WF-7bF">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Gmn-Rx-uTe">
+                            <connections>
+                                <action selector="addItemBtnTapped:" destination="tgN-pG-HY1" id="aGj-gq-xrR"/>
+                                <segue destination="Ncx-UL-xUg" kind="presentation" identifier="addItemToSL" id="XLB-h6-E10"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="lVL-tI-0NJ" id="X8R-M5-o6N"/>
                     </connections>
@@ -1487,7 +1494,7 @@
         <!--Add ItemVC-->
         <scene sceneID="ShZ-Dl-DHT">
             <objects>
-                <viewController id="Ncx-UL-xUg" customClass="AddItemVC" customModule="Keep" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addItemToSL" modalPresentationStyle="overCurrentContext" id="Ncx-UL-xUg" customClass="AddItemVC" customModule="Keep" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TBd-ou-kuG"/>
                         <viewControllerLayoutGuide type="bottom" id="OET-lw-Wip"/>
@@ -1496,7 +1503,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jeE-bd-BtX">
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jeE-bd-BtX">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EjC-Ns-7K7" userLabel="Create Item View">
@@ -1524,7 +1531,7 @@
                                                 <rect key="frame" x="0.0" y="104" width="338" height="50"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XqF-tG-gRa">
                                                 <rect key="frame" x="177" y="162" width="152" height="50"/>
@@ -1532,7 +1539,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="T5e-re-eT1"/>
                                                 </constraints>
-                                                <state key="normal" title="Button"/>
+                                                <state key="normal" title="Save"/>
                                                 <connections>
                                                     <action selector="saveBtnTapped:" destination="Ncx-UL-xUg" eventType="touchUpInside" id="a4d-No-AJZ"/>
                                                 </connections>
@@ -1540,7 +1547,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2e-Lx-qPz">
                                                 <rect key="frame" x="8" y="162" width="152" height="50"/>
                                                 <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                <state key="normal" title="Button"/>
+                                                <state key="normal" title="Cancel"/>
                                                 <connections>
                                                     <action selector="cancelBtnTapped:" destination="Ncx-UL-xUg" eventType="touchUpInside" id="xNl-Dn-l4c"/>
                                                 </connections>
@@ -1591,6 +1598,8 @@
                     </view>
                     <connections>
                         <outlet property="createItemView" destination="EjC-Ns-7K7" id="Skr-ET-WMG"/>
+                        <outlet property="itemTitleField" destination="WYQ-st-u43" id="yzY-WH-2Yo"/>
+                        <outlet property="quantityField" destination="cDl-gy-Bu6" id="k6B-o4-l64"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V5m-Wl-rs3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1600,7 +1609,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="6138" y="-277"/>
+            <point key="canvasLocation" x="6110" y="-277"/>
         </scene>
     </scenes>
     <resources>

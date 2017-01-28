@@ -45,7 +45,8 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func deleteList(_ indexPath:IndexPath) {
-        store.shoppingLists?.remove(at: indexPath.row)
+        
+        //store.shoppingLists?.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .left)
     }
     
@@ -110,6 +111,18 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
     }
      func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 110
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showItems" {
+            if let index = tableView.indexPathForSelectedRow?.row {
+                let selectedTitle = store.allShopingLists[index]
+                let dest = segue.destination as! ShoppingListDetailVC
+                dest.name = selectedTitle.title
+                dest.uniqueID = selectedTitle.uniqueID
+                print(selectedTitle.uniqueID)
+            }
+        }
     }
 
 }
