@@ -8,15 +8,17 @@
 
 import UIKit
 import RealmSwift
+import NotificationCenter
 
 class AddListVC: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPickerViewDelegate {
     
+    let store = DataStore.sharedInstance
     let datePicker = UIDatePicker()
     let formatter = DateFormatter()
     var activeTextField:UITextField?
-    
     @IBOutlet weak var listTitle: UITextField!
     @IBOutlet weak var dateField: UITextField!
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var createListView: UIView!
 
     override func viewDidLoad() {
@@ -28,8 +30,33 @@ class AddListVC: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPi
         formatDates()
         hideKeyboard()
         setupViews()
+        saveButton.isEnabled = false
     }
     
+    @IBAction func addBtnTapped(_ sender: UIButton) {
+        
+        guard let title = listTitle.text, title != "" else { return }
+        guard let date = dateField.text, date != "" else { return }
+
+        let list = ShoppingList(title: title, isCreatedAt: date)
+        
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(list)
+            print("\(list.title) is added on \(list.isCreatedAt) at \(list.shoppingItems)")
+        }
+        
+        print("Add button tapped")
+        NotificationCenter.default.post(name: REFRESH_TV_NOTIFICATION, object: nil)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func cancelBtnTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+
     func formatInitialData(){
         let currentDate = Date()
         dateField.text = formatter.string(from: currentDate).uppercased()
@@ -45,16 +72,34 @@ class AddListVC: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPi
             datePicker.datePickerMode = .date
             datePicker.addTarget(self, action: #selector(self.datePickerChanged(sender:)) , for: .valueChanged)
             dateField.text = formatter.string(from: datePicker.date).uppercased()
+            
+        }
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        enableSaveButton()
+        return true
+    }
+    
+    func enableSaveButton(){
+        
+        guard let title = listTitle.text else { return }
+        guard let date = dateField.text else { return }
+        
+        if title != "" && date != "" {
+            saveButton.isEnabled = true
+            saveButton.backgroundColor = UIColor.cyan
 
         }
+        
     }
     
     func datePickerChanged(sender: UIDatePicker) {
         
-       dateField.text = formatter.string(from: sender.date).uppercased()
-    
+        dateField.text = formatter.string(from: sender.date).uppercased()
+        
     }
-
+    
     func customToolBarForPickers(){
         
         let toolBar = UIToolbar()
@@ -72,7 +117,7 @@ class AddListVC: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPi
         
         dateField.inputAccessoryView = toolBar
         listTitle.inputAccessoryView = toolBar
-    
+        
     }
     
     func formatDates(){
@@ -81,27 +126,17 @@ class AddListVC: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPi
         formatter.timeStyle = .none
         formatter.dateFormat = "MMM dd, yyyy"
     }
-
-  
+    
+    
     func donePicker(sender:UIBarButtonItem){
         
         activeTextField?.resignFirstResponder()
         
-    }
-    
-    
-    @IBAction func addBtnTapped(_ sender: UIButton) {
-        print("Add button tapped")
-    }
-    
-    @IBAction func cancelBtnTapped(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
     }
 
     func setupViews(){
         view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.35)
         createListView.backgroundColor = UIColor(red: 0.93, green: 0.94, blue: 0.95, alpha: 1.00)
     }
-    
-    
+      
 }

@@ -18,6 +18,9 @@ class DataStore{
     var freezerItems = try! Realm().objects(Item.self).filter("location == 'Freezer'")
     var pantryItems = try! Realm().objects(Item.self).filter("location == 'Pantry'")
     var otherItems = try! Realm().objects(Item.self).filter("location == 'Other'")
+    var allShopingLists = try! Realm().objects(ShoppingList.self)
+    
+    var shoppingLists : List<ShoppingList>?
     
     var fridgeSectionNames: [String] {
         

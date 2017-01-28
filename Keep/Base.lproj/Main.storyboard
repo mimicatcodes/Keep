@@ -1476,6 +1476,7 @@
                         <outlet property="createListView" destination="Bin-Tx-kWY" id="AYq-sI-hpc"/>
                         <outlet property="dateField" destination="iQa-Dj-zcH" id="qgd-ST-giK"/>
                         <outlet property="listTitle" destination="R93-Ms-tYv" id="ESD-pc-hnV"/>
+                        <outlet property="saveButton" destination="2Mk-QW-lhN" id="jE3-xj-Sjv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b2B-nN-LL3" userLabel="First Responder" sceneMemberID="firstResponder"/>

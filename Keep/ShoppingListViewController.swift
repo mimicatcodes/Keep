@@ -9,51 +9,50 @@
 import UIKit
 import RealmSwift
 import MGSwipeTableCell
-
-typealias MailActionCallback = (_ cancelled: Bool, _ deleted: Bool, _ actionIndex: Int) -> Void
+import NotificationCenter
 
 class ShoppingListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     let store = DataStore.sharedInstance
-    
+
     @IBOutlet weak var tableView: UITableView!
-    
-    let list1 = shoppingList(title: "Weekly List", date: NSDate(), itemsRemaining: "3")
-    let list2 = shoppingList(title: "Friday Dinner", date: NSDate(), itemsRemaining: "7")
-    let list3 = shoppingList(title: "Cocktail Party", date: NSDate(), itemsRemaining: "100")
-    let list4 = shoppingList(title: "Birthday Dinner", date: NSDate(), itemsRemaining: "27")
-    let list5 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "13")
-    let list6 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "1")
-    let list7 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "1")
-    let list8 = shoppingList(title: "Dinner", date: NSDate(), itemsRemaining: "1")
-    
-    var listTitlesTest = [shoppingList]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        listTitlesTest = [list1, list2, list3, list4, list5, list6, list7, list8]
-
+    
+        NotificationCenter.default.addObserver(forName: REFRESH_TV_NOTIFICATION, object: nil, queue: nil) { (notification) in
+            print("notification is \(notification)")
+            self.tableView.reloadData()
+        }
+       
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
     }
     
     @IBAction func addListTapped(_ sender: Any) {
         
-        //store.buttonStatus = "Create Event"
         performSegue(withIdentifier: "addList", sender: nil)
         
     }
     
     func titleForIndexPath(_ indexPath: IndexPath) -> String {
-        return listTitlesTest[indexPath.row].title
+       
+        return store.allShopingLists[indexPath.row].title
     }
     
     func deleteList(_ indexPath:IndexPath) {
-        listTitlesTest.remove(at: indexPath.row)
+        store.shoppingLists?.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .left)
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listTitlesTest.count
+
+        return store.allShopingLists.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -61,9 +60,9 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
         let reuseIdentifier = "shoppingListCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as! ShoppingListCell
         
-        cell.numOfItemsRemainingLabel.text = listTitlesTest[indexPath.row].itemsRemaining
-        cell.shoppingListTitleLabel.text = listTitlesTest[indexPath.row].title
-        cell.createdAtLabel.text = "Jan 16, 2017"
+        cell.numOfItemsRemainingLabel.text = String(describing: store.allShopingLists[indexPath.row].numOfItems)
+        cell.shoppingListTitleLabel.text = store.allShopingLists[indexPath.row].title
+        cell.createdAtLabel.text = store.allShopingLists[indexPath.row].isCreatedAt
 
         let rightButton1 = MGSwipeButton(title: "Delete", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
             self.createAlert(withTitle: "Delete")
@@ -121,8 +120,4 @@ class ShoppingListCell: MGSwipeTableCell {
     @IBOutlet weak var numOfItemsRemainingLabel: UILabel!
 }
 
-struct shoppingList {
-    let title: String
-    let date: NSDate
-    let itemsRemaining: String
-}
+

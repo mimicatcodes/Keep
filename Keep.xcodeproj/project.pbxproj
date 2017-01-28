@@ -263,8 +263,8 @@
 			isa = PBXGroup;
 			children = (
 				DDC3E9861E1C957000459295 /* ShoppingListViewController.swift */,
-				DDC3E98C1E1CB86100459295 /* ShoppingListDetailVC.swift */,
 				DDC3E98E1E1CB87C00459295 /* AddListVC.swift */,
+				DDC3E98C1E1CB86100459295 /* ShoppingListDetailVC.swift */,
 				DDC3E9CE1E204B0600459295 /* ToDoItem.swift */,
 				DDC3E9D01E20580B00459295 /* AddItemVC.swift */,
 			);
