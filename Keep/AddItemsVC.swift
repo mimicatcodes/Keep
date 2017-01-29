@@ -34,6 +34,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     @IBOutlet weak var expDateTextfield: UITextField!
     @IBOutlet var locationViews: [UIView]!
     @IBOutlet var locationButtons: [UIButton]!
+    @IBOutlet var locationLabels: [UILabel]!
     @IBOutlet var expButtons: [UIButton]!
 
     @IBOutlet weak var categoryTextfield: UITextField!
@@ -50,6 +51,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         quantityLabel.layer.borderWidth = 1
         quantityLabel.layer.borderColor = MAIN_COLOR.cgColor
         formatInitialData()
+        nameTextField.setBottomBorder()
         formatDates()
         hideKeyboard()
         tableView.isHidden = true
@@ -274,11 +276,14 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         for (index,button) in locationButtons.enumerated() {
             if index == selectedIndex {
                 button.isSelected = true
-                button.backgroundColor = UIColor.green
+                locationViews[index].backgroundColor = MAIN_COLOR
+                locationLabels[index].textColor = UIColor.white
+                
                
             } else {
                 button.isSelected = false
-                button.backgroundColor = UIColor.clear
+                locationViews[index].backgroundColor = UIColor.clear
+                locationLabels[index].textColor = MAIN_BUTTON_LABEL_GRAY
               
             }
         }
@@ -378,11 +383,15 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         for (index,button) in locationButtons.enumerated() {
             if index == 0 {
                 button.isSelected = true
-                button.backgroundColor = UIColor.green
+                //button.backgroundColor = UIColor.green
+                locationViews[index].backgroundColor = MAIN_COLOR
+                locationLabels[index].textColor = UIColor.white
                 
             } else {
                 button.isSelected = false
-                button.backgroundColor = UIColor.clear
+                //button.backgroundColor = UIColor.clear
+                locationViews[index].backgroundColor = UIColor.clear
+                locationLabels[index].textColor = MAIN_BUTTON_LABEL_GRAY
             }
         }
         
