@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource, UIBarPositioningDelegate {
     
     var store = DataStore.sharedInstance
     var location:Location = .Fridge
@@ -25,22 +25,27 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     var filteredItems = [Item]()
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var tvHeight: NSLayoutConstraint!
+
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var quantityMinusButton: UIButton!
     @IBOutlet weak var purchaseDateTextfield: UITextField!
     @IBOutlet weak var expDateTextfield: UITextField!
+    @IBOutlet var locationViews: [UIView]!
     @IBOutlet var locationButtons: [UIButton]!
-    @IBOutlet var expDateButtons: [UIButton]!
+    @IBOutlet var expButtons: [UIButton]!
+
     @IBOutlet weak var categoryTextfield: UITextField!
+
+    
     @IBOutlet weak var saveButton: UIButton!
+    
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         saveButton.isEnabled = false
-        saveButton.backgroundColor = UIColor.clear
         customToolBarForPickers()
         formatInitialData()
         formatDates()
@@ -49,16 +54,18 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         nameTextField.delegate = self
         categoryTextfield.delegate = self
         nameTextField.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.touchDown)
-        
     }
     
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .topAttached
+    }
     func textFieldActive() {
         tableView.isHidden = !tableView.isHidden
     }
     
     override func viewDidLayoutSubviews() {
 
-        tvHeight.constant = 100
+        heightConstraint.constant = 100
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -225,7 +232,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             
         }
         
-        for (index,button) in expDateButtons.enumerated() {
+        for (index,button) in expButtons.enumerated() {
             
             if index == index_ {
                 button.isSelected = true
@@ -265,18 +272,19 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             if index == selectedIndex {
                 button.isSelected = true
                 button.backgroundColor = UIColor.green
+               
             } else {
                 button.isSelected = false
-                button.backgroundColor = UIColor.lightGray
+                button.backgroundColor = UIColor.clear
+              
             }
         }
         
     }
-    
+ 
+
     @IBAction func cancelButtonTapped(_ sender: Any) {
-        
-        dismiss(animated: true, completion: nil)
-        
+         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
@@ -301,7 +309,10 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         showAlert()
         resetAddItems()
         
+
     }
+
+   
     
     @IBAction func quantityMinusBtnTapped(_ sender: Any) {
         
@@ -365,13 +376,14 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             if index == 0 {
                 button.isSelected = true
                 button.backgroundColor = UIColor.green
+                
             } else {
                 button.isSelected = false
-                button.backgroundColor = UIColor.lightGray
+                button.backgroundColor = UIColor.clear
             }
         }
         
-        for button in expDateButtons {
+        for button in expButtons {
             button.isSelected = false
             button.backgroundColor = UIColor.lightGray
         }
@@ -390,7 +402,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         if nameTextField.text != nil && nameTextField.text != "" {
             
             saveButton.isEnabled = true
-            saveButton.backgroundColor = UIColor.cyan
+            saveButton.tintColor = UIColor.red
+            
             
         }
         
@@ -419,10 +432,10 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             datePicker2.datePickerMode = UIDatePickerMode.date
             datePicker2.addTarget(self, action: #selector(self.datePickerChanged(sender:)), for: .valueChanged)
             if let indexSelected = selectedExpIndex {
-                expDateButtons[indexSelected].isSelected = false
+                expButtons[indexSelected].isSelected = false
             }
             
-            for button in expDateButtons {
+            for button in expButtons {
                 button.backgroundColor = UIColor.lightGray
             }
             expDateTextfield.text = formatter.string(from: datePicker2.date).uppercased()
@@ -458,7 +471,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         
         formatInitialData()
         saveButton.isEnabled = false
-        saveButton.backgroundColor = UIColor.clear
+    
         
     }
     

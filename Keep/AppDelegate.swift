@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+
         let colorNormal = UIColor(red: 151/255.0, green: 151/255.0, blue: 151/255.0, alpha: 1)
         let colorSelected = UIColor(red: 35/255.0, green: 213/255.0, blue: 185/255.0, alpha: 1)
         
