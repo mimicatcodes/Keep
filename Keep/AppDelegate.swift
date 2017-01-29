@@ -15,7 +15,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let colorNormal = UIColor(red: 151/255.0, green: 151/255.0, blue: 151/255.0, alpha: 1)
+        let colorSelected = UIColor(red: 35/255.0, green: 213/255.0, blue: 185/255.0, alpha: 1)
+        
+        if let font = UIFont(name: "Montserrat-Regular", size: 16) {
+            
+            UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: font,  NSForegroundColorAttributeName: UIColor(red:100/255.0, green:100/255.0, blue:100/255.0, alpha: 1.0)]
+            
+        }
+        
+        if let font = UIFont(name: "Lato-Regular", size: 11.0) {
+            print("-------------------- font is \(font)")
+            let attributesNormal = [
+                NSForegroundColorAttributeName: colorNormal,
+                NSFontAttributeName : font
+            ]
+            
+            let attributesSelected = [
+                NSForegroundColorAttributeName : colorSelected,
+                NSFontAttributeName : font
+            ]
+            
+            UITabBarItem.appearance().setTitleTextAttributes(attributesNormal, for: .normal)
+            UITabBarItem.appearance().setTitleTextAttributes(attributesSelected, for: .selected)
+            
+        }
+        UITabBar.appearance().tintColor = colorSelected
         return true
+        /*
+         
+         let colorNormal : UIColor = UIColor.blackColor()
+         let colorSelected : UIColor = UIColor.whiteColor()
+         let titleFontAll : UIFont = UIFont(name: "American Typewriter", size: 13.0)!
+         
+         let attributesNormal = [
+         NSForegroundColorAttributeName : colorNormal,
+         NSFontAttributeName : titleFontAll
+         ]
+         
+         let attributesSelected = [
+         NSForegroundColorAttributeName : colorSelected,
+         NSFontAttributeName : titleFontAll
+         ]
+         
+         UITabBarItem.appearance().setTitleTextAttributes(attributesNormal, forState: .Normal)
+         UITabBarItem.appearance().setTitleTextAttributes(attributesSelected, forState: .Selected)
+ */
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

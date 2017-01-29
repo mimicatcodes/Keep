@@ -16,12 +16,14 @@ class AddListVC: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPi
     let datePicker = UIDatePicker()
     let formatter = DateFormatter()
     var activeTextField:UITextField?
+    
     @IBOutlet weak var listTitle: UITextField!
     @IBOutlet weak var dateField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var createListView: UIView!
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         listTitle.delegate = self
         dateField.delegate = self

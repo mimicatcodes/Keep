@@ -20,6 +20,7 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        tableView.separatorColor = UIColor(red:219/255.0, green:219/255.0, blue:219/255.0, alpha: 1.0)
         NotificationCenter.default.addObserver(forName: REFRESH_TV_NOTIFICATION, object: nil, queue: nil) { (notification) in
             print("notification is \(notification)")
             self.tableView.reloadData()
@@ -61,9 +62,15 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
         let reuseIdentifier = "shoppingListCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as! ShoppingListCell
         
+        cell.numOfItemsView.layer.borderWidth = 1.2
+        cell.numOfItemsView.layer.borderColor = UIColor(red:35/255.0, green:213/255.0, blue:185/255.0, alpha: 1.0).cgColor
+        cell.numOfItemsView.backgroundColor = UIColor.clear
+        // make rgb color extensions when refactoring
+
         cell.numOfItemsRemainingLabel.text = String(describing: store.allShopingLists[indexPath.row].numOfItems)
         cell.shoppingListTitleLabel.text = store.allShopingLists[indexPath.row].title
         cell.createdAtLabel.text = store.allShopingLists[indexPath.row].isCreatedAt
+        cell.selectionStyle = .none
 
         let rightButton1 = MGSwipeButton(title: "Delete", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
             self.createAlert(withTitle: "Delete")
@@ -128,9 +135,12 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
 }
 
 class ShoppingListCell: MGSwipeTableCell {
+    
+    @IBOutlet weak var numOfItemsView: UIView!
     @IBOutlet weak var shoppingListTitleLabel: UILabel!
     @IBOutlet weak var createdAtLabel: UILabel!
     @IBOutlet weak var numOfItemsRemainingLabel: UILabel!
+    
 }
 
 

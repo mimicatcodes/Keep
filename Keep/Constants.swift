@@ -15,5 +15,8 @@ struct Colors {
     static let emerald = UIColor(red: 46/255, green: 204/255, blue: 113/255, alpha: 1)
 }
 
+let MAIN_COLOR = UIColor(red: 133/255.0, green: 219/255.0, blue: 205/255.0, alpha: 1)
+let MAIN_BG_COLOR = UIColor(red: 245/255.0, green: 245/255.0, blue: 245/255.0, alpha: 1)
+let MAIN_BUTTON_LABEL_GRAY = UIColor(red: 113/255.0, green: 113/255.0, blue: 113/255.0, alpha: 1)
 let REFRESH_TV_NOTIFICATION = NSNotification.Name("RefeshTVNotification")
 let REFRESH_ITEM_LIST_NOTIFICATION = NSNotification.Name("RefreshItemListNotification")

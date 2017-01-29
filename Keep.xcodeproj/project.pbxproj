@@ -14,6 +14,7 @@
 		DD1EA64D1E0CA5220034C54B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA64C1E0CA5220034C54B /* Constants.swift */; };
 		DD1EA64F1E0CAEFF0034C54B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA64E1E0CAEFF0034C54B /* LoginViewController.swift */; };
 		DD1EA6511E0CAFEB0034C54B /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA6501E0CAFEB0034C54B /* ForgotPasswordViewController.swift */; };
+		DD2C38A31E3D7CD000A7C709 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD2C38A21E3D7CD000A7C709 /* Lato-Bold.ttf */; };
 		DD48537F1E196C4200BEAC02 /* Produce.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD48537E1E196C4200BEAC02 /* Produce.swift */; };
 		DD4853831E197CB500BEAC02 /* Condiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853821E197CB500BEAC02 /* Condiments.swift */; };
 		DD48539D1E198CCF00BEAC02 /* NoodlesGrainsSides.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD48539C1E198CCF00BEAC02 /* NoodlesGrainsSides.swift */; };
@@ -31,6 +32,12 @@
 		DD4853C71E19AF0000BEAC02 /* PackagedFoods.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853C61E19AF0000BEAC02 /* PackagedFoods.swift */; };
 		DD4853CD1E1B186200BEAC02 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853CC1E1B186200BEAC02 /* FridgeViewController.swift */; };
 		DD5D7DC91E329BA300C2317D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5D7DC81E329BA300C2317D /* MainViewController.swift */; };
+		DD75B7B11E3D545D002053E5 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DD75B7AF1E3D545D002053E5 /* Montserrat-Bold.otf */; };
+		DD75B7B21E3D545D002053E5 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = DD75B7B01E3D545D002053E5 /* Montserrat-Regular.otf */; };
+		DD75B7B41E3D5466002053E5 /* Montserrat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DD75B7B31E3D5466002053E5 /* Montserrat-SemiBold.otf */; };
+		DD75B7B61E3D5529002053E5 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD75B7B51E3D5529002053E5 /* Lato-Regular.ttf */; };
+		DD75B7B81E3D5536002053E5 /* Lato-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD75B7B71E3D5536002053E5 /* Lato-Semibold.ttf */; };
+		DD75B7BA1E3D7A93002053E5 /* Montserrat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = DD75B7B91E3D7A93002053E5 /* Montserrat-Light.otf */; };
 		DDC3E9801E1C76E100459295 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E97F1E1C76E100459295 /* SearchVC.swift */; };
 		DDC3E9821E1C93F400459295 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E9811E1C93F400459295 /* DataStore.swift */; };
 		DDC3E9871E1C957000459295 /* ShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E9861E1C957000459295 /* ShoppingListViewController.swift */; };
@@ -60,6 +67,7 @@
 		DD1EA64C1E0CA5220034C54B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DD1EA64E1E0CAEFF0034C54B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DD1EA6501E0CAFEB0034C54B /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		DD2C38A21E3D7CD000A7C709 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 		DD48537E1E196C4200BEAC02 /* Produce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Produce.swift; sourceTree = "<group>"; };
 		DD4853821E197CB500BEAC02 /* Condiments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Condiments.swift; sourceTree = "<group>"; };
 		DD48539C1E198CCF00BEAC02 /* NoodlesGrainsSides.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoodlesGrainsSides.swift; sourceTree = "<group>"; };
@@ -77,6 +85,12 @@
 		DD4853C61E19AF0000BEAC02 /* PackagedFoods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackagedFoods.swift; sourceTree = "<group>"; };
 		DD4853CC1E1B186200BEAC02 /* FridgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
 		DD5D7DC81E329BA300C2317D /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		DD75B7AF1E3D545D002053E5 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.otf"; sourceTree = "<group>"; };
+		DD75B7B01E3D545D002053E5 /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.otf"; sourceTree = "<group>"; };
+		DD75B7B31E3D5466002053E5 /* Montserrat-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.otf"; sourceTree = "<group>"; };
+		DD75B7B51E3D5529002053E5 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		DD75B7B71E3D5536002053E5 /* Lato-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Semibold.ttf"; sourceTree = "<group>"; };
+		DD75B7B91E3D7A93002053E5 /* Montserrat-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.otf"; sourceTree = "<group>"; };
 		DDC3E97F1E1C76E100459295 /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		DDC3E9811E1C93F400459295 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		DDC3E9861E1C957000459295 /* ShoppingListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +159,7 @@
 		DD1EA6361E0CA41D0034C54B /* Keep */ = {
 			isa = PBXGroup;
 			children = (
+				DD75B7AA1E3D52EF002053E5 /* Fonts */,
 				DDE189A71E354A8800306449 /* Helpers */,
 				DD48537D1E196C0400BEAC02 /* Controller */,
 				DD48537C1E196BF900BEAC02 /* View */,
@@ -236,6 +251,20 @@
 				DDC3E9811E1C93F400459295 /* DataStore.swift */,
 			);
 			name = DataModel;
+			sourceTree = "<group>";
+		};
+		DD75B7AA1E3D52EF002053E5 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				DD75B7B31E3D5466002053E5 /* Montserrat-SemiBold.otf */,
+				DD75B7AF1E3D545D002053E5 /* Montserrat-Bold.otf */,
+				DD75B7B01E3D545D002053E5 /* Montserrat-Regular.otf */,
+				DD75B7B91E3D7A93002053E5 /* Montserrat-Light.otf */,
+				DD75B7B71E3D5536002053E5 /* Lato-Semibold.ttf */,
+				DD75B7B51E3D5529002053E5 /* Lato-Regular.ttf */,
+				DD2C38A21E3D7CD000A7C709 /* Lato-Bold.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		DD7B762D1E1B336C001DE6E8 /* Stock */ = {
@@ -357,8 +386,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD1EA6451E0CA41D0034C54B /* LaunchScreen.storyboard in Resources */,
+				DD2C38A31E3D7CD000A7C709 /* Lato-Bold.ttf in Resources */,
+				DD75B7B81E3D5536002053E5 /* Lato-Semibold.ttf in Resources */,
 				DD1EA6421E0CA41D0034C54B /* Assets.xcassets in Resources */,
 				DD1EA63D1E0CA41D0034C54B /* Main.storyboard in Resources */,
+				DD75B7B41E3D5466002053E5 /* Montserrat-SemiBold.otf in Resources */,
+				DD75B7B61E3D5529002053E5 /* Lato-Regular.ttf in Resources */,
+				DD75B7B21E3D545D002053E5 /* Montserrat-Regular.otf in Resources */,
+				DD75B7B11E3D545D002053E5 /* Montserrat-Bold.otf in Resources */,
+				DD75B7BA1E3D7A93002053E5 /* Montserrat-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

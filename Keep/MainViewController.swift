@@ -19,14 +19,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var buttons: [UIButton]!
-    @IBOutlet var underBars: [UIView]!
+    @IBOutlet var views: [UIView]!
+    @IBOutlet var labels: [UILabel]!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         tableView.allowsMultipleSelection = true
         buttons[selectedIndex].isSelected = true
-        underBars[selectedIndex].backgroundColor = UIColor.darkGray
+        views[selectedIndex].backgroundColor = MAIN_COLOR
         didPressStockSection(buttons[selectedIndex])
 
     }
@@ -78,8 +79,20 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Button underbar background color changes when tapped.
         if buttons[selectedIndex].isHighlighted {
             
-            underBars[selectedIndex].backgroundColor = UIColor.darkGray
-            underBars[previousIndex].backgroundColor = UIColor.clear
+            views[selectedIndex].backgroundColor = MAIN_COLOR
+            views[previousIndex].backgroundColor = MAIN_BG_COLOR
+            labels[selectedIndex].textColor = UIColor.white
+            labels[previousIndex].textColor = MAIN_BUTTON_LABEL_GRAY
+            
+            
+            /*
+             
+             let origImage = UIImage(named: "imageName")
+             let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
+             btn.setImage(tintedImage, forState: .normal)
+             btn.tintColor = .redColor
+ */
+            
         }
         
     }
@@ -108,6 +121,28 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         return count
     }
     
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont(name: "Montserrat-Regular", size: 12)
+        header.textLabel?.textColor = UIColor.white
+        header.contentView.backgroundColor = UIColor(red: 35/255.0, green: 213/255.0, blue: 185/255.0, alpha: 1)
+        header.textLabel?.textAlignment = .center
+        /*
+         
+         let header = view as! UITableViewHeaderFooterView
+         header.textLabel?.font = UIFont(name: "Futura", size: 11)
+         header.textLabel?.textColor = UIColor.lightGrayColor()
+         
+         // Background color
+         view.tintColor = UIColor.blackColor()
+         
+         // Text Color/Font
+         let header = view as UITableViewHeaderFooterView
+         header.textLabel.textColor = UIColor.greenColor()
+         header.textLabel.font = my_font // put the font you want here...
+ */
+    }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         var title = ""
