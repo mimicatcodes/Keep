@@ -47,6 +47,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         super.viewDidLoad()
         saveButton.isEnabled = false
         customToolBarForPickers()
+        quantityLabel.layer.borderWidth = 1
+        quantityLabel.layer.borderColor = MAIN_COLOR.cgColor
         formatInitialData()
         formatDates()
         hideKeyboard()
@@ -54,6 +56,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         nameTextField.delegate = self
         categoryTextfield.delegate = self
         nameTextField.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.touchDown)
+    
     }
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {
