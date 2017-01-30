@@ -396,12 +396,12 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     
     func showAlert() {
         
-        labelView = UILabel(frame: CGRect(x: 0, y: 60, width: self.view.frame.width, height: 50))
-        labelView.backgroundColor = UIColor.darkGray
-        labelView.text = "Item Added!"
+        labelView = UILabel(frame: CGRect(x: 0, y: 65, width: self.view.frame.width, height: 40))
+        labelView.backgroundColor = ADDED_LABEL_COLOR
+        labelView.text = "Added an item!"
         labelView.textAlignment = .center
         labelView.textColor = UIColor.white
-        labelView.font = UIFont(name: "AvenirNextCondensed-Regular", size: 20)
+        labelView.font = UIFont(name: "Montserrat-SemiBold", size: 12)
         
         self.view.addSubview(labelView)
         

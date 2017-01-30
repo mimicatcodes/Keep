@@ -1173,12 +1173,12 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="13" id="bzb-G5-IjL"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="12"/>
                                                             <color key="textColor" red="0.37647058823529411" green="0.37647058823529411" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qnG-Xe-NER">
-                                                            <rect key="frame" x="242.5" y="23" width="37.5" height="25"/>
+                                                            <rect key="frame" x="227.5" y="23" width="37.5" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="25" id="2Nc-bf-X9l"/>
                                                             </constraints>
@@ -1196,7 +1196,7 @@
                                                         <constraint firstItem="fpk-J6-VV0" firstAttribute="width" secondItem="YZ5-Yc-0M9" secondAttribute="width" multiplier="0.2" id="Khw-tf-XxW"/>
                                                         <constraint firstItem="47m-mU-HMi" firstAttribute="top" secondItem="QJF-xf-SvH" secondAttribute="bottom" constant="7" id="OAh-Ei-taG"/>
                                                         <constraint firstItem="qnG-Xe-NER" firstAttribute="width" secondItem="YZ5-Yc-0M9" secondAttribute="width" multiplier="0.1" id="XVD-xc-bEN"/>
-                                                        <constraint firstItem="fpk-J6-VV0" firstAttribute="leading" secondItem="qnG-Xe-NER" secondAttribute="trailing" id="Xxd-ac-D8i"/>
+                                                        <constraint firstItem="fpk-J6-VV0" firstAttribute="leading" secondItem="qnG-Xe-NER" secondAttribute="trailing" constant="15" id="Xxd-ac-D8i"/>
                                                         <constraint firstItem="QJF-xf-SvH" firstAttribute="leading" secondItem="YZ5-Yc-0M9" secondAttribute="leadingMargin" constant="12" id="ZSJ-MT-vV1"/>
                                                         <constraint firstItem="47m-mU-HMi" firstAttribute="width" secondItem="QJF-xf-SvH" secondAttribute="width" id="rVh-3h-uGr"/>
                                                         <constraint firstAttribute="trailingMargin" secondItem="fpk-J6-VV0" secondAttribute="trailing" constant="12" id="uM6-MV-JKr"/>

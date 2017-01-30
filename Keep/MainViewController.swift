@@ -223,12 +223,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else if daysLeft == 1 {
             cell.expDateLabel.text = "\(daysLeft) day left"
             cell.expDateLabel.textColor = EXPIRING_WARNING_COLOR
-        } else if daysLeft > 1 {
+        } else if daysLeft == 2 || daysLeft == 3 {
             cell.expDateLabel.text = "\(daysLeft) days left"
-        } else if daysLeft > 1 && daysLeft < 4 {
             cell.expDateLabel.textColor = EXPIRING_WARNING_COLOR
-        } else if daysLeft < 0 {
+        } else if daysLeft > 3 {
+            cell.expDateLabel.text = "\(daysLeft) days left"
+            cell.expDateLabel.textColor = MAIN_BUTTON_LABEL_GRAY
+        } else  {
             cell.expDateLabel.text = "Expired!"
+            cell.expDateLabel.textColor = EXPIRING_WARNING_COLOR
         }
     }
     
