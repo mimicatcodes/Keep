@@ -25,8 +25,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     var filteredItems = [Item]()
     
     @IBOutlet weak var tableView: UITableView!
-
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    @IBOutlet var bodyViews: [UIView]!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var quantityMinusButton: UIButton!
@@ -36,10 +36,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     @IBOutlet var locationButtons: [UIButton]!
     @IBOutlet var locationLabels: [UILabel]!
     @IBOutlet var expButtons: [UIButton]!
-
     @IBOutlet weak var categoryTextfield: UITextField!
-
-    
     @IBOutlet weak var saveButton: UIButton!
     
     
@@ -51,7 +48,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         quantityLabel.layer.borderWidth = 1
         quantityLabel.layer.borderColor = MAIN_BORDER_COLOR.cgColor
         formatInitialData()
-        nameTextField.setBottomBorder()
+        //nameTextField.underlined()
         formatDates()
         hideKeyboard()
         tableView.isHidden = true
@@ -395,6 +392,13 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     
     func formatInitialData() {
         
+        for view in bodyViews {
+            view.underlinedBorder()
+            
+            if view.tag == 5 {
+                view.layer.borderColor = UIColor.clear.cgColor
+            }
+        }
         nameTextField.text = ""
         tableView.isHidden = true
         categoryTextfield.text = ""

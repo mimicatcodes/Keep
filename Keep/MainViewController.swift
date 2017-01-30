@@ -13,8 +13,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     let store = DataStore.sharedInstance
     
-    // var notificationToken: NotificationToken?
-    
     var selectedIndex: Int = 0
     
     @IBOutlet weak var tableView: UITableView!
@@ -29,7 +27,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         buttons[selectedIndex].isSelected = true
         views[selectedIndex].backgroundColor = MAIN_COLOR
         didPressStockSection(buttons[selectedIndex])
-
+  
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,18 +37,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func didPressStockSection(_ sender: UIButton) {
         
-        let previousIndex = selectedIndex
-        selectedIndex = sender.tag
+        let index_ = sender.tag
         
-        buttons[selectedIndex].isEnabled = false
-        buttons[previousIndex].isEnabled = true
-        
-        // Set previous button to the non-selected state
-        buttons[previousIndex].isSelected = false
-
-        sender.isSelected = true
-        
-        switch selectedIndex {
+        switch index_ {
             
         case 0:
             navigationItem.title = "Fridge"
@@ -75,27 +64,28 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             tableView.reloadData()
             
         }
-        
-        // Button underbar background color changes when tapped.
-        if buttons[selectedIndex].isHighlighted {
+
+       
+        for (index,button) in buttons.enumerated() {
             
-            views[selectedIndex].backgroundColor = MAIN_COLOR
-            views[previousIndex].backgroundColor = MAIN_BG_COLOR
-            labels[selectedIndex].textColor = UIColor.white
-            labels[previousIndex].textColor = MAIN_BUTTON_LABEL_GRAY
+            if index == index_ {
+                button.isSelected = true
+                button.setTitleColor(MAIN_COLOR, for: .selected)
+                views[index].backgroundColor = MAIN_COLOR
+                labels[index].textColor = UIColor.white
+
+                
+                
+            } else {
+                button.isSelected = false
+                button.setTitleColor(MAIN_BUTTON_LABEL_GRAY, for: .normal)
+                views[index].backgroundColor = MAIN_BG_COLOR
+                labels[index].textColor = MAIN_BUTTON_LABEL_GRAY
+                
+            }
             
             
-            /*
-             
-             let origImage = UIImage(named: "imageName")
-             let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
-             btn.setImage(tintedImage, forState: .normal)
-             btn.tintColor = .redColor
- */
-            
-        }
-        
-    }
+        }}
     
     // MARK: - TableView Methods
     
@@ -128,20 +118,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         header.textLabel?.textColor = UIColor.white
         header.contentView.backgroundColor = UIColor(red: 35/255.0, green: 213/255.0, blue: 185/255.0, alpha: 1)
         header.textLabel?.textAlignment = .center
-        /*
-         
-         let header = view as! UITableViewHeaderFooterView
-         header.textLabel?.font = UIFont(name: "Futura", size: 11)
-         header.textLabel?.textColor = UIColor.lightGrayColor()
-         
-         // Background color
-         view.tintColor = UIColor.blackColor()
-         
-         // Text Color/Font
-         let header = view as UITableViewHeaderFooterView
-         header.textLabel.textColor = UIColor.greenColor()
-         header.textLabel.font = my_font // put the font you want here...
- */
+
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         

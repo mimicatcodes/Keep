@@ -28,14 +28,27 @@ extension UIViewController {
 
 
 extension UITextField {
-    func setBottomBorder() {
-        self.borderStyle = .none
-        //self.layer.backgroundColor = UIColor.clear.cgColor
-        self.layer.masksToBounds = false
-        self.layer.shadowColor = UIColor.lightGray.cgColor
-        self.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-        self.layer.shadowOpacity = 1.0
-        self.layer.shadowRadius = 0.0
+
+    func underlined(){
+        let border = CALayer()
+        let width = CGFloat(1.0)
+        border.borderColor = MAIN_BORDER_COLOR.cgColor
+        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width:  self.frame.size.width, height: self.frame.size.height)
+        border.borderWidth = width
+        self.layer.addSublayer(border)
+        self.layer.masksToBounds = true
     }
 }
 
+extension UIView {
+    
+    func underlinedBorder(){
+        let border = CALayer()
+        border.frame = CGRect(x: 0, y: self.bounds.size.height - 1, width: UIScreen.main.bounds.width, height: 1)
+        border.backgroundColor = MAIN_BORDER_COLOR.cgColor
+        self.layer.addSublayer(border)
+        self.layer.masksToBounds = true
+        self.layer.shadowOffset = .zero
+    }
+    
+}
