@@ -63,7 +63,7 @@ class AddListVC: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPi
 
     func formatInitialData(){
         let currentDate = Date()
-        dateField.text = formatter.string(from: currentDate).uppercased()
+        dateField.text = formatter.string(from: currentDate).capitalized
         datePicker.setDate(currentDate, animated: true)
     }
     
@@ -75,7 +75,7 @@ class AddListVC: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPi
             dateField.inputView = datePicker
             datePicker.datePickerMode = .date
             datePicker.addTarget(self, action: #selector(self.datePickerChanged(sender:)) , for: .valueChanged)
-            dateField.text = formatter.string(from: datePicker.date).uppercased()
+            dateField.text = formatter.string(from: datePicker.date).capitalized
             
         }
     }
@@ -100,7 +100,7 @@ class AddListVC: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPi
     
     func datePickerChanged(sender: UIDatePicker) {
         
-        dateField.text = formatter.string(from: sender.date).uppercased()
+        dateField.text = formatter.string(from: sender.date).capitalized
         
     }
     

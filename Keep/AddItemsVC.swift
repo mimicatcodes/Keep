@@ -24,6 +24,10 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     var allItems = Array(DataStore.sharedInstance.allItems)
     var filteredItems = [Item]()
     
+    var purchaseDate = Date()
+    var expDate = Date()
+    
+    @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet var bodyViews: [UIView]!
@@ -55,13 +59,27 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         nameTextField.delegate = self
         categoryTextfield.delegate = self
         nameTextField.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.touchDown)
+        setBodyViewBorders()
+        favButton.isSelected = false
+    }
     
+    func setBodyViewBorders(){
+        
+        bodyViews[0].underlinedBorder()
+        bodyViews[1].underlinedBorder()
+        bodyViews[2].underlinedBorder()
+        bodyViews[3].underlinedBorder()
+        bodyViews[4].underlinedBorder()
+        
     }
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {
+        
         return .topAttached
+        
     }
     func textFieldActive() {
+        
         tableView.isHidden = !tableView.isHidden
     }
     
@@ -71,6 +89,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         super.viewWillAppear(animated)
         formatInitialData()
         formatDates()
@@ -87,12 +106,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             searchAutocompleteEntriesWithSubstring(substring)
             
             return true
-
         }
-            
             return true
-        
-        
     }
     
 
@@ -123,9 +138,9 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             return allItems.count
             
         }
-      
+        
         return filteredItems.count
-    
+        
     }
     
     
@@ -189,6 +204,12 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         
     }
     
+    @IBAction func didPressFavBtn(_ sender: UIButton) {
+        
+        favButton.isSelected = !favButton.isSelected
+        // DO MORE STUFF HERE 
+        
+    }
     @IBAction func didPressExpDateBtn(_ sender: UIButton) {
         
         let index_ = sender.tag
@@ -198,34 +219,43 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         case 0:
             let today = Date()
             let fiveDaysLater = Calendar.current.date(byAdding: .day, value: 5, to: today)
+            expDate = fiveDaysLater!
             if let date = fiveDaysLater {
                 
-                expDateTextfield.text = formatter.string(from: date).uppercased()
+                expDateTextfield.text = formatter.string(from: date).capitalized
+                /*
+                 .uppercased()
+ */
             }
             
             print("5 Days")
             
         case 1:
             let today = Date()
-            let fiveDaysLater = Calendar.current.date(byAdding: .day, value: 7, to: today)
-            if let date = fiveDaysLater {
+            let sevenDaysLater = Calendar.current.date(byAdding: .day, value: 7, to: today)
+            expDate = sevenDaysLater!
+            if let date = sevenDaysLater {
                 
-                expDateTextfield.text = formatter.string(from: date).uppercased()
+                expDateTextfield.text = formatter.string(from: date).capitalized
             }
             
             print("7 Days")
             
         case 2:
             let today = Date()
-            let fiveDaysLater = Calendar.current.date(byAdding: .day, value: 14, to: today)
-            if let date = fiveDaysLater {
+            let twoWeeksLater = Calendar.current.date(byAdding: .day, value: 14, to: today)
+            expDate = twoWeeksLater!
+            if let date = twoWeeksLater {
                 
-                expDateTextfield.text = formatter.string(from: date).uppercased()
+                expDateTextfield.text = formatter.string(from: date).capitalized
             }
             
             print("14 Days")
             
         case 3:
+            let today = Date()
+            let neverExpire = Calendar.current.date(byAdding: .day, value: 1095, to: today)
+            expDate = neverExpire! // 3 years later
             expDateTextfield.text = "None"
             print("Never")
             
@@ -318,22 +348,21 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         
         guard let name = nameTextField.text, name != "" else { return }
         guard let purchaseDate = purchaseDateTextfield.text, purchaseDate != "" else { return }
-        guard let expDate = expDateTextfield.text, expDate != "" else { return }
+        guard let exp = expDateTextfield.text, exp != "" else { return }
         guard let category = categoryTextfield.text, category != "" else { return }
         
-        let item = Item(name: name, quantity: String(quantity), expDate: expDate, purchaseDate: purchaseDate, isConsumed: false, location: location.rawValue, category: category)
+        let item = Item(name: name, quantity: String(quantity), expDate: exp, exp: expDate, purchaseDate: purchaseDate, isConsumed: false, location: location.rawValue, category: category)
         
         let realm = try! Realm()
         try! realm.write {
             
             realm.add(item)
-            print("***** \(item.name) is added to realm database in \(item.category) in \(item.location) ***** ")
+            print("***** \(item.name) is added to realm database in \(item.category) in \(item.location) ***** AND \(item.exp)")
             
         }
         
         showAlert()
         resetAddItems()
-        
 
     }
 
@@ -391,14 +420,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     
     
     func formatInitialData() {
-        
-        for view in bodyViews {
-            view.underlinedBorder()
-            
-            if view.tag == 5 {
-                view.layer.borderColor = UIColor.clear.cgColor
-            }
-        }
+
         nameTextField.text = ""
         tableView.isHidden = true
         categoryTextfield.text = ""
@@ -433,9 +455,9 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
 
         }
         
-        purchaseDateTextfield.text = formatter.string(from: Date()).uppercased()
+        purchaseDateTextfield.text = formatter.string(from: Date()).capitalized
         let currentDate = Date()
-        expDateTextfield.text = formatter.string(from: Date()).uppercased()
+        expDateTextfield.text = formatter.string(from: Date()).capitalized
         datePicker1.setDate(currentDate, animated: false)
         datePicker2.setDate(currentDate, animated: false)
         
@@ -468,7 +490,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             purchaseDateTextfield.inputView = datePicker1
             datePicker1.datePickerMode = .date
             datePicker1.addTarget(self, action: #selector(self.datePickerChanged(sender:)) , for: .valueChanged)
-            purchaseDateTextfield.text = formatter.string(from: datePicker1.date).uppercased()
+            purchaseDateTextfield.text = formatter.string(from: datePicker1.date).capitalized
             
         } else if textField.tag == 2 {
             
@@ -488,7 +510,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 button.layer.borderColor = MAIN_BUTTON_LABEL_GRAY.cgColor
          
             }
-            expDateTextfield.text = formatter.string(from: datePicker2.date).uppercased()
+            expDateTextfield.text = formatter.string(from: datePicker2.date).capitalized
         }
         
     }
@@ -510,9 +532,11 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     func datePickerChanged(sender: UIDatePicker) {
         
         if sender == datePicker1 {
-            purchaseDateTextfield.text = formatter.string(from: sender.date).uppercased()
+            purchaseDate = sender.date
+            purchaseDateTextfield.text = formatter.string(from: sender.date).capitalized
         } else if sender == datePicker2 {
-            expDateTextfield.text = formatter.string(from: sender.date).uppercased()
+            expDate = sender.date
+            expDateTextfield.text = formatter.string(from: sender.date).capitalized
         }
         
     }

@@ -431,11 +431,16 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YF5-ES-PUh" userLabel="FavoriteButton">
-                                                <rect key="frame" x="318" y="11.5" width="37" height="38"/>
-                                                <state key="normal" image="FavoriteBase"/>
+                                                <rect key="frame" x="317.5" y="11.5" width="37.5" height="38"/>
+                                                <state key="normal" image="ItemFavoriteBase"/>
+                                                <state key="selected" image="ItemFavoriteActive"/>
+                                                <state key="highlighted" image="ItemFavoriteActive"/>
+                                                <connections>
+                                                    <action selector="didPressFavBtn:" destination="RqP-1N-A4c" eventType="touchUpInside" id="Qtt-Xs-b4g"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorite" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXu-xE-3Qo">
-                                                <rect key="frame" x="314" y="51.5" width="46" height="12"/>
+                                                <rect key="frame" x="314" y="49.5" width="46" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="46" id="V5o-f3-8zq"/>
                                                 </constraints>
@@ -446,7 +451,7 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="ILE-Lo-e1b" firstAttribute="top" secondItem="5hE-v4-8Fg" secondAttribute="bottom" constant="10" id="2cE-6W-UyN"/>
-                                            <constraint firstItem="QXu-xE-3Qo" firstAttribute="top" secondItem="YF5-ES-PUh" secondAttribute="bottom" constant="2" id="8Xb-tb-ifM"/>
+                                            <constraint firstItem="QXu-xE-3Qo" firstAttribute="top" secondItem="YF5-ES-PUh" secondAttribute="bottom" id="8Xb-tb-ifM"/>
                                             <constraint firstItem="5hE-v4-8Fg" firstAttribute="leading" secondItem="UEy-19-NtC" secondAttribute="leading" constant="15" id="8bX-A1-k88"/>
                                             <constraint firstItem="QXu-xE-3Qo" firstAttribute="centerX" secondItem="YF5-ES-PUh" secondAttribute="centerX" id="GfU-W2-u6v"/>
                                             <constraint firstItem="YF5-ES-PUh" firstAttribute="centerY" secondItem="UEy-19-NtC" secondAttribute="centerY" multiplier="0.8" id="Pxc-PK-qT6"/>
@@ -738,9 +743,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="oYN-Qq-60A" secondAttribute="height" multiplier="1:1" id="Sqq-7b-aLP"/>
                                                         </constraints>
-                                                        <state key="normal" image="PantryBase">
-                                                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </state>
+                                                        <state key="normal" image="PantryBase"/>
                                                         <connections>
                                                             <action selector="didPressLocationBtn:" destination="RqP-1N-A4c" eventType="touchUpInside" id="BgG-yL-AGx"/>
                                                         </connections>
@@ -768,9 +771,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="bB1-pC-WSW" secondAttribute="height" multiplier="1:1" id="c57-5e-AVN"/>
                                                         </constraints>
-                                                        <state key="normal" image="HouseholdBase">
-                                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                        </state>
+                                                        <state key="normal" image="HouseholdBase"/>
                                                         <connections>
                                                             <action selector="didPressLocationBtn:" destination="RqP-1N-A4c" eventType="touchUpInside" id="RGx-uh-Ohf"/>
                                                         </connections>
@@ -918,6 +919,7 @@
                     <connections>
                         <outlet property="categoryTextfield" destination="Jvu-iC-Gqs" id="yYn-A0-VTJ"/>
                         <outlet property="expDateTextfield" destination="Gm1-0F-XZ1" id="lt8-AR-IT9"/>
+                        <outlet property="favButton" destination="YF5-ES-PUh" id="Xjb-UO-56l"/>
                         <outlet property="heightConstraint" destination="EXm-Uv-yIP" id="rME-th-grx"/>
                         <outlet property="nameTextField" destination="ILE-Lo-e1b" id="6jZ-oh-wKg"/>
                         <outlet property="purchaseDateTextfield" destination="nli-eo-KRb" id="WWF-QX-GDU"/>
@@ -1158,9 +1160,8 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7 Days Left" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpk-J6-VV0">
-                                                            <rect key="frame" x="194" y="23" width="161" height="25"/>
+                                                            <rect key="frame" x="280" y="23" width="75" height="25"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="161" id="VI1-cH-1dV"/>
                                                                 <constraint firstAttribute="height" constant="25" id="fgW-sc-kv8"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
@@ -1177,10 +1178,9 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qnG-Xe-NER">
-                                                            <rect key="frame" x="233" y="23" width="25" height="25"/>
+                                                            <rect key="frame" x="242.5" y="23" width="37.5" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="25" id="2Nc-bf-X9l"/>
-                                                                <constraint firstAttribute="width" constant="25" id="WZ0-c1-DbH"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                                             <color key="textColor" red="0.44313725490196076" green="0.44313725490196076" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
@@ -1193,8 +1193,10 @@
                                                         <constraint firstItem="QJF-xf-SvH" firstAttribute="centerY" secondItem="YZ5-Yc-0M9" secondAttribute="centerY" multiplier="0.65" id="Faa-j7-OhR"/>
                                                         <constraint firstItem="47m-mU-HMi" firstAttribute="leading" secondItem="QJF-xf-SvH" secondAttribute="leading" id="HAg-ay-1Qd"/>
                                                         <constraint firstItem="fpk-J6-VV0" firstAttribute="centerY" secondItem="YZ5-Yc-0M9" secondAttribute="centerY" id="IrJ-OI-3Qc"/>
+                                                        <constraint firstItem="fpk-J6-VV0" firstAttribute="width" secondItem="YZ5-Yc-0M9" secondAttribute="width" multiplier="0.2" id="Khw-tf-XxW"/>
                                                         <constraint firstItem="47m-mU-HMi" firstAttribute="top" secondItem="QJF-xf-SvH" secondAttribute="bottom" constant="7" id="OAh-Ei-taG"/>
-                                                        <constraint firstItem="fpk-J6-VV0" firstAttribute="leading" secondItem="qnG-Xe-NER" secondAttribute="trailing" constant="-64" id="Xxd-ac-D8i"/>
+                                                        <constraint firstItem="qnG-Xe-NER" firstAttribute="width" secondItem="YZ5-Yc-0M9" secondAttribute="width" multiplier="0.1" id="XVD-xc-bEN"/>
+                                                        <constraint firstItem="fpk-J6-VV0" firstAttribute="leading" secondItem="qnG-Xe-NER" secondAttribute="trailing" id="Xxd-ac-D8i"/>
                                                         <constraint firstItem="QJF-xf-SvH" firstAttribute="leading" secondItem="YZ5-Yc-0M9" secondAttribute="leadingMargin" constant="12" id="ZSJ-MT-vV1"/>
                                                         <constraint firstItem="47m-mU-HMi" firstAttribute="width" secondItem="QJF-xf-SvH" secondAttribute="width" id="rVh-3h-uGr"/>
                                                         <constraint firstAttribute="trailingMargin" secondItem="fpk-J6-VV0" secondAttribute="trailing" constant="12" id="uM6-MV-JKr"/>
@@ -1203,6 +1205,8 @@
                                                 <connections>
                                                     <outlet property="expDateLabel" destination="fpk-J6-VV0" id="AcE-QZ-pHQ"/>
                                                     <outlet property="itemTitleLabel" destination="QJF-xf-SvH" id="gZ9-Bm-fc3"/>
+                                                    <outlet property="purchaseDate" destination="47m-mU-HMi" id="BmY-DR-M5L"/>
+                                                    <outlet property="quantityLabel" destination="qnG-Xe-NER" id="tWS-wW-yic"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -1933,6 +1937,8 @@
         <image name="FridgeBase" width="31" height="53"/>
         <image name="HouseholdActive" width="40" height="45"/>
         <image name="HouseholdBase" width="40" height="45"/>
+        <image name="ItemFavoriteActive" width="22" height="19"/>
+        <image name="ItemFavoriteBase" width="22" height="19"/>
         <image name="Minus" width="22" height="22"/>
         <image name="PantryActive" width="35" height="37"/>
         <image name="PantryBase" width="35" height="37"/>

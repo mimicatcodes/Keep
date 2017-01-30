@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Image.png",
+      "filename" : "Pantry_tealish.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Pantry_tealish@2x.png",
       "scale" : "2x"
     },
     {
