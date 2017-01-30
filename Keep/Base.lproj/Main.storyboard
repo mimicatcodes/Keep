@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -577,7 +578,6 @@
                                             </label>
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Dx-hE-SJd">
                                                 <rect key="frame" x="18" y="137" width="159" height="30"/>
-                                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                                 <state key="normal" title="~ 2 Weeks">
                                                     <color key="titleColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -588,7 +588,6 @@
                                             </button>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="30o-Yy-ApN">
                                                 <rect key="frame" x="197.5" y="101" width="159" height="30"/>
-                                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                                 <state key="normal" title="~ 1 Week">
                                                     <color key="titleColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -618,7 +617,6 @@
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uWw-Ou-gkD">
                                                 <rect key="frame" x="18.5" y="101" width="159" height="30"/>
-                                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                                 <state key="normal" title="~ 5 Days">
                                                     <color key="titleColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -629,7 +627,6 @@
                                             </button>
                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6kF-G2-fIo">
                                                 <rect key="frame" x="197.5" y="137" width="159" height="30"/>
-                                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                                 <state key="normal" title="Never">
                                                     <color key="titleColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -678,10 +675,11 @@
                                                 <rect key="frame" x="0.0" y="25" width="94" height="84.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCQ-10-AR7">
-                                                        <rect key="frame" x="0.0" y="4" width="94" height="59.5"/>
-                                                        <state key="normal" image="FridgeBase">
-                                                            <color key="titleColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </state>
+                                                        <rect key="frame" x="17.5" y="4" width="59.5" height="59.5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="uCQ-10-AR7" secondAttribute="height" multiplier="1:1" id="sJL-9O-Glk"/>
+                                                        </constraints>
+                                                        <state key="normal" image="FridgeBase"/>
                                                         <connections>
                                                             <action selector="didPressLocationBtn:" destination="RqP-1N-A4c" eventType="touchUpInside" id="3h3-Jx-2Qe"/>
                                                         </connections>
@@ -696,7 +694,6 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="uCQ-10-AR7" firstAttribute="height" secondItem="UND-t7-KTf" secondAttribute="height" multiplier="0.7" id="2s4-kU-r1j"/>
-                                                    <constraint firstItem="uCQ-10-AR7" firstAttribute="width" secondItem="UND-t7-KTf" secondAttribute="width" id="5Cz-7b-Pxu"/>
                                                     <constraint firstItem="fH9-nr-f3D" firstAttribute="centerY" secondItem="UND-t7-KTf" secondAttribute="centerY" multiplier="1.8" id="BfQ-rn-LLa"/>
                                                     <constraint firstItem="uCQ-10-AR7" firstAttribute="centerX" secondItem="UND-t7-KTf" secondAttribute="centerX" id="HY7-cX-9r4"/>
                                                     <constraint firstItem="fH9-nr-f3D" firstAttribute="height" secondItem="UND-t7-KTf" secondAttribute="height" multiplier="0.2" id="OUC-PR-1kB"/>
@@ -709,7 +706,10 @@
                                                 <rect key="frame" x="94" y="25" width="94" height="84.5"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Snn-VI-nzp">
-                                                        <rect key="frame" x="0.0" y="4.5" width="94" height="59"/>
+                                                        <rect key="frame" x="17.5" y="4.5" width="59" height="59"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="Snn-VI-nzp" secondAttribute="height" multiplier="1:1" id="6o4-c4-Ad9"/>
+                                                        </constraints>
                                                         <state key="normal" image="FreezerBase">
                                                             <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
@@ -727,7 +727,6 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="Snn-VI-nzp" firstAttribute="centerY" secondItem="cpG-15-jaw" secondAttribute="centerY" multiplier="0.8" id="0aR-C4-eVd"/>
-                                                    <constraint firstItem="Snn-VI-nzp" firstAttribute="width" secondItem="cpG-15-jaw" secondAttribute="width" id="1G1-Pd-2A4"/>
                                                     <constraint firstItem="Snn-VI-nzp" firstAttribute="centerX" secondItem="cpG-15-jaw" secondAttribute="centerX" id="9vj-ej-rtO"/>
                                                     <constraint firstItem="Bn7-hW-asa" firstAttribute="centerX" secondItem="cpG-15-jaw" secondAttribute="centerX" id="JY4-mZ-MU1"/>
                                                     <constraint firstItem="Snn-VI-nzp" firstAttribute="height" secondItem="cpG-15-jaw" secondAttribute="height" multiplier="0.7" id="JlT-ae-SAH"/>
@@ -737,7 +736,10 @@
                                                 <rect key="frame" x="188.5" y="25" width="94" height="84.5"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oYN-Qq-60A">
-                                                        <rect key="frame" x="0.0" y="4.5" width="94" height="59"/>
+                                                        <rect key="frame" x="17.5" y="4.5" width="59" height="59"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="oYN-Qq-60A" secondAttribute="height" multiplier="1:1" id="Sqq-7b-aLP"/>
+                                                        </constraints>
                                                         <state key="normal" image="PantryBase">
                                                             <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
@@ -754,7 +756,6 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstItem="oYN-Qq-60A" firstAttribute="width" secondItem="XqP-hE-GDP" secondAttribute="width" id="6Px-bD-6E7"/>
                                                     <constraint firstItem="oYN-Qq-60A" firstAttribute="centerY" secondItem="XqP-hE-GDP" secondAttribute="centerY" multiplier="0.8" id="Bau-46-Vub"/>
                                                     <constraint firstItem="XPO-a5-QWR" firstAttribute="centerX" secondItem="XqP-hE-GDP" secondAttribute="centerX" id="aM5-S0-J9D"/>
                                                     <constraint firstItem="oYN-Qq-60A" firstAttribute="centerX" secondItem="XqP-hE-GDP" secondAttribute="centerX" id="bm8-DU-cv0"/>
@@ -765,7 +766,10 @@
                                                 <rect key="frame" x="282.5" y="25" width="94" height="84.5"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bB1-pC-WSW">
-                                                        <rect key="frame" x="0.0" y="4.5" width="94" height="59"/>
+                                                        <rect key="frame" x="17.5" y="4.5" width="59" height="59"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="bB1-pC-WSW" secondAttribute="height" multiplier="1:1" id="c57-5e-AVN"/>
+                                                        </constraints>
                                                         <state key="normal" image="HouseholdBase">
                                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
@@ -784,7 +788,6 @@
                                                 <constraints>
                                                     <constraint firstItem="bB1-pC-WSW" firstAttribute="centerX" secondItem="lrt-yD-VxB" secondAttribute="centerX" id="4Qf-af-sf7"/>
                                                     <constraint firstItem="d9o-z0-7aF" firstAttribute="centerX" secondItem="lrt-yD-VxB" secondAttribute="centerX" id="PCg-Ap-M7g"/>
-                                                    <constraint firstItem="bB1-pC-WSW" firstAttribute="width" secondItem="lrt-yD-VxB" secondAttribute="width" id="U6i-HO-Ffc"/>
                                                     <constraint firstItem="bB1-pC-WSW" firstAttribute="height" secondItem="lrt-yD-VxB" secondAttribute="height" multiplier="0.7" id="Uld-l4-b6E"/>
                                                     <constraint firstItem="bB1-pC-WSW" firstAttribute="centerY" secondItem="lrt-yD-VxB" secondAttribute="centerY" multiplier="0.8" id="YXo-La-ClX"/>
                                                 </constraints>

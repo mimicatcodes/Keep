@@ -49,7 +49,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         saveButton.isEnabled = false
         customToolBarForPickers()
         quantityLabel.layer.borderWidth = 1
-        quantityLabel.layer.borderColor = MAIN_COLOR.cgColor
+        quantityLabel.layer.borderColor = MAIN_BORDER_COLOR.cgColor
         formatInitialData()
         nameTextField.setBottomBorder()
         formatDates()
@@ -241,10 +241,20 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             
             if index == index_ {
                 button.isSelected = true
-                button.backgroundColor = UIColor.red
+                button.layer.cornerRadius = 5
+                button.layer.borderWidth = 2
+                button.layer.borderColor = MAIN_COLOR.cgColor
+                button.setTitleColor(MAIN_COLOR, for: .selected)
+                
+    
             } else {
                 button.isSelected = false
-                button.backgroundColor = UIColor.lightGray
+                button.layer.cornerRadius = 5
+                button.layer.borderWidth = 1
+                button.layer.borderColor = MAIN_BUTTON_LABEL_GRAY.cgColor
+                button.setTitleColor(MAIN_BUTTON_LABEL_GRAY, for: .normal)
+        
+
             }
         }
         
@@ -276,13 +286,23 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         for (index,button) in locationButtons.enumerated() {
             if index == selectedIndex {
                 button.isSelected = true
-                locationViews[index].backgroundColor = MAIN_COLOR
-                locationLabels[index].textColor = UIColor.white
+             
+                button.backgroundColor = .clear
+                button.layer.cornerRadius = 5
+                button.layer.borderWidth = 2
+                button.layer.borderColor = MAIN_COLOR.cgColor
+
+                locationLabels[index].textColor = MAIN_COLOR
                 
                
             } else {
                 button.isSelected = false
-                locationViews[index].backgroundColor = UIColor.clear
+                
+                button.backgroundColor = .clear
+                button.layer.cornerRadius = 5
+                button.layer.borderWidth = 1
+                button.layer.borderColor = MAIN_BUTTON_LABEL_GRAY.cgColor
+                
                 locationLabels[index].textColor = MAIN_BUTTON_LABEL_GRAY
               
             }
@@ -383,21 +403,30 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         for (index,button) in locationButtons.enumerated() {
             if index == 0 {
                 button.isSelected = true
-                //button.backgroundColor = UIColor.green
-                locationViews[index].backgroundColor = MAIN_COLOR
-                locationLabels[index].textColor = UIColor.white
+                button.backgroundColor = .clear
+                button.layer.cornerRadius = 5
+                button.layer.borderWidth = 2
+                button.layer.borderColor = MAIN_COLOR.cgColor
+                locationLabels[index].textColor = MAIN_COLOR
                 
             } else {
                 button.isSelected = false
-                //button.backgroundColor = UIColor.clear
-                locationViews[index].backgroundColor = UIColor.clear
+                button.backgroundColor = .clear
+                button.layer.cornerRadius = 5
+                button.layer.borderWidth = 1
+                button.layer.borderColor = MAIN_BUTTON_LABEL_GRAY.cgColor
                 locationLabels[index].textColor = MAIN_BUTTON_LABEL_GRAY
             }
         }
         
         for button in expButtons {
+            
             button.isSelected = false
-            button.backgroundColor = UIColor.lightGray
+            button.layer.cornerRadius = 5
+            button.layer.borderWidth = 1
+            button.layer.borderColor = MAIN_BUTTON_LABEL_GRAY.cgColor
+            button.setTitleColor(MAIN_BUTTON_LABEL_GRAY, for: .normal)
+
         }
         
         purchaseDateTextfield.text = formatter.string(from: Date()).uppercased()
@@ -448,7 +477,12 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             }
             
             for button in expButtons {
-                button.backgroundColor = UIColor.lightGray
+                
+                button.backgroundColor = .clear
+                button.layer.cornerRadius = 5
+                button.layer.borderWidth = 1
+                button.layer.borderColor = MAIN_BUTTON_LABEL_GRAY.cgColor
+         
             }
             expDateTextfield.text = formatter.string(from: datePicker2.date).uppercased()
         }
