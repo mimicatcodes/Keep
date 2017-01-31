@@ -15,7 +15,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var leftView: UIView!
     @IBOutlet weak var midView: UIView!
-    
 
     @IBOutlet weak var tableView: UITableView!
     
