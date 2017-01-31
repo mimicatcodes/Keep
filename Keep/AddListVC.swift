@@ -37,7 +37,7 @@ class AddListVC: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPi
     
     @IBAction func dismissView(_ sender: Any) {
    
-        dismiss(animated: false, completion: nil)
+        //dismiss(animated: false, completion: nil)
     }
     
  

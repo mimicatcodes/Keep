@@ -53,4 +53,14 @@ extension UIView {
         self.layer.shadowOffset = .zero
     }
     
+    func rightBorder(){
+        let border = CALayer()
+        border.frame = CGRect(x: self.frame.size.width - 1, y: 0, width: 1, height: self.frame.size.height)
+        border.backgroundColor = MAIN_BORDER_COLOR.cgColor
+        self.layer.addSublayer(border)
+        self.layer.masksToBounds = true
+        self.layer.shadowOffset = .zero
+
+    }
+    
 }
