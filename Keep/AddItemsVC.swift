@@ -57,6 +57,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         tableView.layer.borderWidth = 1.0
         tableView.separatorInset = .zero
         nameTextField.underlined()
+        categoryTextfield.underlined()
         formatDates()
         hideKeyboard()
         tableView.isHidden = true
