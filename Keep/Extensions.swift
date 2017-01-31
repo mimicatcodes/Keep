@@ -44,7 +44,9 @@ extension UIView {
     
     func underlinedBorder(){
         let border = CALayer()
-        border.frame = CGRect(x: 0, y: self.bounds.size.height - 1, width: UIScreen.main.bounds.width, height: 1)
+        let width = CGFloat(1.0)
+        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width:  self.frame.size.width, height: self.frame.size.height)
+        //border.frame = CGRect(x: 0, y: self.bounds.size.height - 1, width: UIScreen.main.bounds.width, height: 1)
         border.backgroundColor = MAIN_BORDER_COLOR.cgColor
         self.layer.addSublayer(border)
         self.layer.masksToBounds = true

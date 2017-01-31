@@ -27,6 +27,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         buttons[selectedIndex].isSelected = true
         views[selectedIndex].backgroundColor = MAIN_COLOR
         didPressStockSection(buttons[selectedIndex])
+        tableView.tableFooterView = UIView()
+        //tableView.separatorInset = .zero
         
     }
     
@@ -211,6 +213,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         cell.selectionStyle = .none
+        cell.separatorInset = .zero
         
         return cell
         

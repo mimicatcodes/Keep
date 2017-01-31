@@ -2,7 +2,7 @@
 //  FavoritesViewController.swift
 //  Keep
 //
-//  Created by Mirim An on 1/3/17.
+//  Created by Luna An on 1/3/17.
 //  Copyright © 2017 Mimicatcodes. All rights reserved.
 //
 

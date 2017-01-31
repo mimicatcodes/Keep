@@ -9,7 +9,6 @@
 import UIKit
 import RealmSwift
 import MGSwipeTableCell
-import M13Checkbox
 import NotificationCenter
 
 class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
@@ -17,13 +16,14 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
     let store = DataStore.sharedInstance
     var name:String?
     var uniqueID: String = ""
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.separatorStyle = .none
-        
+        tableView.tableFooterView = UIView()
         tableView.backgroundColor = UIColor.clear
+        tableView.allowsMultipleSelection = true
         tableView.rowHeight = 100
         navigationItem.title = name
         NotificationCenter.default.addObserver(forName: REFRESH_ITEM_LIST_NOTIFICATION, object: nil, queue: nil) { (notification) in
@@ -31,8 +31,6 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
-            
-            
         }
     }
     
@@ -58,8 +56,51 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
         let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
         let filteredItems = store.allShoppingItems.filter(predicate)
         cell.titleLabel.text = filteredItems[indexPath.row].name
-        cell.selectionStyle = .none
+        //cell.selectionStyle = .none
+        cell.separatorInset = .zero
+        
+        if filteredItems[indexPath.row].isPurchased == true {
+            cell.titleLabel.textColor = MAIN_BORDER_COLOR
+            cell.checkBoxBtn.imageView?.image = #imageLiteral(resourceName: "ChecklistActive2")
+    
+        } else {
+            cell.titleLabel.textColor = UIColor(red: 77/255.0, green: 77/255.0, blue: 77/255.0, alpha: 1)
+            cell.checkBoxBtn.imageView?.image = #imageLiteral(resourceName: "ChecklistBase2")
+
+        }
+        
         return cell
+        
+       
+    }
+
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       print("Cell sected at \(indexPath.row)")
+    
+        let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
+        let filteredItems = store.allShoppingItems.filter(predicate)
+        
+        let realm = try! Realm()
+        try! realm.write {
+            
+            if filteredItems[indexPath.row].isPurchased == false {
+                filteredItems[indexPath.row].isPurchased = true
+
+            } else {
+                filteredItems[indexPath.row].isPurchased = false
+            }
+            
+        }
+
+        print(filteredItems[indexPath.row].isPurchased)
+        tableView.reloadData()
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 70
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -70,7 +111,7 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
             dest.uniqueID = uniqueID
             
         }
-    }
+     }
     
 }
 
@@ -81,7 +122,7 @@ class ListDetailCell:UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     
-    @IBOutlet weak var checkBox: M13Checkbox!
+    @IBOutlet weak var checkBoxBtn: UIButton!
     
 }
 

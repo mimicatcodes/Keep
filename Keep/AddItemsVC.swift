@@ -52,14 +52,18 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         quantityLabel.layer.borderWidth = 1
         quantityLabel.layer.borderColor = MAIN_BORDER_COLOR.cgColor
         formatInitialData()
-        //nameTextField.underlined()
+        tableView.layer.masksToBounds = true
+        tableView.layer.borderColor = MAIN_BORDER_COLOR.cgColor
+        tableView.layer.borderWidth = 1.0
+        tableView.separatorInset = .zero
+        nameTextField.underlined()
         formatDates()
         hideKeyboard()
         tableView.isHidden = true
         nameTextField.delegate = self
         categoryTextfield.delegate = self
         nameTextField.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.touchDown)
-        setBodyViewBorders()
+        //setBodyViewBorders()
         favButton.isSelected = false
     }
     
@@ -85,7 +89,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     
     override func viewDidLayoutSubviews() {
 
-        heightConstraint.constant = 100
+        heightConstraint.constant = 80
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -169,6 +173,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         tableView.isHidden = true
         nameTextField.endEditing(true)
         tableView.reloadData()
+        
     }
     
     
@@ -177,6 +182,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
         formatter.dateFormat = "MMM dd, yyyy"
+        
     }
     
     func customToolBarForPickers(){
@@ -196,9 +202,10 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         
         expDateTextfield.inputAccessoryView = toolBar
         purchaseDateTextfield.inputAccessoryView = toolBar
+        
     }
     
-    func donePicker(sender:UIBarButtonItem){
+    func donePicker(sender:UIBarButtonItem) {
         
         activeTextField?.resignFirstResponder()
         
@@ -210,6 +217,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         // DO MORE STUFF HERE 
         
     }
+    
     @IBAction func didPressExpDateBtn(_ sender: UIButton) {
         
         let index_ = sender.tag
@@ -223,9 +231,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             if let date = fiveDaysLater {
                 
                 expDateTextfield.text = formatter.string(from: date).capitalized
-                /*
-                 .uppercased()
- */
+
             }
             
             print("5 Days")
@@ -465,15 +471,12 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool{
         
-        
         if nameTextField.text != nil && nameTextField.text != "" {
             
             saveButton.isEnabled = true
             saveButton.tintColor = UIColor.red
-            
-            
+    
         }
-        
         
         return true
     }

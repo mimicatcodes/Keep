@@ -19,7 +19,7 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        tableView.tableFooterView = UIView()
         tableView.separatorColor = UIColor(red:219/255.0, green:219/255.0, blue:219/255.0, alpha: 1.0)
         NotificationCenter.default.addObserver(forName: REFRESH_TV_NOTIFICATION, object: nil, queue: nil) { (notification) in
             print("notification is \(notification)")
@@ -51,6 +51,9 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
         tableView.deleteRows(at: [indexPath], with: .left)
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
@@ -71,6 +74,7 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
         cell.shoppingListTitleLabel.text = store.allShopingLists[indexPath.row].title
         cell.createdAtLabel.text = store.allShopingLists[indexPath.row].isCreatedAt
         cell.selectionStyle = .none
+        cell.separatorInset = .zero
 
         let rightButton1 = MGSwipeButton(title: "Delete", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
             self.createAlert(withTitle: "Delete")
@@ -116,9 +120,7 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
         self.present(alert, animated: true, completion: nil)
         
     }
-     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 110
-    }
+ 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showItems" {
