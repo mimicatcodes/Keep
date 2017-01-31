@@ -20,6 +20,7 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
+        definesPresentationContext = true
         tableView.separatorColor = UIColor(red:219/255.0, green:219/255.0, blue:219/255.0, alpha: 1.0)
         NotificationCenter.default.addObserver(forName: REFRESH_TV_NOTIFICATION, object: nil, queue: nil) { (notification) in
             print("notification is \(notification)")

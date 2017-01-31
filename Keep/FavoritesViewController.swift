@@ -17,6 +17,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
+        definesPresentationContext = true
         NotificationCenter.default.addObserver(forName: REFRESH_FAVORITES, object: nil, queue: nil) { (notification) in
             print("notification is \(notification)")
             DispatchQueue.main.async {
@@ -27,7 +28,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 60
+        return 50
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -38,6 +39,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteCell", for: indexPath) as! FavoriteCell
         cell.favoriteTitle.text = store.allFavoritedItems[indexPath.row].name
         cell.separatorInset = .zero
+        cell.selectionStyle = .none
         return cell
     }
     

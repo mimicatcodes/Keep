@@ -26,6 +26,7 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.allowsMultipleSelection = true
         tableView.rowHeight = 100
         navigationItem.title = name
+        definesPresentationContext = true
         NotificationCenter.default.addObserver(forName: REFRESH_ITEM_LIST_NOTIFICATION, object: nil, queue: nil) { (notification) in
             print("notification is \(notification)")
             DispatchQueue.main.async {

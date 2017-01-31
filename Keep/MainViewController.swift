@@ -247,37 +247,42 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let realm = try! Realm()
             
+            
             switch self.store.buttonStatus {
             case "Fridge":
-                
+                let itemToBeDeleted = self.store.fridgeItems.filter("category == %@", self.store.fridgeSectionNames[indexPath.section])[indexPath.row]
+            
                 try! realm.write {
-                    let itemToBeDeleted = self.store.fridgeItems[indexPath.row]
                     print("\(itemToBeDeleted) has been deleted")
-                    realm.delete(itemToBeDeleted)}
+                    realm.delete(itemToBeDeleted)
+                }
                 self.tableView.reloadData()
                 print("Deleted an item from a Fridge")
                 
             case "Freezer":
+                let itemToBeDeleted = self.store.freezerItems.filter("category == %@", self.store.freezerSectionNames[indexPath.section])[indexPath.row]
                 try! realm.write {
-                    let itemToBeDeleted = self.store.freezerItems[indexPath.row]
                     print("\(itemToBeDeleted) has been deleted")
-                    realm.delete(itemToBeDeleted)}
+                    realm.delete(itemToBeDeleted)
+                }
                 self.tableView.reloadData()
                 print("Deleted an item from Freezer")
                 
             case "Pantry":
+                let itemToBeDeleted = self.store.pantryItems.filter("category == %@", self.store.pantrySectionNames[indexPath.section])[indexPath.row]
                 try! realm.write {
-                    let itemToBeDeleted = self.store.pantryItems[indexPath.row]
                     print("\(itemToBeDeleted) has been deleted")
-                    realm.delete(itemToBeDeleted)}
+                    realm.delete(itemToBeDeleted)
+                }
                 self.tableView.reloadData()
                 print("Deleted an item from Pantry")
                 
             case "Other":
+                let itemToBeDeleted = self.store.otherItems.filter("category == %@", self.store.otherSectionNames[indexPath.section])[indexPath.row]
                 try! realm.write {
-                    let itemToBeDeleted = self.store.otherItems[indexPath.row]
                     print("\(itemToBeDeleted) has been deleted")
-                    realm.delete(itemToBeDeleted)}
+                    realm.delete(itemToBeDeleted)
+                }
                 self.tableView.reloadData()
                 print("Deleted an item from Other")
                 

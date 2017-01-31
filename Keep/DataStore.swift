@@ -22,7 +22,7 @@ class DataStore{
     
     var listID = ""
     
-    var allFavoritedItems = try! Realm().objects(FavoritedItem.self)
+    var allFavoritedItems = try! Realm().objects(FavoritedItem.self).sorted(byProperty: "name", ascending: true)
     var allShoppingItems = try! Realm().objects(ShoppingItem.self)
     
     var fridgeSectionNames: [String] {
@@ -42,6 +42,6 @@ class DataStore{
         return Set(otherItems.value(forKeyPath: "category") as! [String]).sorted()
     }
     
-    var buttonStatus = ""
+    var buttonStatus = "Fridge"
     
 }

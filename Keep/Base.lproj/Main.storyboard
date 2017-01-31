@@ -380,7 +380,7 @@
         <!--Add FavoriteVC-->
         <scene sceneID="BbZ-ZZ-pcf">
             <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="w2k-zI-MQy" customClass="AddFavoriteVC" customModule="Keep" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="overFullScreen" id="w2k-zI-MQy" customClass="AddFavoriteVC" customModule="Keep" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ujd-Gk-tUn"/>
                         <viewControllerLayoutGuide type="bottom" id="wtm-6B-rQ6"/>
@@ -1129,7 +1129,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fridge" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QgJ-r8-pFX">
-                                                <rect key="frame" x="0.0" y="70.5" width="94" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="68.5" width="94" height="15.5"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                 <color key="textColor" red="0.44313725490196076" green="0.44313725490196076" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1139,7 +1139,7 @@
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="QgJ-r8-pFX" secondAttribute="bottom" constant="10" id="4eF-Z2-OND"/>
                                             <constraint firstItem="1jp-kr-pSW" firstAttribute="centerX" secondItem="8Uw-iF-tzg" secondAttribute="centerX" id="Gfd-61-IyG"/>
-                                            <constraint firstItem="QgJ-r8-pFX" firstAttribute="top" secondItem="1jp-kr-pSW" secondAttribute="bottom" constant="4" id="TF2-su-A85"/>
+                                            <constraint firstItem="QgJ-r8-pFX" firstAttribute="top" secondItem="1jp-kr-pSW" secondAttribute="bottom" constant="2" id="TF2-su-A85"/>
                                             <constraint firstItem="QgJ-r8-pFX" firstAttribute="centerX" secondItem="8Uw-iF-tzg" secondAttribute="centerX" id="Vtx-Pi-iOi"/>
                                             <constraint firstAttribute="trailing" secondItem="QgJ-r8-pFX" secondAttribute="trailing" id="Ypg-6m-8xo"/>
                                             <constraint firstItem="QgJ-r8-pFX" firstAttribute="leading" secondItem="8Uw-iF-tzg" secondAttribute="leading" id="cgp-Wb-Ujy"/>
@@ -1152,7 +1152,7 @@
                                         <rect key="frame" x="94" y="0.0" width="94" height="94"/>
                                         <subviews>
                                             <button opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y9t-zA-4mD">
-                                                <rect key="frame" x="0.0" y="22" width="94" height="33"/>
+                                                <rect key="frame" x="0.0" y="10.5" width="94" height="56.5"/>
                                                 <state key="normal" image="FreezerBase"/>
                                                 <state key="selected" image="FreezerActive"/>
                                                 <state key="highlighted" image="FreezerActive"/>
@@ -1161,7 +1161,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Freezer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aLc-gC-sjH">
-                                                <rect key="frame" x="0.5" y="70.5" width="94" height="13.5"/>
+                                                <rect key="frame" x="0.5" y="68.5" width="94" height="15.5"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                 <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1179,7 +1179,7 @@
                                         <rect key="frame" x="188" y="-0.5" width="94" height="94"/>
                                         <subviews>
                                             <button opaque="NO" tag="2" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bqS-Dx-o40">
-                                                <rect key="frame" x="0.5" y="20.5" width="94" height="37"/>
+                                                <rect key="frame" x="0.5" y="11" width="94" height="56.5"/>
                                                 <state key="normal" image="PantryBase"/>
                                                 <state key="selected" image="PantryActive"/>
                                                 <state key="highlighted" image="PantryActive"/>
@@ -1188,7 +1188,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pantry" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cL5-Q5-qcX">
-                                                <rect key="frame" x="0.5" y="71" width="94" height="13.5"/>
+                                                <rect key="frame" x="0.5" y="69" width="94" height="15.5"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                 <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1205,7 +1205,7 @@
                                         <rect key="frame" x="281" y="-0.5" width="94" height="94"/>
                                         <subviews>
                                             <button opaque="NO" tag="3" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fan-0s-U4v">
-                                                <rect key="frame" x="0.5" y="16.5" width="94" height="45"/>
+                                                <rect key="frame" x="0.5" y="11" width="94" height="56.5"/>
                                                 <state key="normal" image="HouseholdBase"/>
                                                 <state key="selected" image="HouseholdActive"/>
                                                 <state key="highlighted" image="HouseholdActive"/>
@@ -1214,7 +1214,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Other" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpJ-6O-aVB">
-                                                <rect key="frame" x="0.5" y="71" width="94" height="13.5"/>
+                                                <rect key="frame" x="0.5" y="69" width="94" height="15.5"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                 <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1230,6 +1230,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="y9t-zA-4mD" firstAttribute="height" secondItem="1jp-kr-pSW" secondAttribute="height" id="2TL-7v-nWX"/>
                                     <constraint firstItem="8Uw-iF-tzg" firstAttribute="leading" secondItem="3b3-Is-Eab" secondAttribute="leading" id="5If-tF-uSe"/>
                                     <constraint firstItem="1D7-4P-myd" firstAttribute="height" secondItem="57W-T6-aKt" secondAttribute="height" id="7dP-NR-tnN"/>
                                     <constraint firstItem="cL5-Q5-qcX" firstAttribute="height" secondItem="aLc-gC-sjH" secondAttribute="height" id="8Nl-30-WjD"/>
@@ -1244,10 +1245,12 @@
                                     <constraint firstItem="57W-T6-aKt" firstAttribute="leading" secondItem="8Uw-iF-tzg" secondAttribute="trailing" id="LGZ-aW-bo6"/>
                                     <constraint firstAttribute="trailing" secondItem="9n0-L9-KbB" secondAttribute="trailing" id="PrV-Fn-dsB"/>
                                     <constraint firstItem="8Uw-iF-tzg" firstAttribute="centerY" secondItem="3b3-Is-Eab" secondAttribute="centerY" id="Q3k-ZS-whK"/>
+                                    <constraint firstItem="Fan-0s-U4v" firstAttribute="height" secondItem="bqS-Dx-o40" secondAttribute="height" id="UL0-Jf-21S"/>
                                     <constraint firstItem="gpJ-6O-aVB" firstAttribute="centerY" secondItem="cL5-Q5-qcX" secondAttribute="centerY" id="WhY-cu-A48"/>
                                     <constraint firstItem="Fan-0s-U4v" firstAttribute="centerY" secondItem="1jp-kr-pSW" secondAttribute="centerY" id="ZXH-kK-bnc"/>
                                     <constraint firstItem="9n0-L9-KbB" firstAttribute="height" secondItem="1D7-4P-myd" secondAttribute="height" id="cFX-Wa-qNg"/>
                                     <constraint firstItem="57W-T6-aKt" firstAttribute="width" secondItem="8Uw-iF-tzg" secondAttribute="width" id="cwA-eh-oGg"/>
+                                    <constraint firstItem="bqS-Dx-o40" firstAttribute="height" secondItem="y9t-zA-4mD" secondAttribute="height" id="dMd-LT-zAY"/>
                                     <constraint firstItem="57W-T6-aKt" firstAttribute="height" secondItem="8Uw-iF-tzg" secondAttribute="height" id="dWy-cf-3Mr"/>
                                     <constraint firstItem="57W-T6-aKt" firstAttribute="centerY" secondItem="8Uw-iF-tzg" secondAttribute="centerY" id="fXy-GH-MU1"/>
                                     <constraint firstItem="bqS-Dx-o40" firstAttribute="centerY" secondItem="1jp-kr-pSW" secondAttribute="centerY" id="mti-8d-nac"/>
@@ -1676,7 +1679,7 @@
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="addListTapped:" destination="PEo-up-NwA" id="m8e-5l-dtl"/>
-                                <segue destination="rYQ-hn-FK9" kind="presentation" identifier="addList" modalPresentationStyle="overCurrentContext" id="h8m-Mk-h3K"/>
+                                <segue destination="rYQ-hn-FK9" kind="presentation" identifier="addList" modalPresentationStyle="overFullScreen" id="h8m-Mk-h3K"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1763,7 +1766,7 @@
                             <color key="tintColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="addItemBtnTapped:" destination="tgN-pG-HY1" id="aGj-gq-xrR"/>
-                                <segue destination="Ncx-UL-xUg" kind="presentation" identifier="addItemToSL" id="XLB-h6-E10"/>
+                                <segue destination="Ncx-UL-xUg" kind="presentation" identifier="addItemToSL" modalPresentationStyle="overFullScreen" id="XLB-h6-E10"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1778,7 +1781,7 @@
         <!--Add ListVC-->
         <scene sceneID="PjJ-tr-eJh">
             <objects>
-                <viewController id="rYQ-hn-FK9" customClass="AddListVC" customModule="Keep" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="overFullScreen" id="rYQ-hn-FK9" customClass="AddListVC" customModule="Keep" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4Dn-FD-DE8"/>
                         <viewControllerLayoutGuide type="bottom" id="ui3-Qy-POP"/>
@@ -1909,7 +1912,7 @@
         <!--Add ItemVC-->
         <scene sceneID="ShZ-Dl-DHT">
             <objects>
-                <viewController storyboardIdentifier="addItemToSL" modalPresentationStyle="overCurrentContext" id="Ncx-UL-xUg" customClass="AddItemVC" customModule="Keep" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addItemToSL" modalPresentationStyle="overFullScreen" id="Ncx-UL-xUg" customClass="AddItemVC" customModule="Keep" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TBd-ou-kuG"/>
                         <viewControllerLayoutGuide type="bottom" id="OET-lw-Wip"/>
