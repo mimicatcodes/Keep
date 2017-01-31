@@ -56,24 +56,25 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
         let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
         let filteredItems = store.allShoppingItems.filter(predicate)
         cell.titleLabel.text = filteredItems[indexPath.row].name
-        //cell.selectionStyle = .none
+        cell.selectionStyle = .none
         cell.separatorInset = .zero
         
         if filteredItems[indexPath.row].isPurchased == true {
             cell.titleLabel.textColor = MAIN_BORDER_COLOR
-            cell.checkBoxBtn.imageView?.image = #imageLiteral(resourceName: "ChecklistActive2")
+            cell.checkBoxImgView.image = #imageLiteral(resourceName: "ChecklistActive2")
     
         } else {
             cell.titleLabel.textColor = UIColor(red: 77/255.0, green: 77/255.0, blue: 77/255.0, alpha: 1)
-            cell.checkBoxBtn.imageView?.image = #imageLiteral(resourceName: "ChecklistBase2")
+            cell.checkBoxImgView.image = #imageLiteral(resourceName: "ChecklistBase2")
 
         }
         
         return cell
-        
-       
+    
     }
 
+    
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        print("Cell sected at \(indexPath.row)")
@@ -100,9 +101,10 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 70
+        return 50
     }
     
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "addItemToSL" {
@@ -121,8 +123,7 @@ class ListDetailCell:UITableViewCell {
     
     
     @IBOutlet weak var titleLabel: UILabel!
-    
-    @IBOutlet weak var checkBoxBtn: UIButton!
+    @IBOutlet weak var checkBoxImgView: UIImageView!
     
 }
 

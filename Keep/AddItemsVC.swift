@@ -62,6 +62,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         hideKeyboard()
         tableView.isHidden = true
         nameTextField.delegate = self
+        nameTextField.autocapitalizationType = .words
+        categoryTextfield.autocapitalizationType = .words
         categoryTextfield.delegate = self
         nameTextField.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.touchDown)
         //setBodyViewBorders()
@@ -83,6 +85,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         return .topAttached
         
     }
+    
     func textFieldActive() {
         
         tableView.isHidden = !tableView.isHidden
@@ -100,7 +103,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         formatDates()
         
     }
-    
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
@@ -162,6 +164,9 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
 
         }
         
+        cell?.textLabel?.font = UIFont(name: "Lato-Regular", size: 13)
+        cell?.textLabel?.textColor = MAIN_BORDER_COLOR
+        
         return cell!
         
     }
@@ -170,7 +175,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         
         let selectedCell: UITableViewCell = tableView.cellForRow(at: indexPath)!
         
-        nameTextField.text = selectedCell.textLabel!.text!
+        nameTextField.text = selectedCell.textLabel!.text!.capitalized
         tableView.isHidden = true
         nameTextField.endEditing(true)
         tableView.reloadData()
@@ -318,6 +323,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         }
         
         for (index,button) in locationButtons.enumerated() {
+            
             if index == selectedIndex {
                 button.isSelected = true
              
@@ -341,10 +347,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
               
             }
         }
-        
     }
  
-
     @IBAction func cancelButtonTapped(_ sender: Any) {
          dismiss(animated: true, completion: nil)
     }
@@ -358,7 +362,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         guard let exp = expDateTextfield.text, exp != "" else { return }
         guard let category = categoryTextfield.text, category != "" else { return }
         
-        let item = Item(name: name, quantity: String(quantity), expDate: exp, exp: expDate, purchaseDate: purchaseDate, isConsumed: false, location: location.rawValue, category: category)
+        let item = Item(name: name.capitalized, quantity: String(quantity), expDate: exp, exp: expDate, purchaseDate: purchaseDate, isConsumed: false, location: location.rawValue, category: category.capitalized)
         
         let realm = try! Realm()
         try! realm.write {
@@ -482,8 +486,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         return true
     }
     
-    
-    
     func textFieldDidBeginEditing(_ textField: UITextField){
         
         activeTextField = textField
@@ -519,7 +521,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         
     }
     
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         activeTextField?.resignFirstResponder()
@@ -531,7 +532,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         
         return true
     }
-    
     
     func datePickerChanged(sender: UIDatePicker) {
         
@@ -550,7 +550,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         formatInitialData()
         saveButton.isEnabled = false
     
-        
     }
     
 }

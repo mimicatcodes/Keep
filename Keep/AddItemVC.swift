@@ -19,17 +19,22 @@ class AddItemVC: UIViewController {
     @IBOutlet weak var createItemView: UIView!
     var listTitle:String?
     var uniqueID: String?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupViews()
-        quantityField.text = "1"
-    }
+
     @IBOutlet weak var itemTitleField: UITextField!
     @IBOutlet weak var quantityField: UITextField!
     
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        setupViews()
+        quantityField.text = "1"
+        itemTitleField.autocapitalizationType = .words
+
+    }
+    
     @IBAction func dismissVC(_ sender: Any) {
-        dismiss(animated: true, completion: nil)    }
+        dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func cancelBtnTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)

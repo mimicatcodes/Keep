@@ -22,7 +22,7 @@ class DataStore{
     
     var listID = ""
     
-    
+    var allFavoritedItems = try! Realm().objects(FavoritedItem.self)
     var allShoppingItems = try! Realm().objects(ShoppingItem.self)
     
     var fridgeSectionNames: [String] {

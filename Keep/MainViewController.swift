@@ -121,6 +121,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         header.textLabel?.textAlignment = .center
         
     }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         var title = ""

@@ -35,6 +35,10 @@ class AddListVC: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPi
         saveButton.isEnabled = false
     }
     
+    @IBAction func dismissView(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func addBtnTapped(_ sender: UIButton) {
         
         guard let title = listTitle.text, title != "" else { return }

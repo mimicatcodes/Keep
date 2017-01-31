@@ -22,5 +22,11 @@ let MAIN_BORDER_COLOR = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.
 let FAV_COLOR = UIColor(red: 255/255.0, green: 137/255.0, blue: 137/255.0, alpha: 1)
 let EXPIRING_WARNING_COLOR = UIColor(red: 237/255.0, green: 93/255.0, blue: 93/255.0, alpha: 1)
 let ADDED_LABEL_COLOR = UIColor(red: 35/255.0, green: 213/255.0, blue: 185/255.0, alpha: 1)
+
+
+
+// NOTIFICATIONS
 let REFRESH_TV_NOTIFICATION = NSNotification.Name("RefeshTVNotification")
 let REFRESH_ITEM_LIST_NOTIFICATION = NSNotification.Name("RefreshItemListNotification")
+
+let REFRESH_FAVORITES = NSNotification.Name("RefreshFavorites")
