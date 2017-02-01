@@ -35,6 +35,7 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+   
     
     @IBAction func addItemBtnTapped(_ sender: Any) {
         
@@ -70,12 +71,38 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
 
         }
         
+        cell.moveButton.tag = indexPath.row
+        cell.moveButton.addTarget(self, action: #selector(buttonActions), for: .touchUpInside)
+        
+        cell.tapAction = { cell in
+            
+            let name = tableView.indexPath(for: cell)?.row
+            
+            print(name ?? "Error")
+            
+            
+        }
+        
         return cell
     
     }
+    
+    func buttonActions(sender:UIButton){
 
-    
-    
+        let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
+        let filteredItems = store.allShoppingItems.filter(predicate)
+        let titleString = filteredItems[sender.tag].name
+        print("----titleString is : --- \(titleString)")
+        
+        let firstActivityItem = "\(titleString)"
+        
+        let activityController = UIActivityViewController(activityItems: [firstActivityItem], applicationActivities: nil)
+        activityController.popoverPresentationController?.sourceView = self.view
+        activityController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
+        self.present(activityController, animated: true, completion: nil)
+
+    }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        print("Cell sected at \(indexPath.row)")
@@ -114,7 +141,7 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
             dest.uniqueID = uniqueID
             
         }
-     }
+    }
     
 }
 
@@ -123,8 +150,13 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
 class ListDetailCell:UITableViewCell {
     
     
+    var tapAction: ((UITableViewCell) -> Void)?
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var checkBoxImgView: UIImageView!
+    @IBOutlet weak var moveButton: UIButton!
+    @IBAction func moveButtonTapped(_ sender: UIButton) {
+        tapAction?(self)
+    }
     
 }
 

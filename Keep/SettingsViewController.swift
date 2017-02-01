@@ -66,9 +66,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             labelOne.text = "items in your stock"
         }
         numOfItemsLabel.text = "\(numOfItems)"
-        
+        /*
+        let lastWeek = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: Date())
+        let thisWeek = Calendar.current.date(byAdding: .weekOfYear, value: 0, to: Date())
+        let nextWeek = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: Date())
+         let fallsBetween = (startDate...endDate).contains(Date())
+ */
         // 2nd Section
-        numOfItemsBoughtThisWeek = 0
         if numOfItemsBoughtThisWeek < 2 {
             labelTwo.text = "item bought this week"
         } else {
@@ -93,8 +97,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             labelFour.text = "items expired"
         }
         numOfItemsExpiredLabel.text = "\(numOfExpiredItems)"
-    
-        
     }
     
     

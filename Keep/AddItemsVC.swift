@@ -352,7 +352,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         saveButton.isEnabled = false
         
         guard let name = nameTextField.text, name != "" else { return }
-        //guard let purchaseDate = purchaseDateTextfield.text, purchaseDate != "" else { return }
         guard let category = categoryTextfield.text, category != "" else { return }
         
         let item = Item(name: name.capitalized, quantity: String(quantity), exp: expDate, purchaseDate: purchaseDate, isConsumed: false, location: location.rawValue, category: category.capitalized)

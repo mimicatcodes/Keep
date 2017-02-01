@@ -493,7 +493,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="188" height="94"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMk-rj-9lq">
-                                                        <rect key="frame" x="10" y="14.5" width="169" height="14.5"/>
+                                                        <rect key="frame" x="10" y="15" width="169" height="14"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="12"/>
                                                         <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -505,7 +505,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="items in your stock" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HP2-v5-sqz">
-                                                        <rect key="frame" x="10" y="66.5" width="169" height="14.5"/>
+                                                        <rect key="frame" x="10" y="66.5" width="169" height="14"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="12"/>
                                                         <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -528,13 +528,13 @@
                                                 <rect key="frame" x="187" y="0.0" width="188" height="94"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxC-mc-eah">
-                                                        <rect key="frame" x="10" y="10.5" width="169" height="14.5"/>
+                                                        <rect key="frame" x="10" y="11" width="169" height="14"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="12"/>
                                                         <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="items bought this week" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVg-ox-AwX">
-                                                        <rect key="frame" x="10" y="64.5" width="169" height="14.5"/>
+                                                        <rect key="frame" x="10" y="64.5" width="169" height="14"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="12"/>
                                                         <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -578,7 +578,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="188" height="94.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jO4-ry-WdY">
-                                                        <rect key="frame" x="10" y="15" width="169" height="14.5"/>
+                                                        <rect key="frame" x="10" y="15.5" width="169" height="14"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="12"/>
                                                         <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -590,7 +590,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="items expiring soon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZrZ-F3-Elh">
-                                                        <rect key="frame" x="10" y="66.5" width="169" height="14.5"/>
+                                                        <rect key="frame" x="10" y="66.5" width="169" height="14"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="12"/>
                                                         <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -613,13 +613,13 @@
                                                 <rect key="frame" x="187" y="0.0" width="188" height="94.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TjE-TW-hFf">
-                                                        <rect key="frame" x="10" y="11" width="169" height="14.5"/>
+                                                        <rect key="frame" x="10" y="11.5" width="169" height="14"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="12"/>
                                                         <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="items expired/wasted" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AOk-T7-5Js">
-                                                        <rect key="frame" x="10" y="64.5" width="169" height="14.5"/>
+                                                        <rect key="frame" x="10" y="64.5" width="169" height="14"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="12"/>
                                                         <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1728,7 +1728,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WxY-bs-u6Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5151" y="-978"/>
+            <point key="canvasLocation" x="5241" y="-976"/>
         </scene>
         <!--Stock-->
         <scene sceneID="xfu-Ix-Uon">
@@ -1978,7 +1978,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qf5-lw-khM">
-                                                    <rect key="frame" x="53" y="13" width="304" height="24"/>
+                                                    <rect key="frame" x="53" y="13" width="214" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="Esa-Kd-NL6"/>
                                                     </constraints>
@@ -1993,10 +1993,21 @@
                                                         <constraint firstAttribute="height" constant="35" id="usv-hF-HSR"/>
                                                     </constraints>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y5L-ip-BrU">
+                                                    <rect key="frame" x="327.5" y="5" width="39.5" height="39.5"/>
+                                                    <color key="backgroundColor" red="0.13725490200000001" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="y5L-ip-BrU" secondAttribute="height" multiplier="1:1" id="2my-SI-BSn"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Move"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Qf5-lw-khM" secondAttribute="trailing" constant="10" id="hTt-yt-Qd1"/>
+                                                <constraint firstItem="y5L-ip-BrU" firstAttribute="centerY" secondItem="V4a-8z-6qy" secondAttribute="centerY" id="cAC-WC-SLW"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Qf5-lw-khM" secondAttribute="trailing" constant="100" id="hTt-yt-Qd1"/>
                                                 <constraint firstItem="Qf5-lw-khM" firstAttribute="centerY" secondItem="V4a-8z-6qy" secondAttribute="centerY" id="iwA-x0-CYU"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="y5L-ip-BrU" secondAttribute="trailing" id="kho-O7-UVb"/>
+                                                <constraint firstItem="y5L-ip-BrU" firstAttribute="height" secondItem="V4a-8z-6qy" secondAttribute="height" multiplier="0.8" id="nSr-Q7-EQv"/>
                                                 <constraint firstItem="Qf5-lw-khM" firstAttribute="leading" secondItem="Dbu-9K-mn5" secondAttribute="trailing" constant="8" id="qWS-vG-rLV"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -2006,6 +2017,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="checkBoxImgView" destination="Dbu-9K-mn5" id="rnh-Nq-BDQ"/>
+                                            <outlet property="moveButton" destination="y5L-ip-BrU" id="I06-Fh-iWV"/>
                                             <outlet property="titleLabel" destination="Qf5-lw-khM" id="uAP-Hq-2bo"/>
                                         </connections>
                                     </tableViewCell>

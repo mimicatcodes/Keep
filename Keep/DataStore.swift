@@ -21,6 +21,16 @@ class DataStore{
 
     var allShopingLists = try! Realm().objects(ShoppingList.self)
 
+     /*
+     let lastWeekDate = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: Date())
+     
+     let nextWeekDate = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: Date())
+     
+     let thisWeek = Calendar.current.date(byAdding: .weekOfYear, value: 0, to: Date())
+
+     let fallsBetween = (startDate...endDate).contains(Date())
+
+ */
     
     var listID = ""
     
