@@ -397,14 +397,13 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             realm.add(item)
             if favButton.isSelected {
                 item.isFavorited = true
-                let favItem = FavoritedItem(name: item.name)
-                realm.add(favItem)
-                print("fav item is \(item.isFavorited) AND \(favItem.name) has been added to realm's fv items")
+                if item.isFavorited == true {
+                    let favItem = FavoritedItem(name: item.name)
+                    realm.add(favItem)
+                    print("fav item is \(item.isFavorited) AND \(favItem.name) has been added to realm's fv items")
+                }
             } else {
                 item.isFavorited = false
-                let favItem = FavoritedItem(name: item.name)
-                print("fav item is \(item.isFavorited) AND \(favItem.name) has been added to realm's fv items")
-                realm.delete(favItem)
                 print("completed")
             }
             print("***** \(item.name) is added to realm database in \(item.category) in \(item.location) ***** AND \(item.exp)")

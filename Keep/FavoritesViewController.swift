@@ -56,6 +56,13 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
             let realm = try! Realm()
             try! realm.write {
                 let favItemToBeDeleted = self.store.allFavoritedItems[indexPath.row]
+                for item in self.store.allItems {
+                    if item.name == favItemToBeDeleted.name {
+                        item.isFavorited = false
+                        print(item)
+                        print(item.isFavorited)
+                    }
+                }
                 print("\(favItemToBeDeleted) has been deleted")
                 realm.delete(favItemToBeDeleted)
                 

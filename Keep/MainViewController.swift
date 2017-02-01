@@ -13,13 +13,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     let store = DataStore.sharedInstance
     
-    var selectedIndex: Int = 0
-    
     @IBOutlet weak var tableView: UITableView!
-    let formatter = DateFormatter()
     @IBOutlet var buttons: [UIButton]!
     @IBOutlet var views: [UIView]!
     @IBOutlet var labels: [UILabel]!
+    var selectedIndex: Int = 0
+    let formatter = DateFormatter()
     
     override func viewDidLoad() {
         

@@ -1999,7 +1999,7 @@
                             <constraint firstItem="1cH-at-e0p" firstAttribute="top" secondItem="4cL-GS-U8M" secondAttribute="bottom" id="bcy-Pr-CMG"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Shopping List" image="ShoppingListBase" selectedImage="ShoppingListActive-1" id="e3E-DE-a30"/>
+                    <tabBarItem key="tabBarItem" title="Shopping List" image="ShoppingListBase1" selectedImage="ShoppingListActive-1" id="e3E-DE-a30"/>
                     <navigationItem key="navigationItem" title="Shopping List" id="BZh-I2-80Y">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="jvf-mf-V2Z">
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -2056,17 +2056,19 @@
                                                         <constraint firstAttribute="height" constant="35" id="usv-hF-HSR"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y5L-ip-BrU">
-                                                    <rect key="frame" x="327.5" y="5" width="39.5" height="39.5"/>
-                                                    <color key="backgroundColor" red="0.13725490200000001" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y5L-ip-BrU">
+                                                    <rect key="frame" x="327.5" y="7" width="39.5" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="y5L-ip-BrU" secondAttribute="height" multiplier="1:1" id="2my-SI-BSn"/>
                                                     </constraints>
-                                                    <state key="normal" title="Move"/>
+                                                    <state key="normal" image="MoveToBase"/>
+                                                    <state key="selected" image="MoveToActive"/>
+                                                    <state key="highlighted" image="MoveToActive"/>
+                                                    <state key="focused" image="MoveToActive"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="y5L-ip-BrU" firstAttribute="centerY" secondItem="V4a-8z-6qy" secondAttribute="centerY" id="cAC-WC-SLW"/>
+                                                <constraint firstItem="y5L-ip-BrU" firstAttribute="centerY" secondItem="V4a-8z-6qy" secondAttribute="centerY" multiplier="1.1" id="cAC-WC-SLW"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Qf5-lw-khM" secondAttribute="trailing" constant="100" id="hTt-yt-Qd1"/>
                                                 <constraint firstItem="Qf5-lw-khM" firstAttribute="centerY" secondItem="V4a-8z-6qy" secondAttribute="centerY" id="iwA-x0-CYU"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="y5L-ip-BrU" secondAttribute="trailing" id="kho-O7-UVb"/>
@@ -2385,12 +2387,14 @@
         <image name="ItemFavoriteActive" width="22" height="19"/>
         <image name="ItemFavoriteBase" width="22" height="19"/>
         <image name="Minus" width="22" height="22"/>
+        <image name="MoveToActive" width="15" height="16"/>
+        <image name="MoveToBase" width="15" height="16"/>
         <image name="PantryActive" width="35" height="37"/>
         <image name="PantryBase" width="35" height="37"/>
         <image name="Pantry_tealish" width="35" height="37"/>
         <image name="Plus" width="22" height="22"/>
         <image name="ShoppingListActive-1" width="27" height="27"/>
-        <image name="ShoppingListBase" width="27" height="27"/>
+        <image name="ShoppingListBase1" width="27" height="27"/>
         <image name="StockActive" width="26" height="26"/>
         <image name="StockBase" width="27" height="27"/>
     </resources>
