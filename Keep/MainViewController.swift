@@ -375,9 +375,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             guard let start = currentCalendar.ordinality(of: .day, in: .era, for: start) else { return 0 }
             guard let end = currentCalendar.ordinality(of: .day, in: .era, for: end) else { return 0 }
             return end - start
-        
     }
-    
 }
 
 class StockCell:UITableViewCell {

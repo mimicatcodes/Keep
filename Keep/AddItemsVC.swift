@@ -68,19 +68,20 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: self.view.window)
-
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
     }
     
     func keyboardWillShow(notification: NSNotification) {
         
         if activeTextField == categoryTextfield {
-            
             if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
                 
                 if let offset = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -102,6 +103,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     }
     
     func keyboardWillHide(notification: NSNotification) {
+        
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y != 0{
                 self.view.frame.origin.y += keyboardSize.height
@@ -122,7 +124,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     }
     
     override func viewDidLayoutSubviews() {
-
+        
         heightConstraint.constant = 80
     }
     
@@ -133,23 +135,20 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         formatDates()
         
     }
-
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         if textField == nameTextField {
-            
             let substring = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-            
             searchAutocompleteEntriesWithSubstring(substring)
-            
             return true
         }
-            return true
+        return true
     }
     
-
-    func searchAutocompleteEntriesWithSubstring(_ substring: String) {
     
+    func searchAutocompleteEntriesWithSubstring(_ substring: String) {
+        
         filteredItems.removeAll(keepingCapacity: false)
         
         for item in allItems {
@@ -163,7 +162,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         }
         
         tableView.reloadData()
-        
     }
     
     
@@ -177,7 +175,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         }
         
         return filteredItems.count
-        
     }
     
     
@@ -191,7 +188,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         } else {
             
             cell?.textLabel?.text = self.filteredItems[indexPath.row].name
-
+            
         }
         
         cell?.textLabel?.font = UIFont(name: "Lato-Regular", size: 13)
@@ -250,7 +247,13 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     @IBAction func didPressFavBtn(_ sender: UIButton) {
         
         favButton.isSelected = !favButton.isSelected
-        // DO MORE STUFF HERE 
+        
+        if favButton.isSelected {
+            print("Fav selected")
+            
+        } else {
+            print("Not selected")
+        }
         
     }
     
@@ -311,15 +314,15 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 button.layer.borderColor = MAIN_COLOR.cgColor
                 button.setTitleColor(MAIN_COLOR, for: .selected)
                 
-    
+                
             } else {
                 button.isSelected = false
                 button.layer.cornerRadius = 5
                 button.layer.borderWidth = 1
                 button.layer.borderColor = BORDER_TWO.cgColor
                 button.setTitleColor(MAIN_BUTTON_LABEL_GRAY, for: .normal)
-        
-
+                
+                
             }
         }
         
@@ -352,15 +355,15 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             
             if index == selectedIndex {
                 button.isSelected = true
-             
+                
                 button.backgroundColor = .clear
                 button.layer.cornerRadius = 5
                 button.layer.borderWidth = 2
                 button.layer.borderColor = MAIN_COLOR.cgColor
-
+                
                 locationLabels[index].textColor = MAIN_COLOR
                 
-               
+                
             } else {
                 button.isSelected = false
                 
@@ -370,13 +373,13 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 button.layer.borderColor = UIColor.clear.cgColor
                 
                 locationLabels[index].textColor = MAIN_BUTTON_LABEL_GRAY
-              
+                
             }
         }
     }
- 
+    
     @IBAction func cancelButtonTapped(_ sender: Any) {
-         dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
@@ -392,16 +395,27 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         try! realm.write {
             
             realm.add(item)
+            if favButton.isSelected {
+                item.isFavorited = true
+                let favItem = FavoritedItem(name: item.name)
+                realm.add(favItem)
+                print("fav item is \(item.isFavorited) AND \(favItem.name) has been added to realm's fv items")
+            } else {
+                item.isFavorited = false
+                let favItem = FavoritedItem(name: item.name)
+                print("fav item is \(item.isFavorited) AND \(favItem.name) has been added to realm's fv items")
+                realm.delete(favItem)
+                print("completed")
+            }
             print("***** \(item.name) is added to realm database in \(item.category) in \(item.location) ***** AND \(item.exp)")
-            
         }
         
         showAlert()
         resetAddItems()
-
+        
     }
-
-   
+    
+    
     
     @IBAction func quantityMinusBtnTapped(_ sender: Any) {
         
@@ -455,7 +469,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     
     
     func formatInitialData() {
-
+        
         nameTextField.text = ""
         tableView.isHidden = true
         categoryTextfield.text = ""
@@ -487,7 +501,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             button.layer.borderWidth = 1
             button.layer.borderColor = MAIN_BUTTON_LABEL_GRAY.cgColor
             button.setTitleColor(MAIN_BUTTON_LABEL_GRAY, for: .normal)
-
+            
         }
         
         purchaseDateTextfield.text = formatter.string(from: Date()).capitalized
@@ -504,7 +518,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             
             saveButton.isEnabled = true
             saveButton.tintColor = UIColor.red
-    
+            
         }
         
         return true
@@ -538,7 +552,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 button.layer.cornerRadius = 5
                 button.layer.borderWidth = 1
                 button.layer.borderColor = MAIN_BUTTON_LABEL_GRAY.cgColor
-         
+                
             }
             expDateTextfield.text = formatter.string(from: datePicker2.date).capitalized
         }
@@ -573,7 +587,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         
         formatInitialData()
         saveButton.isEnabled = false
-    
+        
     }
     
 }

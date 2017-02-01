@@ -1107,6 +1107,7 @@
                                                             <constraint firstAttribute="width" secondItem="uCQ-10-AR7" secondAttribute="height" multiplier="1:1" id="sJL-9O-Glk"/>
                                                         </constraints>
                                                         <state key="normal" image="FridgeBase"/>
+                                                        <state key="selected" image="Fridge_tealish"/>
                                                         <connections>
                                                             <action selector="didPressLocationBtn:" destination="RqP-1N-A4c" eventType="touchUpInside" id="3h3-Jx-2Qe"/>
                                                         </connections>
@@ -1140,6 +1141,7 @@
                                                         <state key="normal" image="FreezerBase">
                                                             <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
+                                                        <state key="selected" image="Freezer_tealish"/>
                                                         <connections>
                                                             <action selector="didPressLocationBtn:" destination="RqP-1N-A4c" eventType="touchUpInside" id="YEC-dg-Zqt"/>
                                                         </connections>
@@ -1168,6 +1170,7 @@
                                                             <constraint firstAttribute="width" secondItem="oYN-Qq-60A" secondAttribute="height" multiplier="1:1" id="Sqq-7b-aLP"/>
                                                         </constraints>
                                                         <state key="normal" image="PantryBase"/>
+                                                        <state key="selected" image="Pantry_tealish"/>
                                                         <connections>
                                                             <action selector="didPressLocationBtn:" destination="RqP-1N-A4c" eventType="touchUpInside" id="BgG-yL-AGx"/>
                                                         </connections>
@@ -1196,6 +1199,7 @@
                                                             <constraint firstAttribute="width" secondItem="bB1-pC-WSW" secondAttribute="height" multiplier="1:1" id="c57-5e-AVN"/>
                                                         </constraints>
                                                         <state key="normal" image="HouseholdBase"/>
+                                                        <state key="selected" image="Household_tealish"/>
                                                         <connections>
                                                             <action selector="didPressLocationBtn:" destination="RqP-1N-A4c" eventType="touchUpInside" id="RGx-uh-Ohf"/>
                                                         </connections>
@@ -2371,15 +2375,19 @@
         <image name="FavoriteBase" width="27" height="27"/>
         <image name="FreezerActive" width="40" height="33"/>
         <image name="FreezerBase" width="40" height="33"/>
+        <image name="Freezer_tealish" width="40" height="33"/>
         <image name="FridgeActive" width="31" height="53"/>
         <image name="FridgeBase" width="31" height="53"/>
+        <image name="Fridge_tealish" width="31" height="53"/>
         <image name="HouseholdActive" width="40" height="45"/>
         <image name="HouseholdBase" width="40" height="45"/>
+        <image name="Household_tealish" width="40" height="45"/>
         <image name="ItemFavoriteActive" width="22" height="19"/>
         <image name="ItemFavoriteBase" width="22" height="19"/>
         <image name="Minus" width="22" height="22"/>
         <image name="PantryActive" width="35" height="37"/>
         <image name="PantryBase" width="35" height="37"/>
+        <image name="Pantry_tealish" width="35" height="37"/>
         <image name="Plus" width="22" height="22"/>
         <image name="ShoppingListActive-1" width="27" height="27"/>
         <image name="ShoppingListBase" width="27" height="27"/>
