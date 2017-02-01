@@ -145,8 +145,6 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
     
 }
 
-
-
 class ListDetailCell:UITableViewCell {
     
     

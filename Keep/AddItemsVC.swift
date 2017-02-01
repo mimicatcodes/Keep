@@ -66,6 +66,16 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         nameTextField.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.touchDown)
         //setBodyViewBorders()
         favButton.isSelected = false
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: self.view.window)
+
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     func setBodyViewBorders(){
@@ -77,6 +87,40 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         bodyViews[4].underlinedBorder()
         
     }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        
+        if activeTextField == categoryTextfield {
+            
+            if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+                
+                if let offset = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+                    if keyboardSize.height == offset.height {
+                        if self.view.frame.origin.y == 0 {
+                            UIView.animate(withDuration: 0.1, animations: {
+                                self.view.frame.origin.y -= keyboardSize.height
+                            })
+                        } else {
+                            UIView.animate(withDuration: 0.1, animations: {
+                                self.view.frame.origin.y += keyboardSize.height - (offset.height)
+                            })
+                        }
+                        print(self.view.frame.origin.y)
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
+    }
+    
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {
         

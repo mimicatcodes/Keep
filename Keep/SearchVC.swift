@@ -46,7 +46,7 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UISearchResultsUpdat
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         
         if searchController.isActive && searchController.searchBar.text != "" {
-            
+
             cell?.textLabel?.text = self.filteredItems?[indexPath.row].name
             
         } else {

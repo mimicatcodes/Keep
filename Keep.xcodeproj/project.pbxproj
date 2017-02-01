@@ -30,7 +30,6 @@
 		DD4853BB1E199FEB00BEAC02 /* CookingAndBaking.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853BA1E199FEB00BEAC02 /* CookingAndBaking.swift */; };
 		DD4853BF1E19A00900BEAC02 /* Other.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853BE1E19A00900BEAC02 /* Other.swift */; };
 		DD4853C71E19AF0000BEAC02 /* PackagedFoods.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853C61E19AF0000BEAC02 /* PackagedFoods.swift */; };
-		DD4853CD1E1B186200BEAC02 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853CC1E1B186200BEAC02 /* FridgeViewController.swift */; };
 		DD5D7DC91E329BA300C2317D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5D7DC81E329BA300C2317D /* MainViewController.swift */; };
 		DD75B7B11E3D545D002053E5 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DD75B7AF1E3D545D002053E5 /* Montserrat-Bold.otf */; };
 		DD75B7B21E3D545D002053E5 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = DD75B7B01E3D545D002053E5 /* Montserrat-Regular.otf */; };
@@ -85,7 +84,6 @@
 		DD4853BA1E199FEB00BEAC02 /* CookingAndBaking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CookingAndBaking.swift; sourceTree = "<group>"; };
 		DD4853BE1E19A00900BEAC02 /* Other.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Other.swift; sourceTree = "<group>"; };
 		DD4853C61E19AF0000BEAC02 /* PackagedFoods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackagedFoods.swift; sourceTree = "<group>"; };
-		DD4853CC1E1B186200BEAC02 /* FridgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
 		DD5D7DC81E329BA300C2317D /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DD75B7AF1E3D545D002053E5 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.otf"; sourceTree = "<group>"; };
 		DD75B7B01E3D545D002053E5 /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.otf"; sourceTree = "<group>"; };
@@ -210,7 +208,6 @@
 		DD4853A41E199DFB00BEAC02 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				DD4853CC1E1B186200BEAC02 /* FridgeViewController.swift */,
 				DD1EA6371E0CA41D0034C54B /* AppDelegate.swift */,
 				DD1EA6431E0CA41D0034C54B /* LaunchScreen.storyboard */,
 				DD1EA6461E0CA41D0034C54B /* Info.plist */,
@@ -483,7 +480,6 @@
 				DDC3E9821E1C93F400459295 /* DataStore.swift in Sources */,
 				DD48539D1E198CCF00BEAC02 /* NoodlesGrainsSides.swift in Sources */,
 				DD1EA64D1E0CA5220034C54B /* Constants.swift in Sources */,
-				DD4853CD1E1B186200BEAC02 /* FridgeViewController.swift in Sources */,
 				DDD7D47C1E403FFE00599382 /* Favorites.swift in Sources */,
 				DDC3E98B1E1C958A00459295 /* SettingsViewController.swift in Sources */,
 				DD4853B51E199FC000BEAC02 /* Meat.swift in Sources */,
