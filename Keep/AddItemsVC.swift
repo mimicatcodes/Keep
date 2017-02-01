@@ -64,7 +64,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         categoryTextfield.autocapitalizationType = .words
         categoryTextfield.delegate = self
         nameTextField.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.touchDown)
-        //setBodyViewBorders()
         favButton.isSelected = false
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
@@ -76,16 +75,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-    }
-    
-    func setBodyViewBorders(){
-        
-        bodyViews[0].underlinedBorder()
-        bodyViews[1].underlinedBorder()
-        bodyViews[2].underlinedBorder()
-        bodyViews[3].underlinedBorder()
-        bodyViews[4].underlinedBorder()
-        
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -111,7 +100,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             }
         }
     }
-    
     
     func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -328,7 +316,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 button.isSelected = false
                 button.layer.cornerRadius = 5
                 button.layer.borderWidth = 1
-                button.layer.borderColor = MAIN_BUTTON_LABEL_GRAY.cgColor
+                button.layer.borderColor = BORDER_TWO.cgColor
                 button.setTitleColor(MAIN_BUTTON_LABEL_GRAY, for: .normal)
         
 

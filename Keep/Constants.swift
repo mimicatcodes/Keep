@@ -18,6 +18,8 @@ struct Colors {
 let MAIN_COLOR = UIColor(red: 133/255.0, green: 219/255.0, blue: 205/255.0, alpha: 1)
 let MAIN_BG_COLOR = UIColor(red: 245/255.0, green: 245/255.0, blue: 245/255.0, alpha: 1)
 let MAIN_BUTTON_LABEL_GRAY = UIColor(red: 113/255.0, green: 113/255.0, blue: 113/255.0, alpha: 1)
+let BORDER_TWO = UIColor(red: 151/255.0, green: 151/255.0, blue: 151/255.0, alpha: 1)
+
 let MAIN_BORDER_COLOR = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1)
 let SEPERATOR_COLOR_DEFAULT = UIColor(red: 224/255.0, green: 224/255.0, blue: 224/255.0, alpha: 1)
 let FAV_COLOR = UIColor(red: 255/255.0, green: 137/255.0, blue: 137/255.0, alpha: 1)
