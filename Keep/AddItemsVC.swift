@@ -56,8 +56,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         tableView.layer.borderColor = MAIN_BORDER_COLOR.cgColor
         tableView.layer.borderWidth = 1.0
         tableView.separatorInset = .zero
-        nameTextField.underlined()
-        categoryTextfield.underlined()
         formatDates()
         hideKeyboard()
         tableView.isHidden = true
@@ -233,11 +231,9 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         case 0:
             let today = Date()
             let fiveDaysLater = Calendar.current.date(byAdding: .day, value: 5, to: today)
-            expDate = fiveDaysLater!
             if let date = fiveDaysLater {
-                
+                expDate = date
                 expDateTextfield.text = formatter.string(from: date).capitalized
-
             }
             
             print("5 Days")
@@ -245,9 +241,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         case 1:
             let today = Date()
             let sevenDaysLater = Calendar.current.date(byAdding: .day, value: 7, to: today)
-            expDate = sevenDaysLater!
             if let date = sevenDaysLater {
-                
+                expDate = date
                 expDateTextfield.text = formatter.string(from: date).capitalized
             }
             
@@ -256,9 +251,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         case 2:
             let today = Date()
             let twoWeeksLater = Calendar.current.date(byAdding: .day, value: 14, to: today)
-            expDate = twoWeeksLater!
             if let date = twoWeeksLater {
-                
+                expDate = date
                 expDateTextfield.text = formatter.string(from: date).capitalized
             }
             
@@ -341,7 +335,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 button.backgroundColor = .clear
                 button.layer.cornerRadius = 5
                 button.layer.borderWidth = 1
-                button.layer.borderColor = MAIN_BUTTON_LABEL_GRAY.cgColor
+                button.layer.borderColor = UIColor.clear.cgColor
                 
                 locationLabels[index].textColor = MAIN_BUTTON_LABEL_GRAY
               
@@ -358,11 +352,10 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         saveButton.isEnabled = false
         
         guard let name = nameTextField.text, name != "" else { return }
-        guard let purchaseDate = purchaseDateTextfield.text, purchaseDate != "" else { return }
-        guard let exp = expDateTextfield.text, exp != "" else { return }
+        //guard let purchaseDate = purchaseDateTextfield.text, purchaseDate != "" else { return }
         guard let category = categoryTextfield.text, category != "" else { return }
         
-        let item = Item(name: name.capitalized, quantity: String(quantity), expDate: exp, exp: expDate, purchaseDate: purchaseDate, isConsumed: false, location: location.rawValue, category: category.capitalized)
+        let item = Item(name: name.capitalized, quantity: String(quantity), exp: expDate, purchaseDate: purchaseDate, isConsumed: false, location: location.rawValue, category: category.capitalized)
         
         let realm = try! Realm()
         try! realm.write {
@@ -451,7 +444,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 button.backgroundColor = .clear
                 button.layer.cornerRadius = 5
                 button.layer.borderWidth = 1
-                button.layer.borderColor = MAIN_BUTTON_LABEL_GRAY.cgColor
+                button.layer.borderColor = UIColor.clear.cgColor
                 locationLabels[index].textColor = MAIN_BUTTON_LABEL_GRAY
             }
         }

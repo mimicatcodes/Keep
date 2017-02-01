@@ -29,5 +29,6 @@ let ADDED_LABEL_COLOR = UIColor(red: 35/255.0, green: 213/255.0, blue: 185/255.0
 // NOTIFICATIONS
 let REFRESH_TV_NOTIFICATION = NSNotification.Name("RefeshTVNotification")
 let REFRESH_ITEM_LIST_NOTIFICATION = NSNotification.Name("RefreshItemListNotification")
+let REFRESH_EXP_LIST = NSNotification.Name("RefreshExpiredItems")
 
 let REFRESH_FAVORITES = NSNotification.Name("RefreshFavorites")
