@@ -54,7 +54,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        setNumbers()
+        DispatchQueue.main.async {
+            self.setNumbers()
+        }
         print("View will appear called")
     }
     

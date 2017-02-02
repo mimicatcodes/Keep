@@ -2518,25 +2518,24 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B9Z-uy-Ldo" userLabel="bottomView">
-                                        <rect key="frame" x="10.5" y="173" width="355" height="47"/>
+                                        <rect key="frame" x="10.5" y="171" width="355" height="49"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sRZ-0Y-vJ1">
-                                                <rect key="frame" x="0.0" y="0.0" width="47" height="47"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="49" height="49"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="sRZ-0Y-vJ1" secondAttribute="height" multiplier="1:1" id="Nez-Rv-aYr"/>
                                                 </constraints>
-                                                <state key="normal" image="Close">
+                                                <state key="normal" image="Clear">
                                                     <color key="titleColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="cancelButtonTapped:" destination="igJ-FK-T4d" eventType="touchUpInside" id="qSp-76-FWG"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adr-GH-Auu">
-                                                <rect key="frame" x="53" y="0.0" width="302" height="47"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adr-GH-Auu">
+                                                <rect key="frame" x="55" y="0.5" width="300" height="49"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                 <state key="normal" title="Save">
                                                     <color key="titleColor" red="0.13725490200000001" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
@@ -2558,7 +2557,7 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="B9Z-uy-Ldo" firstAttribute="top" secondItem="rUG-yj-MnR" secondAttribute="bottom" constant="8" id="0vz-OE-0ha"/>
+                                    <constraint firstItem="B9Z-uy-Ldo" firstAttribute="top" secondItem="rUG-yj-MnR" secondAttribute="bottom" constant="6" id="0vz-OE-0ha"/>
                                     <constraint firstItem="rUG-yj-MnR" firstAttribute="leading" secondItem="t4V-Me-duk" secondAttribute="leading" constant="10" id="Cah-GU-HLk"/>
                                     <constraint firstAttribute="height" constant="220" id="Igs-kB-da0"/>
                                     <constraint firstItem="B9Z-uy-Ldo" firstAttribute="centerX" secondItem="t4V-Me-duk" secondAttribute="centerX" id="L5d-KH-waE"/>
@@ -2607,7 +2606,7 @@
     <resources>
         <image name="AccountActive" width="27" height="27"/>
         <image name="AccountBase" width="27" height="27"/>
-        <image name="Close" width="21" height="19"/>
+        <image name="Clear" width="13" height="13"/>
         <image name="FavoriteActive" width="27" height="27"/>
         <image name="FavoriteBase" width="27" height="27"/>
         <image name="FreezerActive" width="40" height="33"/>

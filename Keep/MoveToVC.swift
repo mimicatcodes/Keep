@@ -28,11 +28,11 @@ class MoveToVC: UIViewController {
         
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.35)
-        topView.layer.cornerRadius = 10
+        topView.layer.cornerRadius = 8
         topView.backgroundColor = UIColor.white
-        saveButton.layer.cornerRadius = 10
+        saveButton.layer.cornerRadius = 5
         saveButton.backgroundColor = UIColor.white
-        cancelButton.layer.cornerRadius = 10
+        cancelButton.layer.cornerRadius = 5
         cancelButton.backgroundColor = UIColor.white
         
     }
