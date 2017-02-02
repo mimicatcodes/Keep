@@ -64,10 +64,12 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
         if filteredItems[indexPath.row].isPurchased == true {
             cell.titleLabel.textColor = MAIN_BORDER_COLOR
             cell.checkBoxImgView.image = #imageLiteral(resourceName: "ChecklistActive2")
+            cell.moveButton.isHidden = false
     
         } else {
             cell.titleLabel.textColor = UIColor(red: 77/255.0, green: 77/255.0, blue: 77/255.0, alpha: 1)
             cell.checkBoxImgView.image = #imageLiteral(resourceName: "ChecklistBase2")
+            cell.moveButton.isHidden = true
 
         }
         
@@ -79,12 +81,10 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
             let name = tableView.indexPath(for: cell)?.row
             
             print(name ?? "Error")
-            
-            
         }
         
         return cell
-    
+
     }
     
     func buttonActions(sender:UIButton){

@@ -11,6 +11,7 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -2001,13 +2002,18 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Shopping List" image="ShoppingListBase1" selectedImage="ShoppingListActive-1" id="e3E-DE-a30"/>
                     <navigationItem key="navigationItem" title="Shopping List" id="BZh-I2-80Y">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="jvf-mf-V2Z">
-                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="addListTapped:" destination="PEo-up-NwA" id="m8e-5l-dtl"/>
-                                <segue destination="rYQ-hn-FK9" kind="presentation" identifier="addList" modalPresentationStyle="overFullScreen" id="h8m-Mk-h3K"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="jvf-mf-V2Z">
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="addListTapped:" destination="PEo-up-NwA" id="m8e-5l-dtl"/>
+                                    <segue destination="rYQ-hn-FK9" kind="presentation" identifier="addList" modalPresentationStyle="overFullScreen" id="h8m-Mk-h3K"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="action" id="Q4u-RA-H34">
+                                <color key="tintColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="4cL-GS-U8M" id="7MP-sT-GM8"/>
@@ -2102,13 +2108,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="Ba5-WF-7bF">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Gmn-Rx-uTe">
-                            <color key="tintColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="addItemBtnTapped:" destination="tgN-pG-HY1" id="aGj-gq-xrR"/>
-                                <segue destination="Ncx-UL-xUg" kind="presentation" identifier="addItemToSL" modalPresentationStyle="overFullScreen" id="XLB-h6-E10"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="Gmn-Rx-uTe">
+                                <color key="tintColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="addItemBtnTapped:" destination="tgN-pG-HY1" id="aGj-gq-xrR"/>
+                                    <segue destination="Ncx-UL-xUg" kind="presentation" identifier="addItemToSL" modalPresentationStyle="overFullScreen" id="XLB-h6-E10"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="edit" id="HS1-7c-88m">
+                                <color key="tintColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="lVL-tI-0NJ" id="X8R-M5-o6N"/>
