@@ -18,7 +18,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MoveTo" customModule="Keep" customModuleProvider="target">
             <connections>
-                <outlet property="containerView" destination="iN0-l3-epB" id="wYO-eK-cM7"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="LAl-IV-YeU"/>
+                <outlet property="itemTitleLabel" destination="1dI-d1-Nyi" id="rXg-fK-gyn"/>
                 <outletCollection property="buttons" destination="b8f-fA-zXy" collectionClass="NSMutableArray" id="OPE-87-L21"/>
                 <outletCollection property="buttons" destination="N4V-KI-Ewc" collectionClass="NSMutableArray" id="6aY-tV-th6"/>
                 <outletCollection property="buttons" destination="mtI-do-VOi" collectionClass="NSMutableArray" id="LXI-sC-LaU"/>
@@ -41,7 +42,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b8f-fA-zXy">
-                            <rect key="frame" x="0.5" y="72.5" width="94" height="66"/>
+                            <rect key="frame" x="0.0" y="72" width="94" height="66"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="b8f-fA-zXy" secondAttribute="height" multiplier="1:0.7" id="fGd-Db-1Nv"/>
@@ -49,7 +50,7 @@
                             <state key="normal" image="FridgeBase"/>
                             <state key="selected" image="FridgeActive"/>
                             <connections>
-                                <action selector="locationButtonTapped:" destination="-1" eventType="touchUpInside" id="WEq-DN-La3"/>
+                                <action selector="locationButtonTapped:" destination="-1" eventType="touchUpInside" id="BAL-uc-zfX"/>
                             </connections>
                         </button>
                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N4V-KI-Ewc">
@@ -61,7 +62,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mtI-do-VOi">
-                            <rect key="frame" x="188.5" y="72.5" width="94" height="66"/>
+                            <rect key="frame" x="188" y="72" width="94" height="66"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" image="PantryBase"/>
                             <connections>
@@ -69,7 +70,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqU-jr-osm">
-                            <rect key="frame" x="281" y="72.5" width="94" height="66"/>
+                            <rect key="frame" x="281" y="72" width="94" height="66"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" image="HouseholdBase"/>
                             <connections>
@@ -77,25 +78,25 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fridge" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xcf-KC-CeZ">
-                            <rect key="frame" x="0.0" y="138.5" width="94" height="28.5"/>
+                            <rect key="frame" x="0.0" y="138" width="94" height="29"/>
                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                             <color key="textColor" red="0.44313725490196076" green="0.44313725490196076" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Freezer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oF1-Om-I5d">
-                            <rect key="frame" x="94" y="138.5" width="94" height="28.5"/>
+                            <rect key="frame" x="94" y="138" width="94" height="29"/>
                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                             <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pantry" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fb6-rj-47t">
-                            <rect key="frame" x="188.5" y="138.5" width="94" height="28.5"/>
+                            <rect key="frame" x="188" y="138" width="94" height="29"/>
                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                             <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Other" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4b-Ef-b1Q">
-                            <rect key="frame" x="281" y="138.5" width="94" height="28.5"/>
+                            <rect key="frame" x="281" y="138" width="94" height="29"/>
                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                             <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>

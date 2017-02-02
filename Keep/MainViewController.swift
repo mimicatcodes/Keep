@@ -29,7 +29,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         didPressStockSection(buttons[selectedIndex])
         tableView.tableFooterView = UIView()
         formatDates()
-        //tableView.separatorInset = .zero
         
     }
     
@@ -210,7 +209,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         case "Freezer":
             cell.itemTitleLabel.text = store.freezerItems.filter("category == %@", store.freezerSectionNames[indexPath.section])[indexPath.row].name
-            cell.purchaseDate.text = "Purchased on \(store.freezerItems.filter("category == %@", store.freezerSectionNames[indexPath.section])[indexPath.row].purchaseDate)"
+            let pDate = formatter.string(from: store.freezerItems.filter("category == %@", store.freezerSectionNames[indexPath.section])[indexPath.row].purchaseDate)
+            cell.purchaseDate.text = "Purchased on " + pDate
             expDate = store.freezerItems.filter("category == %@", store.freezerSectionNames[indexPath.section])[indexPath.row].exp
             daysLeft = daysBetweenTwoDates(start: today, end: expDate)
             let realm = try! Realm()
@@ -232,7 +232,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         case "Pantry":
             cell.itemTitleLabel.text = store.pantryItems.filter("category == %@", store.pantrySectionNames[indexPath.section])[indexPath.row].name
-            cell.purchaseDate.text = "Purchased on \(store.pantryItems.filter("category == %@", store.pantrySectionNames[indexPath.section])[indexPath.row].purchaseDate)"
+            let pDate = formatter.string(from: store.pantryItems.filter("category == %@", store.pantrySectionNames[indexPath.section])[indexPath.row].purchaseDate)
+            cell.purchaseDate.text = "Purchased on " + pDate
             expDate = store.pantryItems.filter("category == %@", store.pantrySectionNames[indexPath.section])[indexPath.row].exp
             daysLeft = daysBetweenTwoDates(start: today, end: expDate)
             let realm = try! Realm()

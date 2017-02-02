@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD0F51BE1E42DB0E004A6153 /* MoveToVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F51BD1E42DB0E004A6153 /* MoveToVC.swift */; };
 		DD1EA6381E0CA41D0034C54B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA6371E0CA41D0034C54B /* AppDelegate.swift */; };
 		DD1EA63D1E0CA41D0034C54B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD1EA63B1E0CA41D0034C54B /* Main.storyboard */; };
 		DD1EA6421E0CA41D0034C54B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD1EA6411E0CA41D0034C54B /* Assets.xcassets */; };
@@ -61,6 +62,7 @@
 /* Begin PBXFileReference section */
 		4E019349C32B54A0147D1EA6 /* Pods-Keep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keep.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Keep/Pods-Keep.debug.xcconfig"; sourceTree = "<group>"; };
 		A6BA35316A371A06E84DEF20 /* Pods_Keep.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Keep.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD0F51BD1E42DB0E004A6153 /* MoveToVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveToVC.swift; sourceTree = "<group>"; };
 		DD1EA6341E0CA41D0034C54B /* Keep.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keep.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD1EA6371E0CA41D0034C54B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD1EA63C1E0CA41D0034C54B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				DDC3E98E1E1CB87C00459295 /* AddListVC.swift */,
 				DDC3E98C1E1CB86100459295 /* ShoppingListDetailVC.swift */,
 				DDC3E9D01E20580B00459295 /* AddItemVC.swift */,
+				DD0F51BD1E42DB0E004A6153 /* MoveToVC.swift */,
 			);
 			name = "Shopping List";
 			sourceTree = "<group>";
@@ -493,6 +496,7 @@
 				DD4853B51E199FC000BEAC02 /* Meat.swift in Sources */,
 				DD48537F1E196C4200BEAC02 /* Produce.swift in Sources */,
 				DD4853831E197CB500BEAC02 /* Condiments.swift in Sources */,
+				DD0F51BE1E42DB0E004A6153 /* MoveToVC.swift in Sources */,
 				DDC3EBA41E31451000459295 /* ShoppingItem.swift in Sources */,
 				DD4853A31E19938700BEAC02 /* Beverages.swift in Sources */,
 				DD4853B11E199FA600BEAC02 /* Bakery.swift in Sources */,

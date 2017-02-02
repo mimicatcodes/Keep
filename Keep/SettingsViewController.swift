@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 import Charts
 
+// -TODO : Implement radar chart for metrics
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let store = DataStore.sharedInstance
@@ -81,7 +82,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         numOfItemsBoughtThisWeekLabel.text = "\(numOfItemsBoughtThisWeek)"
         
         // 3rd Section
-        numOfExpiringItems = store.allItems.filter("isExpiring == true").count
+        numOfExpiringItems = store.allItems.filter("isExpiring == true AND isExpired == false").count
         if numOfExpiringItems < 2 {
             labelThree.text = "item expiring"
         } else {

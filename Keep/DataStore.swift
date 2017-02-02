@@ -31,7 +31,7 @@ class DataStore{
      let fallsBetween = (startDate...endDate).contains(Date())
 
  */
-    
+    var tappedSLItemToSendToLocation = ""
     var listID = ""
 
     var allFavoritedItems = try! Realm().objects(FavoritedItem.self).sorted(byProperty: "name", ascending: true)
