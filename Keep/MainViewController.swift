@@ -44,27 +44,22 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         switch index_ {
             
         case 0:
-           // navigationItem.title = "Fridge"
             store.buttonStatus = "Fridge"
             print("Fridge ---")
             tableView.reloadData()
         case 1:
-           // navigationItem.title = "Freezer"
             store.buttonStatus = "Freezer"
             print("Freezer-----")
             tableView.reloadData()
             
         case 2:
-           // navigationItem.title = "Pantry"
             store.buttonStatus = "Pantry"
             print("Pantry -----")
             tableView.reloadData()
         default:
-           // navigationItem.title = "Other"
             store.buttonStatus = "Other"
             print("Other ------")
             tableView.reloadData()
-            
         }
         
         
@@ -76,7 +71,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 button.setTitleColor(MAIN_COLOR, for: .selected)
                 views[index].backgroundColor = MAIN_COLOR
                 labels[index].textColor = UIColor.white
-
+                
             } else {
                 
                 button.isSelected = false
@@ -102,7 +97,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         var count = 0
         
         switch store.buttonStatus {
-            
         case "Fridge":
             count = store.fridgeSectionNames.count
         case "Freezer":
@@ -113,9 +107,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             count = store.otherSectionNames.count
         default:
             count = 0
-            
         }
-        
         return count
     }
     
@@ -134,7 +126,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         var title = ""
         
         switch store.buttonStatus {
-            
         case "Fridge":
             title = store.fridgeSectionNames[section]
         case "Freezer":
@@ -146,9 +137,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         default:
             break
         }
-        
         return title
-        
     }
     
     
@@ -157,7 +146,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         var count = 0
         
         switch store.buttonStatus {
-            
         case "Fridge":
             count = store.fridgeItems.filter("category == %@", store.fridgeSectionNames[section]).count
         case "Freezer":
@@ -169,7 +157,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         default:
             break
         }
-        
         return count
     }
     
@@ -177,105 +164,26 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "stockCell", for: indexPath) as! StockCell
-        let today = Date()
-        var expDate = Date()
-        var daysLeft: Int = 0
-        
+   
         switch store.buttonStatus {
             
         case "Fridge":
-            cell.itemTitleLabel.text = store.fridgeItems.filter("category == %@", store.fridgeSectionNames[indexPath.section])[indexPath.row].name
-            let pDate = formatter.string(from: store.fridgeItems.filter("category == %@", store.fridgeSectionNames[indexPath.section])[indexPath.row].purchaseDate)
-            cell.purchaseDate.text = "Purchased on " + pDate
-            expDate = store.fridgeItems.filter("category == %@", store.fridgeSectionNames[indexPath.section])[indexPath.row].exp
-            daysLeft = daysBetweenTwoDates(start: today, end: expDate)
-            let realm = try! Realm()
-            try! realm.write {
-                if daysLeft < 0 {
-                    store.fridgeItems.filter("category == %@", store.fridgeSectionNames[indexPath.section])[indexPath.row].isExpired = true
-                } else if daysLeft >= 0 && daysLeft < 4  {
-                    store.fridgeItems.filter("category == %@", store.fridgeSectionNames[indexPath.section])[indexPath.row].isExpiring = true
-                } else {
-                    store.fridgeItems.filter("category == %@", store.fridgeSectionNames[indexPath.section])[indexPath.row].isExpiring = false
-                }
-                
-            }
-
-            print(store.fridgeItems.filter("category == %@", store.fridgeSectionNames[indexPath.section])[indexPath.row].isExpired)
             
-            configureExpireLabels(cell: cell, daysLeft: daysLeft)
-            cell.quantityLabel.text = "x \(store.fridgeItems.filter("category == %@", store.fridgeSectionNames[indexPath.section])[indexPath.row].quantity)"
-            
-            
+            let filteredFridgeItem = store.fridgeItems.filter("category == %@", store.fridgeSectionNames[indexPath.section])[indexPath.row]
+            configureCells(cell: cell, indexPath: indexPath, filteredItem: filteredFridgeItem)
         case "Freezer":
-            cell.itemTitleLabel.text = store.freezerItems.filter("category == %@", store.freezerSectionNames[indexPath.section])[indexPath.row].name
-            let pDate = formatter.string(from: store.freezerItems.filter("category == %@", store.freezerSectionNames[indexPath.section])[indexPath.row].purchaseDate)
-            cell.purchaseDate.text = "Purchased on " + pDate
-            expDate = store.freezerItems.filter("category == %@", store.freezerSectionNames[indexPath.section])[indexPath.row].exp
-            daysLeft = daysBetweenTwoDates(start: today, end: expDate)
-            let realm = try! Realm()
-            try! realm.write {
-                if daysLeft < 0 {
-                    store.freezerItems.filter("category == %@", store.freezerSectionNames[indexPath.section])[indexPath.row].isExpired = true
-                } else if daysLeft >= 0 && daysLeft < 4  {
-                    store.freezerItems.filter("category == %@", store.freezerSectionNames[indexPath.section])[indexPath.row].isExpiring = true
-                } else {
-                    store.freezerItems.filter("category == %@", store.freezerSectionNames[indexPath.section])[indexPath.row].isExpiring = false
-                }
-                
-            }
-
-            print(store.freezerItems.filter("category == %@", store.freezerSectionNames[indexPath.section])[indexPath.row].isExpired)
-            configureExpireLabels(cell: cell, daysLeft: daysLeft)
-            cell.quantityLabel.text = "x \(store.freezerItems.filter("category == %@", store.freezerSectionNames[indexPath.section])[indexPath.row].quantity)"
             
+            let filteredFreezerItem = store.freezerItems.filter("category == %@", store.freezerSectionNames[indexPath.section])[indexPath.row]
+            configureCells(cell: cell, indexPath: indexPath, filteredItem: filteredFreezerItem)
             
         case "Pantry":
-            cell.itemTitleLabel.text = store.pantryItems.filter("category == %@", store.pantrySectionNames[indexPath.section])[indexPath.row].name
-            let pDate = formatter.string(from: store.pantryItems.filter("category == %@", store.pantrySectionNames[indexPath.section])[indexPath.row].purchaseDate)
-            cell.purchaseDate.text = "Purchased on " + pDate
-            expDate = store.pantryItems.filter("category == %@", store.pantrySectionNames[indexPath.section])[indexPath.row].exp
-            daysLeft = daysBetweenTwoDates(start: today, end: expDate)
-            let realm = try! Realm()
-            try! realm.write {
-                if daysLeft < 0 {
-                    store.pantryItems.filter("category == %@", store.pantrySectionNames[indexPath.section])[indexPath.row].isExpired = true
-                    store.pantryItems.filter("category == %@", store.pantrySectionNames[indexPath.section])[indexPath.row].isExpiring = false
-                } else if daysLeft >= 0 && daysLeft < 4 {
-                    store.pantryItems.filter("category == %@", store.pantrySectionNames[indexPath.section])[indexPath.row].isExpiring = true
-                    store.pantryItems.filter("category == %@", store.pantrySectionNames[indexPath.section])[indexPath.row].isExpired = false
-                } else {
-                    store.pantryItems.filter("category == %@", store.pantrySectionNames[indexPath.section])[indexPath.row].isExpired = false
-                    store.pantryItems.filter("category == %@", store.pantrySectionNames[indexPath.section])[indexPath.row].isExpiring = false
-                }
-                
-            }
-            print("\( store.pantryItems.filter("category == %@", store.pantrySectionNames[indexPath.section])[indexPath.row].isExpired) ----- expired?")
-            print("\( store.pantryItems.filter("category == %@", store.pantrySectionNames[indexPath.section])[indexPath.row].isExpiring) ----- expiring?")
-            configureExpireLabels(cell: cell, daysLeft: daysLeft)
-            cell.quantityLabel.text = "x " + store.pantryItems.filter("category == %@", store.pantrySectionNames[indexPath.section])[indexPath.row].quantity
+            let filteredPantryItem = store.pantryItems.filter("category == %@", store.pantrySectionNames[indexPath.section])[indexPath.row]
+            configureCells(cell: cell, indexPath: indexPath, filteredItem: filteredPantryItem)
             
         case "Other":
-            cell.itemTitleLabel.text = store.otherItems.filter("category == %@", store.otherSectionNames[indexPath.section])[indexPath.row].name
-            let pDate = formatter.string(from: store.otherItems.filter("category == %@", store.otherSectionNames[indexPath.section])[indexPath.row].purchaseDate)
-            cell.purchaseDate.text = "Purchased on " + pDate
-            expDate = store.otherItems.filter("category == %@", store.otherSectionNames[indexPath.section])[indexPath.row].exp
-            daysLeft = daysBetweenTwoDates(start: today, end: expDate)
-            let realm = try! Realm()
-            try! realm.write {
-                if daysLeft < 0 {
-                    store.otherItems.filter("category == %@", store.otherSectionNames[indexPath.section])[indexPath.row].isExpired = true
-                } else if daysLeft >= 0 && daysLeft < 4  {
-                    store.otherItems.filter("category == %@", store.otherSectionNames[indexPath.section])[indexPath.row].isExpiring = true
-                } else {
-                    store.otherItems.filter("category == %@", store.otherSectionNames[indexPath.section])[indexPath.row].isExpiring = false
-                }
-            }
-    
-            configureExpireLabels(cell: cell, daysLeft: daysLeft)
-            cell.quantityLabel.text = "x " + store.otherItems.filter("category == %@", store.otherSectionNames[indexPath.section])[indexPath.row].quantity
-
-        default:
+            let filteredOtherItem = store.otherItems.filter("category == %@", store.otherSectionNames[indexPath.section])[indexPath.row]
+            configureCells(cell: cell, indexPath: indexPath, filteredItem: filteredOtherItem)
+            default:
             break
         }
         
@@ -284,6 +192,33 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         return cell
         
+    }
+    
+    func configureCells(cell:StockCell, indexPath: IndexPath, filteredItem: Item ){
+        
+        let today = Date()
+        var expDate = Date()
+        var daysLeft: Int = 0
+        
+        cell.itemTitleLabel.text = filteredItem.name
+        let pDate = formatter.string(from: filteredItem.purchaseDate)
+        cell.purchaseDate.text = "Purchased on " + pDate
+        expDate = filteredItem.exp
+        daysLeft = daysBetweenTwoDates(start: today, end: expDate)
+        let realm = try! Realm()
+        try! realm.write {
+            if daysLeft < 0 {
+                filteredItem.isExpired = true
+            } else if daysLeft >= 0 && daysLeft < 4  {
+                filteredItem.isExpiring = true
+            } else {
+                filteredItem.isExpiring = false
+            }
+        }
+        
+        configureExpireLabels(cell: cell, daysLeft: daysLeft)
+        cell.quantityLabel.text = "x " + filteredItem.quantity
+
     }
     
     func configureExpireLabels(cell: StockCell, daysLeft: Int){
@@ -305,7 +240,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    // MARK: - Methods
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
@@ -317,7 +251,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             switch self.store.buttonStatus {
             case "Fridge":
                 let itemToBeDeleted = self.store.fridgeItems.filter("category == %@", self.store.fridgeSectionNames[indexPath.section])[indexPath.row]
-            
+                
                 try! realm.write {
                     print("\(itemToBeDeleted) has been deleted")
                     realm.delete(itemToBeDeleted)
@@ -370,11 +304,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func daysBetweenTwoDates(start: Date, end: Date) -> Int{
         
-            let currentCalendar = Calendar.current
+        let currentCalendar = Calendar.current
         
-            guard let start = currentCalendar.ordinality(of: .day, in: .era, for: start) else { return 0 }
-            guard let end = currentCalendar.ordinality(of: .day, in: .era, for: end) else { return 0 }
-            return end - start
+        guard let start = currentCalendar.ordinality(of: .day, in: .era, for: start) else { return 0 }
+        guard let end = currentCalendar.ordinality(of: .day, in: .era, for: end) else { return 0 }
+        return end - start
     }
 }
 
@@ -384,6 +318,5 @@ class StockCell:UITableViewCell {
     @IBOutlet weak var expDateLabel: UILabel!
     @IBOutlet weak var purchaseDate: UILabel!
     @IBOutlet weak var quantityLabel: UILabel!
-    
     
 }
