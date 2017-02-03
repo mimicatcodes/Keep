@@ -54,8 +54,6 @@
 		DDD7D47A1E403E7200599382 /* AddFavoriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD7D4791E403E7100599382 /* AddFavoriteVC.swift */; };
 		DDD7D47C1E403FFE00599382 /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD7D47B1E403FFE00599382 /* Favorites.swift */; };
 		DDE189A91E354A9A00306449 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE189A81E354A9A00306449 /* Extensions.swift */; };
-		DDFF62101E42B28000324C0B /* MoveTo.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDFF620F1E42B28000324C0B /* MoveTo.xib */; };
-		DDFF62121E42BAC800324C0B /* MoveTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFF62111E42BAC800324C0B /* MoveTo.swift */; };
 		EEB43B8163D4806DB7C3C1BC /* Pods_Keep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BA35316A371A06E84DEF20 /* Pods_Keep.framework */; };
 /* End PBXBuildFile section */
 
@@ -111,8 +109,6 @@
 		DDD7D4791E403E7100599382 /* AddFavoriteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFavoriteVC.swift; sourceTree = "<group>"; };
 		DDD7D47B1E403FFE00599382 /* Favorites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
 		DDE189A81E354A9A00306449 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		DDFF620F1E42B28000324C0B /* MoveTo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoveTo.xib; sourceTree = "<group>"; };
-		DDFF62111E42BAC800324C0B /* MoveTo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveTo.swift; sourceTree = "<group>"; };
 		F17A8080E837D95CDFD38B65 /* Pods-Keep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keep.release.xcconfig"; path = "Pods/Target Support Files/Pods-Keep/Pods-Keep.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -195,8 +191,6 @@
 			isa = PBXGroup;
 			children = (
 				DD1EA63B1E0CA41D0034C54B /* Main.storyboard */,
-				DDFF620F1E42B28000324C0B /* MoveTo.xib */,
-				DDFF62111E42BAC800324C0B /* MoveTo.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -404,7 +398,6 @@
 				DD1EA63D1E0CA41D0034C54B /* Main.storyboard in Resources */,
 				DD75B7B41E3D5466002053E5 /* Montserrat-SemiBold.otf in Resources */,
 				DD75B7B61E3D5529002053E5 /* Lato-Regular.ttf in Resources */,
-				DDFF62101E42B28000324C0B /* MoveTo.xib in Resources */,
 				DD75B7B21E3D545D002053E5 /* Montserrat-Regular.otf in Resources */,
 				DD75B7B11E3D545D002053E5 /* Montserrat-Bold.otf in Resources */,
 				DD75B7BA1E3D7A93002053E5 /* Montserrat-Light.otf in Resources */,
@@ -475,7 +468,6 @@
 				DD4853A11E19920E00BEAC02 /* Dairy.swift in Sources */,
 				DD1EA6381E0CA41D0034C54B /* AppDelegate.swift in Sources */,
 				DD1EA64F1E0CAEFF0034C54B /* LoginViewController.swift in Sources */,
-				DDFF62121E42BAC800324C0B /* MoveTo.swift in Sources */,
 				DDC3E9891E1C957E00459295 /* FavoritesViewController.swift in Sources */,
 				DDC3E9D11E20580B00459295 /* AddItemVC.swift in Sources */,
 				DDC3E9801E1C76E100459295 /* SearchVC.swift in Sources */,

@@ -79,11 +79,6 @@ class MoveToVC: UIViewController {
         
         let selectedIndex = sender.tag
         
-        //if store.tappedSLItemToSendToLocation != "" {
-          //  let name = store.tappedSLItemToSendToLocation
-            //let realm = try! Realm()
-            //try! realm.write {
-                
                 switch selectedIndex {
                 case 0:
                     
@@ -104,49 +99,14 @@ class MoveToVC: UIViewController {
                     print("Other btn tapped")
                 default:
                     break
-                    /*
-                case 0:
-                    
-                    let item = Item(name: name, quantity: "1", exp: Date(), purchaseDate: Date(), isConsumed: false, location: "Fridge", category: "Uncategorized")
-                    realm.add(item)
-                    print("Fridge for item \(store.tappedSLItemToSendToLocation) tapped")
-                case 1:
-                    let item = Item(name: name, quantity: "1", exp: Date(), purchaseDate: Date(), isConsumed: false, location: "Freezer", category: "Uncategorized")
-                    realm.add(item)
-                    print("Freezer for item \(store.tappedSLItemToSendToLocation) tapped")
-                case 2:
-                    let item = Item(name: name, quantity: "1", exp: Date(), purchaseDate: Date(), isConsumed: false, location: "Pantry", category: "Uncategorized")
-                    realm.add(item)
-                    print("Pantry for item \(store.tappedSLItemToSendToLocation) tapped")
-                case 3:
-                    let item = Item(name: name, quantity: "1", exp: Date(), purchaseDate: Date(), isConsumed: false, location: "Other", category: "Uncategorized")
-                    realm.add(item)
-                    print("Other for item \(store.tappedSLItemToSendToLocation) tapped")
-                default:
-                    break
-                }
- */
-           // }
+
         }
         
         for (index, button) in buttons.enumerated() {
             if index == selectedIndex {
                 button.isSelected = true
                 button.setTitleColor(MAIN_COLOR, for: .selected)
-                
-                
-                /*UIView.animate(withDuration: 1.0, animations: {
-                    
-                    let transition: CATransition = CATransition()
-                     transition.duration = 0.5
-                     transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-                     transition.type = kCATransitionReveal
-                     transition.subtype = kCATransitionFromRight
-                     self.view.window!.layer.add(transition, forKey: nil)
-                     self.dismiss(animated: false, completion: nil)
-                    
-                })*/
-                
+                                
             } else {
                 button.isSelected = false
                 button.setTitleColor(MAIN_BUTTON_LABEL_GRAY, for: .normal)
