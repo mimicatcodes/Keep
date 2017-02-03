@@ -104,11 +104,17 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     
     func keyboardWillHide(notification: NSNotification) {
         
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y = 0
+        }
+        
+        /*
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y != 0{
                 self.view.frame.origin.y += keyboardSize.height
             }
         }
+ */
     }
     
     
@@ -322,10 +328,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 button.layer.borderColor = BORDER_TWO.cgColor
                 button.setTitleColor(MAIN_BUTTON_LABEL_GRAY, for: .normal)
                 
-                
             }
         }
-        
     }
     
     
@@ -526,6 +530,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     func textFieldDidBeginEditing(_ textField: UITextField){
         
         activeTextField = textField
+        print("???????????\(activeTextField)")
         
         if textField.tag == 1 {
             
@@ -541,6 +546,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             expDateTextfield.inputView = datePicker2
             datePicker2.datePickerMode = UIDatePickerMode.date
             datePicker2.addTarget(self, action: #selector(self.datePickerChanged(sender:)), for: .valueChanged)
+            
             if let indexSelected = selectedExpIndex {
                 expButtons[indexSelected].isSelected = false
             }
@@ -553,6 +559,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 button.layer.borderColor = MAIN_BUTTON_LABEL_GRAY.cgColor
                 
             }
+            
             expDateTextfield.text = formatter.string(from: datePicker2.date).capitalized
         }
         

@@ -13,7 +13,7 @@ class MoveToVC: UIViewController {
     
     let store = DataStore.sharedInstance
     
-    var location = "Fridge"
+    var location:String?
     
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var topView: UIView!
@@ -54,16 +54,19 @@ class MoveToVC: UIViewController {
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         if store.tappedSLItemToSendToLocation != "" {
-            let name = store.tappedSLItemToSendToLocation
-            
+            if let location = location {
+                let name = store.tappedSLItemToSendToLocation
+                
                 let realm = try! Realm()
                 try! realm.write {
                     let item = Item(name: name, quantity: "1", exp: Date(), purchaseDate: Date(), isConsumed: false, location: location, category: "Uncategorized")
                     
                     realm.add(item)
-
+                    
                 }
             }
+           
+        }
         dismiss(animated: true, completion: nil)
     }
     

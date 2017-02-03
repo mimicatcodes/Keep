@@ -44,23 +44,23 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         switch index_ {
             
         case 0:
-            navigationItem.title = "Fridge"
+           // navigationItem.title = "Fridge"
             store.buttonStatus = "Fridge"
             print("Fridge ---")
             tableView.reloadData()
         case 1:
-            navigationItem.title = "Freezer"
+           // navigationItem.title = "Freezer"
             store.buttonStatus = "Freezer"
             print("Freezer-----")
             tableView.reloadData()
             
         case 2:
-            navigationItem.title = "Pantry"
+           // navigationItem.title = "Pantry"
             store.buttonStatus = "Pantry"
             print("Pantry -----")
             tableView.reloadData()
         default:
-            navigationItem.title = "Other"
+           // navigationItem.title = "Other"
             store.buttonStatus = "Other"
             print("Other ------")
             tableView.reloadData()
