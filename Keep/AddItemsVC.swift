@@ -104,17 +104,17 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     
     func keyboardWillHide(notification: NSNotification) {
         
-            if self.view.frame.origin.y != 0{
-                self.view.frame.origin.y = 0
+        if self.view.frame.origin.y != 0{
+            self.view.frame.origin.y = 0
         }
         
         /*
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y != 0{
-                self.view.frame.origin.y += keyboardSize.height
-            }
-        }
- */
+         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+         if self.view.frame.origin.y != 0{
+         self.view.frame.origin.y += keyboardSize.height
+         }
+         }
+         */
     }
     
     
@@ -557,6 +557,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 button.layer.cornerRadius = 5
                 button.layer.borderWidth = 1
                 button.layer.borderColor = MAIN_BUTTON_LABEL_GRAY.cgColor
+                button.titleLabel?.textColor = MAIN_BUTTON_LABEL_GRAY
+          
                 
             }
             
