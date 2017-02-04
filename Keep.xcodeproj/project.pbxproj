@@ -54,6 +54,8 @@
 		DDD7D47A1E403E7200599382 /* AddFavoriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD7D4791E403E7100599382 /* AddFavoriteVC.swift */; };
 		DDD7D47C1E403FFE00599382 /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD7D47B1E403FFE00599382 /* Favorites.swift */; };
 		DDE189A91E354A9A00306449 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE189A81E354A9A00306449 /* Extensions.swift */; };
+		DDEC8C8C1E456F29004C73CB /* ScanReceiptsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEC8C8B1E456F29004C73CB /* ScanReceiptsVC.swift */; };
+		DDEC8CB81E458A48004C73CB /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = DDEC8CB71E458A48004C73CB /* tessdata */; };
 		EEB43B8163D4806DB7C3C1BC /* Pods_Keep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BA35316A371A06E84DEF20 /* Pods_Keep.framework */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +111,11 @@
 		DDD7D4791E403E7100599382 /* AddFavoriteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFavoriteVC.swift; sourceTree = "<group>"; };
 		DDD7D47B1E403FFE00599382 /* Favorites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
 		DDE189A81E354A9A00306449 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		DDEC8C8B1E456F29004C73CB /* ScanReceiptsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanReceiptsVC.swift; sourceTree = "<group>"; };
+		DDEC8CB71E458A48004C73CB /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
+		DDEC8CB91E458AF1004C73CB /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		DDEC8CBB1E458B02004C73CB /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		DDEC8CBD1E458CF7004C73CB /* Keep-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Keep-Bridging-Header.h"; sourceTree = "<group>"; };
 		F17A8080E837D95CDFD38B65 /* Pods-Keep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keep.release.xcconfig"; path = "Pods/Target Support Files/Pods-Keep/Pods-Keep.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +134,8 @@
 		86D9C18FBCDF483B6AF1B24D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DDEC8CBB1E458B02004C73CB /* CoreImage.framework */,
+				DDEC8CB91E458AF1004C73CB /* libstdc++.6.0.9.tbd */,
 				A6BA35316A371A06E84DEF20 /* Pods_Keep.framework */,
 			);
 			name = Frameworks;
@@ -149,6 +158,7 @@
 				DD1EA6351E0CA41D0034C54B /* Products */,
 				D172EE28FA2053B384BD78CA /* Pods */,
 				86D9C18FBCDF483B6AF1B24D /* Frameworks */,
+				DDEC8CBD1E458CF7004C73CB /* Keep-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -163,6 +173,7 @@
 		DD1EA6361E0CA41D0034C54B /* Keep */ = {
 			isa = PBXGroup;
 			children = (
+				DDEC8CB71E458A48004C73CB /* tessdata */,
 				DD75B7AA1E3D52EF002053E5 /* Fonts */,
 				DDE189A71E354A8800306449 /* Helpers */,
 				DD48537D1E196C0400BEAC02 /* Controller */,
@@ -277,6 +288,7 @@
 				DD5D7DC81E329BA300C2317D /* MainViewController.swift */,
 				DDC3E97F1E1C76E100459295 /* SearchVC.swift */,
 				DDC3EB9D1E2DBC3900459295 /* AddItemsVC.swift */,
+				DDEC8C8B1E456F29004C73CB /* ScanReceiptsVC.swift */,
 			);
 			name = Stock;
 			sourceTree = "<group>";
@@ -394,6 +406,7 @@
 				DD1EA6451E0CA41D0034C54B /* LaunchScreen.storyboard in Resources */,
 				DD2C38A31E3D7CD000A7C709 /* Lato-Bold.ttf in Resources */,
 				DD75B7B81E3D5536002053E5 /* Lato-Semibold.ttf in Resources */,
+				DDEC8CB81E458A48004C73CB /* tessdata in Resources */,
 				DD1EA6421E0CA41D0034C54B /* Assets.xcassets in Resources */,
 				DD1EA63D1E0CA41D0034C54B /* Main.storyboard in Resources */,
 				DD75B7B41E3D5466002053E5 /* Montserrat-SemiBold.otf in Resources */,
@@ -493,6 +506,7 @@
 				DD4853A31E19938700BEAC02 /* Beverages.swift in Sources */,
 				DD4853B11E199FA600BEAC02 /* Bakery.swift in Sources */,
 				DD4853AB1E199F8300BEAC02 /* HealthAndPersonal.swift in Sources */,
+				DDEC8C8C1E456F29004C73CB /* ScanReceiptsVC.swift in Sources */,
 				DD4853B91E199FD600BEAC02 /* Deli.swift in Sources */,
 				DD4853C71E19AF0000BEAC02 /* PackagedFoods.swift in Sources */,
 				DD5D7DC91E329BA300C2317D /* MainViewController.swift in Sources */,
@@ -620,12 +634,20 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = B5EG3G83GE;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Keep",
+				);
 				INFOPLIST_FILE = Keep/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mimicatcodes.Keep;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Keep-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -636,12 +658,19 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = B5EG3G83GE;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Keep",
+				);
 				INFOPLIST_FILE = Keep/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mimicatcodes.Keep;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Keep-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "2536E723C7697E266A40FBEAE5DCFE4665DB56F1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "2536E723C7697E266A40FBEAE5DCFE4665DB56F1" : 9223372036854775807,
+    "28E0ACC4D8A43B4935CDAD6DE47DD40A4FBF3D6A" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "D5A9A708-3CB7-4599-9F93-E47E551CA041",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "2536E723C7697E266A40FBEAE5DCFE4665DB56F1" : "Keep\/",
+    "28E0ACC4D8A43B4935CDAD6DE47DD40A4FBF3D6A" : "Keep\/Keep\/tessdata\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Keep",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Keep.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:mimicatcodes\/Keep.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2536E723C7697E266A40FBEAE5DCFE4665DB56F1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:tesseract-ocr\/tessdata.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "28E0ACC4D8A43B4935CDAD6DE47DD40A4FBF3D6A"
+    }
+  ]
+}
