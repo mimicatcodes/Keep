@@ -22,6 +22,11 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        emptyArray.removeAll()
+    }
+    
     func processScanning(){
         
         let tesseract:G8Tesseract = G8Tesseract(language: "eng")

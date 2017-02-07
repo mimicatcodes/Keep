@@ -12,7 +12,7 @@ class ScanReceiptsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     @IBOutlet weak var tableView: UITableView!
     
-    var resultsArray:[String]?
+    var resultsArray = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,31 +21,59 @@ class ScanReceiptsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         print("9999999999 + \(resultsArray)")
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let results = resultsArray {
-            return results.count
-        }
-        return 0
+       return resultsArray.count
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "scannedItemCell", for: indexPath) as! scannedItemCell
-        if let results = resultsArray {
-             cell.titleField.text = results[indexPath.row]
+        
+        cell.titleLabel.text = resultsArray[indexPath.row]
             print("AUHHHHHHH")
-        }
+        
         cell.selectionStyle = .none
+        
+        // buttons
+        cell.editAddButton.tag = indexPath.row
+        cell.editAddButton.addTarget(self, action: #selector(deleteRow), for: .touchUpInside)
        
         return cell
+    }
+    
+    func deleteRow(){
+        
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
+    {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
+    {
+        if editingStyle == .delete
+        {
+            
+            resultsArray.remove(at: indexPath.row)
+            tableView.reloadData()
+        }
+    }
 }
 
 class scannedItemCell: UITableViewCell {
-    @IBOutlet weak var titleField: UITextField!
-    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
+   
+    @IBOutlet weak var editAddButton: UIButton!
+
 }
 
