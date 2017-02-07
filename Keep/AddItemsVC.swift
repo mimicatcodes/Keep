@@ -82,6 +82,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     func keyboardWillShow(notification: NSNotification) {
         
         if activeTextField == categoryTextfield {
+            
             if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
                 
                 if let offset = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -517,6 +518,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool{
         
+        //activeTextField = textField
+        
         if nameTextField.text != nil && nameTextField.text != "" {
             
             saveButton.isEnabled = true
@@ -564,7 +567,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             
             expDateTextfield.text = formatter.string(from: datePicker2.date).capitalized
         }
-        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

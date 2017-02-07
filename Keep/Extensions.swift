@@ -24,9 +24,6 @@ extension UIViewController {
     }
 }
 
-// make rgb handling extension
-
-
 extension UITextField {
 
     func underlined(){

@@ -7,27 +7,45 @@
 //
 
 import UIKit
-import TesseractOCR
 
-class ScanReceiptsVC: UIViewController, G8TesseractDelegate {
+class ScanReceiptsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var tableView: UITableView!
+    
+    var resultsArray:[String]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
+        print("9999999999 + \(resultsArray)")
         
-        let tesseract:G8Tesseract = G8Tesseract(language: "eng")
-            tesseract.delegate = self
-            tesseract.image = imageView.image?.g8_blackAndWhite()
-            tesseract.recognize()
-        print(tesseract.recognizedText)
-            textView.text = tesseract.recognizedText
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let results = resultsArray {
+            return results.count
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "scannedItemCell", for: indexPath) as! scannedItemCell
+        if let results = resultsArray {
+             cell.titleField.text = results[indexPath.row]
+            print("AUHHHHHHH")
+        }
+        cell.selectionStyle = .none
+       
+        return cell
+    }
+    
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+}
 
-    }
-    
-    func progressImageRecognition(for tesseract: G8Tesseract!) {
-        print("Recognition progress \(tesseract.progress) %...")
-    }
-    
+class scannedItemCell: UITableViewCell {
+    @IBOutlet weak var titleField: UITextField!
+    @IBOutlet weak var deleteButton: UIButton!
 }
 
