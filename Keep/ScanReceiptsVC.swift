@@ -41,7 +41,7 @@ class ScanReceiptsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "scannedItemCell", for: indexPath) as! scannedItemCell
         
         cell.titleLabel.text = resultsArray[indexPath.row]
-            print("AUHHHHHHH")
+            print(resultsArray[indexPath.row])
         
         cell.selectionStyle = .none
         
@@ -59,6 +59,7 @@ class ScanReceiptsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             print("----titleString is : --- \(title)")
             store.scannedItemToAdd = title
             store.scannedItemIndex = sender.tag
+            print("scanned Item index is \(store.scannedItemIndex)")
             performSegue(withIdentifier: "addScannedItem", sender: self)
         }
         

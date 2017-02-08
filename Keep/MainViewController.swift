@@ -200,7 +200,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         var expDate = Date()
         var daysLeft: Int = 0
         
-        cell.itemTitleLabel.text = filteredItem.name
+        cell.itemTitleLabel.text = filteredItem.name.lowercased().capitalized
         let pDate = formatter.string(from: filteredItem.purchaseDate)
         cell.purchaseDate.text = "Purchased on " + pDate
         expDate = filteredItem.exp

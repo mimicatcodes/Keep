@@ -1627,7 +1627,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pd0-1A-7rX">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pd0-1A-7rX">
                                 <rect key="frame" x="20" y="175" width="374" height="32"/>
                                 <color key="backgroundColor" red="0.84466757550335569" green="0.93479970637583898" blue="0.93747378355704702" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -2117,9 +2117,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="EGk-Fi-H3B" kind="show" id="c4A-wM-Uwl"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -2135,24 +2132,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G67-4y-RLo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6180" y="-977"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="9SE-6E-hla">
-            <objects>
-                <viewController id="EGk-Fi-H3B" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2LZ-Oe-Lue"/>
-                        <viewControllerLayoutGuide type="bottom" id="dJt-b2-noq"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="p73-I0-W2L">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.98721666269999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WxY-bs-u6Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="7048" y="-977"/>
         </scene>
         <!--Shopping List-->
         <scene sceneID="92X-sI-TcT">
