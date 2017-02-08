@@ -13,19 +13,19 @@ class ScanReceiptsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var tableView: UITableView!
     
     var resultsArray = [String]()
+    var titleString:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        print("9999999999 + \(resultsArray)")
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        return resultsArray.count
 
@@ -41,13 +41,38 @@ class ScanReceiptsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // buttons
         cell.editAddButton.tag = indexPath.row
-        cell.editAddButton.addTarget(self, action: #selector(deleteRow), for: .touchUpInside)
+        cell.editAddButton.addTarget(self, action: #selector(addToInventory), for: .touchUpInside)
        
         return cell
     }
     
-    func deleteRow(){
+    func addToInventory(sender: UIButton){
         
+        titleString = resultsArray[sender.tag]
+        if let title = titleString, title != "" {
+            print("----titleString is : --- \(title)")
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "addScannedItem", sender: self)
+            }
+            
+        }
+        
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if titleString != nil, titleString != "" {
+            return true
+        }
+        return false
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addScannedItem" {
+            let dest = segue.destination as! AddItemsVC
+            if let title = titleString {
+                dest.nameTitle = title
+            }
+        }
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
@@ -72,7 +97,6 @@ class ScanReceiptsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 
 class scannedItemCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
-   
     @IBOutlet weak var editAddButton: UIButton!
 
 }

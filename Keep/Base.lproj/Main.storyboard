@@ -919,10 +919,10 @@
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="nameCell" rowHeight="20" id="hTp-YD-dGb">
-                                                        <rect key="frame" x="0.0" y="28" width="290.33333333333331" height="20"/>
+                                                        <rect key="frame" x="0.0" y="28" width="290" height="20"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hTp-YD-dGb" id="lX7-Ox-ZfW">
-                                                            <rect key="frame" x="0.0" y="0.0" width="290.33333333333331" height="19"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="290" height="19"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </tableViewCellContentView>
                                                     </tableViewCell>
@@ -1393,12 +1393,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a5n-Wn-EqX" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer enabled="NO" cancelsTouchesInView="NO" id="al9-FN-c8j"/>
             </objects>
-            <point key="canvasLocation" x="5335" y="-977"/>
+            <point key="canvasLocation" x="3313" y="-1925"/>
         </scene>
         <!--Scan Receipts-->
         <scene sceneID="Zlt-av-STk">
             <objects>
-                <viewController id="t1d-cA-0Z3" customClass="ScanReceiptVC" customModule="Keep" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="overFullScreen" id="t1d-cA-0Z3" customClass="ScanReceiptVC" customModule="Keep" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lu0-AF-tIt"/>
                         <viewControllerLayoutGuide type="bottom" id="z4o-9N-pKK"/>
@@ -1442,43 +1442,56 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="110" id="BEO-d5-2L1"/>
-                                </constraints>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ajh-B2-Wwy">
-                                <rect key="frame" x="20.666666666666657" y="84" width="372.66666666666663" height="368"/>
+                                <rect key="frame" x="21" y="84" width="372" height="368"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="368" id="K2Y-70-Yp2"/>
+                                </constraints>
                             </imageView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3o1-3q-oTH">
                                 <rect key="frame" x="197" y="492" width="20" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="Pih-VB-Oq1"/>
                                     <constraint firstAttribute="width" constant="20" id="Zwr-42-Hm6"/>
                                 </constraints>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="z4o-9N-pKK" firstAttribute="top" secondItem="DTH-7t-N8a" secondAttribute="bottom" constant="30" id="55N-OW-X4d"/>
                             <constraint firstItem="ajh-B2-Wwy" firstAttribute="centerX" secondItem="XGj-3x-Pty" secondAttribute="centerX" id="GJc-Xj-wLt"/>
+                            <constraint firstItem="3o1-3q-oTH" firstAttribute="top" secondItem="ajh-B2-Wwy" secondAttribute="bottom" constant="40" id="Jbq-m3-oKx"/>
                             <constraint firstItem="BLP-Pb-Afy" firstAttribute="top" secondItem="3o1-3q-oTH" secondAttribute="bottom" constant="35" id="h5l-d6-CKK"/>
                             <constraint firstItem="DTH-7t-N8a" firstAttribute="width" secondItem="XGj-3x-Pty" secondAttribute="width" multiplier="0.9" id="jfG-2P-rjR"/>
-                            <constraint firstItem="ajh-B2-Wwy" firstAttribute="height" secondItem="XGj-3x-Pty" secondAttribute="height" multiplier="0.5" id="qbr-JG-qqB"/>
                             <constraint firstItem="ajh-B2-Wwy" firstAttribute="top" secondItem="lu0-AF-tIt" secondAttribute="bottom" constant="20" id="vNl-fO-KXG"/>
                             <constraint firstItem="DTH-7t-N8a" firstAttribute="centerX" secondItem="XGj-3x-Pty" secondAttribute="centerX" id="wg5-vO-Z1c"/>
-                            <constraint firstItem="3o1-3q-oTH" firstAttribute="top" secondItem="ajh-B2-Wwy" secondAttribute="bottom" constant="40" id="wmX-rR-5hL"/>
                             <constraint firstItem="3o1-3q-oTH" firstAttribute="centerX" secondItem="ajh-B2-Wwy" secondAttribute="centerX" id="xtb-EY-MYp"/>
                             <constraint firstItem="ajh-B2-Wwy" firstAttribute="width" secondItem="XGj-3x-Pty" secondAttribute="width" multiplier="0.9" id="zyk-O2-em4"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="HAJ-vU-sBN" appends="YES" id="lqx-xe-L8z"/>
+                        </connections>
                     </view>
-                    <navigationItem key="navigationItem" title="Scan Receipts" id="p2h-YK-v2T"/>
+                    <navigationItem key="navigationItem" title="Scan Receipts" id="p2h-YK-v2T">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="NN4-JG-MtD">
+                            <connections>
+                                <action selector="cancelTapped:" destination="t1d-cA-0Z3" id="bJq-51-LA3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="3o1-3q-oTH" id="Laz-bO-9sk"/>
                         <outlet property="imageView" destination="ajh-B2-Wwy" id="lLt-a8-rzH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uCa-LO-Uq6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="HAJ-vU-sBN">
+                    <connections>
+                        <action selector="dismissScanne:" destination="t1d-cA-0Z3" id="vK6-eA-hZF"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4478" y="-1711"/>
+            <point key="canvasLocation" x="5384.057971014493" y="-1711.1413043478262"/>
         </scene>
         <!--Scanned Items-->
         <scene sceneID="nu8-cw-ATd">
@@ -1539,6 +1552,9 @@
                                                         <constraint firstAttribute="height" constant="44" id="ZZo-7r-WIs"/>
                                                     </constraints>
                                                     <state key="normal" title="Edit/Add"/>
+                                                    <connections>
+                                                        <segue destination="RqP-1N-A4c" kind="presentation" identifier="addScannedItem" id="7th-Rm-Avq"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -1590,7 +1606,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DUX-vA-pgv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6207.2463768115949" y="-1711.1413043478262"/>
+            <point key="canvasLocation" x="7114.4927536231889" y="-1711.1413043478262"/>
         </scene>
         <!--Stock-->
         <scene sceneID="8Ee-t7-Khm">
@@ -1867,7 +1883,7 @@
                             <barButtonItem title="Scan" id="e7U-MW-sKT">
                                 <color key="tintColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <segue destination="t1d-cA-0Z3" kind="show" id="1n4-cB-LBh"/>
+                                    <segue destination="wR8-6D-7bI" kind="presentation" id="8vN-XC-Hxa"/>
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
@@ -2789,7 +2805,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Pa-jy-01s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5300" y="-1711.1413043478262"/>
+            <point key="canvasLocation" x="6205.7971014492759" y="-1711.1413043478262"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="MXu-hn-QDP">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wR8-6D-7bI" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="TdV-OU-yL7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="t1d-cA-0Z3" kind="relationship" relationship="rootViewController" id="L0F-GD-mZa"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HQ1-e4-RXm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4476.811594202899" y="-1711.1413043478262"/>
         </scene>
     </scenes>
     <resources>
@@ -2821,4 +2855,7 @@
         <image name="StockActive" width="26" height="26"/>
         <image name="StockBase" width="27" height="27"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Di4-El-Ign"/>
+    </inferredMetricsTieBreakers>
 </document>

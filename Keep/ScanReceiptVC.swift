@@ -15,27 +15,45 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
     var textsScanned:String = ""
     var emptyArray = [String]()
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var imageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.isHidden = true
         
     }
     
+    @IBAction func cancelTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    @IBAction func dismissScanne(_ sender: Any) {
+       dismiss(animated: true, completion: nil)
+        
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
         emptyArray.removeAll()
     }
     
     func processScanning(){
-        
+    
         let tesseract:G8Tesseract = G8Tesseract(language: "eng")
+        tesseract.engineMode = .tesseractCubeCombined
+        tesseract.pageSegmentationMode = .auto
+        tesseract.maximumRecognitionTime = 30.0
         tesseract.delegate = self
         
         guard let img = imageView.image  else { return }
+        DispatchQueue.main.async {
+            self.addActivityIndicator()
+        }
         
         tesseract.image = img.g8_blackAndWhite()
         tesseract.recognize()
+        addActivityIndicator()
         
         print(tesseract.recognizedText)
         
@@ -51,13 +69,14 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
             emptyArray.append(result)
             
         }
-        
         print(emptyArray)
     }
     
     func progressImageRecognition(for tesseract: G8Tesseract!) {
         print("Recognition progress \(tesseract.progress) %...")
+        
     }
+
 
     @IBAction func takePhotoButtonTapped(_ sender: Any) {
         handleCameraImage()
@@ -70,6 +89,7 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
         processScanning()
         if emptyArray.isEmpty == false {
             performSegue(withIdentifier: "toNavForScannedItems", sender: self)
+            imageView.image = nil
         }
     }
     
@@ -85,7 +105,7 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
         if let selectedImage = selectedImageFromPicker {
             imageView.image = selectedImage
         }
-        
+
         dismiss(animated: true, completion: nil)
     }
     
@@ -119,6 +139,17 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
         }
         
         picker.allowsEditing = true
+    }
+    
+    func addActivityIndicator() {
+        activityIndicator.startAnimating()
+        activityIndicator.isHidden = false
+
+    }
+    
+    func removeActivityIndicator() {
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

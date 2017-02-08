@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource, UIBarPositioningDelegate {
+class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource, UIBarPositioningDelegate, UINavigationControllerDelegate {
     
     var store = DataStore.sharedInstance
     var location:Location = .Fridge
@@ -19,6 +19,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     let datePicker2 = UIDatePicker()
     var activeTextField:UITextField?
     let formatter = DateFormatter()
+    var nameTitle = ""
     var selectedIndex: Int = 0
     var selectedExpIndex: Int?
     var allItems = Array(DataStore.sharedInstance.allItems)
@@ -47,6 +48,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        print("<3<3<\(nameTitle)")
         saveButton.isEnabled = false
         customToolBarForPickers()
         quantityLabel.layer.borderWidth = 1
@@ -63,11 +65,24 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         nameTextField.autocapitalizationType = .words
         categoryTextfield.autocapitalizationType = .words
         categoryTextfield.delegate = self
+        nameTextField.text = nameTitle
         nameTextField.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.touchDown)
         favButton.isSelected = false
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: self.view.window)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("hahahahahaha")
+            formatInitialData()
+            print("^^^^^^^^^^^^^^^^")
+            print(nameTitle)
+            
+            
+            formatDates()
         
     }
     
@@ -79,6 +94,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         
     }
     
+        
     func keyboardWillShow(notification: NSNotification) {
         
         if activeTextField == categoryTextfield {
@@ -133,14 +149,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     override func viewDidLayoutSubviews() {
         
         heightConstraint.constant = 80
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-        super.viewWillAppear(animated)
-        formatInitialData()
-        formatDates()
-        
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -384,6 +392,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
+        nameTitle = ""
         dismiss(animated: true, completion: nil)
     }
     
@@ -474,7 +483,9 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     
     func formatInitialData() {
         
-        nameTextField.text = ""
+        DispatchQueue.main.async {
+            self.nameTextField.text = self.nameTitle
+        }
         tableView.isHidden = true
         categoryTextfield.text = ""
         quantity = 1
