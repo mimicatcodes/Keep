@@ -20,6 +20,9 @@ class DataStore{
     var otherItems = try! Realm().objects(Item.self).filter("location == 'Other'")
     
     var allShopingLists = try! Realm().objects(ShoppingList.self)
+    
+    var scannedItemToAdd = ""
+    var scannedItemIndex:Int?
 
      /*
      let lastWeekDate = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: Date())

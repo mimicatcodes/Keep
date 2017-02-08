@@ -10,6 +10,7 @@ import UIKit
 
 class ScanReceiptsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    let store = DataStore.sharedInstance
     @IBOutlet weak var tableView: UITableView!
     
     var resultsArray = [String]()
@@ -19,6 +20,11 @@ class ScanReceiptsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        NotificationCenter.default.addObserver(forName: REFRESH_SCANNED_ITEMS, object: nil, queue: nil) { notification in
+            print("notification is \(notification)")
+            self.resultsArray.remove(at: self.store.scannedItemIndex!)
+            self.tableView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,10 +57,9 @@ class ScanReceiptsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         titleString = resultsArray[sender.tag]
         if let title = titleString, title != "" {
             print("----titleString is : --- \(title)")
-            DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "addScannedItem", sender: self)
-            }
-            
+            store.scannedItemToAdd = title
+            store.scannedItemIndex = sender.tag
+            performSegue(withIdentifier: "addScannedItem", sender: self)
         }
         
     }
@@ -65,15 +70,7 @@ class ScanReceiptsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         return false
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "addScannedItem" {
-            let dest = segue.destination as! AddItemsVC
-            if let title = titleString {
-                dest.nameTitle = title
-            }
-        }
-    }
+
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)

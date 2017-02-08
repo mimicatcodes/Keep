@@ -34,3 +34,5 @@ let REFRESH_ITEM_LIST_NOTIFICATION = NSNotification.Name("RefreshItemListNotific
 let REFRESH_EXP_LIST = NSNotification.Name("RefreshExpiredItems")
 
 let REFRESH_FAVORITES = NSNotification.Name("RefreshFavorites")
+
+let REFRESH_SCANNED_ITEMS = NSNotification.Name("RefreshScannedItems")
