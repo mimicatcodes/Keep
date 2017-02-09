@@ -56,7 +56,50 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
         formatDates()
     }
     
-    @IBAction func favButtonTapped(_ sender: Any) {
+    @IBAction func favButtonTapped(_ sender: UIButton) {
+        
+        // toggle status here
+    }
+    
+    @IBAction func locationButtonTapped(_ sender: UIButton) {
+        selectedIndex = sender.tag
+        
+        switch selectedIndex {
+        case 0:
+            self.location = .Fridge
+            print("Fridge")
+        case 1:
+            self.location = .Freezer
+            print("Freezer")
+        case 2:
+            self.location = .Pantry
+            print("Pantry")
+        case 3:
+            self.location = .Other
+            print("Other")
+        default:
+            break
+        }
+        
+        for (index, button) in locationButtons.enumerated() {
+            if index == selectedIndex {
+                button.isSelected = true
+                button.backgroundColor = .clear
+                button.layer.cornerRadius = 5
+                button.layer.borderWidth = 2
+                button.layer.borderColor = MAIN_COLOR.cgColor
+                button.isHighlighted = false
+                
+            } else {
+                button.isSelected = false
+                button.backgroundColor = .clear
+                button.layer.cornerRadius = 5
+                button.layer.borderWidth = 1
+                button.layer.borderColor = UIColor.clear.cgColor
+                button.isHighlighted = false
+                
+            }
+        }
     }
     
     @IBAction func cancelTapped(_ sender: Any) {
@@ -90,22 +133,25 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
         categoryField.text = ""
         quantity = 1
         quantityLabel.text = "\(quantity)"
+        
         for (index,button) in locationButtons.enumerated() {
             if index == 0 {
                 button.isSelected = true
                 button.backgroundColor = .clear
+                button.titleLabel?.textColor = MAIN_COLOR
                 button.layer.cornerRadius = 5
                 button.layer.borderWidth = 2
                 button.layer.borderColor = MAIN_COLOR.cgColor
-                locationButtons[index].backgroundColor = MAIN_COLOR
+                
                 
             } else {
                 button.isSelected = false
                 button.backgroundColor = .clear
+                button.titleLabel?.textColor = MAIN_BUTTON_LABEL_GRAY
                 button.layer.cornerRadius = 5
                 button.layer.borderWidth = 1
                 button.layer.borderColor = UIColor.clear.cgColor
-                locationButtons[index].backgroundColor = MAIN_BUTTON_LABEL_GRAY
+               
             }
         }
         

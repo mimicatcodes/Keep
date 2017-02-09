@@ -1634,35 +1634,55 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tx1-md-Zjz">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tx1-md-Zjz">
                                 <rect key="frame" x="20" y="215" width="87" height="30"/>
                                 <color key="backgroundColor" red="0.84466757550335569" green="0.1208315855704698" blue="0.93747378355704702" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Fridge"/>
+                                <state key="normal" title="Fridge">
+                                    <color key="titleColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="locationButtonTapped:" destination="XJM-Dm-HLu" eventType="touchUpInside" id="jqT-Ok-dsx"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncl-yN-Y2x">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncl-yN-Y2x">
                                 <rect key="frame" x="115" y="215" width="87" height="30"/>
                                 <color key="backgroundColor" red="0.84466757550000005" green="0.1208315856" blue="0.9374737836" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="87" id="NzN-Qp-wxZ"/>
                                     <constraint firstAttribute="height" constant="30" id="qMj-lM-FMu"/>
                                 </constraints>
-                                <state key="normal" title="Freezer"/>
+                                <state key="normal" title="Freezer">
+                                    <color key="titleColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="locationButtonTapped:" destination="XJM-Dm-HLu" eventType="touchUpInside" id="YXg-Dc-ZqY"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rxo-Kv-ERb">
-                                <rect key="frame" x="210" y="214" width="87" height="30"/>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rxo-Kv-ERb">
+                                <rect key="frame" x="210" y="214" width="87" height="34"/>
                                 <color key="backgroundColor" red="0.84466757550000005" green="0.1208315856" blue="0.9374737836" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="87" id="APC-S7-Qsl"/>
                                 </constraints>
-                                <state key="normal" title="Pantry"/>
+                                <state key="normal" title="Pantry">
+                                    <color key="titleColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="locationButtonTapped:" destination="XJM-Dm-HLu" eventType="touchUpInside" id="HEN-xU-c9G"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L7O-ny-EKa">
-                                <rect key="frame" x="307" y="214" width="87" height="30"/>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L7O-ny-EKa">
+                                <rect key="frame" x="307" y="214" width="87" height="34"/>
                                 <color key="backgroundColor" red="0.84466757550000005" green="0.1208315856" blue="0.9374737836" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="87" id="xui-ND-hEm"/>
                                 </constraints>
-                                <state key="normal" title="Other"/>
+                                <state key="normal" title="Other">
+                                    <color key="titleColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="locationButtonTapped:" destination="XJM-Dm-HLu" eventType="touchUpInside" id="TTf-6b-i4M"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Exp Date" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="koa-5F-UcP">
                                 <rect key="frame" x="20" y="253" width="374" height="30"/>
@@ -1770,10 +1790,10 @@
                         <outlet property="pDateField" destination="c6t-bD-Erf" id="Uw4-wu-6LA"/>
                         <outlet property="quantityLabel" destination="pd0-1A-7rX" id="GN9-xG-C6e"/>
                         <outlet property="saveButton" destination="PzL-fF-k9b" id="xfJ-Qj-aUC"/>
-                        <outletCollection property="locationButtons" destination="Tx1-md-Zjz" collectionClass="NSMutableArray" id="BTG-C2-QCe"/>
-                        <outletCollection property="locationButtons" destination="ncl-yN-Y2x" collectionClass="NSMutableArray" id="Neh-oB-noA"/>
-                        <outletCollection property="locationButtons" destination="Rxo-Kv-ERb" collectionClass="NSMutableArray" id="JW1-80-n11"/>
-                        <outletCollection property="locationButtons" destination="L7O-ny-EKa" collectionClass="NSMutableArray" id="eBH-hb-sEy"/>
+                        <outletCollection property="locationButtons" destination="Tx1-md-Zjz" collectionClass="NSMutableArray" id="gdQ-4s-hBR"/>
+                        <outletCollection property="locationButtons" destination="ncl-yN-Y2x" collectionClass="NSMutableArray" id="uqm-xK-b9E"/>
+                        <outletCollection property="locationButtons" destination="Rxo-Kv-ERb" collectionClass="NSMutableArray" id="mbB-Ql-jww"/>
+                        <outletCollection property="locationButtons" destination="L7O-ny-EKa" collectionClass="NSMutableArray" id="NI6-X7-xXv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Suc-re-MkE" userLabel="First Responder" sceneMemberID="firstResponder"/>
