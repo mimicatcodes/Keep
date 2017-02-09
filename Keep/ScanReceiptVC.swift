@@ -173,7 +173,7 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
     
     func removeActivityIndicator() {
 
-        activityIndicator.isHidden = true
+        activityIndicator.stopAnimating()
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

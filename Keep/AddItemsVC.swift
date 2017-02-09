@@ -28,8 +28,11 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     var purchaseDate = Date()
     var expDate = Date()
     
+    var list = ["1","2","3","4","5","6"]
+    
     @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var categoryDropdown: UIPickerView!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet var bodyViews: [UIView]!
     @IBOutlet weak var nameTextField: UITextField!
@@ -69,8 +72,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         nameTextField.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.touchDown)
         favButton.isSelected = false
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: self.view.window)
+        //NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
+        //NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: self.view.window)
         
     }
     
@@ -89,12 +92,12 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     override func viewWillDisappear(_ animated: Bool) {
         
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        //NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        //NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
     }
     
-        
+        /*
     func keyboardWillShow(notification: NSNotification) {
         
         if activeTextField == categoryTextfield {
@@ -133,8 +136,29 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
          }
          */
     }
+    */
+    /*
+    // picker
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
     
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return list.count
+    }
     
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        self.view.endEditing(true)
+        return list[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.categoryTextfield.text = self.list[row]
+        self.categoryDropdown.isHidden = true
+
+    }
+    // ----------------
+    */
     func position(for bar: UIBarPositioning) -> UIBarPosition {
         
         return .topAttached
