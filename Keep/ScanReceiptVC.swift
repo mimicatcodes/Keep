@@ -14,6 +14,9 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
     var selectedImage: UIImage?
     var textsScanned:String = ""
     var emptyArray = [String]()
+    @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var libraryButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var imageView: UIImageView!
@@ -21,22 +24,32 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.isHidden = true
+        adjustBorder()
+        saveButton.isEnabled = false
+        enableSaveButton()
+    }
+    
+    func adjustBorder(){
         
-        
+        cameraButton.layer.cornerRadius = 5
+        cameraButton.layer.masksToBounds = true
+        libraryButton.layer.cornerRadius = 5
+        libraryButton.layer.masksToBounds = true
+        saveButton.layer.cornerRadius = 5
+        saveButton.layer.masksToBounds = true
     }
     
     @IBAction func cancelTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    @IBAction func dismissScanne(_ sender: Any) {
-       dismiss(animated: true, completion: nil)
-        
-    }
+ 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        enableSaveButton()
         activityIndicator.stopAnimating()
         activityIndicator.isHidden = true
         emptyArray.removeAll()
+        
     }
     
     func processScanning(){
@@ -51,7 +64,6 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
         
         tesseract.image = img.g8_blackAndWhite()
         tesseract.recognize()
-        addActivityIndicator()
         
         print(tesseract.recognizedText)
         
@@ -79,15 +91,17 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
     @IBAction func takePhotoButtonTapped(_ sender: Any) {
         handleCameraImage()
     }
+    
     @IBAction func importButtonTapped(_ sender: Any) {
         handleLibraryImage()
         
     }
+    
     @IBAction func scanButtonTapped(_ sender: Any) {
-        if imageView.image != nil {
-            addActivityIndicator()
-        }
+        
+        addActivityIndicator()
         processScanning()
+        
         if emptyArray.isEmpty == false {
             performSegue(withIdentifier: "toNavForScannedItems", sender: self)
             imageView.image = nil
@@ -110,6 +124,14 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
         dismiss(animated: true, completion: nil)
     }
     
+    func enableSaveButton(){
+        
+        if imageView.image != nil {
+            saveButton.isEnabled = true
+        } else {
+            saveButton.isEnabled = false
+        }
+    }
     func handleCameraImage(){
         
         let picker = UIImagePickerController()
@@ -143,13 +165,14 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
     }
     
     func addActivityIndicator() {
-        activityIndicator.startAnimating()
+        
         activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
 
     }
     
     func removeActivityIndicator() {
-        activityIndicator.stopAnimating()
+
         activityIndicator.isHidden = true
     }
     

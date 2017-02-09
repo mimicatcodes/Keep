@@ -1407,12 +1407,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DTH-7t-N8a">
-                                <rect key="frame" x="20" y="547" width="373" height="110"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="DTH-7t-N8a">
+                                <rect key="frame" x="20" y="547" width="373" height="144"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BLP-Pb-Afy">
-                                        <rect key="frame" x="0.0" y="0.0" width="373" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="373" height="40"/>
                                         <color key="backgroundColor" red="0.79873636739999998" green="0.81568627449999997" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="ea4-Tx-ilR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                         <state key="normal" title="Take a photo of your receipt">
                                             <color key="titleColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -1421,8 +1425,12 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rbe-Jt-C85">
-                                        <rect key="frame" x="0.0" y="40" width="373" height="30"/>
+                                        <rect key="frame" x="0.0" y="52" width="373" height="40"/>
                                         <color key="backgroundColor" red="0.79873636739999998" green="0.81568627449999997" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="gjf-Pw-Pra"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                         <state key="normal" title="Import a receipt from your library">
                                             <color key="titleColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -1431,10 +1439,17 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8aH-Py-VSj">
-                                        <rect key="frame" x="0.0" y="80" width="373" height="30"/>
+                                        <rect key="frame" x="0.0" y="104" width="373" height="40"/>
                                         <color key="backgroundColor" red="0.13725490200000001" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="CQP-nI-A6A"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                         <state key="normal" title="Scan">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="disabled">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="scanButtonTapped:" destination="t1d-cA-0Z3" eventType="touchUpInside" id="yCL-Hy-hJO"/>
@@ -1481,15 +1496,14 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="3o1-3q-oTH" id="Laz-bO-9sk"/>
+                        <outlet property="cameraButton" destination="BLP-Pb-Afy" id="sYL-DC-kFl"/>
                         <outlet property="imageView" destination="ajh-B2-Wwy" id="lLt-a8-rzH"/>
+                        <outlet property="libraryButton" destination="Rbe-Jt-C85" id="fyx-iI-Kpf"/>
+                        <outlet property="saveButton" destination="8aH-Py-VSj" id="MYM-sW-mXN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uCa-LO-Uq6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="HAJ-vU-sBN">
-                    <connections>
-                        <action selector="dismissScanne:" destination="t1d-cA-0Z3" id="vK6-eA-hZF"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer id="HAJ-vU-sBN"/>
             </objects>
             <point key="canvasLocation" x="5384.057971014493" y="-1711.1413043478262"/>
         </scene>
