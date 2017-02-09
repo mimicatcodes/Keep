@@ -536,6 +536,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             saveButton.isEnabled = true
             saveButton.tintColor = UIColor.red
             
+            // FIX
         }
         
         return true
@@ -544,7 +545,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     func textFieldDidBeginEditing(_ textField: UITextField){
         
         activeTextField = textField
-        print("???????????\(activeTextField)")
         
         if textField.tag == 1 {
             
