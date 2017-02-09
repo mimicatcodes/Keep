@@ -22,6 +22,7 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
         super.viewDidLoad()
         activityIndicator.isHidden = true
         
+        
     }
     
     @IBAction func cancelTapped(_ sender: Any) {
@@ -47,9 +48,6 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
         tesseract.delegate = self
         
         guard let img = imageView.image  else { return }
-        DispatchQueue.main.async {
-            self.addActivityIndicator()
-        }
         
         tesseract.image = img.g8_blackAndWhite()
         tesseract.recognize()
@@ -86,6 +84,9 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
         
     }
     @IBAction func scanButtonTapped(_ sender: Any) {
+        if imageView.image != nil {
+            addActivityIndicator()
+        }
         processScanning()
         if emptyArray.isEmpty == false {
             performSegue(withIdentifier: "toNavForScannedItems", sender: self)
