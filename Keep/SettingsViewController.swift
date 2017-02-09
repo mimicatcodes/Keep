@@ -23,6 +23,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var leftView: UIView!
     @IBOutlet weak var secondLeftView: UIView!
     @IBOutlet weak var midView: UIView!
+    @IBOutlet weak var radarChartView: RadarChartView!
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -50,6 +51,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         leftView.rightBorder()
         secondLeftView.rightBorder()
         setNumbers()
+        radarChartView.noDataText = "No chart data available yet"
     }
     
     override func viewWillAppear(_ animated: Bool) {

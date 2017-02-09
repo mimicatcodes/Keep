@@ -683,10 +683,18 @@
                                                 <color key="textColor" red="0.39215686274509803" green="0.39215686274509803" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ANj-aL-YaZ" customClass="RadarChartView" customModule="Charts">
+                                                <rect key="frame" x="0.0" y="35" width="414" height="201"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                            </view>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="stf-hn-EZO" firstAttribute="width" secondItem="ZL0-ql-idb" secondAttribute="width" id="4dQ-yZ-9Ki"/>
+                                            <constraint firstItem="ANj-aL-YaZ" firstAttribute="top" secondItem="stf-hn-EZO" secondAttribute="bottom" constant="10" id="RZF-8m-V9i"/>
+                                            <constraint firstItem="ANj-aL-YaZ" firstAttribute="width" secondItem="ZL0-ql-idb" secondAttribute="width" id="U7n-6y-E9a"/>
+                                            <constraint firstAttribute="bottom" secondItem="ANj-aL-YaZ" secondAttribute="bottom" id="XWk-vu-0UO"/>
                                             <constraint firstItem="stf-hn-EZO" firstAttribute="top" secondItem="ZL0-ql-idb" secondAttribute="top" constant="8" id="XeD-uL-p2A"/>
+                                            <constraint firstItem="ANj-aL-YaZ" firstAttribute="centerX" secondItem="ZL0-ql-idb" secondAttribute="centerX" id="YCb-U3-IGH"/>
                                             <constraint firstItem="stf-hn-EZO" firstAttribute="centerX" secondItem="ZL0-ql-idb" secondAttribute="centerX" id="xcV-is-kVm"/>
                                         </constraints>
                                     </view>
@@ -750,6 +758,7 @@
                         <outlet property="numOfItemsExpiredLabel" destination="KWd-65-Iex" id="mpz-NG-hwy"/>
                         <outlet property="numOfItemsExpiringLabel" destination="RCN-KU-JAL" id="Xhe-B0-Y8F"/>
                         <outlet property="numOfItemsLabel" destination="0fq-Rt-VO8" id="zG8-YK-JR3"/>
+                        <outlet property="radarChartView" destination="ANj-aL-YaZ" id="ulN-gj-QMx"/>
                         <outlet property="secondLeftView" destination="jGa-IT-Flo" id="nW0-uY-V67"/>
                         <outlet property="secondTopView" destination="Ube-Jg-uYM" id="GaF-Kk-KPC"/>
                         <outlet property="tableView" destination="gFm-2M-8GN" id="cdI-S2-4wM"/>
@@ -758,7 +767,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZMo-O3-n2L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4520.8000000000002" y="1200.4497751124438"/>
+            <point key="canvasLocation" x="4520.289855072464" y="1200"/>
         </scene>
         <!--Add ItemsVC-->
         <scene sceneID="i3o-Fc-eCI">
