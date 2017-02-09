@@ -2056,12 +2056,50 @@
                                             <outlet property="delegate" destination="Kn1-ln-6La" id="2j8-M9-3hC"/>
                                         </connections>
                                     </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJW-p5-Lgo" userLabel="plusButton">
+                                        <rect key="frame" x="335" y="461" width="55" height="55"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="55" id="fLj-zW-YqS"/>
+                                            <constraint firstAttribute="height" constant="55" id="jOt-ql-sSd"/>
+                                        </constraints>
+                                        <state key="normal" image="Add"/>
+                                        <connections>
+                                            <action selector="plusButtonTapped:" destination="Kn1-ln-6La" eventType="touchUpInside" id="qcu-6y-sFi"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edz-Nb-gib" userLabel="scanAddBtn">
+                                        <rect key="frame" x="260" y="461" width="55" height="55"/>
+                                        <color key="backgroundColor" red="0.84466757550000005" green="0.93729026849999997" blue="0.81142512580000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Scan"/>
+                                        <connections>
+                                            <segue destination="wR8-6D-7bI" kind="presentation" id="2ce-NR-NgZ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FN5-yg-hyv" userLabel="manualAddBtn">
+                                        <rect key="frame" x="335" y="386" width="55" height="55"/>
+                                        <color key="backgroundColor" red="0.84466757550000005" green="0.93729026849999997" blue="0.81142512580000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Add"/>
+                                        <connections>
+                                            <segue destination="RqP-1N-A4c" kind="presentation" id="Ew0-hA-R97"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="edz-Nb-gib" firstAttribute="height" secondItem="HJW-p5-Lgo" secondAttribute="height" id="4qH-FX-RGw"/>
                                     <constraint firstItem="aHx-cJ-aag" firstAttribute="height" secondItem="RWc-l2-bUN" secondAttribute="height" id="4zf-8i-xbK"/>
                                     <constraint firstItem="aHx-cJ-aag" firstAttribute="centerX" secondItem="RWc-l2-bUN" secondAttribute="centerX" id="8pQ-hK-JOV"/>
+                                    <constraint firstItem="FN5-yg-hyv" firstAttribute="width" secondItem="HJW-p5-Lgo" secondAttribute="width" id="G8p-7L-iNG"/>
+                                    <constraint firstItem="FN5-yg-hyv" firstAttribute="centerX" secondItem="HJW-p5-Lgo" secondAttribute="centerX" id="Gf3-AA-MhX"/>
+                                    <constraint firstAttribute="bottom" secondItem="HJW-p5-Lgo" secondAttribute="bottom" constant="13" id="KCF-xK-fcn"/>
+                                    <constraint firstItem="FN5-yg-hyv" firstAttribute="height" secondItem="HJW-p5-Lgo" secondAttribute="height" id="O2o-VH-fAN"/>
+                                    <constraint firstItem="HJW-p5-Lgo" firstAttribute="leading" secondItem="edz-Nb-gib" secondAttribute="trailing" constant="20" id="SHx-OQ-jKW"/>
                                     <constraint firstItem="aHx-cJ-aag" firstAttribute="width" secondItem="RWc-l2-bUN" secondAttribute="width" id="TR0-4J-n7K"/>
+                                    <constraint firstItem="HJW-p5-Lgo" firstAttribute="top" secondItem="FN5-yg-hyv" secondAttribute="bottom" constant="20" id="Un8-yH-rJk"/>
+                                    <constraint firstItem="edz-Nb-gib" firstAttribute="width" secondItem="HJW-p5-Lgo" secondAttribute="width" id="W73-NX-sqv"/>
                                     <constraint firstItem="aHx-cJ-aag" firstAttribute="centerY" secondItem="RWc-l2-bUN" secondAttribute="centerY" id="nC7-4E-Phq"/>
+                                    <constraint firstAttribute="trailing" secondItem="HJW-p5-Lgo" secondAttribute="trailing" constant="24" id="nha-Qj-H7V"/>
+                                    <constraint firstItem="edz-Nb-gib" firstAttribute="centerY" secondItem="HJW-p5-Lgo" secondAttribute="centerY" id="sSo-9C-ixe"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -2077,21 +2115,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Stock" id="cVr-4t-XKZ">
-                        <leftBarButtonItems>
-                            <barButtonItem systemItem="add" id="MK6-PJ-IGg">
-                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="addItemTapped:" destination="Kn1-ln-6La" id="8XX-1D-4MK"/>
-                                    <segue destination="RqP-1N-A4c" kind="presentation" id="Di4-El-Ign"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Scan" id="e7U-MW-sKT">
-                                <color key="tintColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <segue destination="wR8-6D-7bI" kind="presentation" id="8vN-XC-Hxa"/>
-                                </connections>
-                            </barButtonItem>
-                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="D0Z-bF-kM6">
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -2101,6 +2124,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="plusButton" destination="HJW-p5-Lgo" id="3Ir-Wy-3b9"/>
                         <outlet property="tableView" destination="aHx-cJ-aag" id="xHp-Oe-ySH"/>
                         <outletCollection property="buttons" destination="1jp-kr-pSW" collectionClass="NSMutableArray" id="VYD-ly-GMa"/>
                         <outletCollection property="buttons" destination="y9t-zA-4mD" collectionClass="NSMutableArray" id="xPG-dK-T9K"/>
@@ -2114,11 +2138,13 @@
                         <outletCollection property="labels" destination="aLc-gC-sjH" collectionClass="NSMutableArray" id="1FK-x1-RGI"/>
                         <outletCollection property="labels" destination="cL5-Q5-qcX" collectionClass="NSMutableArray" id="ZHC-wk-0gF"/>
                         <outletCollection property="labels" destination="gpJ-6O-aVB" collectionClass="NSMutableArray" id="Ord-he-lXq"/>
+                        <outletCollection property="addButtons" destination="FN5-yg-hyv" collectionClass="NSMutableArray" id="sGw-zW-QAx"/>
+                        <outletCollection property="addButtons" destination="edz-Nb-gib" collectionClass="NSMutableArray" id="c3i-HW-Vtc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VWK-9u-iOE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4479.1999999999998" y="-976.46176911544239"/>
+            <point key="canvasLocation" x="4478.2608695652179" y="-976.63043478260875"/>
         </scene>
         <!--Search TableVC-->
         <scene sceneID="fxU-Il-y9w">
@@ -3013,6 +3039,7 @@
     <resources>
         <image name="AccountActive" width="27" height="27"/>
         <image name="AccountBase" width="27" height="27"/>
+        <image name="Add" width="17" height="16"/>
         <image name="ChecklistBase2" width="30" height="30"/>
         <image name="Clear" width="13" height="13"/>
         <image name="FavoriteActive" width="27" height="27"/>

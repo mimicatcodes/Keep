@@ -13,22 +13,54 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     let store = DataStore.sharedInstance
     
+    @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var buttons: [UIButton]!
     @IBOutlet var views: [UIView]!
     @IBOutlet var labels: [UILabel]!
+    @IBOutlet var addButtons: [UIButton]! {
+        didSet {
+            addButtons.forEach {
+                $0.isHidden = true
+                $0.alpha = 0.0
+            }
+        }
+    }
     var selectedIndex: Int = 0
     let formatter = DateFormatter()
+    
+    var plusButtonIsRotated = false
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        plusButton.layer.cornerRadius = plusButton.frame.size.height / 2
+        plusButton.layer.borderWidth = 2.0
+        plusButton.layer.borderColor = MAIN_COLOR.cgColor
+        
+        plusButton.layer.shadowColor = UIColor.black.cgColor
+        plusButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        plusButton.layer.masksToBounds = false
+        plusButton.layer.shadowRadius = 1.0
+        plusButton.layer.shadowOpacity = 0.3
+      
+        addButtons.forEach {
+            $0.layer.cornerRadius = $0.frame.size.height/2
+            $0.layer.shadowColor = UIColor.black.cgColor
+            $0.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+            $0.layer.masksToBounds = false
+            $0.layer.shadowRadius = 1.0
+            $0.layer.shadowOpacity = 0.3
+        }
+
         tableView.allowsMultipleSelection = true
         buttons[selectedIndex].isSelected = true
         views[selectedIndex].backgroundColor = MAIN_COLOR
         didPressStockSection(buttons[selectedIndex])
         tableView.tableFooterView = UIView()
         formatDates()
+        
+        
         
     }
     
@@ -37,6 +69,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.reloadData()
     }
     
+    @IBAction func plusButtonTapped(_ sender: Any) {
+        animateAddButtons()
+    }
     @IBAction func didPressStockSection(_ sender: UIButton) {
         
         let index_ = sender.tag
@@ -90,6 +125,37 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         formatter.dateFormat = "MMM dd, yyyy"
         
     }
+    
+    func animateAddButtons() {
+        self.view.layoutIfNeeded()
+        
+        UIView.animate(withDuration: 0.15, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.2, options: .curveLinear, animations: {
+            
+            if !self.plusButtonIsRotated {
+                self.plusButton.transform = CGAffineTransform(rotationAngle: CGFloat(45).degreesToRadians)
+                
+                self.addButtons.forEach {
+                    $0.isHidden = false
+                    $0.alpha = 1.0
+                }
+                
+                self.plusButtonIsRotated = true
+            } else {
+                self.plusButton.transform = CGAffineTransform(rotationAngle: CGFloat(0).degreesToRadians)
+                
+                self.addButtons.forEach {
+                    $0.isHidden = true
+                    $0.alpha = 0.0
+                }
+                
+                self.plusButtonIsRotated = false
+            }
+            
+            
+        }, completion: nil)
+        
+    }
+
     // MARK: - TableView Methods
     
     func numberOfSections(in tableView: UITableView) -> Int {
