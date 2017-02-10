@@ -484,11 +484,11 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         
         labelView = UILabel(frame: CGRect(x: 0, y: 65, width: self.view.frame.width, height: 40))
         labelView.backgroundColor = ADDED_LABEL_COLOR
-        labelView.text = "Added an item!"
+        labelView.text = "Item added"
         labelView.textAlignment = .center
         labelView.textColor = UIColor.white
-        labelView.font = UIFont(name: "Montserrat-SemiBold", size: 12)
-        
+        labelView.font = UIFont(name: "Montserrat-Regular", size: 12)
+  
         self.view.addSubview(labelView)
         
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.dismissAlert), userInfo: nil, repeats: false)
@@ -543,6 +543,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             
         }
         
+        favButton.isSelected = false
+        
         purchaseDateTextfield.text = formatter.string(from: Date()).capitalized
         let currentDate = Date()
         expDateTextfield.text = formatter.string(from: Date()).capitalized
@@ -596,7 +598,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 button.layer.borderWidth = 1
                 button.layer.borderColor = MAIN_BUTTON_LABEL_GRAY.cgColor
                 button.titleLabel?.textColor = MAIN_BUTTON_LABEL_GRAY
-          
                 
             }
             

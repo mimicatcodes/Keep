@@ -25,7 +25,7 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.backgroundColor = UIColor.clear
         tableView.allowsMultipleSelection = true
         tableView.rowHeight = 100
-        navigationItem.title = name
+        navigationItem.title = name?.capitalized
         definesPresentationContext = true
         NotificationCenter.default.addObserver(forName: REFRESH_ITEM_LIST_NOTIFICATION, object: nil, queue: nil) { (notification) in
             print("notification is \(notification)")

@@ -72,7 +72,7 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
         // make rgb color extensions when refactoring
 
         cell.numOfItemsRemainingLabel.text = String(describing: store.allShopingLists[indexPath.row].numOfItems)
-        cell.shoppingListTitleLabel.text = store.allShopingLists[indexPath.row].title
+        cell.shoppingListTitleLabel.text = store.allShopingLists[indexPath.row].title.capitalized
         cell.createdAtLabel.text = store.allShopingLists[indexPath.row].isCreatedAt
         cell.selectionStyle = .none
         cell.separatorInset = .zero
