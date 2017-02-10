@@ -10,7 +10,6 @@ import UIKit
 import RealmSwift
 import Charts
 
-// -TODO : Implement radar chart for metrics
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let store = DataStore.sharedInstance
@@ -41,6 +40,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     var numOfExpiredItems: Int = 0
     var numOfExpiringItems: Int = 0
     
+    // dummy data
+    var categories:[String]!
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -51,7 +53,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         leftView.rightBorder()
         secondLeftView.rightBorder()
         setNumbers()
-        radarChartView.noDataText = "No chart data available yet"
+        
+        // dummy data
+        categories = ["Protein","Dairy","Vegetales","Fruits","Grains"]
+        let numOfItemsInCategory = [10.0, 4.0, 6.0, 3.0, 8.0]
+        
+        setChart(dataPoints: categories, values: numOfItemsInCategory)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,6 +113,39 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
+    // Charts
+    func setChart(dataPoints: [String], values: [Double]) {
+        radarChartView.noDataText = "No chart data available yet. Please add items in your inventory"
+        
+        let chartFormatter = ChartFormatter()
+        let yAxis = radarChartView.yAxis
+        let xAxis = radarChartView.xAxis
+        
+        var dataEntries: [RadarChartDataEntry] = []
+        for i in 0..<values.count {
+            let dataEntry = RadarChartDataEntry(value: values[i])
+            xAxis.valueFormatter = chartFormatter
+            radarChartView.xAxis.valueFormatter=xAxis.valueFormatter
+            dataEntries.append(dataEntry)
+        }
+        
+        let chartDataSet = RadarChartDataSet(values: dataEntries, label: "categories")
+        
+        chartDataSet.drawFilledEnabled = true
+        chartDataSet.drawValuesEnabled = false
+        
+        let chartData = RadarChartData(dataSet: chartDataSet)
+        chartData.labels = dataPoints
+        radarChartView.data = chartData
+        
+        yAxis.drawLabelsEnabled = false
+        xAxis.drawLabelsEnabled = true
+        
+        radarChartView.sizeToFit()
+        radarChartView.chartDescription?.text = ""
+        
+    }
+    
     func daysBetweenTwoDates(start: Date, end: Date) -> Int{
         
         let currentCalendar = Calendar.current
@@ -132,4 +173,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 class AccountCell: UITableViewCell {
     
     @IBOutlet weak var title: UILabel!
+}
+
+@objc(RadarChartFormatter)
+class ChartFormatter:NSObject,IAxisValueFormatter{
+    
+     let categories = ["Protein","Dairy","Vegetales","Fruits","Grains"]
+    
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        return categories[Int(value)]
+    }
+    
 }
