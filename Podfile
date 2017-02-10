@@ -10,7 +10,7 @@ target 'Keep' do
    pod 'MGSwipeTableCell'
    pod 'RealmSwift'
    pod 'Charts', '~> 3.0.1'
-   pod 'TesseractOCRiOS', '4.0.0'
+   pod 'TesseractOCRiOS', :git => 'https://github.com/gali8/Tesseract-OCR-iOS.git'
 
 
    post_install do |installer|

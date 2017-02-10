@@ -14,15 +14,24 @@ DEPENDENCIES:
   - Charts (~> 3.0.1)
   - MGSwipeTableCell
   - RealmSwift
-  - TesseractOCRiOS (= 4.0.0)
+  - TesseractOCRiOS (from `https://github.com/gali8/Tesseract-OCR-iOS.git`)
+
+EXTERNAL SOURCES:
+  TesseractOCRiOS:
+    :git: https://github.com/gali8/Tesseract-OCR-iOS.git
+
+CHECKOUT OPTIONS:
+  TesseractOCRiOS:
+    :commit: c7ad56d6544839b2f84c7ffde8fa42efe2312405
+    :git: https://github.com/gali8/Tesseract-OCR-iOS.git
 
 SPEC CHECKSUMS:
   Charts: 0e84f4418e87dad6a9edde221fba37ebb51d3ba7
   MGSwipeTableCell: 616700eb0ffd1c611ba909066cb7fd739790a0a7
   Realm: a55959c0b171a5fe5267406d17f314fec3cefaae
   RealmSwift: 749fd955bf8d6471c21d218b9389a47aaeccfe3f
-  TesseractOCRiOS: 90638afbe43d082433f2e76b384c7901d23956df
+  TesseractOCRiOS: 729989db3984bb60ba3addb053569b172d48c409
 
-PODFILE CHECKSUM: 8c2ed92b144a9f9ae8738a7b30e0b504de9d5e6f
+PODFILE CHECKSUM: 9b4d9e92bdbef972fba5db4a11b63ddb113e8c0f
 
 COCOAPODS: 1.0.1

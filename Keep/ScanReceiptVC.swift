@@ -62,7 +62,7 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
         
         guard let img = imageView.image  else { return }
         
-        tesseract.image = img.g8_blackAndWhite()
+        tesseract.image = img
         tesseract.recognize()
         
         print(tesseract.recognizedText)
