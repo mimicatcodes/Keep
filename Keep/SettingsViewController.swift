@@ -129,21 +129,29 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             dataEntries.append(dataEntry)
         }
         
-        let chartDataSet = RadarChartDataSet(values: dataEntries, label: "categories")
-        
+        let chartDataSet = RadarChartDataSet(values: dataEntries, label: nil)
+
         chartDataSet.drawFilledEnabled = true
         chartDataSet.drawValuesEnabled = false
+        chartDataSet.fillColor = MAIN_COLOR
         
         let chartData = RadarChartData(dataSet: chartDataSet)
         chartData.labels = dataPoints
         radarChartView.data = chartData
         
+        let font = UIFont(name: "Montserrat-Regular", size: 11)
+        
         yAxis.drawLabelsEnabled = false
         xAxis.drawLabelsEnabled = true
         
+        if let font = font {
+            xAxis.labelFont = font
+        }
+        xAxis.labelTextColor = MAIN_COLOR
+        
         radarChartView.sizeToFit()
         radarChartView.chartDescription?.text = ""
-        
+
     }
     
     func daysBetweenTwoDates(start: Date, end: Date) -> Int{
