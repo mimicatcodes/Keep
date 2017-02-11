@@ -127,8 +127,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func animateAddButtons() {
-        self.view.layoutIfNeeded()
         
+        self.view.layoutIfNeeded()
         UIView.animate(withDuration: 0.15, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.2, options: .curveLinear, animations: {
             
             if !self.plusButtonIsRotated {

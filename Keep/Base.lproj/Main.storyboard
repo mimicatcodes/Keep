@@ -952,6 +952,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="1ei-cO-3Vg" firstAttribute="width" secondItem="z4L-pD-lU0" secondAttribute="width" id="42O-8w-gG2"/>
                                             <constraint firstItem="z4L-pD-lU0" firstAttribute="centerY" secondItem="b4C-Xb-ldH" secondAttribute="centerY" multiplier="1.3" id="EI6-M0-Kz4"/>
@@ -1375,7 +1376,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a5n-Wn-EqX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer enabled="NO" cancelsTouchesInView="NO" id="al9-FN-c8j"/>
+                <tapGestureRecognizer enabled="NO" cancelsTouchesInView="NO" id="al9-FN-c8j">
+                    <connections>
+                        <action selector="endEditing:" destination="RqP-1N-A4c" id="YwY-Na-o2y"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="5334.7826086956529" y="-977.44565217391312"/>
         </scene>
@@ -1618,14 +1623,14 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pd0-1A-7rX">
-                                <rect key="frame" x="20" y="175" width="374" height="32"/>
+                                <rect key="frame" x="20" y="175" width="374" height="31"/>
                                 <color key="backgroundColor" red="0.84466757550335569" green="0.93479970637583898" blue="0.93747378355704702" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tx1-md-Zjz">
-                                <rect key="frame" x="20" y="215" width="87" height="30"/>
+                                <rect key="frame" x="20" y="214" width="87" height="31"/>
                                 <color key="backgroundColor" red="0.84466757550335569" green="0.1208315855704698" blue="0.93747378355704702" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Fridge">
                                     <color key="titleColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
@@ -1635,7 +1640,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncl-yN-Y2x">
-                                <rect key="frame" x="115" y="215" width="87" height="30"/>
+                                <rect key="frame" x="115" y="214" width="87" height="30"/>
                                 <color key="backgroundColor" red="0.84466757550000005" green="0.1208315856" blue="0.9374737836" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="87" id="NzN-Qp-wxZ"/>
@@ -1649,7 +1654,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rxo-Kv-ERb">
-                                <rect key="frame" x="210" y="214" width="87" height="34"/>
+                                <rect key="frame" x="210" y="213" width="87" height="34"/>
                                 <color key="backgroundColor" red="0.84466757550000005" green="0.1208315856" blue="0.9374737836" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="87" id="APC-S7-Qsl"/>
@@ -1662,7 +1667,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L7O-ny-EKa">
-                                <rect key="frame" x="307" y="214" width="87" height="34"/>
+                                <rect key="frame" x="307" y="213" width="87" height="34"/>
                                 <color key="backgroundColor" red="0.84466757550000005" green="0.1208315856" blue="0.9374737836" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="87" id="xui-ND-hEm"/>
@@ -2905,7 +2910,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6NV-Q0-7le" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Account" image="AccountBase" selectedImage="AccountActive" id="vlE-cu-N9h"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Po4-If-Yas">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Po4-If-Yas">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2962,7 +2967,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Lqn-cy-2Pg" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Stock" image="StockBase" selectedImage="StockActive" id="mYZ-P8-dxe"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kFl-qL-4VT">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kFl-qL-4VT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

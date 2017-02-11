@@ -21,7 +21,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let font = UIFont(name: "Montserrat-Regular", size: 16) {
             
-            UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: font,  NSForegroundColorAttributeName: UIColor(red:100/255.0, green:100/255.0, blue:100/255.0, alpha: 1.0)]
+            let navigationBarAppearace = UINavigationBar.appearance()
+            
+            navigationBarAppearace.titleTextAttributes = [NSFontAttributeName: font,  NSForegroundColorAttributeName: UIColor(red:100/255.0, green:100/255.0, blue:100/255.0, alpha: 1.0)]
+            
+            navigationBarAppearace.barTintColor = .white
+            navigationBarAppearace.tintColor = MAIN_BUTTON_LABEL_GRAY
+            navigationBarAppearace.layer.borderColor = MAIN_BORDER_COLOR.cgColor
+            navigationBarAppearace.isTranslucent = false
+            
+            navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName: MAIN_BUTTON_LABEL_GRAY]
             
         }
         

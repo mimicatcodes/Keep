@@ -84,8 +84,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             formatInitialData()
             print("^^^^^^^^^^^^^^^^")
             print(nameTitle)
-            
-            
             formatDates()
         
     }
@@ -441,8 +439,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         
         saveButton.isEnabled = false
         
-        guard let name = nameTextField.text, name != "" else { return }
-        guard let category = categoryTextfield.text, category != "" else { return }
+        guard let name = nameTextField.text else { return }
+        guard let category = categoryTextfield.text else { return }
         
         let item = Item(name: name.capitalized, quantity: String(quantity), exp: expDate, purchaseDate: purchaseDate, isConsumed: false, location: location.rawValue, category: category.capitalized)
         
@@ -463,6 +461,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             }
             print("***** \(item.name) is added to realm database in \(item.category) in \(item.location) ***** AND \(item.exp)")
         }
+        
+        
         
         showAlert()
         resetAddItems()
@@ -559,7 +559,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             button.setTitleColor(MAIN_BUTTON_LABEL_GRAY, for: .normal)
             
         }
-        
+        saveButton.titleLabel?.textColor = MAIN_BUTTON_LABEL_GRAY
         favButton.isSelected = false
         
         purchaseDateTextfield.text = formatter.string(from: Date()).capitalized
@@ -569,21 +569,34 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         datePicker2.setDate(currentDate, animated: false)
         
     }
-    
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool{
+
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
-        //activeTextField = textField
+        guard let name = nameTextField.text else { return false }
+        //guard let category = categoryTextfield.text else { return false }
         
-        if nameTextField.text != nil && nameTextField.text != "" {
+        if name != ""  {
+            DispatchQueue.main.async {
+                self.saveButton.titleLabel?.textColor = MAIN_COLOR
+                   self.saveButton.isEnabled = true
+            }
+         
+        }
+        /*
+        if let name = nameTextField.text , let category = categoryTextfield.text  {
+            DispatchQueue.main.async {
+                self.saveButton.titleLabel?.textColor = MAIN_COLOR
+            }
             
             saveButton.isEnabled = true
-            saveButton.tintColor = UIColor.red
             
-            // FIX
         }
-        
+ */
         return true
+
     }
+    
+    
     
     func textFieldDidBeginEditing(_ textField: UITextField){
         
@@ -620,15 +633,18 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             
             expDateTextfield.text = formatter.string(from: datePicker2.date).capitalized
         }
+    
+   
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        activeTextField?.resignFirstResponder()
+    activeTextField?.resignFirstResponder()
+        activeTextField?.endEditing(true)
         
         if textField == nameTextField {
             tableView.isHidden = true
-            nameTextField.endEditing(true)
+    
         }
         
         return true
