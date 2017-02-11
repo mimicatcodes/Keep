@@ -1019,7 +1019,7 @@
                                                     <color key="titleColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="didPressExpDateBtn:" destination="RqP-1N-A4c" eventType="touchUpInside" id="PSs-Lb-sID"/>
+                                                    <action selector="didPressExpDateBtn:" destination="RqP-1N-A4c" eventType="touchUpInside" id="JcE-bG-vT4"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="30o-Yy-ApN">
@@ -1029,7 +1029,7 @@
                                                     <color key="titleColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="didPressExpDateBtn:" destination="RqP-1N-A4c" eventType="touchUpInside" id="9D6-xk-3Ql"/>
+                                                    <action selector="didPressExpDateBtn:" destination="RqP-1N-A4c" eventType="touchUpInside" id="C4o-to-T8u"/>
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="   FEB 16, 2017" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gm1-0F-XZ1">
@@ -1054,7 +1054,7 @@
                                                     <color key="titleColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="didPressExpDateBtn:" destination="RqP-1N-A4c" eventType="touchUpInside" id="r2w-i5-KHb"/>
+                                                    <action selector="didPressExpDateBtn:" destination="RqP-1N-A4c" eventType="touchUpInside" id="0Pf-k0-JL1"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6kF-G2-fIo">
@@ -1064,7 +1064,7 @@
                                                     <color key="titleColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="didPressExpDateBtn:" destination="RqP-1N-A4c" eventType="touchUpInside" id="ioy-XO-Q7T"/>
+                                                    <action selector="didPressExpDateBtn:" destination="RqP-1N-A4c" eventType="touchUpInside" id="ebG-Qc-HB0"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V0I-SX-7ht">
@@ -1366,12 +1366,12 @@
                         <outletCollection property="bodyViews" destination="b4C-Xb-ldH" collectionClass="NSMutableArray" id="8Xk-lI-bdc"/>
                         <outletCollection property="bodyViews" destination="GlK-Zj-yyg" collectionClass="NSMutableArray" id="Jiu-rN-G6X"/>
                         <outletCollection property="bodyViews" destination="TYt-Fa-epa" collectionClass="NSMutableArray" id="CAp-lH-d5s"/>
-                        <outletCollection property="expButtons" destination="uWw-Ou-gkD" collectionClass="NSMutableArray" id="fip-gs-R8i"/>
-                        <outletCollection property="expButtons" destination="6kF-G2-fIo" collectionClass="NSMutableArray" id="0sv-dJ-pUC"/>
-                        <outletCollection property="expButtons" destination="30o-Yy-ApN" collectionClass="NSMutableArray" id="1yt-CT-ibu"/>
-                        <outletCollection property="expButtons" destination="3Dx-hE-SJd" collectionClass="NSMutableArray" id="Ypm-1G-aBw"/>
                         <outletCollection property="bodyViews" destination="cAl-kj-DJJ" collectionClass="NSMutableArray" id="V6j-7t-mJY"/>
                         <outletCollection property="bodyViews" destination="NKx-js-WdC" collectionClass="NSMutableArray" id="RoW-j2-paE"/>
+                        <outletCollection property="expButtons" destination="uWw-Ou-gkD" collectionClass="NSMutableArray" id="bSa-DN-0hR"/>
+                        <outletCollection property="expButtons" destination="30o-Yy-ApN" collectionClass="NSMutableArray" id="3uW-g9-vpm"/>
+                        <outletCollection property="expButtons" destination="3Dx-hE-SJd" collectionClass="NSMutableArray" id="Vo4-nh-JKw"/>
+                        <outletCollection property="expButtons" destination="6kF-G2-fIo" collectionClass="NSMutableArray" id="TIV-m6-P81"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a5n-Wn-EqX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2905,7 +2905,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6NV-Q0-7le" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Account" image="AccountBase" selectedImage="AccountActive" id="vlE-cu-N9h"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Po4-If-Yas">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Po4-If-Yas">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2962,7 +2962,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Lqn-cy-2Pg" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Stock" image="StockBase" selectedImage="StockActive" id="mYZ-P8-dxe"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kFl-qL-4VT">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kFl-qL-4VT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
