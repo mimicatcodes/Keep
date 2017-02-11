@@ -24,6 +24,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     var selectedExpIndex: Int?
     var allItems = Array(DataStore.sharedInstance.allItems)
     var filteredItems = [Item]()
+    var filteredItemsNames = [String]()
     
     var purchaseDate = Date()
     var expDate = Date()
@@ -167,7 +168,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     
     func textFieldActive() {
         
-        tableView.isHidden = !tableView.isHidden
+        print("name field activated")
+        //tableView.isHidden = !tableView.isHidden
     }
     
     override func viewDidLayoutSubviews() {
@@ -188,16 +190,21 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     
     func searchAutocompleteEntriesWithSubstring(_ substring: String) {
         
-        filteredItems.removeAll(keepingCapacity: false)
+        //filteredItems.removeAll(keepingCapacity: false)
+        filteredItemsNames.removeAll(keepingCapacity: false)
         
-        for item in allItems {
-            
-            let myString: NSString! = item.name as NSString
-            let substringRange: NSRange! = myString.range(of: substring)
-            
-            if substringRange.location == 0 {
-                filteredItems.append(item)
+        for itemArray in allItems_ {
+            for item in itemArray {
+                //let myString: NSString! = item.name as NSString
+                let myString: NSString! = item as NSString
+                let substringRange: NSRange! = myString.range(of: substring)
+                
+                if substringRange.location == 0 {
+                    //filteredItems.append(item)
+                    filteredItemsNames.append(item)
+                }
             }
+        
         }
         
         tableView.reloadData()
@@ -207,26 +214,36 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if filteredItems.count == 0 {
-            
-            return allItems.count
-            
+        //if filteredItems.count == 0 {
+        if filteredItemsNames.count == 0 {
+
+            //return allItems.count
+            return list.count
         }
         
-        return filteredItems.count
+        //return filteredItems.count
+        return filteredItemsNames.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "nameCell")
         
-        if filteredItems.count == 0 {
+        //if filteredItems.count == 0 {
+        if filteredItemsNames.count == 0 {
             
-            cell?.textLabel?.text = self.allItems[indexPath.row].name
+            tableView.isHidden = true
+            // ---- Dummy data ----------------------
+            cell?.textLabel?.text = list[indexPath.row]
+            // ---- Dummy data ----------------------
             
         } else {
             
-            cell?.textLabel?.text = self.filteredItems[indexPath.row].name
+            tableView.isHidden = false
+           
+            //cell?.textLabel?.text = self.filteredItems[indexPath.row].name
+            
+            cell?.textLabel?.text = self.filteredItemsNames[indexPath.row]
             
         }
         
@@ -242,10 +259,10 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         let selectedCell: UITableViewCell = tableView.cellForRow(at: indexPath)!
         
         nameTextField.text = selectedCell.textLabel!.text!.capitalized
-        tableView.isHidden = true
+        tableView.isHidden = !tableView.isHidden
+        print("00000000")
         nameTextField.endEditing(true)
-        tableView.reloadData()
-        
+
     }
     
     

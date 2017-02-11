@@ -8,7 +8,7 @@
 
 import Foundation
 
-var allItems  = [alhoholicBeverages, bakery, dairyFreeMilk, softDrinks, juice, coffeeAndTea ]
+var allItems_  = [alhoholicBeverages, bakery, dairyFreeMilk, softDrinks, juice, coffeeAndTea ]
 var alhoholicBeverages = [
     
     // wine, beer and spirits
