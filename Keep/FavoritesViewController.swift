@@ -54,35 +54,28 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func configureSwipeButtons(cell:FavoriteCell, indexPath: IndexPath){
         
-        let rightButton1 = MGSwipeButton(title: "Delete", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
-            //self.createAlert(withTitle: "Delete")
+        let deleteButton = MGSwipeButton(title: "Delete", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
             self.delete(indexPath: indexPath)
             return true
         }
         
-        let rightButton2 = MGSwipeButton(title: "Edit", backgroundColor: UIColor.green) { (sender: MGSwipeTableCell) -> Bool in
-            self.createAlert(withTitle: "Edit")
-            return true
-        }
-        
-        let leftButton1 = MGSwipeButton(title: "Move to stock", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
+        let moveToStockBtn = MGSwipeButton(title: "Stock", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
             self.createAlert(withTitle: "Left1")
             return true
         }
         
-        let leftButton2 = MGSwipeButton(title: "Move to shopping list", backgroundColor: UIColor.yellow) { (sender: MGSwipeTableCell) -> Bool in
+        let moveToSLBtn = MGSwipeButton(title: "SL", backgroundColor: UIColor.yellow) { (sender: MGSwipeTableCell) -> Bool in
             self.createAlert(withTitle: "Left2")
             return true
         }
         
-        rightButton1.setPadding(30)
-        rightButton2.setPadding(30)
-        cell.rightButtons = [rightButton1, rightButton2]
+        deleteButton.setPadding(30)
+        cell.rightButtons = [deleteButton]
         cell.rightExpansion.buttonIndex = 0
         
-        leftButton1.setPadding(30)
-        leftButton2.setPadding(30)
-        cell.leftButtons = [leftButton1, leftButton2]
+        moveToStockBtn.setPadding(30)
+        moveToSLBtn.setPadding(30)
+        cell.leftButtons = [moveToStockBtn, moveToSLBtn]
         cell.leftExpansion.buttonIndex = 1
         
     }

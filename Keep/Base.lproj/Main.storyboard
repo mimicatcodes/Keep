@@ -367,7 +367,7 @@
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="7fh-uj-oj4">
                             <color key="tintColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="w2k-zI-MQy" kind="presentation" id="C5B-QV-3TT"/>
+                                <segue destination="w2k-zI-MQy" kind="presentation" identifier="addFav" id="C5B-QV-3TT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -395,7 +395,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qzd-SC-l8w">
-                                        <rect key="frame" x="15" y="100" width="384" height="133"/>
+                                        <rect key="frame" x="15" y="154.33333333333331" width="384" height="132.99999999999994"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Rh-GS-TRw">
                                                 <rect key="frame" x="15" y="32" width="354" height="35"/>
@@ -411,7 +411,7 @@
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lsj-zB-GHa">
-                                                <rect key="frame" x="15" y="75" width="354" height="30"/>
+                                                <rect key="frame" x="15" y="75" width="354" height="29.999999999999972"/>
                                                 <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="dad-81-D4J"/>
@@ -440,7 +440,7 @@
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="Qzd-SC-l8w" firstAttribute="leading" secondItem="MNm-FG-lSD" secondAttribute="leading" constant="15" id="09J-2C-TuR"/>
-                                    <constraint firstItem="Qzd-SC-l8w" firstAttribute="top" secondItem="MNm-FG-lSD" secondAttribute="top" constant="100" id="kab-MJ-H9E"/>
+                                    <constraint firstItem="Qzd-SC-l8w" firstAttribute="centerY" secondItem="MNm-FG-lSD" secondAttribute="centerY" multiplier="0.6" id="ZUy-Nr-XOj"/>
                                     <constraint firstAttribute="trailing" secondItem="Qzd-SC-l8w" secondAttribute="trailing" constant="15" id="u5w-hL-gzj"/>
                                 </constraints>
                                 <connections>

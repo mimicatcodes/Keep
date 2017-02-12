@@ -10,29 +10,36 @@ import UIKit
 import RealmSwift
 
 class AddFavoriteVC: UIViewController, UITextFieldDelegate {
+    
+    let store = DataStore.sharedInstance
 
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
-
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        nameField.becomeFirstResponder()
         nameField.autocapitalizationType = .words
         nameField.placeholder = "Name is required"
         hideKeyboard()
     
     }
-   
+    
     @IBAction func dismissView(_ sender: Any) {
         
         nameField.endEditing(true)
+        nameField.resignFirstResponder()
         dismiss(animated: false, completion: nil)
         
     }
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         
+        saveFavItem()
+    }
+    
+    func saveFavItem(){
         guard let name = nameField.text, name != "" else { return }
         let favorite = FavoritedItem(name: name.capitalized)
         
@@ -40,17 +47,20 @@ class AddFavoriteVC: UIViewController, UITextFieldDelegate {
         try! realm.write {
             realm.add(favorite)
             
-                print("Favorite item \(favorite.name) has been added")
+            print("Favorite item \(favorite.name) has been added")
             
         }
         dismiss(animated: true, completion: nil)
         NotificationCenter.default.post(name: REFRESH_FAVORITES, object: nil)
-        
     }
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        nameField.resignFirstResponder()
+        
+        textField.endEditing(true)
+        textField.resignFirstResponder()
+        saveFavItem()
+        
         return true
     }
 }

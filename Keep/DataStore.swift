@@ -58,5 +58,6 @@ class DataStore{
     }
     
     var buttonStatus = "Fridge"
+    var favItemToEdit:FavoritedItem?
     
 }
