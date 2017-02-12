@@ -92,6 +92,15 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         
     }
     
+    private func moveToStock(){
+        
+    }
+    
+    private func moveToSL(){
+        
+    }
+    
+    
     private func delete(indexPath: IndexPath){
         
         let realm = try! Realm()

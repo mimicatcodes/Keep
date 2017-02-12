@@ -15,6 +15,17 @@ enum Category : String {
     
 }
 
+enum Categories {
+    case Fruits
+    case Vegetables
+    case Protein
+    case Seasoning
+    case Grains
+    case Snacks
+    case Household
+    case PersonalCare
+    
+}
 enum ItemsCategories {
     
     case bakery
@@ -39,4 +50,7 @@ enum ItemsCategories {
     case other
     
 }
+
+// ADD 5 FOOD GROUPS : "Fruits", "Vegetables", "Protein", "Grains", "Dairy"
+//
 

@@ -9,12 +9,15 @@
 import UIKit
 import RealmSwift
 
-class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource, UIBarPositioningDelegate, UINavigationControllerDelegate {
+class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource, UIBarPositioningDelegate, UINavigationControllerDelegate {
     
+    @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
     var store = DataStore.sharedInstance
+    var originalTopMargin:CGFloat!
     var location:Location = .Fridge
     var quantity: Int = 1
     var labelView: UILabel!
+    let picker = UIPickerView()
     let datePicker1 = UIDatePicker()
     let datePicker2 = UIDatePicker()
     var activeTextField:UITextField?
@@ -33,7 +36,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     
     @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var categoryDropdown: UIPickerView!
+    @IBOutlet weak var bodyView: UIView!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet var bodyViews: [UIView]!
     @IBOutlet weak var nameTextField: UITextField!
@@ -65,16 +68,15 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         formatDates()
         hideKeyboard()
         tableView.isHidden = true
+        picker.delegate = self
+        picker.dataSource = self
         nameTextField.delegate = self
         nameTextField.autocapitalizationType = .words
         categoryTextfield.autocapitalizationType = .words
         categoryTextfield.delegate = self
+        categoryTextfield.inputView = picker
         nameTextField.text = nameTitle
-        nameTextField.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.touchDown)
         favButton.isSelected = false
-        
-        //NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
-        //NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: self.view.window)
         
     }
     
@@ -88,56 +90,20 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        originalTopMargin = topMarginConstraint.constant
+        
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         
         super.viewWillDisappear(animated)
-        //NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        //NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
     }
     
-        /*
-    func keyboardWillShow(notification: NSNotification) {
-        
-        if activeTextField == categoryTextfield {
-            
-            if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-                
-                if let offset = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-                    if keyboardSize.height == offset.height {
-                        if self.view.frame.origin.y == 0 {
-                            UIView.animate(withDuration: 0.1, animations: {
-                                self.view.frame.origin.y -= keyboardSize.height
-                            })
-                        } else {
-                            UIView.animate(withDuration: 0.1, animations: {
-                                self.view.frame.origin.y += keyboardSize.height - (offset.height)
-                            })
-                        }
-                        print(self.view.frame.origin.y)
-                    }
-                }
-            }
-        }
-    }
-    
-    func keyboardWillHide(notification: NSNotification) {
-        
-        if self.view.frame.origin.y != 0{
-            self.view.frame.origin.y = 0
-        }
-        
-        /*
-         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-         if self.view.frame.origin.y != 0{
-         self.view.frame.origin.y += keyboardSize.height
-         }
-         }
-         */
-    }
-    */
-    /*
-    // picker
+    // picker for category dropdown
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -147,27 +113,20 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        self.view.endEditing(true)
+        //self.view.endEditing(true)
         return list[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.categoryTextfield.text = self.list[row]
-        self.categoryDropdown.isHidden = true
+        self.categoryTextfield.text = list[row]
+        
 
     }
-    // ----------------
-    */
+    
     func position(for bar: UIBarPositioning) -> UIBarPosition {
         
         return .topAttached
         
-    }
-    
-    func textFieldActive() {
-        
-        print("name field activated")
-        //tableView.isHidden = !tableView.isHidden
     }
     
     override func viewDidLayoutSubviews() {
@@ -207,8 +166,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         
         tableView.reloadData()
     }
-    
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -287,6 +244,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
         
+        categoryTextfield.inputAccessoryView = toolBar
         expDateTextfield.inputAccessoryView = toolBar
         purchaseDateTextfield.inputAccessoryView = toolBar
         
@@ -295,6 +253,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     func donePicker(sender:UIBarButtonItem) {
         
         activeTextField?.resignFirstResponder()
+        moveViewDown()
         
     }
     
@@ -324,7 +283,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 expDate = date
                 expDateTextfield.text = formatter.string(from: date).capitalized
             }
-            
+            moveViewDown()
             print("5 Days")
             
         case 1:
@@ -334,7 +293,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 expDate = date
                 expDateTextfield.text = formatter.string(from: date).capitalized
             }
-            
+            moveViewDown()
             print("7 Days")
             
         case 2:
@@ -344,7 +303,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 expDate = date
                 expDateTextfield.text = formatter.string(from: date).capitalized
             }
-            
+            moveViewDown()
             print("14 Days")
             
         case 3:
@@ -353,6 +312,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             expDate = neverExpire! // 3 years later
             expDateTextfield.text = "None"
             print("Never")
+            
+            moveViewDown()
             
         default:
             break
@@ -469,10 +430,9 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         
     }
     
-    
-    
     @IBAction func quantityMinusBtnTapped(_ sender: Any) {
         
+        moveViewDown()
         if quantity == 1 {
             
             quantityMinusButton.isEnabled = false
@@ -489,6 +449,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     
     @IBAction func quantityPlusBtnTapped(_ sender: Any) {
         
+        moveViewDown()
         quantity += 1
         quantityLabel.text = "\(quantity)"
         if quantityMinusButton.isEnabled == false {
@@ -603,15 +564,18 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         activeTextField = textField
         
         if textField.tag == 1 {
-            
+        
+            moveViewUp()
             tableView.isHidden = true
             purchaseDateTextfield.inputView = datePicker1
             datePicker1.datePickerMode = .date
             datePicker1.addTarget(self, action: #selector(self.datePickerChanged(sender:)) , for: .valueChanged)
             purchaseDateTextfield.text = formatter.string(from: datePicker1.date).capitalized
+            moveViewDown()
             
         } else if textField.tag == 2 {
-            
+        
+            moveViewUp()
             tableView.isHidden = true
             expDateTextfield.inputView = datePicker2
             datePicker2.datePickerMode = UIDatePickerMode.date
@@ -619,6 +583,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             
             if let indexSelected = selectedExpIndex {
                 expButtons[indexSelected].isSelected = false
+                
             }
             
             for button in expButtons {
@@ -632,6 +597,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             }
             
             expDateTextfield.text = formatter.string(from: datePicker2.date).capitalized
+        } else if textField == categoryTextfield {
+            moveViewDown()
         }
     
    
@@ -641,15 +608,24 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         
     activeTextField?.resignFirstResponder()
         activeTextField?.endEditing(true)
+        moveViewDown()
         
         if textField == nameTextField {
             tableView.isHidden = true
     
         }
-        
+       
         return true
     }
     
+    /*
+    @IBAction func dismissPicker(_ sender: Any) {
+        moveViewDown()
+        activeTextField?.resignFirstResponder()
+        activeTextField?.endEditing(true)
+    }
+    */
+
     func datePickerChanged(sender: UIDatePicker) {
         
         if sender == datePicker1 {
@@ -662,11 +638,43 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         
     }
     
+
     func resetAddItems(){
         
         formatInitialData()
         saveButton.isEnabled = false
         
     }
+    
+    @IBAction func dismissPickers(_ sender: Any) {
+        activeTextField?.resignFirstResponder()
+        activeTextField?.endEditing(true)
+        moveViewDown()
+    }
+    
+    func moveViewUp() {
+        if topMarginConstraint.constant != originalTopMargin {
+            return
+        }
+        
+        topMarginConstraint.constant -= 130
+        UIView.animate(withDuration: 0.2, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+
+        })
+    }
+    
+    func moveViewDown() {
+        if topMarginConstraint.constant == originalTopMargin {
+            return
+        }
+        
+        topMarginConstraint.constant = originalTopMargin
+        UIView.animate(withDuration: 0.2, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+        
+    }
+
     
 }

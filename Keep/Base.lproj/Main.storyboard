@@ -952,6 +952,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <color key="backgroundColor" red="0.90045616610000001" green="0.93729026849999997" blue="0.86047609059999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="1ei-cO-3Vg" firstAttribute="width" secondItem="z4L-pD-lU0" secondAttribute="width" id="42O-8w-gG2"/>
@@ -992,6 +993,7 @@
                                                 </connections>
                                             </textField>
                                         </subviews>
+                                        <color key="backgroundColor" red="1" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="Ube-w8-PlD" firstAttribute="top" secondItem="GlK-Zj-yyg" secondAttribute="top" id="CrH-Fi-ptz"/>
                                             <constraint firstItem="nli-eo-KRb" firstAttribute="width" secondItem="GlK-Zj-yyg" secondAttribute="width" multiplier="0.7" id="Jwl-cS-eOw"/>
@@ -1086,6 +1088,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <color key="backgroundColor" red="0.96686241610000001" green="0.83529411760000005" blue="0.85900796980000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="6kF-G2-fIo" firstAttribute="centerX" secondItem="30o-Yy-ApN" secondAttribute="centerX" id="2ed-NO-nHl"/>
                                             <constraint firstItem="30o-Yy-ApN" firstAttribute="trailing" secondItem="nnA-0D-SVU" secondAttribute="trailing" id="5Oq-pg-ROi"/>
@@ -1325,6 +1328,9 @@
                                     <constraint firstItem="GlK-Zj-yyg" firstAttribute="top" secondItem="b4C-Xb-ldH" secondAttribute="bottom" id="ren-hU-5ta"/>
                                     <constraint firstItem="b4C-Xb-ldH" firstAttribute="top" secondItem="NKx-js-WdC" secondAttribute="bottom" id="yvY-Ve-sPu"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="b2d-8c-QqR" appends="YES" id="93a-Gw-5kz"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1341,6 +1347,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
+                        <outlet property="bodyView" destination="ix9-p9-I5u" id="em4-kc-e57"/>
                         <outlet property="categoryTextfield" destination="Jvu-iC-Gqs" id="yYn-A0-VTJ"/>
                         <outlet property="expDateTextfield" destination="Gm1-0F-XZ1" id="lt8-AR-IT9"/>
                         <outlet property="favButton" destination="YF5-ES-PUh" id="Xjb-UO-56l"/>
@@ -1351,6 +1358,7 @@
                         <outlet property="quantityMinusButton" destination="z4L-pD-lU0" id="jyk-Zc-2Jd"/>
                         <outlet property="saveButton" destination="ysc-Xz-AX1" id="Al1-8R-gW5"/>
                         <outlet property="tableView" destination="lJ3-eQ-4im" id="qCR-AC-mtE"/>
+                        <outlet property="topMarginConstraint" destination="rU3-6C-rvm" id="OKI-FL-up9"/>
                         <outletCollection property="locationButtons" destination="uCQ-10-AR7" collectionClass="NSMutableArray" id="eC5-aZ-7OM"/>
                         <outletCollection property="locationButtons" destination="Snn-VI-nzp" collectionClass="NSMutableArray" id="iqj-AD-VQ9"/>
                         <outletCollection property="locationButtons" destination="oYN-Qq-60A" collectionClass="NSMutableArray" id="94n-ab-lc9"/>
@@ -1376,9 +1384,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a5n-Wn-EqX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer enabled="NO" cancelsTouchesInView="NO" id="al9-FN-c8j">
+                <tapGestureRecognizer id="b2d-8c-QqR">
                     <connections>
-                        <action selector="endEditing:" destination="RqP-1N-A4c" id="YwY-Na-o2y"/>
+                        <action selector="dismissPickers:" destination="RqP-1N-A4c" id="EX2-tb-CIl"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
