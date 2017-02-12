@@ -76,7 +76,14 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
         cell.createdAtLabel.text = store.allShopingLists[indexPath.row].isCreatedAt
         cell.selectionStyle = .none
         cell.separatorInset = .zero
-
+        configureSwipeButtons(cell: cell)
+        
+        return cell
+        
+    }
+    
+    func configureSwipeButtons(cell:ShoppingListCell){
+        
         let rightButton1 = MGSwipeButton(title: "Delete", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
             self.createAlert(withTitle: "Delete")
             return true
@@ -100,14 +107,13 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
         rightButton1.setPadding(38)
         rightButton2.setPadding(38)
         cell.rightButtons = [rightButton1, rightButton2]
-        cell.rightExpansion.buttonIndex = 1
+        cell.rightExpansion.buttonIndex = 0
         
         leftButton1.setPadding(38)
         leftButton2.setPadding(38)
         cell.leftButtons = [leftButton1, leftButton2]
         cell.leftExpansion.buttonIndex = 1
-        return cell
-        
+
     }
     
     func createAlert(withTitle:String) {

@@ -40,6 +40,7 @@
 		DD75B7BA1E3D7A93002053E5 /* Montserrat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = DD75B7B91E3D7A93002053E5 /* Montserrat-Light.otf */; };
 		DD786E311E4A69CE00B1F4E3 /* ScanReceiptVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD786E301E4A69CE00B1F4E3 /* ScanReceiptVC.swift */; };
 		DD786E331E4AED2F00B1F4E3 /* AddScannedItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD786E321E4AED2F00B1F4E3 /* AddScannedItemVC.swift */; };
+		DD786E361E50FAAF00B1F4E3 /* optionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD786E351E50FAAF00B1F4E3 /* optionsView.xib */; };
 		DDC3E9801E1C76E100459295 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E97F1E1C76E100459295 /* SearchVC.swift */; };
 		DDC3E9821E1C93F400459295 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E9811E1C93F400459295 /* DataStore.swift */; };
 		DDC3E9871E1C957000459295 /* ShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E9861E1C957000459295 /* ShoppingListViewController.swift */; };
@@ -99,6 +100,7 @@
 		DD75B7B91E3D7A93002053E5 /* Montserrat-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.otf"; sourceTree = "<group>"; };
 		DD786E301E4A69CE00B1F4E3 /* ScanReceiptVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanReceiptVC.swift; sourceTree = "<group>"; };
 		DD786E321E4AED2F00B1F4E3 /* AddScannedItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScannedItemVC.swift; sourceTree = "<group>"; };
+		DD786E351E50FAAF00B1F4E3 /* optionsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = optionsView.xib; sourceTree = "<group>"; };
 		DDC3E97F1E1C76E100459295 /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		DDC3E9811E1C93F400459295 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		DDC3E9861E1C957000459295 /* ShoppingListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				DD1EA63B1E0CA41D0034C54B /* Main.storyboard */,
+				DD786E351E50FAAF00B1F4E3 /* optionsView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				DD1EA6451E0CA41D0034C54B /* LaunchScreen.storyboard in Resources */,
 				DD2C38A31E3D7CD000A7C709 /* Lato-Bold.ttf in Resources */,
 				DD75B7B81E3D5536002053E5 /* Lato-Semibold.ttf in Resources */,
+				DD786E361E50FAAF00B1F4E3 /* optionsView.xib in Resources */,
 				DDEC8CB81E458A48004C73CB /* tessdata in Resources */,
 				DD1EA6421E0CA41D0034C54B /* Assets.xcassets in Resources */,
 				DD1EA63D1E0CA41D0034C54B /* Main.storyboard in Resources */,

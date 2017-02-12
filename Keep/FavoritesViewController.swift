@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import MGSwipeTableCell
 
 class FavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -46,8 +47,45 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.favoriteTitle.text = store.allFavoritedItems[indexPath.row].name
         cell.separatorInset = .zero
         cell.selectionStyle = .none
+        configureSwipeButtons(cell: cell)
+        
         return cell
     }
+    
+    func configureSwipeButtons(cell:FavoriteCell){
+        
+        let rightButton1 = MGSwipeButton(title: "Delete", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
+            self.createAlert(withTitle: "Delete")
+            return true
+        }
+        
+        let rightButton2 = MGSwipeButton(title: "Edit", backgroundColor: UIColor.green) { (sender: MGSwipeTableCell) -> Bool in
+            self.createAlert(withTitle: "Edit")
+            return true
+        }
+        
+        let leftButton1 = MGSwipeButton(title: "Left1", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
+            self.createAlert(withTitle: "Left1")
+            return true
+        }
+        
+        let leftButton2 = MGSwipeButton(title: "Left2", backgroundColor: UIColor.yellow) { (sender: MGSwipeTableCell) -> Bool in
+            self.createAlert(withTitle: "Left2")
+            return true
+        }
+        
+        rightButton1.setPadding(30)
+        rightButton2.setPadding(30)
+        cell.rightButtons = [rightButton1, rightButton2]
+        cell.rightExpansion.buttonIndex = 0
+        
+        leftButton1.setPadding(30)
+        leftButton2.setPadding(30)
+        cell.leftButtons = [leftButton1, leftButton2]
+        cell.leftExpansion.buttonIndex = 1
+        
+    }
+
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
@@ -81,11 +119,26 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         
         return [delete, edit]
     }
+    
+    
+    func createAlert(withTitle:String) {
+        
+        let alert = UIAlertController(title: withTitle, message: "", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            
+        }
+        
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+
+
 
     
 }
 
-class FavoriteCell:UITableViewCell {
+class FavoriteCell:MGSwipeTableCell {
     
     @IBOutlet weak var favoriteTitle: UILabel!
 }

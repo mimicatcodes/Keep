@@ -64,8 +64,26 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        dismissBtns()
         tableView.reloadData()
+    }
+    
+    @IBAction func dismissButtons(_ sender: Any) {
+        dismissBtns()
+    }
+    
+    func dismissBtns(){
+        if self.plusButtonIsRotated == true {
+            self.plusButton.transform = CGAffineTransform(rotationAngle: CGFloat(45).degreesToRadians)
+            
+            self.addButtons.forEach {
+                $0.isHidden = true
+                $0.alpha = 1.0
+            }
+            
+            self.plusButtonIsRotated = false
+        }
+
     }
     
     @IBAction func plusButtonTapped(_ sender: Any) {
@@ -117,6 +135,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
                 
             }
+            dismissBtns()
         }
     }
     
@@ -262,6 +281,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dismissBtns()
+    }
+    
     func configureCells(cell:StockCell, indexPath: IndexPath, filteredItem: Item ){
         
         let today = Date()
@@ -310,7 +333,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
+        dismissBtns()
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             
             let realm = try! Realm()
