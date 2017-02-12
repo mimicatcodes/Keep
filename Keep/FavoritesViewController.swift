@@ -35,7 +35,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 50
+        return 70
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,15 +47,16 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.favoriteTitle.text = store.allFavoritedItems[indexPath.row].name
         cell.separatorInset = .zero
         cell.selectionStyle = .none
-        configureSwipeButtons(cell: cell)
+        configureSwipeButtons(cell: cell, indexPath: indexPath)
         
         return cell
     }
     
-    func configureSwipeButtons(cell:FavoriteCell){
+    func configureSwipeButtons(cell:FavoriteCell, indexPath: IndexPath){
         
         let rightButton1 = MGSwipeButton(title: "Delete", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
-            self.createAlert(withTitle: "Delete")
+            //self.createAlert(withTitle: "Delete")
+            self.delete(indexPath: indexPath)
             return true
         }
         
@@ -64,12 +65,12 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
             return true
         }
         
-        let leftButton1 = MGSwipeButton(title: "Left1", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
+        let leftButton1 = MGSwipeButton(title: "Move to stock", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
             self.createAlert(withTitle: "Left1")
             return true
         }
         
-        let leftButton2 = MGSwipeButton(title: "Left2", backgroundColor: UIColor.yellow) { (sender: MGSwipeTableCell) -> Bool in
+        let leftButton2 = MGSwipeButton(title: "Move to shopping list", backgroundColor: UIColor.yellow) { (sender: MGSwipeTableCell) -> Bool in
             self.createAlert(withTitle: "Left2")
             return true
         }
@@ -85,41 +86,6 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.leftExpansion.buttonIndex = 1
         
     }
-
-    
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            
-            let realm = try! Realm()
-            try! realm.write {
-                let favItemToBeDeleted = self.store.allFavoritedItems[indexPath.row]
-                for item in self.store.allItems {
-                    if item.name == favItemToBeDeleted.name {
-                        item.isFavorited = false
-                        print(item)
-                        print(item.isFavorited)
-                    }
-                }
-                print("\(favItemToBeDeleted) has been deleted")
-                realm.delete(favItemToBeDeleted)
-                
-            }
-            self.tableView.reloadData()
-            print("Deleted an item from favoritedItems")
-            
-        }
-        
-        let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-            // share item at indexPath
-            
-            print("EDIT Tapped")
-            
-        }
-        
-        return [delete, edit]
-    }
-    
     
     func createAlert(withTitle:String) {
         
@@ -132,9 +98,26 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         self.present(alert, animated: true, completion: nil)
         
     }
-
-
-
+    
+    private func delete(indexPath: IndexPath){
+        
+        let realm = try! Realm()
+        try! realm.write {
+            let favItemToBeDeleted = self.store.allFavoritedItems[indexPath.row]
+            for item in self.store.allItems {
+                if item.name == favItemToBeDeleted.name {
+                    item.isFavorited = false
+                    print(item)
+                    print(item.isFavorited)
+                }
+            }
+            print("\(favItemToBeDeleted) has been deleted")
+            realm.delete(favItemToBeDeleted)
+            
+        }
+        self.tableView.reloadData()
+        print("Deleted an item from favoritedItems")
+    }
     
 }
 
