@@ -1441,27 +1441,36 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ajh-B2-Wwy">
                                 <rect key="frame" x="21" y="84" width="372" height="368"/>
                             </imageView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3o1-3q-oTH">
-                                <rect key="frame" x="197" y="492" width="20" height="31.666666666666629"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9jD-bo-1aJ">
+                                <rect key="frame" x="21" y="452" width="372" height="107"/>
+                                <subviews>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="App-VG-Twd">
+                                        <rect key="frame" x="0.0" y="52" width="372" height="2.6666666666666856"/>
+                                        <color key="progressTintColor" red="0.13725490200000001" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    </progressView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="Zwr-42-Hm6"/>
+                                    <constraint firstItem="App-VG-Twd" firstAttribute="width" secondItem="9jD-bo-1aJ" secondAttribute="width" id="JWk-IY-bEW"/>
+                                    <constraint firstItem="App-VG-Twd" firstAttribute="centerX" secondItem="9jD-bo-1aJ" secondAttribute="centerX" id="R7y-P1-tm7"/>
+                                    <constraint firstItem="App-VG-Twd" firstAttribute="centerY" secondItem="9jD-bo-1aJ" secondAttribute="centerY" id="fih-fB-nBR"/>
                                 </constraints>
-                                <color key="color" red="0.13725490200000001" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
-                            </activityIndicatorView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="z4o-9N-pKK" firstAttribute="top" secondItem="DTH-7t-N8a" secondAttribute="bottom" constant="30" id="AZN-Zq-W60"/>
+                            <constraint firstItem="9jD-bo-1aJ" firstAttribute="trailing" secondItem="ajh-B2-Wwy" secondAttribute="trailing" id="BPN-NK-w40"/>
                             <constraint firstItem="ajh-B2-Wwy" firstAttribute="centerX" secondItem="XGj-3x-Pty" secondAttribute="centerX" id="GJc-Xj-wLt"/>
-                            <constraint firstItem="3o1-3q-oTH" firstAttribute="top" secondItem="ajh-B2-Wwy" secondAttribute="bottom" constant="40" id="Jbq-m3-oKx"/>
+                            <constraint firstItem="9jD-bo-1aJ" firstAttribute="leading" secondItem="ajh-B2-Wwy" secondAttribute="leading" id="TZD-a0-EgO"/>
                             <constraint firstItem="DTH-7t-N8a" firstAttribute="height" secondItem="XGj-3x-Pty" secondAttribute="height" multiplier="0.2" id="chl-uK-bny"/>
-                            <constraint firstItem="BLP-Pb-Afy" firstAttribute="top" secondItem="3o1-3q-oTH" secondAttribute="bottom" constant="35" id="h5l-d6-CKK"/>
                             <constraint firstItem="DTH-7t-N8a" firstAttribute="width" secondItem="XGj-3x-Pty" secondAttribute="width" multiplier="0.9" id="jfG-2P-rjR"/>
                             <constraint firstItem="ajh-B2-Wwy" firstAttribute="height" secondItem="XGj-3x-Pty" secondAttribute="height" multiplier="0.5" id="pZo-VX-xkn"/>
+                            <constraint firstItem="BLP-Pb-Afy" firstAttribute="top" secondItem="9jD-bo-1aJ" secondAttribute="bottom" id="qm6-PW-nBe"/>
                             <constraint firstItem="ajh-B2-Wwy" firstAttribute="top" secondItem="lu0-AF-tIt" secondAttribute="bottom" constant="20" id="vNl-fO-KXG"/>
                             <constraint firstItem="DTH-7t-N8a" firstAttribute="centerX" secondItem="XGj-3x-Pty" secondAttribute="centerX" id="wg5-vO-Z1c"/>
-                            <constraint firstItem="3o1-3q-oTH" firstAttribute="centerX" secondItem="ajh-B2-Wwy" secondAttribute="centerX" id="xtb-EY-MYp"/>
+                            <constraint firstItem="9jD-bo-1aJ" firstAttribute="top" secondItem="ajh-B2-Wwy" secondAttribute="bottom" id="zjI-3q-jWI"/>
                             <constraint firstItem="ajh-B2-Wwy" firstAttribute="width" secondItem="XGj-3x-Pty" secondAttribute="width" multiplier="0.9" id="zyk-O2-em4"/>
                         </constraints>
                         <connections>
@@ -1476,10 +1485,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="activityIndicator" destination="3o1-3q-oTH" id="Laz-bO-9sk"/>
                         <outlet property="cameraButton" destination="BLP-Pb-Afy" id="sYL-DC-kFl"/>
                         <outlet property="imageView" destination="ajh-B2-Wwy" id="lLt-a8-rzH"/>
                         <outlet property="libraryButton" destination="Rbe-Jt-C85" id="fyx-iI-Kpf"/>
+                        <outlet property="progressView" destination="App-VG-Twd" id="YPh-mY-04U"/>
                         <outlet property="saveButton" destination="8aH-Py-VSj" id="MYM-sW-mXN"/>
                     </connections>
                 </viewController>
@@ -1623,14 +1632,14 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pd0-1A-7rX">
-                                <rect key="frame" x="20" y="175" width="374" height="31"/>
+                                <rect key="frame" x="20" y="175" width="374" height="32"/>
                                 <color key="backgroundColor" red="0.84466757550335569" green="0.93479970637583898" blue="0.93747378355704702" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tx1-md-Zjz">
-                                <rect key="frame" x="20" y="214" width="87" height="31"/>
+                                <rect key="frame" x="20" y="215" width="87" height="30"/>
                                 <color key="backgroundColor" red="0.84466757550335569" green="0.1208315855704698" blue="0.93747378355704702" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Fridge">
                                     <color key="titleColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
@@ -1640,7 +1649,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncl-yN-Y2x">
-                                <rect key="frame" x="115" y="214" width="87" height="30"/>
+                                <rect key="frame" x="115" y="215" width="87" height="30"/>
                                 <color key="backgroundColor" red="0.84466757550000005" green="0.1208315856" blue="0.9374737836" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="87" id="NzN-Qp-wxZ"/>
@@ -1654,7 +1663,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rxo-Kv-ERb">
-                                <rect key="frame" x="210" y="213" width="87" height="34"/>
+                                <rect key="frame" x="210" y="214" width="87" height="34"/>
                                 <color key="backgroundColor" red="0.84466757550000005" green="0.1208315856" blue="0.9374737836" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="87" id="APC-S7-Qsl"/>
@@ -1667,7 +1676,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L7O-ny-EKa">
-                                <rect key="frame" x="307" y="213" width="87" height="34"/>
+                                <rect key="frame" x="307" y="214" width="87" height="34"/>
                                 <color key="backgroundColor" red="0.84466757550000005" green="0.1208315856" blue="0.9374737836" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="87" id="xui-ND-hEm"/>
@@ -2106,6 +2115,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="menuBarView" destination="3b3-Is-Eab" id="Lr7-2B-YJz"/>
                         <outlet property="plusButton" destination="HJW-p5-Lgo" id="3Ir-Wy-3b9"/>
                         <outlet property="tableView" destination="aHx-cJ-aag" id="xHp-Oe-ySH"/>
                         <outletCollection property="buttons" destination="1jp-kr-pSW" collectionClass="NSMutableArray" id="VYD-ly-GMa"/>

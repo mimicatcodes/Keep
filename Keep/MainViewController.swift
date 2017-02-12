@@ -13,6 +13,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     let store = DataStore.sharedInstance
     
+    @IBOutlet weak var menuBarView: UIView!
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var buttons: [UIButton]!
@@ -60,8 +61,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.tableFooterView = UIView()
         formatDates()
         
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,6 +80,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         case 0:
             store.buttonStatus = "Fridge"
             print("Fridge ---")
+            
             tableView.reloadData()
         case 1:
             store.buttonStatus = "Freezer"
@@ -106,6 +106,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 button.setTitleColor(MAIN_COLOR, for: .selected)
                 views[index].backgroundColor = MAIN_COLOR
                 labels[index].textColor = UIColor.white
+        
                 
             } else {
                 
@@ -113,6 +114,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 button.setTitleColor(MAIN_BUTTON_LABEL_GRAY, for: .normal)
                 views[index].backgroundColor = MAIN_BG_COLOR
                 labels[index].textColor = MAIN_BUTTON_LABEL_GRAY
+
                 
             }
         }

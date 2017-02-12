@@ -14,16 +14,19 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
     var selectedImage: UIImage?
     var textsScanned:String = ""
     var emptyArray = [String]()
+    
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var libraryButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
-    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var imageView: UIImageView!
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        activityIndicator.isHidden = true
+        //activityIndicator.isHidden = true
+        progressView.setProgress(0, animated: true)
         adjustBorder()
         saveButton.isEnabled = false
         enableSaveButton()
@@ -40,28 +43,32 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
     }
     
     @IBAction func cancelTapped(_ sender: Any) {
+        
         dismiss(animated: true, completion: nil)
     }
  
     override func viewWillAppear(_ animated: Bool) {
+        
         super.viewWillAppear(animated)
         enableSaveButton()
-        activityIndicator.stopAnimating()
-        activityIndicator.isHidden = true
+        //activityIndicator.stopAnimating()
+        //activityIndicator.isHidden = true
+        progressView.progress = 0.0
         emptyArray.removeAll()
         
     }
     
     func processScanning(){
-    
+
+        guard let img = imageView.image  else { return }
         let tesseract:G8Tesseract = G8Tesseract(language: "eng")
+        DispatchQueue.main.async {
+            self.progressView.progress = Float(tesseract.progress)
+        }
         tesseract.engineMode = .tesseractCubeCombined
         tesseract.pageSegmentationMode = .auto
         tesseract.maximumRecognitionTime = 30.0
         tesseract.delegate = self
-        
-        guard let img = imageView.image  else { return }
-        
         tesseract.image = img
         tesseract.recognize()
         
@@ -79,6 +86,8 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
             emptyArray.append(result)
             
         }
+        performSegue(withIdentifier: "toNavForScannedItems", sender: self)
+        imageView.image = nil
         print(emptyArray)
     }
     
@@ -99,13 +108,15 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
     
     @IBAction func scanButtonTapped(_ sender: Any) {
         
-        addActivityIndicator()
+        //addActivityIndicator()
         processScanning()
         
+        /*
         if emptyArray.isEmpty == false {
             performSegue(withIdentifier: "toNavForScannedItems", sender: self)
             imageView.image = nil
         }
+ */
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -165,6 +176,7 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
     }
     
     func addActivityIndicator() {
+    
         
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
