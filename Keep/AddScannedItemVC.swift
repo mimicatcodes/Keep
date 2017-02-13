@@ -10,19 +10,21 @@ import UIKit
 import NotificationCenter
 import RealmSwift
 
-class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIBarPositioningDelegate, UINavigationControllerDelegate  {
+class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIBarPositioningDelegate, UINavigationControllerDelegate  {
 
     let store = DataStore.sharedInstance
     
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var quantityLabel: UILabel!
+    @IBOutlet var locationView: UIView!
     @IBOutlet var locationButtons: [UIButton]!
     @IBOutlet weak var expDateField: UITextField!
     @IBOutlet weak var pDateField: UITextField!
     @IBOutlet weak var categoryField: UITextField!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
+    let picker = UIPickerView()
     let datePicker1 = UIDatePicker()
     let datePicker2 = UIDatePicker()
     var selectedIndex: Int = 0
@@ -35,6 +37,9 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
     var location: Location = .Fridge
     var activeTextField:UITextField?
     
+    // dummy data
+    let categories = ["1","2","3","4","5","6"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         nameField.delegate = self
@@ -46,6 +51,10 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
         formatInitialData()
         formatDates()
         customToolBarForPickers()
+        configureAppearances()
+        picker.delegate = self
+        picker.dataSource = self
+        categoryField.inputView = picker
 
     }
     
@@ -54,6 +63,34 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
         nameField.text = store.scannedItemToAdd
         formatInitialData()
         formatDates()
+    }
+    
+    func configureAppearances(){
+        nameField.layer.cornerRadius = 8
+        quantityLabel.layer.cornerRadius = 8
+        quantityLabel.layer.masksToBounds = true
+        pDateField.layer.cornerRadius = 8
+        expDateField.layer.cornerRadius = 8
+        locationView.layer.cornerRadius = 8
+        categoryField.layer.cornerRadius = 8
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return categories.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        categoryField.text = categories[row]
+        categoryField.resignFirstResponder()
+        categoryField.endEditing(true)
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return categories[row]
     }
     
     @IBAction func favButtonTapped(_ sender: UIButton) {
@@ -84,29 +121,29 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
         for (index, button) in locationButtons.enumerated() {
             if index == selectedIndex {
                 button.isSelected = true
-                button.backgroundColor = .clear
+                button.backgroundColor = MAIN_COLOR
+                button.setTitleColor(.white, for: .selected)
                 button.layer.cornerRadius = 5
-                button.layer.borderWidth = 2
-                button.layer.borderColor = MAIN_COLOR.cgColor
-                button.isHighlighted = false
+
                 
             } else {
                 button.isSelected = false
-                button.backgroundColor = .clear
+                button.backgroundColor = MAIN_BG_COLOR
+                button.setTitleColor(MAIN_COLOR, for: .normal)
                 button.layer.cornerRadius = 5
-                button.layer.borderWidth = 1
-                button.layer.borderColor = UIColor.clear.cgColor
-                button.isHighlighted = false
                 
             }
         }
     }
     
-    @IBAction func cancelTapped(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+    
+    @IBAction func cancelBtnTapped(_ sender: Any) {
+        
+         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func saveButtonTapped(_ sender: Any) {
+    
+    @IBAction func saveBtnTapped(_ sender: Any) {
         
         guard let name = nameField.text, name != "" else { return }
         guard let quantity = quantityLabel.text, quantity != "" else { return }
@@ -116,16 +153,17 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
         
         let realm = try! Realm()
         try! realm.write {
-          let item = Item(name: name, quantity: quantity, exp: expDate, purchaseDate: purchaseDate, isConsumed: false, location: location.rawValue, category: category)
+            let item = Item(name: name, quantity: quantity, exp: expDate, purchaseDate: purchaseDate, isConsumed: false, location: location.rawValue, category: category)
             print("scanned item to add to realm is \(item)")
             realm.add(item)
         }
         
-       NotificationCenter.default.post(name: REFRESH_SCANNED_ITEMS, object: nil)
+        NotificationCenter.default.post(name: REFRESH_SCANNED_ITEMS, object: nil)
         
-    
+        
         dismiss(animated: true, completion: nil)
     }
+  
     
     
     func formatInitialData() {
@@ -137,20 +175,16 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
         for (index,button) in locationButtons.enumerated() {
             if index == 0 {
                 button.isSelected = true
-                button.backgroundColor = .clear
-                button.titleLabel?.textColor = MAIN_COLOR
+                button.backgroundColor = MAIN_COLOR
+                button.setTitleColor(.white, for: .selected)
                 button.layer.cornerRadius = 5
-                button.layer.borderWidth = 2
-                button.layer.borderColor = MAIN_COLOR.cgColor
                 
                 
             } else {
                 button.isSelected = false
-                button.backgroundColor = .clear
-                button.titleLabel?.textColor = MAIN_BUTTON_LABEL_GRAY
+                button.backgroundColor = MAIN_BG_COLOR
+                button.setTitleColor(MAIN_COLOR, for: .normal)
                 button.layer.cornerRadius = 5
-                button.layer.borderWidth = 1
-                button.layer.borderColor = UIColor.clear.cgColor
                
             }
         }
