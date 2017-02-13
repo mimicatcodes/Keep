@@ -35,9 +35,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        plusButton.layer.cornerRadius = plusButton.frame.size.height / 2
-        plusButton.layer.borderWidth = 2.0
-        plusButton.layer.borderColor = MAIN_COLOR.cgColor
         
         plusButton.layer.shadowColor = UIColor.black.cgColor
         plusButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
@@ -46,12 +43,16 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         plusButton.layer.shadowOpacity = 0.3
       
         addButtons.forEach {
-            $0.layer.cornerRadius = $0.frame.size.height/2
+            $0.layer.cornerRadius = 20
             $0.layer.shadowColor = UIColor.black.cgColor
+            $0.layer.borderWidth = 2
+            $0.layer.borderColor = UIColor(red: 39/255.0, green: 207/255.0, blue: 171/255.0, alpha: 1).cgColor
+            /*
             $0.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
             $0.layer.masksToBounds = false
             $0.layer.shadowRadius = 1.0
             $0.layer.shadowOpacity = 0.3
+ */
         }
 
         tableView.allowsMultipleSelection = true
