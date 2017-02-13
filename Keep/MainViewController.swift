@@ -74,7 +74,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func dismissBtns(){
         if self.plusButtonIsRotated == true {
-            self.plusButton.transform = CGAffineTransform(rotationAngle: CGFloat(45).degreesToRadians)
+            self.plusButton.transform = CGAffineTransform(rotationAngle: CGFloat(0).degreesToRadians)
             
             self.addButtons.forEach {
                 $0.isHidden = true

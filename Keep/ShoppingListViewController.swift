@@ -14,6 +14,7 @@ import NotificationCenter
 class ShoppingListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     let store = DataStore.sharedInstance
+    var uniqueID: String = ""
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -90,7 +91,7 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
         }
         
         let rightButton2 = MGSwipeButton(title: "Edit", backgroundColor: UIColor.green) { (sender: MGSwipeTableCell) -> Bool in
-            self.createAlert(withTitle: "Edit")
+            self.shareList()
             return true
         }
         
@@ -114,6 +115,23 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
         cell.leftButtons = [leftButton1, leftButton2]
         cell.leftExpansion.buttonIndex = 1
 
+    }
+    
+    func shareList(){
+        let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
+        let filteredItems = store.allShoppingItems.filter(predicate)
+        var emptyArray = String()
+        
+        for item in filteredItems {
+            emptyArray.append(item.name)
+            
+        }
+        
+        let activityController = UIActivityViewController(activityItems: [emptyArray], applicationActivities: nil)
+        
+        activityController.popoverPresentationController?.sourceView = self.view
+        activityController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
+        self.present(activityController, animated: true, completion: nil)
     }
     
     func createAlert(withTitle:String) {
@@ -140,7 +158,6 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
             }
         }
     }
-
 }
 
 class ShoppingListCell: MGSwipeTableCell {

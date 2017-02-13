@@ -23,9 +23,9 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UISearchResultsUpdat
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
-        self.tableView.tableHeaderView = searchController.searchBar
-        self.tableView.tableFooterView = UIView()
-        self.tableView.separatorInset = .zero
+        tableView.tableHeaderView = searchController.searchBar
+        tableView.tableFooterView = UIView()
+        tableView.separatorInset = .zero
         
     }
     

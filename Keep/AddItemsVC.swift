@@ -617,14 +617,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
        
         return true
     }
-    
-    /*
-    @IBAction func dismissPicker(_ sender: Any) {
-        moveViewDown()
-        activeTextField?.resignFirstResponder()
-        activeTextField?.endEditing(true)
-    }
-    */
 
     func datePickerChanged(sender: UIDatePicker) {
         

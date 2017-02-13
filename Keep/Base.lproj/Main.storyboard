@@ -742,7 +742,7 @@
         <!--Add ItemsVC-->
         <scene sceneID="i3o-Fc-eCI">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="RqP-1N-A4c" customClass="AddItemsVC" customModule="Keep" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController autoresizesArchivedViewToFullSize="NO" id="RqP-1N-A4c" customClass="AddItemsVC" customModule="Keep" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ith-Uu-Pez"/>
                         <viewControllerLayoutGuide type="bottom" id="cdK-3O-nFG"/>
@@ -952,7 +952,6 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.90045616610000001" green="0.93729026849999997" blue="0.86047609059999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="1ei-cO-3Vg" firstAttribute="width" secondItem="z4L-pD-lU0" secondAttribute="width" id="42O-8w-gG2"/>
@@ -993,7 +992,6 @@
                                                 </connections>
                                             </textField>
                                         </subviews>
-                                        <color key="backgroundColor" red="1" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="Ube-w8-PlD" firstAttribute="top" secondItem="GlK-Zj-yyg" secondAttribute="top" id="CrH-Fi-ptz"/>
                                             <constraint firstItem="nli-eo-KRb" firstAttribute="width" secondItem="GlK-Zj-yyg" secondAttribute="width" multiplier="0.7" id="Jwl-cS-eOw"/>
@@ -1088,7 +1086,6 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.96686241610000001" green="0.83529411760000005" blue="0.85900796980000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="6kF-G2-fIo" firstAttribute="centerX" secondItem="30o-Yy-ApN" secondAttribute="centerX" id="2ed-NO-nHl"/>
                                             <constraint firstItem="30o-Yy-ApN" firstAttribute="trailing" secondItem="nnA-0D-SVU" secondAttribute="trailing" id="5Oq-pg-ROi"/>
@@ -2284,18 +2281,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Shopping List" id="BZh-I2-80Y">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="jvf-mf-V2Z">
-                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="addListTapped:" destination="PEo-up-NwA" id="m8e-5l-dtl"/>
-                                    <segue destination="rYQ-hn-FK9" kind="presentation" identifier="addList" modalPresentationStyle="overFullScreen" id="h8m-Mk-h3K"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="action" id="Q4u-RA-H34">
-                                <color key="tintColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="jvf-mf-V2Z">
+                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="addListTapped:" destination="PEo-up-NwA" id="m8e-5l-dtl"/>
+                                <segue destination="rYQ-hn-FK9" kind="presentation" identifier="addList" modalPresentationStyle="overFullScreen" id="h8m-Mk-h3K"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="4cL-GS-U8M" id="7MP-sT-GM8"/>

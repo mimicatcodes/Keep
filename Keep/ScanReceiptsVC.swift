@@ -20,6 +20,7 @@ class ScanReceiptsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorInset = .zero
         NotificationCenter.default.addObserver(forName: REFRESH_SCANNED_ITEMS, object: nil, queue: nil) { notification in
             print("notification is \(notification)")
             self.resultsArray.remove(at: self.store.scannedItemIndex!)
