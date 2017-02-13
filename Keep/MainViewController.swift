@@ -89,6 +89,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func plusButtonTapped(_ sender: Any) {
         animateAddButtons()
     }
+    
     @IBAction func didPressStockSection(_ sender: UIButton) {
         
         let index_ = sender.tag

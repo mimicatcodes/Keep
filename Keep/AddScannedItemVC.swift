@@ -17,12 +17,20 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var quantityLabel: UILabel!
+    @IBOutlet weak var minusButton: UIButton!
+    
+    @IBOutlet weak var plusButton: UIButton!
+    
     @IBOutlet var locationView: UIView!
     @IBOutlet var locationButtons: [UIButton]!
     @IBOutlet weak var expDateField: UITextField!
     @IBOutlet weak var pDateField: UITextField!
     @IBOutlet weak var categoryField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
+    
+    var originalTopMargin: CGFloat!
     
     let picker = UIPickerView()
     let datePicker1 = UIDatePicker()
@@ -49,12 +57,14 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
         categoryField.delegate = self
         categoryField.autocapitalizationType = .words
         formatInitialData()
-        formatDates()
         customToolBarForPickers()
         configureAppearances()
         picker.delegate = self
         picker.dataSource = self
+        pDateField.inputView = datePicker1
+        expDateField.inputView = datePicker2
         categoryField.inputView = picker
+        formatDates()
 
     }
     
@@ -63,6 +73,11 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
         nameField.text = store.scannedItemToAdd
         formatInitialData()
         formatDates()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        originalTopMargin = topMarginConstraint.constant
     }
     
     func configureAppearances(){
@@ -87,10 +102,44 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
         categoryField.text = categories[row]
         categoryField.resignFirstResponder()
         categoryField.endEditing(true)
+        moveViewDown()
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return categories[row]
+    }
+    
+    @IBAction func minusBtnTapped(_ sender: Any) {
+        minus()
+    }
+    
+    @IBAction func plusBtnTapped(_ sender: Any) {
+        plus()
+    }
+    
+    func minus(){
+        //moveViewDown()
+        if quantity == 1 {
+            
+            minusButton.isEnabled = false
+            
+        } else {
+            
+            plusButton.isEnabled = true
+            quantity -= 1
+            quantityLabel.text = "\(quantity)"
+            
+        }
+    }
+    
+    func plus(){
+        //moveViewDown()
+        quantity += 1
+        quantityLabel.text = "\(quantity)"
+        if minusButton.isEnabled == false {
+            minusButton.isEnabled = true
+            
+        }
     }
     
     @IBAction func favButtonTapped(_ sender: UIButton) {
@@ -99,8 +148,11 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
     }
     
     @IBAction func locationButtonTapped(_ sender: UIButton) {
-        selectedIndex = sender.tag
         
+        moveViewDown()
+        categoryField.endEditing(true)
+        categoryField.resignFirstResponder()
+        selectedIndex = sender.tag
         switch selectedIndex {
         case 0:
             self.location = .Fridge
@@ -168,7 +220,7 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
     
     func formatInitialData() {
 
-        categoryField.text = ""
+        categoryField.text = "Other"
         quantity = 1
         quantityLabel.text = "\(quantity)"
         
@@ -246,13 +298,14 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
         
         expDateField.inputAccessoryView = toolBar
         pDateField.inputAccessoryView = toolBar
-        
+        categoryField.inputAccessoryView = toolBar
     }
 
 
     func donePicker(sender:UIBarButtonItem) {
         
         activeTextField?.resignFirstResponder()
+            moveViewDown()
         
     }
     
@@ -267,6 +320,7 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
             datePicker1.datePickerMode = .date
             datePicker1.addTarget(self, action: #selector(self.datePickerChanged(sender:)) , for: .valueChanged)
             pDateField.text = formatter.string(from: datePicker1.date).capitalized
+            moveViewDown()
             
         } else if textField.tag == 1 {
             
@@ -274,7 +328,35 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
             datePicker2.datePickerMode = UIDatePickerMode.date
             datePicker2.addTarget(self, action: #selector(self.datePickerChanged(sender:)), for: .valueChanged)
             expDateField.text = formatter.string(from: datePicker2.date).capitalized
+            moveViewDown()
+        } else if textField.tag == 2 {
+            moveViewUp()
         }
     }
-
+    
+    
+    func moveViewUp() {
+        if topMarginConstraint.constant != originalTopMargin {
+            return
+        }
+        
+        topMarginConstraint.constant -= 100
+        UIView.animate(withDuration: 0.2, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+            
+        })
+    }
+    
+    func moveViewDown() {
+        if topMarginConstraint.constant == originalTopMargin {
+            return
+        }
+        
+        topMarginConstraint.constant = originalTopMargin
+        UIView.animate(withDuration: 0.2, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+        
+    }
+ 
 }

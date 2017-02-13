@@ -1629,6 +1629,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0EL-Rv-Lsc">
+                                <rect key="frame" x="28" y="56" width="332" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="5W2-Kp-oi9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="   Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qyK-7l-uva">
                                 <rect key="frame" x="28" y="76" width="309" height="36"/>
                                 <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
@@ -1656,15 +1665,6 @@
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0EL-Rv-Lsc">
-                                <rect key="frame" x="28" y="56" width="332" height="15"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="5W2-Kp-oi9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPk-8B-Lhx">
                                 <rect key="frame" x="28" y="122" width="332" height="15"/>
                                 <constraints>
@@ -1684,7 +1684,7 @@
                                 <color key="textColor" red="0.13725490200000001" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZEh-hE-jMD">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZEh-hE-jMD" userLabel="buttonView">
                                 <rect key="frame" x="310" y="142" width="76" height="36"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IxV-TQ-LUq">
@@ -1693,12 +1693,24 @@
                                         <state key="normal" image="MinusQuantity">
                                             <color key="titleColor" red="0.13725490200000001" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <state key="selected">
+                                            <color key="titleColor" red="0.13725490200000001" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="minusBtnTapped:" destination="XJM-Dm-HLu" eventType="touchUpInside" id="nRv-Vc-gjb"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNY-py-dFY">
                                         <rect key="frame" x="37" y="0.0" width="38" height="36"/>
                                         <state key="normal" image="AddQuantity">
                                             <color key="titleColor" red="0.13725490200000001" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <state key="selected">
+                                            <color key="titleColor" red="0.13725490200000001" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="plusBtnTapped:" destination="XJM-Dm-HLu" eventType="touchUpInside" id="fwD-6Z-Vct"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -1795,7 +1807,7 @@
                                     <constraint firstItem="2e6-Lk-DRO" firstAttribute="height" secondItem="eNd-Pv-OkN" secondAttribute="height" id="vfV-bI-f8m"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="   Uncategorized" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nDC-bK-Ofs">
+                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="   Uncategorized" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nDC-bK-Ofs">
                                 <rect key="frame" x="28" y="406" width="358" height="36"/>
                                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.13725490200000001" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -1908,10 +1920,13 @@
                         <outlet property="expDateField" destination="koa-5F-UcP" id="PEH-Qp-Mfh"/>
                         <outlet property="favButton" destination="Jqd-09-mMA" id="JOb-aS-7n4"/>
                         <outlet property="locationView" destination="XN5-1a-oKF" id="0Rv-j9-SNG"/>
+                        <outlet property="minusButton" destination="IxV-TQ-LUq" id="fHc-sD-A5z"/>
                         <outlet property="nameField" destination="qyK-7l-uva" id="fPL-OU-3Kb"/>
                         <outlet property="pDateField" destination="c6t-bD-Erf" id="Uw4-wu-6LA"/>
+                        <outlet property="plusButton" destination="CNY-py-dFY" id="h1G-h9-L7a"/>
                         <outlet property="quantityLabel" destination="pd0-1A-7rX" id="GN9-xG-C6e"/>
                         <outlet property="saveButton" destination="qNV-kY-oI0" id="f0b-Ad-3AM"/>
+                        <outlet property="topMarginConstraint" destination="vcB-Ox-2nf" id="vJn-8U-S9l"/>
                         <outletCollection property="locationButtons" destination="yHJ-12-joB" collectionClass="NSMutableArray" id="jzh-2N-5Ag"/>
                         <outletCollection property="locationButtons" destination="pv9-uH-nx0" collectionClass="NSMutableArray" id="WLZ-8M-Yct"/>
                         <outletCollection property="locationButtons" destination="eNd-Pv-OkN" collectionClass="NSMutableArray" id="uO1-qy-ItY"/>
@@ -2239,20 +2254,20 @@
                         <outlet property="menuBarView" destination="3b3-Is-Eab" id="Lr7-2B-YJz"/>
                         <outlet property="plusButton" destination="HJW-p5-Lgo" id="3Ir-Wy-3b9"/>
                         <outlet property="tableView" destination="aHx-cJ-aag" id="xHp-Oe-ySH"/>
-                        <outletCollection property="buttons" destination="1jp-kr-pSW" collectionClass="NSMutableArray" id="VYD-ly-GMa"/>
-                        <outletCollection property="buttons" destination="y9t-zA-4mD" collectionClass="NSMutableArray" id="xPG-dK-T9K"/>
-                        <outletCollection property="buttons" destination="bqS-Dx-o40" collectionClass="NSMutableArray" id="l31-Cz-V2w"/>
-                        <outletCollection property="buttons" destination="Fan-0s-U4v" collectionClass="NSMutableArray" id="qYk-TG-Txs"/>
-                        <outletCollection property="views" destination="8Uw-iF-tzg" collectionClass="NSMutableArray" id="bw0-fZ-Sco"/>
-                        <outletCollection property="views" destination="57W-T6-aKt" collectionClass="NSMutableArray" id="uWE-JM-ifj"/>
-                        <outletCollection property="views" destination="1D7-4P-myd" collectionClass="NSMutableArray" id="ppK-iu-udg"/>
-                        <outletCollection property="views" destination="9n0-L9-KbB" collectionClass="NSMutableArray" id="OKP-GX-5Mi"/>
                         <outletCollection property="labels" destination="QgJ-r8-pFX" collectionClass="NSMutableArray" id="Z00-og-djR"/>
                         <outletCollection property="labels" destination="aLc-gC-sjH" collectionClass="NSMutableArray" id="1FK-x1-RGI"/>
                         <outletCollection property="labels" destination="cL5-Q5-qcX" collectionClass="NSMutableArray" id="ZHC-wk-0gF"/>
                         <outletCollection property="labels" destination="gpJ-6O-aVB" collectionClass="NSMutableArray" id="Ord-he-lXq"/>
                         <outletCollection property="addButtons" destination="FN5-yg-hyv" collectionClass="NSMutableArray" id="sGw-zW-QAx"/>
                         <outletCollection property="addButtons" destination="edz-Nb-gib" collectionClass="NSMutableArray" id="c3i-HW-Vtc"/>
+                        <outletCollection property="buttons" destination="1jp-kr-pSW" collectionClass="NSMutableArray" id="N0e-P7-hmm"/>
+                        <outletCollection property="buttons" destination="y9t-zA-4mD" collectionClass="NSMutableArray" id="Fra-WN-Gjg"/>
+                        <outletCollection property="buttons" destination="bqS-Dx-o40" collectionClass="NSMutableArray" id="501-2x-dvo"/>
+                        <outletCollection property="buttons" destination="Fan-0s-U4v" collectionClass="NSMutableArray" id="Dxh-x9-2kW"/>
+                        <outletCollection property="views" destination="8Uw-iF-tzg" collectionClass="NSMutableArray" id="45V-wk-fLH"/>
+                        <outletCollection property="views" destination="57W-T6-aKt" collectionClass="NSMutableArray" id="skP-1C-0Pc"/>
+                        <outletCollection property="views" destination="1D7-4P-myd" collectionClass="NSMutableArray" id="wEx-pY-1t3"/>
+                        <outletCollection property="views" destination="9n0-L9-KbB" collectionClass="NSMutableArray" id="bqD-RT-L20"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VWK-9u-iOE" userLabel="First Responder" sceneMemberID="firstResponder"/>
