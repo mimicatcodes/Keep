@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import UIKit
 
-class AddItemVC: UIViewController {
+class AddItemVC: UIViewController, UITextFieldDelegate {
  // To do: autocomplete?
     let store = DataStore.sharedInstance
     var listTitle:String?
@@ -25,6 +25,7 @@ class AddItemVC: UIViewController {
         setupViews()
         saveButton.isEnabled = false
         saveButton.backgroundColor = .red
+        itemTitleField.delegate = self
         itemTitleField.becomeFirstResponder()
         itemTitleField.autocapitalizationType = .words
         itemTitleField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
@@ -71,6 +72,11 @@ class AddItemVC: UIViewController {
             saveButton.isEnabled = false
             saveButton.backgroundColor = .red
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        dismiss()
+        return true
     }
     
     func dismiss() {

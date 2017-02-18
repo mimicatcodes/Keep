@@ -12,24 +12,24 @@ import RealmSwift
 class AddFavoriteVC: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var saveButton: CustomButton!
     
     let store = DataStore.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nameField.becomeFirstResponder()
+        nameField.textAlignment = .center
         nameField.autocapitalizationType = .words
-        hideKeyboard()
+        nameField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
+        saveButton.backgroundColor = .red
         setupViews()
     }
     
     @IBAction func dismissView(_ sender: Any) {
-        nameField.endEditing(true)
-        nameField.resignFirstResponder()
-        dismiss(animated: false, completion: nil)
-    }
+  }
     
-    @IBAction func saveButtonTapped(_ sender: UIButton) {
+    @IBAction func saveButtonTapped(_ sender: Any) {
         saveFavItem()
     }
     
@@ -38,7 +38,7 @@ class AddFavoriteVC: UIViewController, UITextFieldDelegate {
         nameField.resignFirstResponder()
         dismiss(animated: false, completion: nil)
     }
-    
+
     func saveFavItem(){
         guard let name = nameField.text, !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
         let favorite = FavoritedItem(name: name.capitalized)
@@ -48,6 +48,21 @@ class AddFavoriteVC: UIViewController, UITextFieldDelegate {
         }
         NotificationCenter.default.post(name: NotificationName.refreshFavorites, object: nil)
         dismiss()
+    }
+    
+    func checkTextField(sender: UITextField) {
+        var textLength = 0
+        if let text = sender.text {
+            textLength = text.trimmingCharacters(in: .whitespacesAndNewlines).characters.count
+        }
+        if textLength > 0 {
+            saveButton.isEnabled = true
+            saveButton.backgroundColor = Colors.main
+            
+        } else {
+            saveButton.isEnabled = false
+            saveButton.backgroundColor = .red
+        }
     }
     
     func dismiss() {

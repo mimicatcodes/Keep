@@ -536,6 +536,7 @@
                     </view>
                     <connections>
                         <outlet property="nameField" destination="1Rh-GS-TRw" id="RAK-jg-VPV"/>
+                        <outlet property="saveButton" destination="0Uo-Kk-m8y" id="IBG-SS-t2L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYo-p0-ztz" userLabel="First Responder" sceneMemberID="firstResponder"/>
