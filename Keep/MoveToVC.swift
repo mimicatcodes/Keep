@@ -26,6 +26,8 @@ class MoveToVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        saveButton.isEnabled = false
+        saveButton.backgroundColor = UIColor.gray
         view.backgroundColor = Colors.dawn
         
     }
@@ -88,6 +90,9 @@ class MoveToVC: UIViewController {
                 default:
                     break
         }
+        
+        saveButton.isEnabled = true
+        saveButton.backgroundColor = Colors.main
         
         for (index, button) in buttons.enumerated() {
             if index == selectedIndex {

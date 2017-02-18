@@ -1730,7 +1730,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DUX-vA-pgv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5102.898550724638" y="-1697.2826086956522"/>
+            <point key="canvasLocation" x="5335" y="-1697"/>
         </scene>
         <!--Add Scanned ItemVC-->
         <scene sceneID="1Ku-2s-tJT">

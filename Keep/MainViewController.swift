@@ -48,9 +48,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         buttons = [fridgeButton, freezerButton, pantryButton, otherButton]
         addButtons.forEach {
             $0.layer.cornerRadius = 20
-            $0.layer.shadowColor = UIColor.black.cgColor
             $0.layer.borderWidth = 2
-            $0.layer.borderColor = UIColor(red: 39/255.0, green: 207/255.0, blue: 171/255.0, alpha: 1).cgColor
+            $0.layer.borderColor = Colors.addButtonsBorder.cgColor
         }
         tableView.allowsMultipleSelection = true
         buttons[selectedIndex].isSelected = true
@@ -175,7 +174,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: Fonts.montserratRegular, size: 12)
         header.textLabel?.textColor = UIColor.white
-        header.contentView.backgroundColor = UIColor(red: 35/255.0, green: 213/255.0, blue: 185/255.0, alpha: 1)
+        header.contentView.backgroundColor = Colors.added
         header.textLabel?.textAlignment = .center
         
     }

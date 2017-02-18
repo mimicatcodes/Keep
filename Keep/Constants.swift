@@ -22,6 +22,9 @@ struct Colors {
     static let warning = UIColor(red: 237/255.0, green: 93/255.0, blue: 93/255.0, alpha: 1)
     static let added = UIColor(red: 35/255.0, green: 213/255.0, blue: 185/255.0, alpha: 1)
     static let dawn = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.10)
+    static let naviTitle = UIColor(red:100/255.0, green:100/255.0, blue:100/255.0, alpha: 1.0)
+    static let emeraldGreen = UIColor(red: 39/255.0, green: 207/255.0, blue: 171/255.0, alpha: 1)
+    static let addButtonsBorder = UIColor(red: 39/255.0, green: 207/255.0, blue: 171/255.0, alpha: 1)
 }
 
 struct NotificationName {
