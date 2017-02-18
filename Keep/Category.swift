@@ -11,7 +11,7 @@ import RealmSwift
 
 enum Category : String {
     
-    case bakery = "Bakery", dairy = "Dairy", other = "Other"
+    case bakery, dairy, other
     
 }
 
@@ -50,7 +50,4 @@ enum ItemsCategories {
     case other
     
 }
-
-// ADD 5 FOOD GROUPS : "Fruits", "Vegetables", "Protein", "Grains", "Dairy"
-//
 

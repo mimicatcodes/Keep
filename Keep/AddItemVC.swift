@@ -21,13 +21,11 @@ class AddItemVC: UIViewController {
     var uniqueID: String?
 
     @IBOutlet weak var itemTitleField: UITextField!
-    @IBOutlet weak var quantityField: UITextField!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         setupViews()
-        quantityField.text = "1"
         itemTitleField.autocapitalizationType = .words
 
     }
@@ -39,12 +37,12 @@ class AddItemVC: UIViewController {
     @IBAction func cancelBtnTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
     @IBAction func saveBtnTapped(_ sender: Any) {
         
         guard let title = itemTitleField.text, title != "" else { return }
-        guard let quantity = quantityField.text, quantity != "" else { return }
         
-        let shoppingItem = ShoppingItem(name: title, quantity: quantity, isPurchased: false)
+        let shoppingItem = ShoppingItem(name: title, isPurchased: false)
         
         guard let id = uniqueID else { return }
         
@@ -54,23 +52,16 @@ class AddItemVC: UIViewController {
         
         let realm = try! Realm()
         try! realm.write {
-            
             realm.add(shoppingItem)
             shoppingItem.list?.numOfItems += 1
-            print("***** \(shoppingItem.name) is added to realm database in \(shoppingItem.list?.uniqueID) in \(shoppingItem.quantity) ***** ")
         }
         
         dismiss(animated: true, completion: nil)
-        NotificationCenter.default.post(name: REFRESH_ITEM_LIST_NOTIFICATION, object: nil)
+        NotificationCenter.default.post(name: NotificationName.refreshItemList, object: nil)
         
     }
-    
-    
+
     func setupViews(){
-        
-        view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.35)
-        createItemView.backgroundColor = UIColor(red: 0.93, green: 0.94, blue: 0.95, alpha: 1.00)
+        view.backgroundColor = Colors.dawn
     }
-    
-    
 }

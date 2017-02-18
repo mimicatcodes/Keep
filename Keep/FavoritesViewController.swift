@@ -19,7 +19,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
         definesPresentationContext = true
-        NotificationCenter.default.addObserver(forName: REFRESH_FAVORITES, object: nil, queue: nil) { (notification) in
+        NotificationCenter.default.addObserver(forName: NotificationName.refreshFavorites, object: nil, queue: nil) { (notification) in
             print("notification is \(notification)")
             DispatchQueue.main.async {
                 self.tableView.reloadData()

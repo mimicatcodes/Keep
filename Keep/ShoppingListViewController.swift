@@ -15,6 +15,7 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
     
     let store = DataStore.sharedInstance
     var uniqueID: String = ""
+    let formatter = DateFormatter()
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -22,24 +23,24 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
         definesPresentationContext = true
-        tableView.separatorColor = UIColor(red:219/255.0, green:219/255.0, blue:219/255.0, alpha: 1.0)
-        NotificationCenter.default.addObserver(forName: REFRESH_TV_NOTIFICATION, object: nil, queue: nil) { notification in
+        formatDates()
+        tableView.separatorColor = Colors.seperatorTwo
+        NotificationCenter.default.addObserver(forName: NotificationName.refreshTableview, object: nil, queue: nil) { notification in
             print("notification is \(notification)")
             self.tableView.reloadData()
         }
-       
+        
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         tableView.reloadData()
     }
     
     @IBAction func addListTapped(_ sender: Any) {
         
-        performSegue(withIdentifier: "addList", sender: nil)
-        
+        performSegue(withIdentifier: Identifiers.Segue.addList, sender: nil)
     }
     
     func titleForIndexPath(_ indexPath: IndexPath) -> String {
@@ -64,8 +65,7 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let reuseIdentifier = "shoppingListCell"
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as! ShoppingListCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.Cell.shoppingListCell) as! ShoppingListCell
         
         cell.numOfItemsView.layer.borderWidth = 1.2
         cell.numOfItemsView.layer.borderColor = UIColor(red:35/255.0, green:213/255.0, blue:185/255.0, alpha: 1.0).cgColor
@@ -74,7 +74,8 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
 
         cell.numOfItemsRemainingLabel.text = String(describing: store.allShopingLists[indexPath.row].numOfItems)
         cell.shoppingListTitleLabel.text = store.allShopingLists[indexPath.row].title.capitalized
-        cell.createdAtLabel.text = store.allShopingLists[indexPath.row].isCreatedAt
+        let createdAt = formatter.string(from:store.allShopingLists[indexPath.row].isCreatedAt)
+        cell.createdAtLabel.text = createdAt
         cell.selectionStyle = .none
         cell.separatorInset = .zero
         configureSwipeButtons(cell: cell)
@@ -137,18 +138,13 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
     func createAlert(withTitle:String) {
         
         let alert = UIAlertController(title: withTitle, message: "", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
-            
-        }
-        
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in }
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
-        
     }
- 
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showItems" {
+        if segue.identifier == Identifiers.Segue.showItems {
             if let index = tableView.indexPathForSelectedRow?.row {
                 let selectedTitle = store.allShopingLists[index]
                 let dest = segue.destination as! ShoppingListDetailVC
@@ -157,6 +153,16 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
                 print(selectedTitle.uniqueID)
             }
         }
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
+    }
+    
+    func formatDates(){
+        
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        formatter.dateFormat = "MMM dd, yyyy"
     }
 }
 

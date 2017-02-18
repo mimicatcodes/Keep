@@ -10,6 +10,6 @@ import Foundation
 
 enum Location : String {
     
-    case Fridge = "Fridge", Freezer = "Freezer", Pantry = "Pantry", Other = "Other"
+    case Fridge, Freezer, Pantry, Other
     
 }

@@ -32,30 +32,21 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UISearchResultsUpdat
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if searchController.isActive && searchController.searchBar.text != "" {
-            
             if let items = self.filteredItems {
-                
                 return items.count
-                
             }
         }
-        
         return store.allItems.count
-        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         
         if searchController.isActive && searchController.searchBar.text != "" {
-
             cell?.textLabel?.text = self.filteredItems?[indexPath.row].name
-            
         } else {
-            
             cell?.textLabel?.text = self.store.allItems[indexPath.row].name
         }
-        
         return cell!
     }
     

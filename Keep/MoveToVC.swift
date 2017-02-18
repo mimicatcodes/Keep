@@ -2,7 +2,7 @@
 //  MoveToVC.swift
 //  Keep
 //
-//  Created by Mirim An on 2/1/17.
+//  Created by Luna An on 2/1/17.
 //  Copyright © 2017 Mimicatcodes. All rights reserved.
 //
 
@@ -25,16 +25,8 @@ class MoveToVC: UIViewController {
     @IBOutlet var buttons: [UIButton]!
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.35)
-        topView.layer.cornerRadius = 8
-        topView.backgroundColor = UIColor.white
-        saveButton.layer.cornerRadius = 5
-        saveButton.backgroundColor = UIColor.white
-        cancelButton.layer.cornerRadius = 5
-        cancelButton.backgroundColor = UIColor.white
-        
+        view.backgroundColor = Colors.dawn
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,16 +48,13 @@ class MoveToVC: UIViewController {
         if store.tappedSLItemToSendToLocation != "" {
             if let location = location {
                 let name = store.tappedSLItemToSendToLocation
-                
+        
                 let realm = try! Realm()
                 try! realm.write {
                     let item = Item(name: name, quantity: "1", exp: Date(), purchaseDate: Date(), isConsumed: false, location: location, category: "Uncategorized")
-                    
                     realm.add(item)
-                    
                 }
             }
-           
         }
         dismiss(animated: true, completion: nil)
     }
@@ -78,47 +67,39 @@ class MoveToVC: UIViewController {
     @IBAction func locationBtnsTapped(_ sender: UIButton) {
         
         let selectedIndex = sender.tag
-        
                 switch selectedIndex {
                 case 0:
-                    
-                    location = "Fridge"
+                    location = Locations.fridge
                     print("Fridge btn tapped")
                     print("\(buttons[0].isSelected)")
                 case 1:
                     
-                    location = "Freezer"
+                    location = Locations.freezer
                     print("Freezer btn tapped")
                 case 2:
                     
-                    location = "Pantry"
+                    location = Locations.pantry
                     print("Pantry btn tapped")
                 case 3:
                     
-                    location = "Other"
+                    location = Locations.other
                     print("Other btn tapped")
                 default:
                     break
-
         }
         
         for (index, button) in buttons.enumerated() {
             if index == selectedIndex {
                 button.isSelected = true
-                button.setTitleColor(MAIN_COLOR, for: .selected)
-                                
+                button.setTitleColor(Colors.main, for: .selected)
             } else {
                 button.isSelected = false
-                button.setTitleColor(MAIN_BUTTON_LABEL_GRAY, for: .normal)
-
+                button.setTitleColor(Colors.button, for: .normal)
             }
         }
-        
     }
 
-    
     @IBAction func dismissView(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-
 }

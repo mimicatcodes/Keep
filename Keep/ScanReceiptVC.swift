@@ -23,7 +23,6 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
     @IBOutlet weak var imageView: UIImageView!
 
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         //activityIndicator.isHidden = true
         progressView.setProgress(0, animated: true)
@@ -42,8 +41,7 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
         saveButton.layer.masksToBounds = true
     }
     
-    @IBAction func cancelTapped(_ sender: Any) {
-        
+    @IBAction func cancelTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
  
@@ -55,23 +53,18 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
         //activityIndicator.isHidden = true
         progressView.progress = 0.0
         emptyArray.removeAll()
-        
     }
     
     func processScanning(){
-
+        
         guard let img = imageView.image  else { return }
-        let tesseract:G8Tesseract = G8Tesseract(language: "eng")
-        DispatchQueue.main.async {
-            self.progressView.progress = Float(tesseract.progress)
-        }
+        let tesseract:G8Tesseract = G8Tesseract(language: TesseractLang.english)
         tesseract.engineMode = .tesseractCubeCombined
         tesseract.pageSegmentationMode = .auto
         tesseract.maximumRecognitionTime = 30.0
         tesseract.delegate = self
         tesseract.image = img
         tesseract.recognize()
-        
         print(tesseract.recognizedText)
         
         textsScanned = tesseract.recognizedText
@@ -86,16 +79,31 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
             emptyArray.append(result)
             
         }
-        performSegue(withIdentifier: "toNavForScannedItems", sender: self)
+        
+        performSegue(withIdentifier: Identifiers.Segue.toScannedItems, sender: self)
         imageView.image = nil
         print(emptyArray)
     }
     
     func progressImageRecognition(for tesseract: G8Tesseract!) {
-        print("Recognition progress \(tesseract.progress) %...")
+       // progressView.progress = Float(tesseract.progress).remainder(dividingBy: 100)
+        
+        updateProgress(with: Float(tesseract.progress))
+        //  print("Recognition progress \(tesseract.progress) %...")
         
     }
+    
+    func updateProgress(with value: Float) {
+        
+        print("\n")
+        print("value: \(value)")
 
+        progressView.setProgress(value, animated: false)
+        progressView.setNeedsLayout()
+        progressView.setNeedsDisplay()
+        progressView.setNeedsFocusUpdate()
+        
+    }
 
     @IBAction func takePhotoButtonTapped(_ sender: Any) {
         handleCameraImage()
@@ -103,11 +111,9 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
     
     @IBAction func importButtonTapped(_ sender: Any) {
         handleLibraryImage()
-        
     }
     
     @IBAction func scanButtonTapped(_ sender: Any) {
-        
         //addActivityIndicator()
         processScanning()
         
@@ -189,13 +195,10 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "toNavForScannedItems" {
-            
+        if identifier == Identifiers.Segue.toScannedItems {
             if emptyArray.isEmpty {
-                
                 return false
             }
-                
             else {
                 return true
             }
@@ -204,12 +207,16 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toNavForScannedItems" {
-            let destNav = segue.destination as! UINavigationController
-            let targetController = destNav.topViewController as! ScanReceiptsVC
-  
+        if segue.identifier == Identifiers.Segue.toScannedItems {
+//            let destNav = segue.destination as! UINavigationController
+//            let targetController = destNav.topViewController as! ScanReceiptsVC
+//  
+//            if !emptyArray.isEmpty {
+//                targetController.resultsArray = emptyArray
+//            }
+            let dest = segue.destination as! ScannedItemsVC
             if !emptyArray.isEmpty {
-                targetController.resultsArray = emptyArray
+                dest.resultsArray = emptyArray
             }
         }
     }

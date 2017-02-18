@@ -8,11 +8,11 @@
 
 import UIKit
 
-class ScanReceiptsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-    let store = DataStore.sharedInstance
+class ScannedItemsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     @IBOutlet weak var tableView: UITableView!
     
+    let store = DataStore.sharedInstance
     var resultsArray = [String]()
     var titleString:String?
     
@@ -21,7 +21,7 @@ class ScanReceiptsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorInset = .zero
-        NotificationCenter.default.addObserver(forName: REFRESH_SCANNED_ITEMS, object: nil, queue: nil) { notification in
+        NotificationCenter.default.addObserver(forName: NotificationName.refreshScannedItems, object: nil, queue: nil) { notification in
             print("notification is \(notification)")
             self.resultsArray.remove(at: self.store.scannedItemIndex!)
             self.tableView.reloadData()
@@ -39,14 +39,11 @@ class ScanReceiptsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "scannedItemCell", for: indexPath) as! scannedItemCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.Cell.scannedItemCell, for: indexPath) as! scannedItemCell
         
         cell.titleLabel.text = resultsArray[indexPath.row]
             print(resultsArray[indexPath.row])
-        
         cell.selectionStyle = .none
-        
-        // buttons
         cell.editAddButton.tag = indexPath.row
         cell.editAddButton.addTarget(self, action: #selector(addToInventory), for: .touchUpInside)
        
@@ -61,7 +58,7 @@ class ScanReceiptsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             store.scannedItemToAdd = title
             store.scannedItemIndex = sender.tag
             print("scanned Item index is \(store.scannedItemIndex)")
-            performSegue(withIdentifier: "addScannedItem", sender: self)
+            performSegue(withIdentifier: Identifiers.Segue.addScannedItem, sender: self)
         }
         
     }
@@ -87,7 +84,6 @@ class ScanReceiptsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     {
         if editingStyle == .delete
         {
-            
             resultsArray.remove(at: indexPath.row)
             tableView.reloadData()
         }

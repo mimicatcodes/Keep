@@ -57,7 +57,7 @@ class DataStore{
         return Set(otherItems.value(forKeyPath: "category") as! [String]).sorted()
     }
     
-    var buttonStatus = "Fridge"
+    var buttonStatus = Locations.fridge
     var favItemToEdit:FavoritedItem?
     
 }

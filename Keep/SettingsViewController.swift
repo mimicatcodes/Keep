@@ -133,7 +133,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
         chartDataSet.drawFilledEnabled = true
         chartDataSet.drawValuesEnabled = false
-        chartDataSet.fillColor = MAIN_COLOR
+        chartDataSet.fillColor = Colors.main
         
         let chartData = RadarChartData(dataSet: chartDataSet)
         chartData.labels = dataPoints
@@ -147,7 +147,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         if let font = font {
             xAxis.labelFont = font
         }
-        xAxis.labelTextColor = MAIN_COLOR
+        xAxis.labelTextColor = Colors.main
         
         radarChartView.sizeToFit()
         radarChartView.chartDescription?.text = ""
@@ -171,7 +171,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell =  tableView.dequeueReusableCell(withIdentifier: "accountCell", for: indexPath) as! AccountCell
+        let cell =  tableView.dequeueReusableCell(withIdentifier: Identifiers.Cell.accountCell, for: indexPath) as! AccountCell
         cell.title.text = sections[indexPath.row]
         
         return cell

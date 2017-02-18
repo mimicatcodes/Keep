@@ -27,7 +27,7 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.rowHeight = 100
         navigationItem.title = name?.capitalized
         definesPresentationContext = true
-        NotificationCenter.default.addObserver(forName: REFRESH_ITEM_LIST_NOTIFICATION, object: nil, queue: nil) { (notification) in
+        NotificationCenter.default.addObserver(forName: NotificationName.refreshItemList, object: nil, queue: nil) { (notification) in
             print("notification is \(notification)")
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -35,11 +35,9 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-   
-    
     @IBAction func addItemBtnTapped(_ sender: Any) {
         
-        performSegue(withIdentifier: "addItemToSL", sender: nil)
+        performSegue(withIdentifier: Identifiers.Segue.addItemToSL, sender: nil)
         
     }
     
@@ -53,7 +51,7 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier:"listDetailCell", for: indexPath) as! ListDetailCell
+        let cell = tableView.dequeueReusableCell(withIdentifier:Identifiers.Cell.listDetailCell, for: indexPath) as! ListDetailCell
         
         let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
         let filteredItems = store.allShoppingItems.filter(predicate)
@@ -62,7 +60,7 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
         cell.separatorInset = .zero
         
         if filteredItems[indexPath.row].isPurchased == true {
-            cell.titleLabel.textColor = MAIN_BORDER_COLOR
+            cell.titleLabel.textColor = Colors.mainBorder
             cell.checkBoxImgView.image = #imageLiteral(resourceName: "ChecklistActive2")
             cell.moveButton.isHidden = false
     
@@ -132,25 +130,20 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return 50
     }
     
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "addItemToSL" {
+        if segue.identifier == Identifiers.Segue.addItemToSL {
             
             let dest = segue.destination as! AddItemVC
             dest.uniqueID = uniqueID
-            
         }
     }
 }
 
 class ListDetailCell:UITableViewCell {
-    
-    
     var tapAction: ((UITableViewCell) -> Void)?
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var checkBoxImgView: UIImageView!
@@ -158,7 +151,6 @@ class ListDetailCell:UITableViewCell {
     @IBAction func moveButtonTapped(_ sender: UIButton) {
         tapAction?(self)
     }
-    
 }
 
 

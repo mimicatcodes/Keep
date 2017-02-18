@@ -11,13 +11,22 @@ import RealmSwift
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let store = DataStore.sharedInstance
-    
     @IBOutlet weak var menuBarView: UIView!
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet var buttons: [UIButton]!
-    @IBOutlet var views: [UIView]!
+    @IBOutlet weak var fridgeButton: UIButton!
+    @IBOutlet weak var freezerButton: UIButton!
+    @IBOutlet weak var pantryButton: UIButton!
+    @IBOutlet weak var otherButton: UIButton!
+    
+    @IBOutlet weak var fridgeView: UIView!
+    @IBOutlet weak var freezerView: UIView!
+    @IBOutlet weak var pantryView: UIView!
+    @IBOutlet weak var otherView: UIView!
+    
+    var views: [UIView]!
+    var buttons: [UIButton]!
+    
     @IBOutlet var labels: [UILabel]!
     @IBOutlet var addButtons: [UIButton]! {
         didSet {
@@ -27,37 +36,32 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
+    
+    let store = DataStore.sharedInstance
     var selectedIndex: Int = 0
     let formatter = DateFormatter()
-    
     var plusButtonIsRotated = false
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
+        views = [fridgeView, freezerView, pantryView, otherView]
+        buttons = [fridgeButton, freezerButton, pantryButton, otherButton]
         plusButton.layer.shadowColor = UIColor.black.cgColor
         plusButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         plusButton.layer.masksToBounds = false
         plusButton.layer.shadowRadius = 1.0
         plusButton.layer.shadowOpacity = 0.3
-      
+        
         addButtons.forEach {
             $0.layer.cornerRadius = 20
             $0.layer.shadowColor = UIColor.black.cgColor
             $0.layer.borderWidth = 2
             $0.layer.borderColor = UIColor(red: 39/255.0, green: 207/255.0, blue: 171/255.0, alpha: 1).cgColor
-            /*
-            $0.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-            $0.layer.masksToBounds = false
-            $0.layer.shadowRadius = 1.0
-            $0.layer.shadowOpacity = 0.3
- */
         }
-
+        
         tableView.allowsMultipleSelection = true
         buttons[selectedIndex].isSelected = true
-        views[selectedIndex].backgroundColor = MAIN_COLOR
+        views[selectedIndex].backgroundColor = Colors.main
         didPressStockSection(buttons[selectedIndex])
         tableView.tableFooterView = UIView()
         formatDates()
@@ -74,17 +78,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func dismissBtns(){
+        
         if self.plusButtonIsRotated == true {
             self.plusButton.transform = CGAffineTransform(rotationAngle: CGFloat(0).degreesToRadians)
-            
             self.addButtons.forEach {
                 $0.isHidden = true
                 $0.alpha = 1.0
             }
-            
             self.plusButtonIsRotated = false
         }
-
     }
     
     @IBAction func plusButtonTapped(_ sender: Any) {
@@ -96,57 +98,34 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let index_ = sender.tag
         
         switch index_ {
-            
         case 0:
-            store.buttonStatus = "Fridge"
-            print("Fridge ---")
-            
+            store.buttonStatus = Locations.fridge
             tableView.reloadData()
         case 1:
-            store.buttonStatus = "Freezer"
-            print("Freezer-----")
+            store.buttonStatus = Locations.freezer
             tableView.reloadData()
-            
         case 2:
-            store.buttonStatus = "Pantry"
-            print("Pantry -----")
+            store.buttonStatus = Locations.pantry
             tableView.reloadData()
         default:
-            store.buttonStatus = "Other"
-            print("Other ------")
+            store.buttonStatus = Locations.other
             tableView.reloadData()
         }
         
-        
-        for (index,button) in buttons.enumerated() {
-            
-            if index == index_ {
-                
+        for (i,button) in buttons.enumerated() {
+            if i == index_ {
                 button.isSelected = true
-                button.setTitleColor(MAIN_COLOR, for: .selected)
-                views[index].backgroundColor = MAIN_COLOR
-                labels[index].textColor = UIColor.white
-        
-                
+                button.setTitleColor(Colors.main, for: .selected)
+                views[i].backgroundColor = Colors.main
+                labels[i].textColor = UIColor.white
             } else {
-                
                 button.isSelected = false
-                button.setTitleColor(MAIN_BUTTON_LABEL_GRAY, for: .normal)
-                views[index].backgroundColor = MAIN_BG_COLOR
-                labels[index].textColor = MAIN_BUTTON_LABEL_GRAY
-
-                
+                button.setTitleColor(Colors.button, for: .normal)
+                views[i].backgroundColor = Colors.mainBg
+                labels[i].textColor = Colors.button
             }
             dismissBtns()
         }
-    }
-    
-    func formatDates(){
-        
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        formatter.dateFormat = "MMM dd, yyyy"
-        
     }
     
     func animateAddButtons() {
@@ -161,7 +140,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                     $0.isHidden = false
                     $0.alpha = 1.0
                 }
-                
                 self.plusButtonIsRotated = true
             } else {
                 self.plusButton.transform = CGAffineTransform(rotationAngle: CGFloat(0).degreesToRadians)
@@ -170,29 +148,29 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                     $0.isHidden = true
                     $0.alpha = 0.0
                 }
-                
                 self.plusButtonIsRotated = false
             }
-            
-            
         }, completion: nil)
         
     }
-
-    // MARK: - TableView Methods
     
+    func formatDates(){
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        formatter.dateFormat = "MMM dd, yyyy"
+    }
+
     func numberOfSections(in tableView: UITableView) -> Int {
         
         var count = 0
-        
         switch store.buttonStatus {
-        case "Fridge":
+        case Locations.fridge:
             count = store.fridgeSectionNames.count
-        case "Freezer":
+        case Locations.freezer:
             count = store.freezerSectionNames.count
-        case "Pantry":
+        case Locations.pantry:
             count = store.pantrySectionNames.count
-        case "Other":
+        case Locations.other:
             count = store.otherSectionNames.count
         default:
             count = 0
@@ -203,7 +181,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "Montserrat-Regular", size: 12)
+        header.textLabel?.font = UIFont(name: Fonts.montserratRegular, size: 12)
         header.textLabel?.textColor = UIColor.white
         header.contentView.backgroundColor = UIColor(red: 35/255.0, green: 213/255.0, blue: 185/255.0, alpha: 1)
         header.textLabel?.textAlignment = .center
@@ -215,13 +193,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         var title = ""
         
         switch store.buttonStatus {
-        case "Fridge":
+        case Locations.fridge:
             title = store.fridgeSectionNames[section]
-        case "Freezer":
+        case Locations.freezer:
             title = store.freezerSectionNames[section]
-        case "Pantry":
+        case Locations.pantry:
             title = store.pantrySectionNames[section]
-        case "Other":
+        case Locations.other:
             title = store.otherSectionNames[section]
         default:
             break
@@ -235,44 +213,42 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         var count = 0
         
         switch store.buttonStatus {
-        case "Fridge":
-            count = store.fridgeItems.filter("category == %@", store.fridgeSectionNames[section]).count
-        case "Freezer":
-            count = store.freezerItems.filter("category == %@", store.freezerSectionNames[section]).count
-        case "Pantry":
-            count = store.pantryItems.filter("category == %@", store.pantrySectionNames[section]).count
-        case "Other":
-            count = store.otherItems.filter("category == %@", store.otherSectionNames[section]).count
+        case Locations.fridge:
+            count = store.fridgeItems.filter(Filters.category, store.fridgeSectionNames[section]).count
+        case Locations.freezer:
+            count = store.freezerItems.filter(Filters.category, store.freezerSectionNames[section]).count
+        case Locations.pantry:
+            count = store.pantryItems.filter(Filters.category, store.pantrySectionNames[section]).count
+        case Locations.other:
+            count = store.otherItems.filter(Filters.category, store.otherSectionNames[section]).count
         default:
             break
         }
         return count
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.Cell.stockCell, for: indexPath) as! StockCell
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "stockCell", for: indexPath) as! StockCell
-   
         switch store.buttonStatus {
             
-        case "Fridge":
+        case Locations.fridge:
             
-            let filteredFridgeItem = store.fridgeItems.filter("category == %@", store.fridgeSectionNames[indexPath.section])[indexPath.row]
+            let filteredFridgeItem = store.fridgeItems.filter(Filters.category, store.fridgeSectionNames[indexPath.section])[indexPath.row]
             configureCells(cell: cell, indexPath: indexPath, filteredItem: filteredFridgeItem)
-        case "Freezer":
+        case Locations.freezer:
             
-            let filteredFreezerItem = store.freezerItems.filter("category == %@", store.freezerSectionNames[indexPath.section])[indexPath.row]
+            let filteredFreezerItem = store.freezerItems.filter(Filters.category, store.freezerSectionNames[indexPath.section])[indexPath.row]
             configureCells(cell: cell, indexPath: indexPath, filteredItem: filteredFreezerItem)
             
-        case "Pantry":
-            let filteredPantryItem = store.pantryItems.filter("category == %@", store.pantrySectionNames[indexPath.section])[indexPath.row]
+        case Locations.pantry:
+            let filteredPantryItem = store.pantryItems.filter(Filters.category, store.pantrySectionNames[indexPath.section])[indexPath.row]
             configureCells(cell: cell, indexPath: indexPath, filteredItem: filteredPantryItem)
             
-        case "Other":
-            let filteredOtherItem = store.otherItems.filter("category == %@", store.otherSectionNames[indexPath.section])[indexPath.row]
+        case Locations.other:
+            let filteredOtherItem = store.otherItems.filter(Filters.category, store.otherSectionNames[indexPath.section])[indexPath.row]
             configureCells(cell: cell, indexPath: indexPath, filteredItem: filteredOtherItem)
-            default:
+        default:
             break
         }
         
@@ -308,31 +284,28 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 filteredItem.isExpiring = false
             }
         }
-        
         configureExpireLabels(cell: cell, daysLeft: daysLeft)
         cell.quantityLabel.text = "x " + filteredItem.quantity
-
     }
     
     func configureExpireLabels(cell: StockCell, daysLeft: Int){
         if daysLeft == 0 {
             cell.expDateLabel.text = "Expiring today"
-            cell.expDateLabel.textColor = EXPIRING_WARNING_COLOR
+            cell.expDateLabel.textColor = Colors.warning
         } else if daysLeft == 1 {
             cell.expDateLabel.text = "\(daysLeft) day left"
-            cell.expDateLabel.textColor = EXPIRING_WARNING_COLOR
+            cell.expDateLabel.textColor = Colors.warning
         } else if daysLeft == 2 || daysLeft == 3 {
             cell.expDateLabel.text = "\(daysLeft) days left"
-            cell.expDateLabel.textColor = EXPIRING_WARNING_COLOR
+            cell.expDateLabel.textColor = Colors.warning
         } else if daysLeft > 3 {
             cell.expDateLabel.text = "\(daysLeft) days left"
-            cell.expDateLabel.textColor = MAIN_BUTTON_LABEL_GRAY
+            cell.expDateLabel.textColor = Colors.button
         } else  {
             cell.expDateLabel.text = "Expired!"
-            cell.expDateLabel.textColor = EXPIRING_WARNING_COLOR
+            cell.expDateLabel.textColor = Colors.warning
         }
     }
-    
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         dismissBtns()
@@ -340,10 +313,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let realm = try! Realm()
             
-            
             switch self.store.buttonStatus {
-            case "Fridge":
-                let itemToBeDeleted = self.store.fridgeItems.filter("category == %@", self.store.fridgeSectionNames[indexPath.section])[indexPath.row]
+            case Locations.fridge:
+                let itemToBeDeleted = self.store.fridgeItems.filter(Filters.category, self.store.fridgeSectionNames[indexPath.section])[indexPath.row]
                 
                 try! realm.write {
                     print("\(itemToBeDeleted) has been deleted")
@@ -352,8 +324,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.tableView.reloadData()
                 print("Deleted an item from a Fridge")
                 
-            case "Freezer":
-                let itemToBeDeleted = self.store.freezerItems.filter("category == %@", self.store.freezerSectionNames[indexPath.section])[indexPath.row]
+            case Locations.freezer:
+                let itemToBeDeleted = self.store.freezerItems.filter(Filters.category, self.store.freezerSectionNames[indexPath.section])[indexPath.row]
                 try! realm.write {
                     print("\(itemToBeDeleted) has been deleted")
                     realm.delete(itemToBeDeleted)
@@ -361,8 +333,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.tableView.reloadData()
                 print("Deleted an item from Freezer")
                 
-            case "Pantry":
-                let itemToBeDeleted = self.store.pantryItems.filter("category == %@", self.store.pantrySectionNames[indexPath.section])[indexPath.row]
+            case Locations.pantry:
+                let itemToBeDeleted = self.store.pantryItems.filter(Filters.category, self.store.pantrySectionNames[indexPath.section])[indexPath.row]
                 try! realm.write {
                     print("\(itemToBeDeleted) has been deleted")
                     realm.delete(itemToBeDeleted)
@@ -370,8 +342,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.tableView.reloadData()
                 print("Deleted an item from Pantry")
                 
-            case "Other":
-                let itemToBeDeleted = self.store.otherItems.filter("category == %@", self.store.otherSectionNames[indexPath.section])[indexPath.row]
+            case Locations.other:
+                let itemToBeDeleted = self.store.otherItems.filter(Filters.category, self.store.otherSectionNames[indexPath.section])[indexPath.row]
                 try! realm.write {
                     print("\(itemToBeDeleted) has been deleted")
                     realm.delete(itemToBeDeleted)
@@ -382,16 +354,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             default:
                 break
             }
-            
         }
-        
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
             // share item at indexPath
-            
             print("EDIT Tapped")
-            
         }
-        
         return [delete, edit]
     }
     
@@ -403,6 +370,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         guard let end = currentCalendar.ordinality(of: .day, in: .era, for: end) else { return 0 }
         return end - start
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
+    }
 }
 
 class StockCell:UITableViewCell {
@@ -413,3 +386,4 @@ class StockCell:UITableViewCell {
     @IBOutlet weak var quantityLabel: UILabel!
     
 }
+

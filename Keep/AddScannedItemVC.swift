@@ -14,24 +14,20 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
 
     let store = DataStore.sharedInstance
     
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var minusButton: UIButton!
-    
     @IBOutlet weak var plusButton: UIButton!
-    
     @IBOutlet var locationView: UIView!
     @IBOutlet var locationButtons: [UIButton]!
     @IBOutlet weak var expDateField: UITextField!
     @IBOutlet weak var pDateField: UITextField!
     @IBOutlet weak var categoryField: UITextField!
-    @IBOutlet weak var saveButton: UIBarButtonItem!
-    
     @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
     
     var originalTopMargin: CGFloat!
-    
     let picker = UIPickerView()
     let datePicker1 = UIDatePicker()
     let datePicker2 = UIDatePicker()
@@ -64,10 +60,20 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
         pDateField.inputView = datePicker1
         expDateField.inputView = datePicker2
         categoryField.inputView = picker
+        if quantity == 1 {
+            minusButton.isEnabled = false
+        } else {
+            minusButton.isEnabled = true
+        }
         formatDates()
-
     }
     
+    /*func customFontForBarButtonItems(left: UIBarButtonItem, right: UIBarButtonItem){
+        if let font = UIFont(name: Fonts.latoSemibold, size: 15) {
+            left.setTitleTextAttributes([NSFontAttributeName:font], for: .normal)
+            right.setTitleTextAttributes([NSFontAttributeName:font], for: .normal)
+        }
+    }*/
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         nameField.text = store.scannedItemToAdd
@@ -118,27 +124,20 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
     }
     
     func minus(){
-        //moveViewDown()
         if quantity == 1 {
-            
             minusButton.isEnabled = false
-            
         } else {
-            
             plusButton.isEnabled = true
             quantity -= 1
             quantityLabel.text = "\(quantity)"
-            
         }
     }
     
     func plus(){
-        //moveViewDown()
         quantity += 1
         quantityLabel.text = "\(quantity)"
         if minusButton.isEnabled == false {
             minusButton.isEnabled = true
-            
         }
     }
     
@@ -156,16 +155,16 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
         switch selectedIndex {
         case 0:
             self.location = .Fridge
-            print("Fridge")
+            print(Locations.fridge)
         case 1:
             self.location = .Freezer
-            print("Freezer")
+            print(Locations.freezer)
         case 2:
             self.location = .Pantry
-            print("Pantry")
+            print(Locations.pantry)
         case 3:
             self.location = .Other
-            print("Other")
+            print(Locations.other)
         default:
             break
         }
@@ -173,29 +172,26 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
         for (index, button) in locationButtons.enumerated() {
             if index == selectedIndex {
                 button.isSelected = true
-                button.backgroundColor = MAIN_COLOR
+                button.backgroundColor = Colors.main
                 button.setTitleColor(.white, for: .selected)
                 button.layer.cornerRadius = 5
-
-                
             } else {
                 button.isSelected = false
-                button.backgroundColor = MAIN_BG_COLOR
-                button.setTitleColor(MAIN_COLOR, for: .normal)
+                button.backgroundColor = Colors.mainBg
+                button.setTitleColor(Colors.main, for: .normal)
                 button.layer.cornerRadius = 5
-                
             }
         }
     }
     
     
-    @IBAction func cancelBtnTapped(_ sender: Any) {
+    @IBAction func cancelBtnTapped(_ sender: UIButton) {
         
          dismiss(animated: true, completion: nil)
     }
     
     
-    @IBAction func saveBtnTapped(_ sender: Any) {
+    @IBAction func saveBtnTapped(_ sender: UIButton) {
         
         guard let name = nameField.text, name != "" else { return }
         guard let quantity = quantityLabel.text, quantity != "" else { return }
@@ -209,10 +205,7 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
             print("scanned item to add to realm is \(item)")
             realm.add(item)
         }
-        
-        NotificationCenter.default.post(name: REFRESH_SCANNED_ITEMS, object: nil)
-        
-        
+        NotificationCenter.default.post(name: NotificationName.refreshScannedItems, object: nil)
         dismiss(animated: true, completion: nil)
     }
   
@@ -227,17 +220,14 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
         for (index,button) in locationButtons.enumerated() {
             if index == 0 {
                 button.isSelected = true
-                button.backgroundColor = MAIN_COLOR
+                button.backgroundColor = Colors.main
                 button.setTitleColor(.white, for: .selected)
                 button.layer.cornerRadius = 5
-                
-                
             } else {
                 button.isSelected = false
-                button.backgroundColor = MAIN_BG_COLOR
-                button.setTitleColor(MAIN_COLOR, for: .normal)
+                button.backgroundColor = Colors.mainBg
+                button.setTitleColor(Colors.main, for: .normal)
                 button.layer.cornerRadius = 5
-               
             }
         }
         
@@ -249,15 +239,12 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
     }
     
     func formatDates(){
-        
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
         formatter.dateFormat = "MMM dd, yyyy"
-        
     }
     
     func datePickerChanged(sender: UIDatePicker) {
-        
         if sender == datePicker1 {
             purchaseDate = sender.date
             pDateField.text = formatter.string(from: sender.date).capitalized
@@ -265,18 +252,14 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
             expDate = sender.date
             expDateField.text = formatter.string(from: sender.date).capitalized
         }
-        
     }
     
     func resetAddItems(){
-        
         formatInitialData()
         saveButton.isEnabled = false
-        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         activeTextField?.resignFirstResponder()
         return true
     }
@@ -333,17 +316,14 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
             moveViewUp()
         }
     }
-    
-    
+
     func moveViewUp() {
         if topMarginConstraint.constant != originalTopMargin {
             return
         }
-        
         topMarginConstraint.constant -= 100
         UIView.animate(withDuration: 0.2, animations: { () -> Void in
             self.view.layoutIfNeeded()
-            
         })
     }
     
@@ -351,12 +331,10 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
         if topMarginConstraint.constant == originalTopMargin {
             return
         }
-        
         topMarginConstraint.constant = originalTopMargin
         UIView.animate(withDuration: 0.2, animations: { () -> Void in
             self.view.layoutIfNeeded()
         })
-        
     }
- 
 }
+

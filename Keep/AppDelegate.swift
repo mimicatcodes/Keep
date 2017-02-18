@@ -19,22 +19,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let colorNormal = UIColor(red: 151/255.0, green: 151/255.0, blue: 151/255.0, alpha: 1)
         let colorSelected = UIColor(red: 35/255.0, green: 213/255.0, blue: 185/255.0, alpha: 1)
         
-        if let font = UIFont(name: "Montserrat-Regular", size: 16) {
+        if let font = UIFont(name: Fonts.montserratRegular, size: 16) {
             
             let navigationBarAppearace = UINavigationBar.appearance()
             
             navigationBarAppearace.titleTextAttributes = [NSFontAttributeName: font,  NSForegroundColorAttributeName: UIColor(red:100/255.0, green:100/255.0, blue:100/255.0, alpha: 1.0)]
             
             navigationBarAppearace.barTintColor = .white
-            navigationBarAppearace.tintColor = MAIN_BUTTON_LABEL_GRAY
-            navigationBarAppearace.layer.borderColor = MAIN_BORDER_COLOR.cgColor
+            navigationBarAppearace.tintColor = Colors.button
+            navigationBarAppearace.layer.borderColor = Colors.mainBorder.cgColor
             navigationBarAppearace.isTranslucent = false
             
-            navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName: MAIN_BUTTON_LABEL_GRAY]
+            navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName: Colors.button]
             
         }
         
-        if let font = UIFont(name: "Lato-Regular", size: 11.0) {
+        if let font = UIFont(name: Fonts.latoRegular, size: 11.0) {
             print("-------------------- font is \(font)")
             let attributesNormal = [
                 NSForegroundColorAttributeName: colorNormal,
