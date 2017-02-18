@@ -71,7 +71,7 @@ class ScannedItemsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     
-    @IBAction func cancelButtonTapped(_ sender: Any) {
+    @IBAction func cancelButtonTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
@@ -93,6 +93,5 @@ class ScannedItemsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 class scannedItemCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var editAddButton: UIButton!
-
 }
 

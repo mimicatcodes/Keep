@@ -11,7 +11,7 @@ import RealmSwift
 import NotificationCenter
 
 class AddListVC: UIViewController,  UITextFieldDelegate {
-            
+    
     let store = DataStore.sharedInstance
     let currentDate = Date()
     
@@ -20,23 +20,48 @@ class AddListVC: UIViewController,  UITextFieldDelegate {
     @IBOutlet weak var createListView: UIView!
 
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         listTitle.delegate = self
-        customToolBarForPickers()
         hideKeyboard()
         setupViews()
+        listTitle.becomeFirstResponder()
         saveButton.isEnabled = false
+        listTitle.autocapitalizationType = .words
+        saveButton.backgroundColor = .red
+        listTitle.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
     }
     
     @IBAction func dismissView(_ sender: Any) {
-        dismiss(animated: false, completion: nil)
+        //dismiss()
     }
     
     @IBAction func addBtnTapped(_ sender: UIButton) {
-        
-        guard let title = listTitle.text, title != "" else { return }
-        let list = ShoppingList(title: title, isCreatedAt: currentDate)
+        save()
+    }
+
+    func checkTextField(sender: UITextField) {
+        var textLength = 0
+        if let text = sender.text {
+         textLength = text.trimmingCharacters(in: .whitespacesAndNewlines).characters.count
+        }
+        if textLength > 0 {
+            saveButton.isEnabled = true
+            saveButton.backgroundColor = Colors.main
+
+        } else {
+            saveButton.isEnabled = false
+            saveButton.backgroundColor = .red
+        }
+    }
+    
+    func dismiss() {
+        listTitle.resignFirstResponder()
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func save() {
+        guard let text = listTitle.text, !text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty else { return }
+        let list = ShoppingList(title: text, isCreatedAt: currentDate)
         let uuid = UUID().uuidString
         list.uniqueID = uuid
         
@@ -48,48 +73,19 @@ class AddListVC: UIViewController,  UITextFieldDelegate {
         
         print("Add button tapped")
         NotificationCenter.default.post(name: NotificationName.refreshTableview, object: nil)
-        dismiss(animated: true, completion: nil)
+        dismiss()
     }
     
     @IBAction func cancelBtnTapped(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        dismiss()
     }
-
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        enableSaveButton()
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // change to done 
+        save()
         return true
     }
     
-    func enableSaveButton(){
-        
-        guard let title = listTitle.text, title != "" else { return }
-
-        saveButton.isEnabled = true
-        saveButton.backgroundColor = UIColor.cyan
-    }
-    
-    func customToolBarForPickers(){
-        
-        let toolBar = UIToolbar()
-        toolBar.barStyle = UIBarStyle.default
-        toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor.darkGray
-        toolBar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePicker))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(donePicker))
-        
-        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-        listTitle.inputAccessoryView = toolBar
-        
-    }
-    
-    func donePicker(sender:UIBarButtonItem){
-        listTitle.resignFirstResponder()
-    }
-
     func setupViews(){
         view.backgroundColor = Colors.dawn
     }

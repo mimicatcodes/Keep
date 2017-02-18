@@ -27,6 +27,7 @@ class MoveToVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Colors.dawn
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

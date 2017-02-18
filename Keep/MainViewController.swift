@@ -46,26 +46,18 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         views = [fridgeView, freezerView, pantryView, otherView]
         buttons = [fridgeButton, freezerButton, pantryButton, otherButton]
-        plusButton.layer.shadowColor = UIColor.black.cgColor
-        plusButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        plusButton.layer.masksToBounds = false
-        plusButton.layer.shadowRadius = 1.0
-        plusButton.layer.shadowOpacity = 0.3
-        
         addButtons.forEach {
             $0.layer.cornerRadius = 20
             $0.layer.shadowColor = UIColor.black.cgColor
             $0.layer.borderWidth = 2
             $0.layer.borderColor = UIColor(red: 39/255.0, green: 207/255.0, blue: 171/255.0, alpha: 1).cgColor
         }
-        
         tableView.allowsMultipleSelection = true
         buttons[selectedIndex].isSelected = true
         views[selectedIndex].backgroundColor = Colors.main
         didPressStockSection(buttons[selectedIndex])
         tableView.tableFooterView = UIView()
         formatDates()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

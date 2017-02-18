@@ -69,5 +69,6 @@ struct TesseractLang {
 
 struct Filters {
     static let category = "category == %@"
+    static let uniqueID = "uniqueID contains[c] %@"
 }
 

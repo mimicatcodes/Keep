@@ -40,17 +40,21 @@ class AddFavoriteVC: UIViewController, UITextFieldDelegate {
     }
     
     func saveFavItem(){
-        guard let name = nameField.text, name != "" else { return }
+        guard let name = nameField.text, !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
         let favorite = FavoritedItem(name: name.capitalized)
         let realm = try! Realm()
         try! realm.write {
             realm.add(favorite)
-            print("Favorite item \(favorite.name) has been added")
         }
-        dismiss(animated: true, completion: nil)
         NotificationCenter.default.post(name: NotificationName.refreshFavorites, object: nil)
+        dismiss()
     }
     
+    func dismiss() {
+        nameField.resignFirstResponder()
+        dismiss(animated: true, completion: nil)
+    }
+        
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         nameField.endEditing(true)
         nameField.resignFirstResponder()
