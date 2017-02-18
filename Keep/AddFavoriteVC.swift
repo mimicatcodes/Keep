@@ -19,6 +19,7 @@ class AddFavoriteVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         nameField.becomeFirstResponder()
+        nameField.delegate = self
         nameField.textAlignment = .center
         nameField.autocapitalizationType = .words
         nameField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
@@ -30,7 +31,7 @@ class AddFavoriteVC: UIViewController, UITextFieldDelegate {
   }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        saveFavItem()
+        save()
     }
     
     @IBAction func cancel(_ sender: Any) {
@@ -38,8 +39,8 @@ class AddFavoriteVC: UIViewController, UITextFieldDelegate {
         nameField.resignFirstResponder()
         dismiss(animated: false, completion: nil)
     }
-
-    func saveFavItem(){
+    
+    func save() {
         guard let name = nameField.text, !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
         let favorite = FavoritedItem(name: name.capitalized)
         let realm = try! Realm()
@@ -71,9 +72,7 @@ class AddFavoriteVC: UIViewController, UITextFieldDelegate {
     }
         
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        nameField.endEditing(true)
-        nameField.resignFirstResponder()
-        saveFavItem()
+        save()
         return true
     }
     

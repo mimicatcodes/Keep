@@ -40,6 +40,10 @@ class AddItemVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func saveBtnTapped(_ sender: Any) {
+        save()
+    }
+    
+    func save() {
         guard let title = itemTitleField.text, !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
         
         let shoppingItem = ShoppingItem(name: title, isPurchased: false)
@@ -75,7 +79,7 @@ class AddItemVC: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        dismiss()
+        save()
         return true
     }
     

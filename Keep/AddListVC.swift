@@ -68,10 +68,8 @@ class AddListVC: UIViewController,  UITextFieldDelegate {
         let realm = try! Realm()
         try! realm.write {
             realm.add(list)
-            print("\(list.title) is added on \(list.isCreatedAt) at \(list.shoppingItems)")
         }
         
-        print("Add button tapped")
         NotificationCenter.default.post(name: NotificationName.refreshTableview, object: nil)
         dismiss()
     }
