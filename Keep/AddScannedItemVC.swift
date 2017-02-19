@@ -172,13 +172,13 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
         for (index, button) in locationButtons.enumerated() {
             if index == selectedIndex {
                 button.isSelected = true
-                button.backgroundColor = Colors.main
+                button.backgroundColor = Colors.tealish
                 button.setTitleColor(.white, for: .selected)
                 button.layer.cornerRadius = 5
             } else {
                 button.isSelected = false
-                button.backgroundColor = Colors.mainBg
-                button.setTitleColor(Colors.main, for: .normal)
+                button.backgroundColor = Colors.whiteTwo
+                button.setTitleColor(Colors.tealish, for: .normal)
                 button.layer.cornerRadius = 5
             }
         }
@@ -220,13 +220,13 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
         for (index,button) in locationButtons.enumerated() {
             if index == 0 {
                 button.isSelected = true
-                button.backgroundColor = Colors.main
+                button.backgroundColor = Colors.tealish
                 button.setTitleColor(.white, for: .selected)
                 button.layer.cornerRadius = 5
             } else {
                 button.isSelected = false
-                button.backgroundColor = Colors.mainBg
-                button.setTitleColor(Colors.main, for: .normal)
+                button.backgroundColor = Colors.whiteTwo
+                button.setTitleColor(Colors.tealish, for: .normal)
                 button.layer.cornerRadius = 5
             }
         }

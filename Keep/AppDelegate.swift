@@ -15,17 +15,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let colorNormal = Colors.border
-        let colorSelected = Colors.added
+        let colorNormal = Colors.warmGreyFive
+        let colorSelected = Colors.tealish
         
         if let font = UIFont(name: Fonts.montserratRegular, size: 16) {
             let navigationBarAppearace = UINavigationBar.appearance()
-            navigationBarAppearace.titleTextAttributes = [NSFontAttributeName: font,  NSForegroundColorAttributeName: Colors.naviTitle]
+            navigationBarAppearace.titleTextAttributes = [NSFontAttributeName: font,  NSForegroundColorAttributeName: Colors.brownishGreyTwo]
             navigationBarAppearace.barTintColor = .white
-            navigationBarAppearace.tintColor = Colors.button
-            navigationBarAppearace.layer.borderColor = Colors.mainBorder.cgColor
+            navigationBarAppearace.tintColor = Colors.warmGreyThree
+            navigationBarAppearace.layer.borderColor = Colors.whiteFour.cgColor
             navigationBarAppearace.isTranslucent = false
-            navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName: Colors.button]
+            navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName: Colors.warmGreyThree]
         }
         
         if let font = UIFont(name: Fonts.latoRegular, size: 11.0) {

@@ -24,7 +24,7 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
         tableView.tableFooterView = UIView()
         definesPresentationContext = true
         formatDates()
-        tableView.separatorColor = Colors.seperatorTwo
+        tableView.separatorColor = Colors.whiteThree
         NotificationCenter.default.addObserver(forName: NotificationName.refreshTableview, object: nil, queue: nil) { notification in
             print("notification is \(notification)")
             self.tableView.reloadData()

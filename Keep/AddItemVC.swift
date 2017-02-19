@@ -70,7 +70,7 @@ class AddItemVC: UIViewController, UITextFieldDelegate {
         }
         if textLength > 0 {
             saveButton.isEnabled = true
-            saveButton.backgroundColor = Colors.main
+            saveButton.backgroundColor = Colors.tealish
             
         } else {
             saveButton.isEnabled = false

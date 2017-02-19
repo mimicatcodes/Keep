@@ -60,7 +60,7 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
         cell.separatorInset = .zero
         
         if filteredItems[indexPath.row].isPurchased == true {
-            cell.titleLabel.textColor = Colors.mainBorder
+            cell.titleLabel.textColor = Colors.whiteFour
             cell.checkBoxImgView.image = #imageLiteral(resourceName: "ChecklistActive2")
             cell.moveButton.isHidden = false
     

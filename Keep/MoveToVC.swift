@@ -92,15 +92,15 @@ class MoveToVC: UIViewController {
         }
         
         saveButton.isEnabled = true
-        saveButton.backgroundColor = Colors.main
+        saveButton.backgroundColor = Colors.tealish
         
         for (index, button) in buttons.enumerated() {
             if index == selectedIndex {
                 button.isSelected = true
-                button.setTitleColor(Colors.main, for: .selected)
+                button.setTitleColor(Colors.tealish, for: .selected)
             } else {
                 button.isSelected = false
-                button.setTitleColor(Colors.button, for: .normal)
+                button.setTitleColor(Colors.warmGreyThree, for: .normal)
             }
         }
     }

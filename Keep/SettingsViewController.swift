@@ -133,7 +133,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
         chartDataSet.drawFilledEnabled = true
         chartDataSet.drawValuesEnabled = false
-        chartDataSet.fillColor = Colors.main
+        chartDataSet.fillColor = Colors.tealish
         
         let chartData = RadarChartData(dataSet: chartDataSet)
         chartData.labels = dataPoints
@@ -147,7 +147,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         if let font = font {
             xAxis.labelFont = font
         }
-        xAxis.labelTextColor = Colors.main
+        xAxis.labelTextColor = Colors.tealish
         
         radarChartView.sizeToFit()
         radarChartView.chartDescription?.text = ""

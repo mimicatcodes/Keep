@@ -28,7 +28,7 @@ import UIKit
             layer.borderWidth = borderWidth
         }
     }
-    @IBInspectable var borderColor: CGColor = Colors.main.cgColor {
+    @IBInspectable var borderColor: CGColor = Colors.tealish.cgColor {
         didSet {
             layer.borderColor = borderColor
         }
@@ -44,7 +44,7 @@ import UIKit
     @IBInspectable var borderWidth: CGFloat = 0 {
         didSet {
             layer.borderWidth = borderWidth
-            layer.borderColor = Colors.main.cgColor
+            layer.borderColor = Colors.tealish.cgColor
         }
     }
 }

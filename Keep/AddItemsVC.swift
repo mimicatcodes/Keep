@@ -57,12 +57,12 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         saveButton.isEnabled = false
         customToolBarForPickers()
         quantityLabel.layer.borderWidth = 1
-        quantityLabel.layer.borderColor = Colors.mainBorder.cgColor
+        quantityLabel.layer.borderColor = Colors.whiteFour.cgColor
         formatInitialData()
         tableView.allowsSelection = true
         tableView.delegate = self
         tableView.layer.masksToBounds = true
-        tableView.layer.borderColor = Colors.mainBorder.cgColor
+        tableView.layer.borderColor = Colors.whiteFour.cgColor
         tableView.layer.borderWidth = 1.0
         tableView.separatorInset = .zero
         formatDates()
@@ -195,7 +195,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         }
         
         cell?.textLabel?.font = UIFont(name: Fonts.latoRegular, size: 13)
-        cell?.textLabel?.textColor = Colors.mainBorder
+        cell?.textLabel?.textColor = Colors.whiteFour
         return cell!
     }
     
@@ -315,14 +315,14 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 button.isSelected = true
                 button.layer.cornerRadius = 5
                 button.layer.borderWidth = 2
-                button.layer.borderColor = Colors.main.cgColor
-                button.setTitleColor(Colors.main, for: .selected)
+                button.layer.borderColor = Colors.tealish.cgColor
+                button.setTitleColor(Colors.tealish, for: .selected)
             } else {
                 button.isSelected = false
                 button.layer.cornerRadius = 5
                 button.layer.borderWidth = 1
-                button.layer.borderColor = Colors.border.cgColor
-                button.setTitleColor(Colors.button, for: .normal)
+                button.layer.borderColor = Colors.warmGreyFive.cgColor
+                button.setTitleColor(Colors.warmGreyThree, for: .normal)
             }
         }
     }
@@ -358,12 +358,9 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 button.backgroundColor = .clear
                 button.layer.cornerRadius = 5
                 button.layer.borderWidth = 2
-                button.layer.borderColor = Colors.main.cgColor
-                
-                locationLabels[index].textColor = Colors.main
-                
-                
-            } else {
+                button.layer.borderColor = Colors.tealish.cgColor
+                locationLabels[index].textColor = Colors.tealish
+                } else {
                 button.isSelected = false
                 
                 button.backgroundColor = .clear
@@ -371,8 +368,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 button.layer.borderWidth = 1
                 button.layer.borderColor = UIColor.clear.cgColor
                 
-                locationLabels[index].textColor = Colors.button
-                
+                locationLabels[index].textColor = Colors.warmGreyThree
             }
         }
     }
@@ -439,7 +435,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     func showAlert() {
         
         labelView = UILabel(frame: CGRect(x: 0, y: 65, width: self.view.frame.width, height: 40))
-        labelView.backgroundColor = Colors.added
+        labelView.backgroundColor = Colors.tealish
         labelView.text = "Item added"
         labelView.textAlignment = .center
         labelView.textColor = UIColor.white
@@ -475,8 +471,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 button.backgroundColor = .clear
                 button.layer.cornerRadius = 5
                 button.layer.borderWidth = 2
-                button.layer.borderColor = Colors.main.cgColor
-                locationLabels[index].textColor = Colors.main
+                button.layer.borderColor = Colors.tealish.cgColor
+                locationLabels[index].textColor = Colors.tealish
                 
             } else {
                 button.isSelected = false
@@ -484,7 +480,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 button.layer.cornerRadius = 5
                 button.layer.borderWidth = 1
                 button.layer.borderColor = UIColor.clear.cgColor
-                locationLabels[index].textColor = Colors.button
+                locationLabels[index].textColor = Colors.warmGreyThree
             }
         }
         
@@ -493,11 +489,11 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             button.isSelected = false
             button.layer.cornerRadius = 5
             button.layer.borderWidth = 1
-            button.layer.borderColor = Colors.button.cgColor
-            button.setTitleColor(Colors.button, for: .normal)
+            button.layer.borderColor = Colors.warmGreyThree.cgColor
+            button.setTitleColor(Colors.warmGreyThree, for: .normal)
             
         }
-        saveButton.titleLabel?.textColor = Colors.button
+        saveButton.titleLabel?.textColor = Colors.warmGreyThree
         favButton.isSelected = false
         
         purchaseDateTextfield.text = formatter.string(from: Date()).capitalized
@@ -514,7 +510,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         
         if name != ""  {
             DispatchQueue.main.async {
-                self.saveButton.titleLabel?.textColor = Colors.main
+                self.saveButton.titleLabel?.textColor = Colors.tealish
                 self.saveButton.isEnabled = true
             }
             
@@ -556,8 +552,8 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 button.backgroundColor = .clear
                 button.layer.cornerRadius = 5
                 button.layer.borderWidth = 1
-                button.layer.borderColor = Colors.button.cgColor
-                button.titleLabel?.textColor = Colors.button
+                button.layer.borderColor = Colors.warmGreyThree.cgColor
+                button.titleLabel?.textColor = Colors.warmGreyThree
                 
             }
             expDateTextfield.text = formatter.string(from: datePicker2.date).capitalized

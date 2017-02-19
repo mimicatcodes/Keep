@@ -49,11 +49,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         addButtons.forEach {
             $0.layer.cornerRadius = 20
             $0.layer.borderWidth = 2
-            $0.layer.borderColor = Colors.addButtonsBorder.cgColor
+            $0.layer.borderColor = Colors.tealish.cgColor
         }
         tableView.allowsMultipleSelection = true
         buttons[selectedIndex].isSelected = true
-        views[selectedIndex].backgroundColor = Colors.main
+        views[selectedIndex].backgroundColor = Colors.tealish
         didPressStockSection(buttons[selectedIndex])
         tableView.tableFooterView = UIView()
         formatDates()
@@ -106,14 +106,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         for (i,button) in buttons.enumerated() {
             if i == index_ {
                 button.isSelected = true
-                button.setTitleColor(Colors.main, for: .selected)
-                views[i].backgroundColor = Colors.main
+                button.setTitleColor(Colors.tealish, for: .selected)
+                views[i].backgroundColor = Colors.tealish
                 labels[i].textColor = UIColor.white
             } else {
                 button.isSelected = false
-                button.setTitleColor(Colors.button, for: .normal)
-                views[i].backgroundColor = Colors.mainBg
-                labels[i].textColor = Colors.button
+                button.setTitleColor(Colors.warmGreyThree, for: .normal)
+                views[i].backgroundColor = Colors.whiteTwo
+                labels[i].textColor = Colors.warmGreyThree
             }
             dismissBtns()
         }
@@ -174,7 +174,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: Fonts.montserratRegular, size: 12)
         header.textLabel?.textColor = UIColor.white
-        header.contentView.backgroundColor = Colors.added
+        header.contentView.backgroundColor = Colors.tealish
         header.textLabel?.textAlignment = .center
         
     }
@@ -282,19 +282,22 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func configureExpireLabels(cell: StockCell, daysLeft: Int){
         if daysLeft == 0 {
             cell.expDateLabel.text = "Expiring today"
-            cell.expDateLabel.textColor = Colors.warning
+            cell.expDateLabel.textColor = Colors.pastelRed
         } else if daysLeft == 1 {
             cell.expDateLabel.text = "\(daysLeft) day left"
-            cell.expDateLabel.textColor = Colors.warning
+            cell.expDateLabel.textColor = Colors.pastelRed
+
         } else if daysLeft == 2 || daysLeft == 3 {
             cell.expDateLabel.text = "\(daysLeft) days left"
-            cell.expDateLabel.textColor = Colors.warning
+            cell.expDateLabel.textColor = Colors.pastelRed
+
         } else if daysLeft > 3 {
             cell.expDateLabel.text = "\(daysLeft) days left"
-            cell.expDateLabel.textColor = Colors.button
+            cell.expDateLabel.textColor = Colors.warmGreyThree
         } else  {
             cell.expDateLabel.text = "Expired!"
-            cell.expDateLabel.textColor = Colors.warning
+            cell.expDateLabel.textColor = Colors.pastelRed
+
         }
     }
     

@@ -11,20 +11,36 @@ import UIKit
 import NotificationCenter
 
 struct Colors {
-    static let main = UIColor(red: 133/255.0, green: 219/255.0, blue: 205/255.0, alpha: 1)
-    static let mainBg = UIColor(red: 245/255.0, green: 245/255.0, blue: 245/255.0, alpha: 1)
-    static let button = UIColor(red: 113/255.0, green: 113/255.0, blue: 113/255.0, alpha: 1)
-    static let mainBorder = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1)
-    static let border = UIColor(red: 151/255.0, green: 151/255.0, blue: 151/255.0, alpha: 1)
-    static let seperator = UIColor(red: 224/255.0, green: 224/255.0, blue: 224/255.0, alpha: 1)
-    static let seperatorTwo = UIColor(red:219/255.0, green:219/255.0, blue:219/255.0, alpha: 1.0)
-    static let favorite = UIColor(red: 255/255.0, green: 137/255.0, blue: 137/255.0, alpha: 1)
-    static let warning = UIColor(red: 237/255.0, green: 93/255.0, blue: 93/255.0, alpha: 1)
-    static let added = UIColor(red: 35/255.0, green: 213/255.0, blue: 185/255.0, alpha: 1)
+    static let lightTeal = UIColor(red: 133/255.0, green: 219/255.0, blue: 205/255.0, alpha: 1)
+    static let lightTealTwo = UIColor(red: 178/255.0, green: 231/255.0, blue: 222/255.0, alpha: 1)
+    static let lightTealThree = UIColor(red: 135/255.0, green: 219/255.0, blue: 206/255.0, alpha: 1)
+    
+    static let tealish =  UIColor(red: 35/255.0, green: 213/255.0, blue: 185/255.0, alpha: 1)
+    
+    static let whiteTwo = UIColor(red: 245/255.0, green: 245/255.0, blue: 245/255.0, alpha: 1)
+    static let whiteThree = UIColor(red:219/255.0, green:219/255.0, blue:219/255.0, alpha: 1.0)
+    static let whiteFour = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1)
+    static let whiteFive = UIColor(red: 213/255.0, green: 213/255.0, blue: 213/255.0, alpha: 1)
+    static let whiteSix = UIColor(red: 242/255.0, green: 242/255.0, blue: 242/255.0, alpha: 1)
+
+    static let warmGrey = UIColor(red: 131/255.0, green: 131/255.0, blue: 131/255.0, alpha: 1)
+    static let warmGreyTwo = UIColor(red: 146/255.0, green: 146/255.0, blue: 146/255.0, alpha: 1)
+    static let warmGreyThree = UIColor(red: 113/255.0, green: 113/255.0, blue: 113/255.0, alpha: 1)
+    static let warmGreyFour = UIColor(red: 123/255.0, green: 123/255.0, blue: 123/255.0, alpha: 1)
+    static let warmGreyFive = UIColor(red: 151/255.0, green: 151/255.0, blue: 151/255.0, alpha: 1)
+
+    static let greyishBrown = UIColor(red: 77/255.0, green: 77/255.0, blue: 77/255.0, alpha: 1)
+    
+    static let brownishGrey = UIColor(red: 96/255.0, green: 96/255.0, blue: 96/255.0, alpha: 1)
+    static let brownishGreyTwo = UIColor(red:100/255.0, green:100/255.0, blue:100/255.0, alpha: 1.0)
+    
+    static let pastelRed = UIColor(red: 237/255.0, green: 93/255.0, blue: 93/255.0, alpha: 1)
+    static let peachyPink = UIColor(red: 255/255.0, green: 137/255.0, blue: 137/255.0, alpha: 1)
+
+    static let pinkishGrey = UIColor(red: 202/255.0, green: 202/255.0, blue: 202/255.0, alpha: 1)
+    static let pinkishGreyTwo = UIColor(red: 201/255.0, green: 201/255.0, blue: 201/255.0, alpha: 1)
+    
     static let dawn = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.10)
-    static let naviTitle = UIColor(red:100/255.0, green:100/255.0, blue:100/255.0, alpha: 1.0)
-    static let emeraldGreen = UIColor(red: 39/255.0, green: 207/255.0, blue: 171/255.0, alpha: 1)
-    static let addButtonsBorder = UIColor(red: 39/255.0, green: 207/255.0, blue: 171/255.0, alpha: 1)
 }
 
 struct NotificationName {
