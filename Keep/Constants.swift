@@ -50,6 +50,7 @@ struct NotificationName {
     //static let refreshExpList = NSNotification.Name("RefreshExpiredItems")
     static let refreshFavorites = NSNotification.Name("RefreshFavorites")
     static let refreshScannedItems = NSNotification.Name("RefreshScannedItems")
+    static let refreshMainTV = NSNotification.Name("RefreshMainTV")
 }
 
 struct Identifiers {

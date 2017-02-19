@@ -11,6 +11,10 @@ import RealmSwift
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    
+    // TODO: additions from scanned items need to be handled 
+    // TODO: Refresh controller
+    
     @IBOutlet weak var menuBarView: UIView!
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -37,6 +41,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    @IBAction func unwindToMain(segue: UIStoryboardSegue) {}
+    
     let store = DataStore.sharedInstance
     var selectedIndex: Int = 0
     let formatter = DateFormatter()
@@ -57,10 +63,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         didPressStockSection(buttons[selectedIndex])
         tableView.tableFooterView = UIView()
         formatDates()
+        NotificationCenter.default.addObserver(forName: NotificationName.refreshMainTV, object: nil, queue: nil) { notification in
+            print("notification is \(notification)")
+            self.tableView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         dismissBtns()
+        print("/nTHIS is view will appear getting called in mainVC")
         tableView.reloadData()
     }
     
@@ -106,8 +117,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         for (i,button) in buttons.enumerated() {
             if i == index_ {
                 button.isSelected = true
-                button.setTitleColor(Colors.tealish, for: .selected)
-                views[i].backgroundColor = Colors.tealish
+                button.setTitleColor(Colors.lightTeal, for: .selected)
+                views[i].backgroundColor = Colors.lightTeal
                 labels[i].textColor = UIColor.white
             } else {
                 button.isSelected = false

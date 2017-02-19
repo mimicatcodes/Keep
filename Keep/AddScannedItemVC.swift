@@ -13,8 +13,9 @@ import RealmSwift
 class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIBarPositioningDelegate, UINavigationControllerDelegate  {
     
     // TODO: fix pickers - date errors
-
-    let store = DataStore.sharedInstance
+    // TODO: Custom tool bar fonts - fix!
+    
+    //let store = DataStore.sharedInstance
     
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var nameField: UITextField!
@@ -29,6 +30,7 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
     @IBOutlet weak var categoryField: UITextField!
     @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
     
+    let store = DataStore.sharedInstance
     var originalTopMargin: CGFloat!
     let picker = UIPickerView()
     let datePicker1 = UIDatePicker()
@@ -207,6 +209,7 @@ class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDeleg
             print("scanned item to add to realm is \(item)")
             realm.add(item)
         }
+          NotificationCenter.default.post(name: NotificationName.refreshMainTV, object: nil)
         NotificationCenter.default.post(name: NotificationName.refreshScannedItems, object: nil)
         dismiss(animated: true, completion: nil)
     }

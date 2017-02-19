@@ -36,6 +36,11 @@ class ScannedItemsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.reloadData()
     }
     
+    @IBAction func homeButtonTapped(_ sender: Any) {
+      print("Go back to main menu")
+        performSegue(withIdentifier: "unwindToMain", sender: self)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        return resultsArray.count
 
