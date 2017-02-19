@@ -10,8 +10,10 @@ import UIKit
 
 class ScannedItemsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    // TODO: limit num of characters entered in the textfield
+    // TODO:
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var topView: UIView!
     let store = DataStore.sharedInstance
     var resultsArray = [String]()
     var titleString:String?
@@ -21,6 +23,7 @@ class ScannedItemsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorInset = .zero
+        topView.underlinedBorder()
         NotificationCenter.default.addObserver(forName: NotificationName.refreshScannedItems, object: nil, queue: nil) { notification in
             print("notification is \(notification)")
             self.resultsArray.remove(at: self.store.scannedItemIndex!)
@@ -44,6 +47,7 @@ class ScannedItemsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.titleLabel.text = resultsArray[indexPath.row]
             print(resultsArray[indexPath.row])
         cell.selectionStyle = .none
+        cell.editAddButton.layer.cornerRadius = 8
         cell.editAddButton.tag = indexPath.row
         cell.editAddButton.addTarget(self, action: #selector(addToInventory), for: .touchUpInside)
        

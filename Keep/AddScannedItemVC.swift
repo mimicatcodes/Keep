@@ -11,6 +11,8 @@ import NotificationCenter
 import RealmSwift
 
 class AddScannedItemVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIBarPositioningDelegate, UINavigationControllerDelegate  {
+    
+    // TODO: fix pickers - date errors
 
     let store = DataStore.sharedInstance
     

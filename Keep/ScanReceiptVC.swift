@@ -9,26 +9,26 @@
 import UIKit
 import TesseractOCR
 
+// TODO: Activitiy indicator / progress bar/ 
+
 class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, G8TesseractDelegate {
     
     var selectedImage: UIImage?
     var textsScanned:String = ""
     var emptyArray = [String]()
     
+    @IBOutlet weak var viewUnderImgV: UIView!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var libraryButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var imageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //activityIndicator.isHidden = true
-        progressView.setProgress(0, animated: true)
         adjustBorder()
         saveButton.isEnabled = false
         enableSaveButton()
+        styleSubViews()
     }
     
     func adjustBorder(){
@@ -49,9 +49,6 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
         
         super.viewWillAppear(animated)
         enableSaveButton()
-        //activityIndicator.stopAnimating()
-        //activityIndicator.isHidden = true
-        progressView.progress = 0.0
         emptyArray.removeAll()
     }
     
@@ -86,7 +83,6 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
     }
     
     func progressImageRecognition(for tesseract: G8Tesseract!) {
-       // progressView.progress = Float(tesseract.progress).remainder(dividingBy: 100)
         
         updateProgress(with: Float(tesseract.progress))
         //  print("Recognition progress \(tesseract.progress) %...")
@@ -98,10 +94,10 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
         print("\n")
         print("value: \(value)")
 
-        progressView.setProgress(value, animated: false)
-        progressView.setNeedsLayout()
-        progressView.setNeedsDisplay()
-        progressView.setNeedsFocusUpdate()
+//        progressView.setProgress(value, animated: false)
+//        progressView.setNeedsLayout()
+//        progressView.setNeedsDisplay()
+//        progressView.setNeedsFocusUpdate()
         
     }
 
@@ -181,17 +177,13 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
         picker.allowsEditing = true
     }
     
-    func addActivityIndicator() {
-    
-        
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
-
-    }
-    
-    func removeActivityIndicator() {
-
-        activityIndicator.stopAnimating()
+    func styleSubViews(){
+        viewUnderImgV.layer.borderWidth = 1
+        viewUnderImgV.layer.masksToBounds = true
+        viewUnderImgV.layer.borderColor = Colors.tealish.cgColor
+        cameraButton.layer.cornerRadius = 8
+        libraryButton.layer.cornerRadius = 8
+        saveButton.layer.cornerRadius = 8
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -208,12 +200,6 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Identifiers.Segue.toScannedItems {
-//            let destNav = segue.destination as! UINavigationController
-//            let targetController = destNav.topViewController as! ScanReceiptsVC
-//  
-//            if !emptyArray.isEmpty {
-//                targetController.resultsArray = emptyArray
-//            }
             let dest = segue.destination as! ScannedItemsVC
             if !emptyArray.isEmpty {
                 dest.resultsArray = emptyArray
