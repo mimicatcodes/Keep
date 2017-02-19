@@ -44,7 +44,7 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
     @IBAction func cancelTapped(_ sender: UIButton) {
         imageView.image = nil
         test = true
-        
+        dismiss(animated: true, completion: nil)
     }
     
     func shouldCancelImageRecognition(for tesseract: G8Tesseract!) -> Bool {
