@@ -80,7 +80,6 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
         for string in elementsArray {
             let result = string.trimmingCharacters(in: CharacterSet(charactersIn: "01234567890.,"))
             emptyArray.append(result)
-            //isFinishedProcessing = true
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: Identifiers.Segue.toScannedItems, sender: self)
                 self.imageView.image = nil
@@ -89,22 +88,12 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
     }
     
     func progressImageRecognition(for tesseract: G8Tesseract!) {
-        
         updateProgress(with: Float(tesseract.progress))
-        //  print("Recognition progress \(tesseract.progress) %...")
-        
     }
     
     func updateProgress(with value: Float) {
-        
         print("\n")
         print("value: \(value)")
-
-//        progressView.setProgress(value, animated: false)
-//        progressView.setNeedsLayout()
-//        progressView.setNeedsDisplay()
-//        progressView.setNeedsFocusUpdate()
-        
     }
 
     @IBAction func takePhotoButtonTapped(_ sender: Any) {
@@ -126,11 +115,7 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
         DispatchQueue.global(qos: .background).async {
             self.processScanning()
         }
-//        
-//        if isFinishedProcessing {
-//            performSegue(withIdentifier: Identifiers.Segue.toScannedItems, sender: self)
-//            imageView.image = nil
-//        }
+
         print(emptyArray)
     }
     
