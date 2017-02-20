@@ -12,6 +12,7 @@ import TesseractOCR
 // TODO: Activitiy indicator / progress bar/ 
 // TODO: Activate button
 
+
 class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, G8TesseractDelegate {
     
     var selectedImage: UIImage?

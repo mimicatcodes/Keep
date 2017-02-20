@@ -10,6 +10,9 @@ import UIKit
 import RealmSwift
 
 class SearchVC: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
+    // TODO: Fix search 
+    // TODO: include info - location, quantity 
+    // TODO: Navigation - fix it
     
     let store = DataStore.sharedInstance
     var filteredItems:Results<Item>?
@@ -18,7 +21,6 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UISearchResultsUpdat
     @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
@@ -26,11 +28,9 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UISearchResultsUpdat
         tableView.tableHeaderView = searchController.searchBar
         tableView.tableFooterView = UIView()
         tableView.separatorInset = .zero
-        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if searchController.isActive && searchController.searchBar.text != "" {
             if let items = self.filteredItems {
                 return items.count
@@ -51,20 +51,15 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UISearchResultsUpdat
     }
     
     func filterContentForSearch(_ searchString: String) {
-        
         let allItems = store.allItems
         let predicate = NSPredicate(format: "name contains[c] %@", searchString)
         self.filteredItems = allItems.filter(predicate)
         self.tableView.reloadData()
-        
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        
         self.filterContentForSearch(searchController.searchBar.text!)
-        
     }
-    
 }
 
 

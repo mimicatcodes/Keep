@@ -11,25 +11,24 @@ import RealmSwift
 
 class MoveToVC: UIViewController {
     
-    let store = DataStore.sharedInstance
-    
-    var location:String?
-    
+    // tealish faded colorissue
+
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var itemTitleLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
-
     @IBOutlet var buttons: [UIButton]!
+    
+    let store = DataStore.sharedInstance
+    var location:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         saveButton.isEnabled = false
-        saveButton.backgroundColor = UIColor.gray
+        saveButton.backgroundColor = Colors.tealishFaded
         view.backgroundColor = Colors.dawn
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,7 +99,7 @@ class MoveToVC: UIViewController {
                 button.setTitleColor(Colors.tealish, for: .selected)
             } else {
                 button.isSelected = false
-                button.setTitleColor(Colors.warmGreyThree, for: .normal)
+                button.setTitleColor(Colors.tealishFaded, for: .normal)
             }
         }
     }

@@ -11,14 +11,14 @@ import RealmSwift
 import UIKit
 
 class AddItemVC: UIViewController, UITextFieldDelegate {
- // To do: autocomplete?
-    let store = DataStore.sharedInstance
-    var listTitle:String?
-    var uniqueID: String?
     
     @IBOutlet weak var saveButton: CustomButton!
     @IBOutlet weak var createItemView: UIView!
     @IBOutlet weak var itemTitleField: UITextField!
+    // To do: autocomplete?
+    let store = DataStore.sharedInstance
+    var listTitle:String?
+    var uniqueID: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +59,7 @@ class AddItemVC: UIViewController, UITextFieldDelegate {
             realm.add(shoppingItem)
             shoppingItem.list?.numOfItems += 1
         }
+        
         NotificationCenter.default.post(name: NotificationName.refreshItemList, object: nil)
         dismiss()
     }
@@ -68,6 +69,7 @@ class AddItemVC: UIViewController, UITextFieldDelegate {
         if let text = sender.text {
             textLength = text.trimmingCharacters(in: .whitespacesAndNewlines).characters.count
         }
+        
         if textLength > 0 {
             saveButton.isEnabled = true
             saveButton.backgroundColor = Colors.tealish

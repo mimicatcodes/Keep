@@ -13,11 +13,11 @@ import NotificationCenter
 
 class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
+    @IBOutlet weak var tableView: UITableView!
+    
     let store = DataStore.sharedInstance
     var name:String?
     var uniqueID: String = ""
-    
-    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,21 +36,16 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     @IBAction func addItemBtnTapped(_ sender: Any) {
-        
         performSegue(withIdentifier: Identifiers.Segue.addItemToSL, sender: nil)
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
         let filteredItems = store.allShoppingItems.filter(predicate)
         return filteredItems.count
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier:Identifiers.Cell.listDetailCell, for: indexPath) as! ListDetailCell
         
         let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
@@ -63,30 +58,22 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
             cell.titleLabel.textColor = Colors.whiteFour
             cell.checkBoxImgView.image = #imageLiteral(resourceName: "ChecklistActive2")
             cell.moveButton.isHidden = false
-    
         } else {
             cell.titleLabel.textColor = UIColor(red: 77/255.0, green: 77/255.0, blue: 77/255.0, alpha: 1)
             cell.checkBoxImgView.image = #imageLiteral(resourceName: "ChecklistBase2")
             cell.moveButton.isHidden = true
-
         }
         
         cell.moveButton.tag = indexPath.row
         cell.moveButton.addTarget(self, action: #selector(buttonActions), for: .touchUpInside)
-        
         cell.tapAction = { cell in
-            
             let name = tableView.indexPath(for: cell)?.row
-            
             print(name ?? "Error")
         }
-        
         return cell
-
     }
     
     func buttonActions(sender:UIButton){
-
         let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
         let filteredItems = store.allShoppingItems.filter(predicate)
         let titleString = filteredItems[sender.tag].name
@@ -102,31 +89,24 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
         activityController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
         self.present(activityController, animated: true, completion: nil)
  */
-
     }
 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        print("Cell sected at \(indexPath.row)")
-    
         let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
         let filteredItems = store.allShoppingItems.filter(predicate)
         
         let realm = try! Realm()
         try! realm.write {
-            
             if filteredItems[indexPath.row].isPurchased == false {
                 filteredItems[indexPath.row].isPurchased = true
-
             } else {
                 filteredItems[indexPath.row].isPurchased = false
             }
-            
         }
-
         print(filteredItems[indexPath.row].isPurchased)
         tableView.reloadData()
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -136,7 +116,6 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Identifiers.Segue.addItemToSL {
-            
             let dest = segue.destination as! AddItemVC
             dest.uniqueID = uniqueID
         }

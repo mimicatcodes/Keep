@@ -14,7 +14,7 @@ struct Colors {
     static let lightTeal = UIColor(red: 133/255.0, green: 219/255.0, blue: 205/255.0, alpha: 1)
     static let lightTealTwo = UIColor(red: 178/255.0, green: 231/255.0, blue: 222/255.0, alpha: 1)
     static let lightTealThree = UIColor(red: 135/255.0, green: 219/255.0, blue: 206/255.0, alpha: 1)
-    
+
     static let tealish =  UIColor(red: 35/255.0, green: 213/255.0, blue: 185/255.0, alpha: 1)
     static let tealishFaded = UIColor(red: 35/255.0, green: 213/255.0, blue: 185/255.0, alpha: 0.3)
     

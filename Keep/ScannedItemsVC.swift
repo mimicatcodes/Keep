@@ -79,7 +79,6 @@ class ScannedItemsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         return false
     }
 
-    
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }

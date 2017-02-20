@@ -12,12 +12,12 @@ import NotificationCenter
 
 class AddListVC: UIViewController,  UITextFieldDelegate {
     
-    let store = DataStore.sharedInstance
-    let currentDate = Date()
-    
     @IBOutlet weak var listTitle: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var createListView: UIView!
+    
+    let store = DataStore.sharedInstance
+    let currentDate = Date()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,15 +39,19 @@ class AddListVC: UIViewController,  UITextFieldDelegate {
         save()
     }
 
+    @IBAction func cancelBtnTapped(_ sender: Any) {
+        dismiss()
+    }
+    
     func checkTextField(sender: UITextField) {
         var textLength = 0
         if let text = sender.text {
-         textLength = text.trimmingCharacters(in: .whitespacesAndNewlines).characters.count
+            textLength = text.trimmingCharacters(in: .whitespacesAndNewlines).characters.count
         }
         if textLength > 0 {
             saveButton.isEnabled = true
             saveButton.backgroundColor = Colors.tealish
-
+            
         } else {
             saveButton.isEnabled = false
             saveButton.backgroundColor = .red
@@ -73,11 +77,7 @@ class AddListVC: UIViewController,  UITextFieldDelegate {
         NotificationCenter.default.post(name: NotificationName.refreshTableview, object: nil)
         dismiss()
     }
-    
-    @IBAction func cancelBtnTapped(_ sender: Any) {
-        dismiss()
-    }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // change to done 
         save()

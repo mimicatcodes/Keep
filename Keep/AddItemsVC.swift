@@ -11,6 +11,8 @@ import RealmSwift
 
 class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource, UIBarPositioningDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
     
+    // TODO: Save button
+    
     @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
     var store = DataStore.sharedInstance
     var originalTopMargin:CGFloat!
@@ -50,8 +52,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     @IBOutlet var expButtons: [UIButton]!
     @IBOutlet weak var categoryTextfield: UITextField!
     @IBOutlet weak var saveButton: UIButton!
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         saveButton.isEnabled = false
@@ -88,15 +89,11 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         originalTopMargin = topMarginConstraint.constant
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
         super.viewWillDisappear(animated)
-        
     }
     // picker for category dropdown
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -134,7 +131,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
         if textField == nameTextField {
             let substring = (textField.text! as NSString).replacingCharacters(in: range, with: string)
             searchAutocompleteEntriesWithSubstring(substring)
@@ -145,7 +141,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     
     
     func searchAutocompleteEntriesWithSubstring(_ substring: String) {
-        
         //filteredItems.removeAll(keepingCapacity: false)
         filteredItemsNames.removeAll(keepingCapacity: false)
         
@@ -165,7 +160,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         //if filteredItems.count == 0 {
         if filteredItemsNames.count == 0 {
             //return allItems.count
@@ -200,13 +194,11 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let selectedCell: UITableViewCell = tableView.cellForRow(at: indexPath)!
         
         nameTextField.text = selectedCell.textLabel!.text!.capitalized
         DispatchQueue.main.async {
             self.tableView.isHidden = !tableView.isHidden
-
         }
         print("!!!!!!!!")
         nameTextField.endEditing(true)
@@ -219,7 +211,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     }
     
     func customToolBarForPickers(){
-        
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
         toolBar.isTranslucent = true
@@ -236,19 +227,15 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         categoryTextfield.inputAccessoryView = toolBar
         expDateTextfield.inputAccessoryView = toolBar
         purchaseDateTextfield.inputAccessoryView = toolBar
-        
     }
     
     func donePicker(sender:UIBarButtonItem) {
-        
         view.isUserInteractionEnabled = true
         activeTextField?.resignFirstResponder()
         moveViewDown()
-        
     }
     
     @IBAction func didPressFavBtn(_ sender: UIButton) {
-        
         favButton.isSelected = !favButton.isSelected
         
         if favButton.isSelected {
@@ -260,7 +247,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     }
     
     @IBAction func didPressExpDateBtn(_ sender: UIButton) {
-        
         let index_ = sender.tag
         
         switch index_ {
@@ -329,7 +315,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     
     
     @IBAction func didPressLocationBtn(_ sender: UIButton) {
-        
         selectedIndex = sender.tag
         
         switch selectedIndex {
@@ -410,7 +395,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     }
     
     @IBAction func quantityMinusBtnTapped(_ sender: Any) {
-        
         moveViewDown()
         if quantity == 1 {
             quantityMinusButton.isEnabled = false
@@ -422,19 +406,16 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     }
     
     @IBAction func quantityPlusBtnTapped(_ sender: Any) {
-        
         moveViewDown()
         quantity += 1
         quantityLabel.text = "\(quantity)"
         if quantityMinusButton.isEnabled == false {
             quantityMinusButton.isEnabled = true
-            
         }
     }
     
     func showAlert() {
-        
-        labelView = UILabel(frame: CGRect(x: 0, y: 65, width: self.view.frame.width, height: 40))
+        labelView = UILabel(frame: CGRect(x: 0, y: 60, width: self.view.frame.width, height: 40))
         labelView.backgroundColor = Colors.tealish
         labelView.text = "Item added"
         labelView.textAlignment = .center
@@ -444,20 +425,15 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         self.view.addSubview(labelView)
         
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.dismissAlert), userInfo: nil, repeats: false)
-        
     }
     
     func dismissAlert(){
-        
         if labelView != nil {
-            
             labelView.removeFromSuperview()
-            
         }
     }
     
     func formatInitialData() {
-        
         DispatchQueue.main.async {
             self.nameTextField.text = self.nameTitle
         }
@@ -485,14 +461,13 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         }
         
         for button in expButtons {
-            
             button.isSelected = false
             button.layer.cornerRadius = 5
             button.layer.borderWidth = 1
             button.layer.borderColor = Colors.warmGreyThree.cgColor
             button.setTitleColor(Colors.warmGreyThree, for: .normal)
-            
         }
+        
         saveButton.titleLabel?.textColor = Colors.warmGreyThree
         favButton.isSelected = false
         
@@ -504,16 +479,13 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        
         guard let name = nameTextField.text else { return false }
         //guard let category = categoryTextfield.text else { return false }
-        
         if name != ""  {
             DispatchQueue.main.async {
                 self.saveButton.titleLabel?.textColor = Colors.tealish
                 self.saveButton.isEnabled = true
             }
-            
         }
         /*
          if let name = nameTextField.text , let category = categoryTextfield.text  {
@@ -548,13 +520,11 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
                 expButtons[indexSelected].isSelected = false
             }
             for button in expButtons {
-                
                 button.backgroundColor = .clear
                 button.layer.cornerRadius = 5
                 button.layer.borderWidth = 1
                 button.layer.borderColor = Colors.warmGreyThree.cgColor
                 button.titleLabel?.textColor = Colors.warmGreyThree
-                
             }
             expDateTextfield.text = formatter.string(from: datePicker2.date).capitalized
         } else if textField == categoryTextfield {
@@ -563,7 +533,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         activeTextField?.resignFirstResponder()
         activeTextField?.endEditing(true)
         moveViewDown()
@@ -575,7 +544,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     }
     
     func datePickerChanged(sender: UIDatePicker) {
-        
         if sender == datePicker1 {
             purchaseDate = sender.date
             purchaseDateTextfield.text = formatter.string(from: sender.date).capitalized
@@ -586,16 +554,12 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     }
     
     func resetAddItems(){
-        
         formatInitialData()
         saveButton.isEnabled = false
-        
     }
     
     func moveViewUp() {
-        if topMarginConstraint.constant != originalTopMargin {
-            return
-        }
+        if topMarginConstraint.constant != originalTopMargin { return }
         topMarginConstraint.constant -= 130
         UIView.animate(withDuration: 0.2, animations: { () -> Void in
             self.view.layoutIfNeeded()
@@ -603,9 +567,7 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     }
     
     func moveViewDown() {
-        if topMarginConstraint.constant == originalTopMargin {
-            return
-        }
+        if topMarginConstraint.constant == originalTopMargin { return }
         topMarginConstraint.constant = originalTopMargin
         UIView.animate(withDuration: 0.2, animations: { () -> Void in
             self.view.layoutIfNeeded()

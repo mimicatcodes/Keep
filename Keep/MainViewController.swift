@@ -10,8 +10,6 @@ import UIKit
 import RealmSwift
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    
     // TODO: additions from scanned items need to be handled 
     // TODO: Refresh controller
     
@@ -28,9 +26,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var pantryView: UIView!
     @IBOutlet weak var otherView: UIView!
     
-    var views: [UIView]!
-    var buttons: [UIButton]!
-    
     @IBOutlet var labels: [UILabel]!
     @IBOutlet var addButtons: [UIButton]! {
         didSet {
@@ -40,9 +35,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
-    
-    @IBAction func unwindToMain(segue: UIStoryboardSegue) {}
-    
+
+    var views: [UIView]!
+    var buttons: [UIButton]!
     let store = DataStore.sharedInstance
     var selectedIndex: Int = 0
     let formatter = DateFormatter()
@@ -52,15 +47,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         views = [fridgeView, freezerView, pantryView, otherView]
         buttons = [fridgeButton, freezerButton, pantryButton, otherButton]
-        addButtons.forEach {
-            $0.layer.cornerRadius = 20
-            $0.layer.borderWidth = 2
-            $0.layer.borderColor = Colors.tealish.cgColor
-        }
         tableView.allowsMultipleSelection = true
-        buttons[selectedIndex].isSelected = true
-        views[selectedIndex].backgroundColor = Colors.tealish
-        didPressStockSection(buttons[selectedIndex])
+        setupInitialButtonStatus()
         tableView.tableFooterView = UIView()
         formatDates()
         NotificationCenter.default.addObserver(forName: NotificationName.refreshMainTV, object: nil, queue: nil) { notification in
@@ -75,20 +63,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.reloadData()
     }
     
+    @IBAction func unwindToMain(segue: UIStoryboardSegue) {}
+    
     @IBAction func dismissButtons(_ sender: Any) {
         dismissBtns()
-    }
-    
-    func dismissBtns(){
-        
-        if self.plusButtonIsRotated == true {
-            self.plusButton.transform = CGAffineTransform(rotationAngle: CGFloat(0).degreesToRadians)
-            self.addButtons.forEach {
-                $0.isHidden = true
-                $0.alpha = 1.0
-            }
-            self.plusButtonIsRotated = false
-        }
     }
     
     @IBAction func plusButtonTapped(_ sender: Any) {
@@ -96,10 +74,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func didPressStockSection(_ sender: UIButton) {
-        
-        let index_ = sender.tag
-        
-        switch index_ {
+        switch sender.tag {
         case 0:
             store.buttonStatus = Locations.fridge
             tableView.reloadData()
@@ -115,7 +90,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         for (i,button) in buttons.enumerated() {
-            if i == index_ {
+            if i == sender.tag {
                 button.isSelected = true
                 button.setTitleColor(Colors.lightTeal, for: .selected)
                 views[i].backgroundColor = Colors.lightTeal
@@ -130,11 +105,32 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    func setupInitialButtonStatus(){
+        addButtons.forEach {
+            $0.layer.cornerRadius = 20
+            $0.layer.borderWidth = 2
+            $0.layer.borderColor = Colors.tealish.cgColor
+        }
+        buttons[0].isSelected = true
+        labels[0].textColor = .white
+        views[0].backgroundColor = Colors.lightTeal
+    }
+    
+    func dismissBtns(){
+        if self.plusButtonIsRotated == true {
+            self.plusButton.transform = CGAffineTransform(rotationAngle: CGFloat(0).degreesToRadians)
+            self.addButtons.forEach {
+                $0.isHidden = true
+                $0.alpha = 1.0
+            }
+            self.plusButtonIsRotated = false
+        }
+    }
+
+    
     func animateAddButtons() {
-        
         self.view.layoutIfNeeded()
         UIView.animate(withDuration: 0.15, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.2, options: .curveLinear, animations: {
-            
             if !self.plusButtonIsRotated {
                 self.plusButton.transform = CGAffineTransform(rotationAngle: CGFloat(45).degreesToRadians)
                 
@@ -163,7 +159,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        
         var count = 0
         switch store.buttonStatus {
         case Locations.fridge:
@@ -181,17 +176,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: Fonts.montserratRegular, size: 12)
         header.textLabel?.textColor = UIColor.white
         header.contentView.backgroundColor = Colors.tealish
         header.textLabel?.textAlignment = .center
-        
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
         var title = ""
         
         switch store.buttonStatus {
@@ -211,7 +203,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         var count = 0
         
         switch store.buttonStatus {
@@ -233,32 +224,24 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.Cell.stockCell, for: indexPath) as! StockCell
         
         switch store.buttonStatus {
-            
         case Locations.fridge:
-            
             let filteredFridgeItem = store.fridgeItems.filter(Filters.category, store.fridgeSectionNames[indexPath.section])[indexPath.row]
             configureCells(cell: cell, indexPath: indexPath, filteredItem: filteredFridgeItem)
         case Locations.freezer:
-            
             let filteredFreezerItem = store.freezerItems.filter(Filters.category, store.freezerSectionNames[indexPath.section])[indexPath.row]
             configureCells(cell: cell, indexPath: indexPath, filteredItem: filteredFreezerItem)
-            
         case Locations.pantry:
             let filteredPantryItem = store.pantryItems.filter(Filters.category, store.pantrySectionNames[indexPath.section])[indexPath.row]
             configureCells(cell: cell, indexPath: indexPath, filteredItem: filteredPantryItem)
-            
         case Locations.other:
             let filteredOtherItem = store.otherItems.filter(Filters.category, store.otherSectionNames[indexPath.section])[indexPath.row]
             configureCells(cell: cell, indexPath: indexPath, filteredItem: filteredOtherItem)
         default:
             break
         }
-        
         cell.selectionStyle = .none
         cell.separatorInset = .zero
-        
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -266,7 +249,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func configureCells(cell:StockCell, indexPath: IndexPath, filteredItem: Item ){
-        
         let today = Date()
         var expDate = Date()
         var daysLeft: Int = 0
@@ -308,7 +290,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else  {
             cell.expDateLabel.text = "Expired!"
             cell.expDateLabel.textColor = Colors.pastelRed
-
         }
     }
     
@@ -384,11 +365,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 }
 
 class StockCell:UITableViewCell {
-    
     @IBOutlet weak var itemTitleLabel: UILabel!
     @IBOutlet weak var expDateLabel: UILabel!
     @IBOutlet weak var purchaseDate: UILabel!
     @IBOutlet weak var quantityLabel: UILabel!
-    
 }
 
