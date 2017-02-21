@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import NotificationCenter
 
-class AddListVC: UIViewController,  UITextFieldDelegate {
+class AddListVC: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var listTitle: UITextField!
     @IBOutlet weak var saveButton: UIButton!
@@ -43,19 +43,8 @@ class AddListVC: UIViewController,  UITextFieldDelegate {
         dismiss()
     }
     
-    func checkTextField(sender: UITextField) {
-        var textLength = 0
-        if let text = sender.text {
-            textLength = text.trimmingCharacters(in: .whitespacesAndNewlines).characters.count
-        }
-        if textLength > 0 {
-            saveButton.isEnabled = true
-            saveButton.backgroundColor = Colors.tealish
-            
-        } else {
-            saveButton.isEnabled = false
-            saveButton.backgroundColor = .red
-        }
+    func setupViews(){
+        view.backgroundColor = Colors.dawn
     }
     
     func dismiss() {
@@ -77,14 +66,27 @@ class AddListVC: UIViewController,  UITextFieldDelegate {
         NotificationCenter.default.post(name: NotificationName.refreshTableview, object: nil)
         dismiss()
     }
-
+    
+    func checkTextField(sender: UITextField) {
+        var textLength = 0
+        if let text = sender.text {
+            textLength = text.trimmingCharacters(in: .whitespacesAndNewlines).characters.count
+        }
+        if textLength > 0 {
+            saveButton.isEnabled = true
+            saveButton.backgroundColor = Colors.tealish
+            
+        } else {
+            saveButton.isEnabled = false
+            saveButton.backgroundColor = .red
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // change to done 
+        // change to done
         save()
         return true
     }
-    
-    func setupViews(){
-        view.backgroundColor = Colors.dawn
-    }
 }
+
+

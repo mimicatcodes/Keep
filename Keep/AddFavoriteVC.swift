@@ -51,6 +51,15 @@ class AddFavoriteVC: UIViewController, UITextFieldDelegate {
         dismiss()
     }
     
+    func dismiss() {
+        nameField.resignFirstResponder()
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func setupViews(){
+        view.backgroundColor = Colors.dawn
+    }
+    
     func checkTextField(sender: UITextField) {
         var textLength = 0
         if let text = sender.text {
@@ -66,17 +75,8 @@ class AddFavoriteVC: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func dismiss() {
-        nameField.resignFirstResponder()
-        dismiss(animated: true, completion: nil)
-    }
-        
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         save()
         return true
-    }
-    
-    func setupViews(){
-        view.backgroundColor = Colors.dawn
     }
 }

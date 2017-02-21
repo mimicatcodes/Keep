@@ -145,7 +145,6 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
          dismiss(animated: true, completion: nil)
     }
     
-    
     @IBAction func saveBtnTapped(_ sender: UIButton) {
         guard let name = nameField.text, name != "" else { return }
         guard let quantity = quantityLabel.text, quantity != "" else { return }

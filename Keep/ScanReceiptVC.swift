@@ -12,7 +12,7 @@ import TesseractOCR
 // TODO: Activitiy indicator / progress bar/ 
 // TODO: Activate button
 
-class ScanReceiptVC: UIViewController, UINavigationControllerDelegate, G8TesseractDelegate {
+class ScanReceiptVC: UIViewController, UINavigationControllerDelegate {
     
     var selectedImage: UIImage?
     var textsScanned:String = ""
@@ -62,40 +62,6 @@ class ScanReceiptVC: UIViewController, UINavigationControllerDelegate, G8Tessera
         emptyArray.removeAll()
     }
     
-    func processScanning(){
-        guard let img = imageView.image  else { return }
-        let tesseract:G8Tesseract = G8Tesseract(language: TesseractLang.english)
-        tesseract.engineMode = .tesseractCubeCombined
-        tesseract.pageSegmentationMode = .auto
-        tesseract.maximumRecognitionTime = 30.0
-        tesseract.delegate = self
-        tesseract.image = img
-        tesseract.recognize()
-        print(tesseract.recognizedText)
-        textsScanned = tesseract.recognizedText
-        print(textsScanned)
-        let newlineChars = NSCharacterSet.newlines
-        let elementsArray = textsScanned.components(separatedBy: newlineChars).filter {!$0.isEmpty        }
-        print(elementsArray)
-        for string in elementsArray {
-            let result = string.trimmingCharacters(in: CharacterSet(charactersIn: "01234567890.,"))
-            emptyArray.append(result)
-            DispatchQueue.main.async {
-                self.performSegue(withIdentifier: Identifiers.Segue.toScannedItems, sender: self)
-                self.imageView.image = nil
-            }
-        }
-    }
-    
-    func progressImageRecognition(for tesseract: G8Tesseract!) {
-        updateProgress(with: Float(tesseract.progress))
-    }
-    
-    func updateProgress(with value: Float) {
-        print("\n")
-        print("value: \(value)")
-    }
-
     @IBAction func takePhotoButtonTapped(_ sender: Any) {
         handleCameraImage()
     }
@@ -190,6 +156,7 @@ class ScanReceiptVC: UIViewController, UINavigationControllerDelegate, G8Tessera
     }
 }
 
+//  Pickers
 extension ScanReceiptVC : UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
@@ -210,3 +177,39 @@ extension ScanReceiptVC : UIImagePickerControllerDelegate {
     }
 }
 
+// Tesseract OCR related
+extension ScanReceiptVC : G8TesseractDelegate {
+    func processScanning(){
+        guard let img = imageView.image  else { return }
+        let tesseract:G8Tesseract = G8Tesseract(language: TesseractLang.english)
+        tesseract.engineMode = .tesseractCubeCombined
+        tesseract.pageSegmentationMode = .auto
+        tesseract.maximumRecognitionTime = 30.0
+        tesseract.delegate = self
+        tesseract.image = img
+        tesseract.recognize()
+        print(tesseract.recognizedText)
+        textsScanned = tesseract.recognizedText
+        print(textsScanned)
+        let newlineChars = NSCharacterSet.newlines
+        let elementsArray = textsScanned.components(separatedBy: newlineChars).filter {!$0.isEmpty        }
+        print(elementsArray)
+        for string in elementsArray {
+            let result = string.trimmingCharacters(in: CharacterSet(charactersIn: "01234567890.,"))
+            emptyArray.append(result)
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: Identifiers.Segue.toScannedItems, sender: self)
+                self.imageView.image = nil
+            }
+        }
+    }
+    
+    func progressImageRecognition(for tesseract: G8Tesseract!) {
+        updateProgress(with: Float(tesseract.progress))
+    }
+    
+    func updateProgress(with value: Float) {
+        print("\n")
+        print("value: \(value)")
+    }
+}

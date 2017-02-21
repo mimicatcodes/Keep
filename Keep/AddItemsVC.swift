@@ -372,16 +372,6 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
         datePicker2.setDate(currentDate, animated: false)
     }
     
-    func datePickerChanged(sender: UIDatePicker) {
-        if sender == datePicker1 {
-            purchaseDate = sender.date
-            purchaseDateTextfield.text = formatter.string(from: sender.date).capitalized
-        } else if sender == datePicker2 {
-            expDate = sender.date
-            expDateTextfield.text = formatter.string(from: sender.date).capitalized
-        }
-    }
-    
     func resetAddItems(){
         formatInitialData()
         saveButton.isEnabled = false
@@ -573,6 +563,16 @@ extension AddItemsVC : UIPickerViewDelegate, UIPickerViewDataSource {
         view.isUserInteractionEnabled = true
         activeTextField?.resignFirstResponder()
         moveViewDown()
+    }
+    
+    func datePickerChanged(sender: UIDatePicker) {
+        if sender == datePicker1 {
+            purchaseDate = sender.date
+            purchaseDateTextfield.text = formatter.string(from: sender.date).capitalized
+        } else if sender == datePicker2 {
+            expDate = sender.date
+            expDateTextfield.text = formatter.string(from: sender.date).capitalized
+        }
     }
 
 }

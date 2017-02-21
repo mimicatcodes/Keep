@@ -11,8 +11,7 @@ import RealmSwift
 import MGSwipeTableCell
 import NotificationCenter
 
-class ShoppingListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    
+class ShoppingListViewController: UIViewController {
     // TODO: move activity view controller to the shoppinglist detail vc 
     
     @IBOutlet weak var tableView: UITableView!
@@ -43,39 +42,10 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
         performSegue(withIdentifier: Identifiers.Segue.addList, sender: nil)
     }
     
-    func titleForIndexPath(_ indexPath: IndexPath) -> String {
-       
-        return store.allShopingLists[indexPath.row].title
-    }
-    
     func deleteList(_ indexPath:IndexPath) {
         
         //store.shoppingLists?.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .left)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return store.allShopingLists.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.Cell.shoppingListCell) as! ShoppingListCell
-        cell.numOfItemsView.layer.borderWidth = 1.2
-        cell.numOfItemsView.layer.borderColor = UIColor(red:35/255.0, green:213/255.0, blue:185/255.0, alpha: 1.0).cgColor
-        cell.numOfItemsView.backgroundColor = UIColor.clear
-        cell.numOfItemsRemainingLabel.text = String(describing: store.allShopingLists[indexPath.row].numOfItems)
-        cell.shoppingListTitleLabel.text = store.allShopingLists[indexPath.row].title.capitalized
-        let createdAt = formatter.string(from:store.allShopingLists[indexPath.row].isCreatedAt)
-        cell.createdAtLabel.text = createdAt
-        cell.selectionStyle = .none
-        cell.separatorInset = .zero
-        configureSwipeButtons(cell: cell)
-        return cell
     }
     
     func configureSwipeButtons(cell:ShoppingListCell){
@@ -108,6 +78,12 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
         leftButton2.setPadding(38)
         cell.leftButtons = [leftButton1, leftButton2]
         cell.leftExpansion.buttonIndex = 1
+    }
+    
+    func formatDates() {
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        formatter.dateFormat = "MMM dd, yyyy"
     }
     
     func shareList(){
@@ -148,13 +124,37 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
     }
-    
-    func formatDates() {
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        formatter.dateFormat = "MMM dd, yyyy"
-    }
 }
 
 
+extension ShoppingListViewController : UITableViewDelegate, UITableViewDataSource {
+    func titleForIndexPath(_ indexPath: IndexPath) -> String {
+        
+        return store.allShopingLists[indexPath.row].title
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return store.allShopingLists.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.Cell.shoppingListCell) as! ShoppingListCell
+        cell.numOfItemsView.layer.borderWidth = 1.2
+        cell.numOfItemsView.layer.borderColor = UIColor(red:35/255.0, green:213/255.0, blue:185/255.0, alpha: 1.0).cgColor
+        cell.numOfItemsView.backgroundColor = UIColor.clear
+        cell.numOfItemsRemainingLabel.text = String(describing: store.allShopingLists[indexPath.row].numOfItems)
+        cell.shoppingListTitleLabel.text = store.allShopingLists[indexPath.row].title.capitalized
+        let createdAt = formatter.string(from:store.allShopingLists[indexPath.row].isCreatedAt)
+        cell.createdAtLabel.text = createdAt
+        cell.selectionStyle = .none
+        cell.separatorInset = .zero
+        configureSwipeButtons(cell: cell)
+        return cell
+    }
 
+}

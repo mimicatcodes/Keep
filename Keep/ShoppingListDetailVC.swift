@@ -11,7 +11,7 @@ import RealmSwift
 import MGSwipeTableCell
 import NotificationCenter
 
-class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class ShoppingListDetailVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -39,6 +39,33 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
         performSegue(withIdentifier: Identifiers.Segue.addItemToSL, sender: nil)
     }
     
+    func buttonActions(sender:UIButton){
+        let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
+        let filteredItems = store.allShoppingItems.filter(predicate)
+        let titleString = filteredItems[sender.tag].name
+        print("----titleString is : --- \(titleString)")
+        
+        store.tappedSLItemToSendToLocation = titleString
+
+        /*
+        let firstActivityItem = "\(titleString)"
+        
+        let activityController = UIActivityViewController(activityItems: [firstActivityItem], applicationActivities: nil)
+        activityController.popoverPresentationController?.sourceView = self.view
+        activityController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
+        self.present(activityController, animated: true, completion: nil)
+ */
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Identifiers.Segue.addItemToSL {
+            let dest = segue.destination as! AddItemVC
+            dest.uniqueID = uniqueID
+        }
+    }
+}
+
+extension ShoppingListDetailVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
         let filteredItems = store.allShoppingItems.filter(predicate)
@@ -73,27 +100,8 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
-    func buttonActions(sender:UIButton){
-        let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
-        let filteredItems = store.allShoppingItems.filter(predicate)
-        let titleString = filteredItems[sender.tag].name
-        print("----titleString is : --- \(titleString)")
-        
-        store.tappedSLItemToSendToLocation = titleString
-
-        /*
-        let firstActivityItem = "\(titleString)"
-        
-        let activityController = UIActivityViewController(activityItems: [firstActivityItem], applicationActivities: nil)
-        activityController.popoverPresentationController?.sourceView = self.view
-        activityController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
-        self.present(activityController, animated: true, completion: nil)
- */
-    }
-
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       print("Cell sected at \(indexPath.row)")
+        print("Cell sected at \(indexPath.row)")
         let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
         let filteredItems = store.allShoppingItems.filter(predicate)
         
@@ -112,15 +120,6 @@ class ShoppingListDetailVC: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
-    
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Identifiers.Segue.addItemToSL {
-            let dest = segue.destination as! AddItemVC
-            dest.uniqueID = uniqueID
-        }
-    }
 }
-
-
 

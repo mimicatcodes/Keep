@@ -37,16 +37,6 @@ class MoveToVC: UIViewController {
         setupViews()
     }
     
-    func setupViews(){
-        if store.tappedSLItemToSendToLocation != "" {
-            DispatchQueue.main.async {
-                self.itemTitleLabel.text = "Add \(self.store.tappedSLItemToSendToLocation) to"
-            }
-        } else {
-        print("Not possible")
-        }
-    }
-    
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         if store.tappedSLItemToSendToLocation != "" {
             if let location = location {
@@ -89,5 +79,15 @@ class MoveToVC: UIViewController {
 
     @IBAction func dismissView(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func setupViews(){
+        if store.tappedSLItemToSendToLocation != "" {
+            DispatchQueue.main.async {
+                self.itemTitleLabel.text = "Add \(self.store.tappedSLItemToSendToLocation) to"
+            }
+        } else {
+            print("Not possible")
+        }
     }
 }

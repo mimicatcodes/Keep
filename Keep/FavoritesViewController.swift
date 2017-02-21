@@ -10,11 +10,12 @@ import UIKit
 import RealmSwift
 import MGSwipeTableCell
 
-class FavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    let store = DataStore.sharedInstance
+class FavoritesViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    
+    let store = DataStore.sharedInstance
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
@@ -31,25 +32,6 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewWillAppear(true)
         tableView.reloadData()
         
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return 70
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return store.allFavoritedItems.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteCell", for: indexPath) as! FavoriteCell
-        cell.favoriteTitle.text = store.allFavoritedItems[indexPath.row].name
-        cell.separatorInset = .zero
-        cell.selectionStyle = .none
-        configureSwipeButtons(cell: cell, indexPath: indexPath)
-        
-        return cell
     }
     
     func configureSwipeButtons(cell:FavoriteCell, indexPath: IndexPath){
@@ -121,4 +103,24 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         print("Deleted an item from favoritedItems")
     }
     
+}
+
+extension FavoritesViewController : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return store.allFavoritedItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteCell", for: indexPath) as! FavoriteCell
+        cell.favoriteTitle.text = store.allFavoritedItems[indexPath.row].name
+        cell.separatorInset = .zero
+        cell.selectionStyle = .none
+        configureSwipeButtons(cell: cell, indexPath: indexPath)
+        
+        return cell
+    }
 }

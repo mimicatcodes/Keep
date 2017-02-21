@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import Charts
 
-class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingsViewController: UIViewController {
     
     let store = DataStore.sharedInstance
     let today = Date()
@@ -44,7 +44,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     var categories:[String]!
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         tableView.separatorInset = .zero
         topView.underlinedBorder()
@@ -59,7 +58,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let numOfItemsInCategory = [10.0, 4.0, 6.0, 3.0, 8.0]
         
         setChart(dataPoints: categories, values: numOfItemsInCategory)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -112,8 +110,17 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         numOfItemsExpiredLabel.text = "\(numOfExpiredItems)"
     }
     
-    
-    // Charts
+    func daysBetweenTwoDates(start: Date, end: Date) -> Int{
+        let currentCalendar = Calendar.current
+        
+        guard let start = currentCalendar.ordinality(of: .day, in: .era, for: start) else { return 0 }
+        guard let end = currentCalendar.ordinality(of: .day, in: .era, for: end) else { return 0 }
+        return end - start
+    }
+}
+
+// Charts API
+extension SettingsViewController {
     func setChart(dataPoints: [String], values: [Double]) {
         radarChartView.noDataText = "No chart data available yet. Please add items in your inventory"
         
@@ -130,7 +137,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         let chartDataSet = RadarChartDataSet(values: dataEntries, label: nil)
-
+        
         chartDataSet.drawFilledEnabled = true
         chartDataSet.drawValuesEnabled = false
         chartDataSet.fillColor = Colors.tealish
@@ -151,21 +158,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         radarChartView.sizeToFit()
         radarChartView.chartDescription?.text = ""
+        
+    }
+}
 
-    }
-    
-    func daysBetweenTwoDates(start: Date, end: Date) -> Int{
-        
-        let currentCalendar = Calendar.current
-        
-        guard let start = currentCalendar.ordinality(of: .day, in: .era, for: start) else { return 0 }
-        guard let end = currentCalendar.ordinality(of: .day, in: .era, for: end) else { return 0 }
-        return end - start
-    
-    }
-    
-    // TV Methods
-    
+extension SettingsViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections.count
     }
