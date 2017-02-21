@@ -12,7 +12,7 @@ import RealmSwift
 class MoveToVC: UIViewController {
     
     // tealish faded colorissue
-
+    // label change color too?
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var bottomView: UIView!

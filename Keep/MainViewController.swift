@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MainViewController: UIViewController {
     // TODO: additions from scanned items need to be handled 
     // TODO: Refresh controller
     
@@ -179,79 +179,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         return count
     }
     
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: Fonts.montserratRegular, size: 12)
-        header.textLabel?.textColor = UIColor.white
-        header.contentView.backgroundColor = Colors.tealish
-        header.textLabel?.textAlignment = .center
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        var title = ""
-        
-        switch store.buttonStatus {
-        case Locations.fridge:
-            title = store.fridgeSectionNames[section]
-        case Locations.freezer:
-            title = store.freezerSectionNames[section]
-        case Locations.pantry:
-            title = store.pantrySectionNames[section]
-        case Locations.other:
-            title = store.otherSectionNames[section]
-        default:
-            break
-        }
-        return title
-    }
-    
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count = 0
-        
-        switch store.buttonStatus {
-        case Locations.fridge:
-            count = store.fridgeItems.filter(Filters.category, store.fridgeSectionNames[section]).count
-        case Locations.freezer:
-            count = store.freezerItems.filter(Filters.category, store.freezerSectionNames[section]).count
-        case Locations.pantry:
-            count = store.pantryItems.filter(Filters.category, store.pantrySectionNames[section]).count
-        case Locations.other:
-            count = store.otherItems.filter(Filters.category, store.otherSectionNames[section]).count
-        default:
-            break
-        }
-        return count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.Cell.stockCell, for: indexPath) as! StockCell
-        
-        switch store.buttonStatus {
-        case Locations.fridge:
-            let filteredFridgeItem = store.fridgeItems.filter(Filters.category, store.fridgeSectionNames[indexPath.section])[indexPath.row]
-            configureCells(cell: cell, indexPath: indexPath, filteredItem: filteredFridgeItem)
-        case Locations.freezer:
-            let filteredFreezerItem = store.freezerItems.filter(Filters.category, store.freezerSectionNames[indexPath.section])[indexPath.row]
-            configureCells(cell: cell, indexPath: indexPath, filteredItem: filteredFreezerItem)
-        case Locations.pantry:
-            let filteredPantryItem = store.pantryItems.filter(Filters.category, store.pantrySectionNames[indexPath.section])[indexPath.row]
-            configureCells(cell: cell, indexPath: indexPath, filteredItem: filteredPantryItem)
-        case Locations.other:
-            let filteredOtherItem = store.otherItems.filter(Filters.category, store.otherSectionNames[indexPath.section])[indexPath.row]
-            configureCells(cell: cell, indexPath: indexPath, filteredItem: filteredOtherItem)
-        default:
-            break
-        }
-        cell.selectionStyle = .none
-        cell.separatorInset = .zero
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        dismissBtns()
-    }
-    
     func configureCells(cell:StockCell, indexPath: IndexPath, filteredItem: Item ){
         let today = Date()
         var expDate = Date()
@@ -295,6 +222,99 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.expDateLabel.text = "Expired!"
             cell.expDateLabel.textColor = Colors.pastelRed
         }
+    }
+    
+    func daysBetweenTwoDates(start: Date, end: Date) -> Int{
+        
+        let currentCalendar = Calendar.current
+        
+        guard let start = currentCalendar.ordinality(of: .day, in: .era, for: start) else { return 0 }
+        guard let end = currentCalendar.ordinality(of: .day, in: .era, for: end) else { return 0 }
+        return end - start
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
+    }
+}
+
+
+extension MainViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var count = 0
+        
+        switch store.buttonStatus {
+        case Locations.fridge:
+            count = store.fridgeItems.filter(Filters.category, store.fridgeSectionNames[section]).count
+        case Locations.freezer:
+            count = store.freezerItems.filter(Filters.category, store.freezerSectionNames[section]).count
+        case Locations.pantry:
+            count = store.pantryItems.filter(Filters.category, store.pantrySectionNames[section]).count
+        case Locations.other:
+            count = store.otherItems.filter(Filters.category, store.otherSectionNames[section]).count
+        default:
+            break
+        }
+        return count
+    }
+    
+}
+
+extension MainViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dismissBtns()
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont(name: Fonts.montserratRegular, size: 12)
+        header.textLabel?.textColor = UIColor.white
+        header.contentView.backgroundColor = Colors.tealish
+        header.textLabel?.textAlignment = .center
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        var title = ""
+        
+        switch store.buttonStatus {
+        case Locations.fridge:
+            title = store.fridgeSectionNames[section]
+        case Locations.freezer:
+            title = store.freezerSectionNames[section]
+        case Locations.pantry:
+            title = store.pantrySectionNames[section]
+        case Locations.other:
+            title = store.otherSectionNames[section]
+        default:
+            break
+        }
+        return title
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.Cell.stockCell, for: indexPath) as! StockCell
+        
+        switch store.buttonStatus {
+        case Locations.fridge:
+            let filteredFridgeItem = store.fridgeItems.filter(Filters.category, store.fridgeSectionNames[indexPath.section])[indexPath.row]
+            configureCells(cell: cell, indexPath: indexPath, filteredItem: filteredFridgeItem)
+        case Locations.freezer:
+            let filteredFreezerItem = store.freezerItems.filter(Filters.category, store.freezerSectionNames[indexPath.section])[indexPath.row]
+            configureCells(cell: cell, indexPath: indexPath, filteredItem: filteredFreezerItem)
+        case Locations.pantry:
+            let filteredPantryItem = store.pantryItems.filter(Filters.category, store.pantrySectionNames[indexPath.section])[indexPath.row]
+            configureCells(cell: cell, indexPath: indexPath, filteredItem: filteredPantryItem)
+        case Locations.other:
+            let filteredOtherItem = store.otherItems.filter(Filters.category, store.otherSectionNames[indexPath.section])[indexPath.row]
+            configureCells(cell: cell, indexPath: indexPath, filteredItem: filteredOtherItem)
+        default:
+            break
+        }
+        cell.selectionStyle = .none
+        cell.separatorInset = .zero
+        return cell
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -351,21 +371,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         return [delete, edit]
     }
-    
-    func daysBetweenTwoDates(start: Date, end: Date) -> Int{
-        
-        let currentCalendar = Calendar.current
-        
-        guard let start = currentCalendar.ordinality(of: .day, in: .era, for: start) else { return 0 }
-        guard let end = currentCalendar.ordinality(of: .day, in: .era, for: end) else { return 0 }
-        return end - start
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let backItem = UIBarButtonItem()
-        backItem.title = ""
-        navigationItem.backBarButtonItem = backItem
-    }
+
 }
 
 

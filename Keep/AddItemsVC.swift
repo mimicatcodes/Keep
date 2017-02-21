@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource, UIBarPositioningDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
+class AddItemsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIBarPositioningDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
     
     // TODO: Save button
     
@@ -130,15 +130,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         heightConstraint.constant = 80
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == nameTextField {
-            let substring = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-            searchAutocompleteEntriesWithSubstring(substring)
-            return true
-        }
-        return true
-    }
-    
     
     func searchAutocompleteEntriesWithSubstring(_ substring: String) {
         //filteredItems.removeAll(keepingCapacity: false)
@@ -157,51 +148,6 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             }
         }
         tableView.reloadData()
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //if filteredItems.count == 0 {
-        if filteredItemsNames.count == 0 {
-            //return allItems.count
-            return list.count
-        }
-        //return filteredItems.count
-        return filteredItemsNames.count
-    }
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "nameCell")
-        
-        //if filteredItems.count == 0 {
-        if filteredItemsNames.count == 0 {
-            tableView.isHidden = true
-            // ---- Dummy data ----------------------
-            cell?.textLabel?.text = list[indexPath.row]
-            // ---- Dummy data ----------------------
-            
-        } else {
-            tableView.isHidden = false
-            
-            //cell?.textLabel?.text = self.filteredItems[indexPath.row].name
-            
-            cell?.textLabel?.text = self.filteredItemsNames[indexPath.row]
-        }
-        
-        cell?.textLabel?.font = UIFont(name: Fonts.latoRegular, size: 13)
-        cell?.textLabel?.textColor = Colors.whiteFour
-        return cell!
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedCell: UITableViewCell = tableView.cellForRow(at: indexPath)!
-        
-        nameTextField.text = selectedCell.textLabel!.text!.capitalized
-        DispatchQueue.main.async {
-            self.tableView.isHidden = !tableView.isHidden
-        }
-        print("!!!!!!!!")
-        nameTextField.endEditing(true)
     }
     
     func formatDates(){
@@ -500,6 +446,49 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         return true
     }
     
+    
+    func datePickerChanged(sender: UIDatePicker) {
+        if sender == datePicker1 {
+            purchaseDate = sender.date
+            purchaseDateTextfield.text = formatter.string(from: sender.date).capitalized
+        } else if sender == datePicker2 {
+            expDate = sender.date
+            expDateTextfield.text = formatter.string(from: sender.date).capitalized
+        }
+    }
+    
+    func resetAddItems(){
+        formatInitialData()
+        saveButton.isEnabled = false
+    }
+    
+    func moveViewUp() {
+        if topMarginConstraint.constant != originalTopMargin { return }
+        topMarginConstraint.constant -= 130
+        UIView.animate(withDuration: 0.2, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    func moveViewDown() {
+        if topMarginConstraint.constant == originalTopMargin { return }
+        topMarginConstraint.constant = originalTopMargin
+        UIView.animate(withDuration: 0.2, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+    }
+}
+
+extension AddItemsVC: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == nameTextField {
+            let substring = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            searchAutocompleteEntriesWithSubstring(substring)
+            return true
+        }
+        return true
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField){
         activeTextField = textField
         if textField.tag == 1 {
@@ -542,35 +531,52 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         }
         return true
     }
-    
-    func datePickerChanged(sender: UIDatePicker) {
-        if sender == datePicker1 {
-            purchaseDate = sender.date
-            purchaseDateTextfield.text = formatter.string(from: sender.date).capitalized
-        } else if sender == datePicker2 {
-            expDate = sender.date
-            expDateTextfield.text = formatter.string(from: sender.date).capitalized
+
+}
+
+extension AddItemsVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //if filteredItems.count == 0 {
+        if filteredItemsNames.count == 0 {
+            //return allItems.count
+            return list.count
         }
+        //return filteredItems.count
+        return filteredItemsNames.count
+    }
+}
+
+extension AddItemsVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCell: UITableViewCell = tableView.cellForRow(at: indexPath)!
+        
+        nameTextField.text = selectedCell.textLabel!.text!.capitalized
+        DispatchQueue.main.async {
+            self.tableView.isHidden = !tableView.isHidden
+        }
+        nameTextField.endEditing(true)
     }
     
-    func resetAddItems(){
-        formatInitialData()
-        saveButton.isEnabled = false
-    }
-    
-    func moveViewUp() {
-        if topMarginConstraint.constant != originalTopMargin { return }
-        topMarginConstraint.constant -= 130
-        UIView.animate(withDuration: 0.2, animations: { () -> Void in
-            self.view.layoutIfNeeded()
-        })
-    }
-    
-    func moveViewDown() {
-        if topMarginConstraint.constant == originalTopMargin { return }
-        topMarginConstraint.constant = originalTopMargin
-        UIView.animate(withDuration: 0.2, animations: { () -> Void in
-            self.view.layoutIfNeeded()
-        })
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "nameCell")
+        
+        //if filteredItems.count == 0 {
+        if filteredItemsNames.count == 0 {
+            tableView.isHidden = true
+            // ---- Dummy data ----------------------
+            cell?.textLabel?.text = list[indexPath.row]
+            // ---- Dummy data ----------------------
+            
+        } else {
+            tableView.isHidden = false
+            
+            //cell?.textLabel?.text = self.filteredItems[indexPath.row].name
+            
+            cell?.textLabel?.text = self.filteredItemsNames[indexPath.row]
+        }
+        
+        cell?.textLabel?.font = UIFont(name: Fonts.latoRegular, size: 13)
+        cell?.textLabel?.textColor = Colors.whiteFour
+        return cell!
     }
 }
