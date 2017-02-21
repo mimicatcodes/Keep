@@ -31,6 +31,12 @@
 		DD4853BB1E199FEB00BEAC02 /* CookingAndBaking.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853BA1E199FEB00BEAC02 /* CookingAndBaking.swift */; };
 		DD4853BF1E19A00900BEAC02 /* Other.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853BE1E19A00900BEAC02 /* Other.swift */; };
 		DD4853C71E19AF0000BEAC02 /* PackagedFoods.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853C61E19AF0000BEAC02 /* PackagedFoods.swift */; };
+		DD515D051E5BD3DD00415A2B /* StockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515D041E5BD3DD00415A2B /* StockCell.swift */; };
+		DD515D071E5BD44500415A2B /* ScannedItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515D061E5BD44500415A2B /* ScannedItemCell.swift */; };
+		DD515D091E5BD4FA00415A2B /* ShoppingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515D081E5BD4FA00415A2B /* ShoppingListCell.swift */; };
+		DD515D0B1E5BD55900415A2B /* ListDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515D0A1E5BD55900415A2B /* ListDetailCell.swift */; };
+		DD515D0D1E5BD5B400415A2B /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515D0C1E5BD5B400415A2B /* AccountCell.swift */; };
+		DD515D0F1E5BD60B00415A2B /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515D0E1E5BD60B00415A2B /* FavoriteCell.swift */; };
 		DD5D7DC91E329BA300C2317D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5D7DC81E329BA300C2317D /* MainViewController.swift */; };
 		DD75B7B11E3D545D002053E5 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DD75B7AF1E3D545D002053E5 /* Montserrat-Bold.otf */; };
 		DD75B7B21E3D545D002053E5 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = DD75B7B01E3D545D002053E5 /* Montserrat-Regular.otf */; };
@@ -92,6 +98,12 @@
 		DD4853BA1E199FEB00BEAC02 /* CookingAndBaking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CookingAndBaking.swift; sourceTree = "<group>"; };
 		DD4853BE1E19A00900BEAC02 /* Other.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Other.swift; sourceTree = "<group>"; };
 		DD4853C61E19AF0000BEAC02 /* PackagedFoods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackagedFoods.swift; sourceTree = "<group>"; };
+		DD515D041E5BD3DD00415A2B /* StockCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockCell.swift; sourceTree = "<group>"; };
+		DD515D061E5BD44500415A2B /* ScannedItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannedItemCell.swift; sourceTree = "<group>"; };
+		DD515D081E5BD4FA00415A2B /* ShoppingListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingListCell.swift; sourceTree = "<group>"; };
+		DD515D0A1E5BD55900415A2B /* ListDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailCell.swift; sourceTree = "<group>"; };
+		DD515D0C1E5BD5B400415A2B /* AccountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
+		DD515D0E1E5BD60B00415A2B /* FavoriteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		DD5D7DC81E329BA300C2317D /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DD75B7AF1E3D545D002053E5 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.otf"; sourceTree = "<group>"; };
 		DD75B7B01E3D545D002053E5 /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.otf"; sourceTree = "<group>"; };
@@ -209,6 +221,8 @@
 		DD48537C1E196BF900BEAC02 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DD515D031E5BD3BE00415A2B /* Custom Cells */,
+				DD8586B91E580C1200065DDD /* Custom Views */,
 				DD1EA63B1E0CA41D0034C54B /* Main.storyboard */,
 				DD786E351E50FAAF00B1F4E3 /* optionsView.xib */,
 			);
@@ -277,6 +291,19 @@
 			name = DataModel;
 			sourceTree = "<group>";
 		};
+		DD515D031E5BD3BE00415A2B /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				DD515D041E5BD3DD00415A2B /* StockCell.swift */,
+				DD515D061E5BD44500415A2B /* ScannedItemCell.swift */,
+				DD515D081E5BD4FA00415A2B /* ShoppingListCell.swift */,
+				DD515D0A1E5BD55900415A2B /* ListDetailCell.swift */,
+				DD515D0C1E5BD5B400415A2B /* AccountCell.swift */,
+				DD515D0E1E5BD60B00415A2B /* FavoriteCell.swift */,
+			);
+			name = "Custom Cells";
+			sourceTree = "<group>";
+		};
 		DD75B7AA1E3D52EF002053E5 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -313,18 +340,17 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
-		DD8586B91E580C1200065DDD /* Custom View */ = {
+		DD8586B91E580C1200065DDD /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
 				DD8586BA1E580C2A00065DDD /* CustomViews.swift */,
 			);
-			name = "Custom View";
+			name = "Custom Views";
 			sourceTree = "<group>";
 		};
 		DDC3E9831E1C953F00459295 /* Shopping List */ = {
 			isa = PBXGroup;
 			children = (
-				DD8586B91E580C1200065DDD /* Custom View */,
 				DDC3E9861E1C957000459295 /* ShoppingListViewController.swift */,
 				DDC3E98E1E1CB87C00459295 /* AddListVC.swift */,
 				DDC3E98C1E1CB86100459295 /* ShoppingListDetailVC.swift */,
@@ -495,6 +521,7 @@
 			files = (
 				DDC3E98D1E1CB86200459295 /* ShoppingListDetailVC.swift in Sources */,
 				DD1EA6511E0CAFEB0034C54B /* ForgotPasswordViewController.swift in Sources */,
+				DD515D051E5BD3DD00415A2B /* StockCell.swift in Sources */,
 				DD4853AF1E199F9D00BEAC02 /* FrozenFoods.swift in Sources */,
 				DDC3EBA01E31365B00459295 /* Category.swift in Sources */,
 				DD786E311E4A69CE00B1F4E3 /* ScanReceiptVC.swift in Sources */,
@@ -509,6 +536,7 @@
 				DDC3E9801E1C76E100459295 /* SearchVC.swift in Sources */,
 				DDC3E98F1E1CB87C00459295 /* AddListVC.swift in Sources */,
 				DD4853BF1E19A00900BEAC02 /* Other.swift in Sources */,
+				DD515D0D1E5BD5B400415A2B /* AccountCell.swift in Sources */,
 				DDC3EBA21E31450100459295 /* StockItem.swift in Sources */,
 				DDC3E9871E1C957000459295 /* ShoppingListViewController.swift in Sources */,
 				DD8586BB1E580C2A00065DDD /* CustomViews.swift in Sources */,
@@ -523,13 +551,17 @@
 				DDD7D47C1E403FFE00599382 /* Favorites.swift in Sources */,
 				DDC3E98B1E1C958A00459295 /* SettingsViewController.swift in Sources */,
 				DD4853B51E199FC000BEAC02 /* Meat.swift in Sources */,
+				DD515D071E5BD44500415A2B /* ScannedItemCell.swift in Sources */,
 				DD48537F1E196C4200BEAC02 /* Produce.swift in Sources */,
 				DD4853831E197CB500BEAC02 /* Condiments.swift in Sources */,
 				DD0F51BE1E42DB0E004A6153 /* MoveToVC.swift in Sources */,
+				DD515D0B1E5BD55900415A2B /* ListDetailCell.swift in Sources */,
 				DDC3EBA41E31451000459295 /* ShoppingItem.swift in Sources */,
 				DD4853A31E19938700BEAC02 /* Beverages.swift in Sources */,
+				DD515D091E5BD4FA00415A2B /* ShoppingListCell.swift in Sources */,
 				DD4853B11E199FA600BEAC02 /* Bakery.swift in Sources */,
 				DD4853AB1E199F8300BEAC02 /* HealthAndPersonal.swift in Sources */,
+				DD515D0F1E5BD60B00415A2B /* FavoriteCell.swift in Sources */,
 				DDEC8C8C1E456F29004C73CB /* ScannedItemsVC.swift in Sources */,
 				DD4853B91E199FD600BEAC02 /* Deli.swift in Sources */,
 				DD4853C71E19AF0000BEAC02 /* PackagedFoods.swift in Sources */,

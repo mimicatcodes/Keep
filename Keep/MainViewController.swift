@@ -26,7 +26,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var pantryView: UIView!
     @IBOutlet weak var otherView: UIView!
     
-    @IBOutlet var labels: [UILabel]!
+    @IBOutlet weak var fridgeLabel: UILabel!
+    @IBOutlet weak var freezerLabel: UILabel!
+    @IBOutlet weak var pantryLabel: UILabel!
+    @IBOutlet weak var otherLabel: UILabel!
+    
     @IBOutlet var addButtons: [UIButton]! {
         didSet {
             addButtons.forEach {
@@ -38,6 +42,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     var views: [UIView]!
     var buttons: [UIButton]!
+    var labels: [UILabel]!
+    var locations:[String] = [Locations.fridge, Locations.freezer, Locations.pantry, Locations.other]
+    
     let store = DataStore.sharedInstance
     var selectedIndex: Int = 0
     let formatter = DateFormatter()
@@ -45,16 +52,16 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         views = [fridgeView, freezerView, pantryView, otherView]
         buttons = [fridgeButton, freezerButton, pantryButton, otherButton]
+        labels = [fridgeLabel, freezerLabel, pantryLabel, otherLabel]
+        
+        formatDates()
         tableView.allowsMultipleSelection = true
         setupInitialButtonStatus()
-        tableView.tableFooterView = UIView()
-        formatDates()
-        NotificationCenter.default.addObserver(forName: NotificationName.refreshMainTV, object: nil, queue: nil) { notification in
-            print("notification is \(notification)")
-            self.tableView.reloadData()
-        }
+        tableView.tableFooterView = UIView() // Remove empty cells
+        notificationAddObserver()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,35 +81,26 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func didPressStockSection(_ sender: UIButton) {
-        switch sender.tag {
-        case 0:
-            store.buttonStatus = Locations.fridge
-            tableView.reloadData()
-        case 1:
-            store.buttonStatus = Locations.freezer
-            tableView.reloadData()
-        case 2:
-            store.buttonStatus = Locations.pantry
-            tableView.reloadData()
-        default:
-            store.buttonStatus = Locations.other
-            tableView.reloadData()
-        }
-        
         for (i,button) in buttons.enumerated() {
             if i == sender.tag {
+                store.buttonStatus = locations[i]
+                print("Selected sender.tag value is --------\(sender.tag)")
                 button.isSelected = true
                 button.setTitleColor(Colors.lightTeal, for: .selected)
                 views[i].backgroundColor = Colors.lightTeal
                 labels[i].textColor = UIColor.white
+                tableView.reloadData()
             } else {
+                print("NOT selected sender.tag value is --------\(sender.tag)")
                 button.isSelected = false
                 button.setTitleColor(Colors.warmGreyThree, for: .normal)
                 views[i].backgroundColor = Colors.whiteTwo
                 labels[i].textColor = Colors.warmGreyThree
+                tableView.reloadData()
             }
             dismissBtns()
         }
+        print("the button status is-------\(store.buttonStatus)")
     }
     
     func setupInitialButtonStatus(){
@@ -126,8 +124,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.plusButtonIsRotated = false
         }
     }
-
     
+    func notificationAddObserver(){
+        NotificationCenter.default.addObserver(forName: NotificationName.refreshMainTV, object: nil, queue: nil) { notification in
+            print("notification is \(notification)")
+            self.tableView.reloadData()
+        }
+    }
+
     func animateAddButtons() {
         self.view.layoutIfNeeded()
         UIView.animate(withDuration: 0.15, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.2, options: .curveLinear, animations: {
@@ -364,10 +368,4 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 }
 
-class StockCell:UITableViewCell {
-    @IBOutlet weak var itemTitleLabel: UILabel!
-    @IBOutlet weak var expDateLabel: UILabel!
-    @IBOutlet weak var purchaseDate: UILabel!
-    @IBOutlet weak var quantityLabel: UILabel!
-}
 

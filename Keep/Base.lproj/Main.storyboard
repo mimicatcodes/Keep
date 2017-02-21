@@ -836,7 +836,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ysc-Xz-AX1">
-                                        <rect key="frame" x="326" y="16.5" width="34" height="40"/>
+                                        <rect key="frame" x="328" y="16.5" width="32" height="40"/>
                                         <fontDescription key="fontDescription" name="Lato-Semibold" family="Lato" pointSize="15"/>
                                         <state key="normal" title="Save">
                                             <color key="titleColor" red="0.4823529411764706" green="0.4823529411764706" blue="0.4823529411764706" alpha="1" colorSpace="calibratedRGB"/>
@@ -846,7 +846,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C0T-8N-p3W">
-                                        <rect key="frame" x="15" y="16" width="47" height="40"/>
+                                        <rect key="frame" x="15" y="16" width="45" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="g6J-EZ-cGN"/>
                                         </constraints>
@@ -1761,7 +1761,7 @@
                                 <rect key="frame" x="0.0" y="220.5" width="375" height="446.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="scannedItemCell" rowHeight="70" id="giC-Zw-pkN" customClass="scannedItemCell" customModule="Keep" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="scannedItemCell" rowHeight="70" id="giC-Zw-pkN" customClass="ScannedItemCell" customModule="Keep" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="giC-Zw-pkN" id="L8s-PN-Dcs">
@@ -2056,7 +2056,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorite" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q6x-xF-1dM">
-                                        <rect key="frame" x="1" y="24" width="36" height="12"/>
+                                        <rect key="frame" x="0.5" y="24" width="37" height="12"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="10"/>
                                         <color key="textColor" red="1" green="0.53725490196078429" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2070,7 +2070,7 @@
                                 <rect key="frame" x="0.0" y="-20" width="375" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T1R-4n-wEx">
-                                        <rect key="frame" x="15" y="30" width="47" height="32"/>
+                                        <rect key="frame" x="15" y="30" width="45" height="32"/>
                                         <fontDescription key="fontDescription" name="Lato-Semibold" family="Lato" pointSize="15"/>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" red="0.4823529412" green="0.4823529412" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
@@ -2080,7 +2080,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SYQ-ot-hNj">
-                                        <rect key="frame" x="326" y="31" width="34" height="30"/>
+                                        <rect key="frame" x="328" y="31" width="32" height="30"/>
                                         <fontDescription key="fontDescription" name="Lato-Semibold" family="Lato" pointSize="15"/>
                                         <state key="normal" title="Save">
                                             <color key="titleColor" red="0.4823529412" green="0.4823529412" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
@@ -2435,7 +2435,7 @@
                                             <outlet property="delegate" destination="Kn1-ln-6La" id="2j8-M9-3hC"/>
                                         </connections>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJW-p5-Lgo" userLabel="plusButton">
+                                    <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJW-p5-Lgo" userLabel="plusButton">
                                         <rect key="frame" x="296" y="392" width="55" height="55"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="55" id="fLj-zW-YqS"/>
@@ -2446,7 +2446,7 @@
                                             <action selector="plusButtonTapped:" destination="Kn1-ln-6La" eventType="touchUpInside" id="qcu-6y-sFi"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edz-Nb-gib" userLabel="scanAddBtn">
+                                    <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edz-Nb-gib" userLabel="scanAddBtn">
                                         <rect key="frame" x="169" y="398" width="107" height="43"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -2461,7 +2461,7 @@
                                             <segue destination="t1d-cA-0Z3" kind="presentation" id="rxy-wN-vWw"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FN5-yg-hyv" userLabel="manualAddBtn">
+                                    <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FN5-yg-hyv" userLabel="manualAddBtn">
                                         <rect key="frame" x="244" y="329" width="107" height="43"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -2507,7 +2507,7 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Stock" id="cVr-4t-XKZ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="D0Z-bF-kM6">
+                        <barButtonItem key="rightBarButtonItem" tag="13" systemItem="search" id="D0Z-bF-kM6">
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="2ZJ-yf-mcK" kind="presentation" id="gJ9-Qg-DEK"/>
@@ -2516,20 +2516,20 @@
                     </navigationItem>
                     <connections>
                         <outlet property="freezerButton" destination="y9t-zA-4mD" id="cH3-1Q-id8"/>
+                        <outlet property="freezerLabel" destination="aLc-gC-sjH" id="M4M-bA-een"/>
                         <outlet property="freezerView" destination="57W-T6-aKt" id="WGW-YD-N6T"/>
                         <outlet property="fridgeButton" destination="1jp-kr-pSW" id="QQB-6s-PpS"/>
+                        <outlet property="fridgeLabel" destination="QgJ-r8-pFX" id="baU-zs-H2W"/>
                         <outlet property="fridgeView" destination="8Uw-iF-tzg" id="YrY-hk-Vsz"/>
                         <outlet property="menuBarView" destination="3b3-Is-Eab" id="Lr7-2B-YJz"/>
                         <outlet property="otherButton" destination="Fan-0s-U4v" id="oaF-Ng-KQS"/>
+                        <outlet property="otherLabel" destination="gpJ-6O-aVB" id="iBT-Gj-14R"/>
                         <outlet property="otherView" destination="9n0-L9-KbB" id="kPt-kh-3XO"/>
                         <outlet property="pantryButton" destination="bqS-Dx-o40" id="xk0-re-aS5"/>
+                        <outlet property="pantryLabel" destination="cL5-Q5-qcX" id="Vxl-Rl-dEP"/>
                         <outlet property="pantryView" destination="1D7-4P-myd" id="CzV-0p-yzx"/>
                         <outlet property="plusButton" destination="HJW-p5-Lgo" id="3Ir-Wy-3b9"/>
                         <outlet property="tableView" destination="aHx-cJ-aag" id="xHp-Oe-ySH"/>
-                        <outletCollection property="labels" destination="QgJ-r8-pFX" collectionClass="NSMutableArray" id="Z00-og-djR"/>
-                        <outletCollection property="labels" destination="aLc-gC-sjH" collectionClass="NSMutableArray" id="1FK-x1-RGI"/>
-                        <outletCollection property="labels" destination="cL5-Q5-qcX" collectionClass="NSMutableArray" id="ZHC-wk-0gF"/>
-                        <outletCollection property="labels" destination="gpJ-6O-aVB" collectionClass="NSMutableArray" id="Ord-he-lXq"/>
                         <outletCollection property="addButtons" destination="FN5-yg-hyv" collectionClass="NSMutableArray" id="sGw-zW-QAx"/>
                         <outletCollection property="addButtons" destination="edz-Nb-gib" collectionClass="NSMutableArray" id="c3i-HW-Vtc"/>
                     </connections>
@@ -3440,7 +3440,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6NV-Q0-7le" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Account" image="AccountBase" selectedImage="AccountActive" id="vlE-cu-N9h"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Po4-If-Yas">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Po4-If-Yas">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3459,7 +3459,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="c6G-tW-MuC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Favorite" image="FavoriteBase" selectedImage="FavoriteActive" id="Yd3-xY-LFh"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8Bp-me-ReT">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="8Bp-me-ReT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3478,7 +3478,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AM9-6z-x9s" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Shopping List" image="ShoppingListBase1" selectedImage="ShoppingListActive-1" id="e3E-DE-a30"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="m0J-zS-r8q">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="m0J-zS-r8q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3497,7 +3497,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Lqn-cy-2Pg" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Stock" image="StockBase" selectedImage="StockActive" id="mYZ-P8-dxe"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kFl-qL-4VT">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kFl-qL-4VT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

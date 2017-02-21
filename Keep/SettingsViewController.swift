@@ -178,11 +178,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
 }
 
-class AccountCell: UITableViewCell {
-    
-    @IBOutlet weak var title: UILabel!
-}
-
 @objc(RadarChartFormatter)
 class ChartFormatter:NSObject,IAxisValueFormatter{
     

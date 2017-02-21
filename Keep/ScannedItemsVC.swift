@@ -47,7 +47,7 @@ class ScannedItemsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.Cell.scannedItemCell, for: indexPath) as! scannedItemCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.Cell.scannedItemCell, for: indexPath) as! ScannedItemCell
         
         cell.titleLabel.text = resultsArray[indexPath.row]
             print(resultsArray[indexPath.row])
@@ -96,10 +96,5 @@ class ScannedItemsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             tableView.reloadData()
         }
     }
-}
-
-class scannedItemCell: UITableViewCell {
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var editAddButton: UIButton!
 }
 

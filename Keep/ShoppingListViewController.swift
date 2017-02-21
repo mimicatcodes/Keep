@@ -156,13 +156,5 @@ class ShoppingListViewController: UIViewController, UITableViewDelegate, UITable
     }
 }
 
-class ShoppingListCell: MGSwipeTableCell {
-    
-    @IBOutlet weak var numOfItemsView: UIView!
-    @IBOutlet weak var shoppingListTitleLabel: UILabel!
-    @IBOutlet weak var createdAtLabel: UILabel!
-    @IBOutlet weak var numOfItemsRemainingLabel: UILabel!
-    
-}
 
 

@@ -22,6 +22,7 @@ class MoveToVC: UIViewController {
     @IBOutlet var buttons: [UIButton]!
     
     let store = DataStore.sharedInstance
+    var locations:[String] = [Locations.fridge, Locations.freezer, Locations.pantry, Locations.other]
     var location:String?
     
     override func viewDidLoad() {
@@ -68,40 +69,22 @@ class MoveToVC: UIViewController {
     
     @IBAction func locationBtnsTapped(_ sender: UIButton) {
         
-        let selectedIndex = sender.tag
-                switch selectedIndex {
-                case 0:
-                    location = Locations.fridge
-                    print("Fridge btn tapped")
-                    print("\(buttons[0].isSelected)")
-                case 1:
-                    
-                    location = Locations.freezer
-                    print("Freezer btn tapped")
-                case 2:
-                    
-                    location = Locations.pantry
-                    print("Pantry btn tapped")
-                case 3:
-                    
-                    location = Locations.other
-                    print("Other btn tapped")
-                default:
-                    break
-        }
-        
-        saveButton.isEnabled = true
-        saveButton.backgroundColor = Colors.tealish
-        
-        for (index, button) in buttons.enumerated() {
-            if index == selectedIndex {
+        for (i,button) in buttons.enumerated() {
+            if i == sender.tag {
+                location = locations[i]
+                print("selected location is:\(location)")
+                print("Selected sender.tag value is --------\(sender.tag)")
                 button.isSelected = true
                 button.setTitleColor(Colors.tealish, for: .selected)
+                print("is button selected? \(button.isSelected)")
             } else {
+                print("NOT selected sender.tag value is --------\(i)")
                 button.isSelected = false
-                button.setTitleColor(Colors.tealishFaded, for: .normal)
+                button.setTitleColor(Colors.warmGreyThree, for: .normal)
             }
         }
+        saveButton.isEnabled = true
+        saveButton.backgroundColor = Colors.tealish
     }
 
     @IBAction func dismissView(_ sender: Any) {

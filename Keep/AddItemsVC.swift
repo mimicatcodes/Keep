@@ -572,8 +572,5 @@ class AddItemsVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         UIView.animate(withDuration: 0.2, animations: { () -> Void in
             self.view.layoutIfNeeded()
         })
-        
     }
-    
-    
 }

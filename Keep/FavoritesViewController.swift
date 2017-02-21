@@ -122,8 +122,3 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
 }
-
-class FavoriteCell:MGSwipeTableCell {
-    
-    @IBOutlet weak var favoriteTitle: UILabel!
-}
