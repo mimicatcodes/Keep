@@ -12,8 +12,7 @@ import TesseractOCR
 // TODO: Activitiy indicator / progress bar/ 
 // TODO: Activate button
 
-
-class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, G8TesseractDelegate {
+class ScanReceiptVC: UIViewController, UINavigationControllerDelegate, G8TesseractDelegate {
     
     var selectedImage: UIImage?
     var textsScanned:String = ""
@@ -120,23 +119,6 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
         print(emptyArray)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
-        var selectedImageFromPicker: UIImage?
-        
-        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
-            selectedImageFromPicker = editedImage
-        } else if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            selectedImageFromPicker = originalImage
-        }
-        if let selectedImage = selectedImageFromPicker {
-            imageView.image = selectedImage
-            saveButton.isEnabled = true
-            saveButton.backgroundColor = Colors.tealish
-            
-        }
-        dismiss(animated: true, completion: nil)
-    }
     
     func enableSaveButton(){
         if imageView.image != nil {
@@ -207,3 +189,24 @@ class ScanReceiptVC: UIViewController, UIImagePickerControllerDelegate,UINavigat
         }
     }
 }
+
+extension ScanReceiptVC : UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        var selectedImageFromPicker: UIImage?
+        
+        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            selectedImageFromPicker = editedImage
+        } else if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            selectedImageFromPicker = originalImage
+        }
+        if let selectedImage = selectedImageFromPicker {
+            imageView.image = selectedImage
+            saveButton.isEnabled = true
+            saveButton.backgroundColor = Colors.tealish
+            
+        }
+        dismiss(animated: true, completion: nil)
+    }
+}
+

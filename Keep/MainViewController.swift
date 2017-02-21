@@ -56,11 +56,11 @@ class MainViewController: UIViewController {
         views = [fridgeView, freezerView, pantryView, otherView]
         buttons = [fridgeButton, freezerButton, pantryButton, otherButton]
         labels = [fridgeLabel, freezerLabel, pantryLabel, otherLabel]
-        
-        formatDates()
-        tableView.allowsMultipleSelection = true
         setupInitialButtonStatus()
+        
+        tableView.allowsMultipleSelection = true
         tableView.tableFooterView = UIView() // Remove empty cells
+        formatDates()
         notificationAddObserver()
     }
     
@@ -109,19 +109,20 @@ class MainViewController: UIViewController {
             $0.layer.borderWidth = 2
             $0.layer.borderColor = Colors.tealish.cgColor
         }
-        buttons[0].isSelected = true
-        labels[0].textColor = .white
-        views[0].backgroundColor = Colors.lightTeal
+        buttons.first?.isSelected = true
+        buttons.first?.isSelected = true
+        labels.first?.textColor = .white
+        views.first?.backgroundColor = Colors.lightTeal
     }
     
     func dismissBtns(){
-        if self.plusButtonIsRotated == true {
-            self.plusButton.transform = CGAffineTransform(rotationAngle: CGFloat(0).degreesToRadians)
-            self.addButtons.forEach {
+        if plusButtonIsRotated == true {
+            plusButton.transform = CGAffineTransform(rotationAngle: CGFloat(0).degreesToRadians)
+            addButtons.forEach {
                 $0.isHidden = true
                 $0.alpha = 1.0
             }
-            self.plusButtonIsRotated = false
+            plusButtonIsRotated = false
         }
     }
     
@@ -133,7 +134,7 @@ class MainViewController: UIViewController {
     }
 
     func animateAddButtons() {
-        self.view.layoutIfNeeded()
+        view.layoutIfNeeded()
         UIView.animate(withDuration: 0.15, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.2, options: .curveLinear, animations: {
             if !self.plusButtonIsRotated {
                 self.plusButton.transform = CGAffineTransform(rotationAngle: CGFloat(45).degreesToRadians)
@@ -160,23 +161,6 @@ class MainViewController: UIViewController {
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
         formatter.dateFormat = "MMM dd, yyyy"
-    }
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        var count = 0
-        switch store.buttonStatus {
-        case Locations.fridge:
-            count = store.fridgeSectionNames.count
-        case Locations.freezer:
-            count = store.freezerSectionNames.count
-        case Locations.pantry:
-            count = store.pantrySectionNames.count
-        case Locations.other:
-            count = store.otherSectionNames.count
-        default:
-            count = 0
-        }
-        return count
     }
     
     func configureCells(cell:StockCell, indexPath: IndexPath, filteredItem: Item ){
@@ -225,11 +209,11 @@ class MainViewController: UIViewController {
     }
     
     func daysBetweenTwoDates(start: Date, end: Date) -> Int{
-        
         let currentCalendar = Calendar.current
         
         guard let start = currentCalendar.ordinality(of: .day, in: .era, for: start) else { return 0 }
         guard let end = currentCalendar.ordinality(of: .day, in: .era, for: end) else { return 0 }
+        
         return end - start
     }
     
@@ -242,6 +226,23 @@ class MainViewController: UIViewController {
 
 
 extension MainViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        var count = 0
+        switch store.buttonStatus {
+        case Locations.fridge:
+            count = store.fridgeSectionNames.count
+        case Locations.freezer:
+            count = store.freezerSectionNames.count
+        case Locations.pantry:
+            count = store.pantrySectionNames.count
+        case Locations.other:
+            count = store.otherSectionNames.count
+        default:
+            count = 0
+        }
+        return count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count = 0
         
@@ -257,9 +258,9 @@ extension MainViewController: UITableViewDataSource {
         default:
             break
         }
+        
         return count
     }
-    
 }
 
 extension MainViewController: UITableViewDelegate {
@@ -290,6 +291,7 @@ extension MainViewController: UITableViewDelegate {
         default:
             break
         }
+        
         return title
     }
     
@@ -312,8 +314,10 @@ extension MainViewController: UITableViewDelegate {
         default:
             break
         }
+        
         cell.selectionStyle = .none
         cell.separatorInset = .zero
+        
         return cell
     }
     
@@ -333,7 +337,6 @@ extension MainViewController: UITableViewDelegate {
                 }
                 self.tableView.reloadData()
                 print("Deleted an item from a Fridge")
-                
             case Locations.freezer:
                 let itemToBeDeleted = self.store.freezerItems.filter(Filters.category, self.store.freezerSectionNames[indexPath.section])[indexPath.row]
                 try! realm.write {
@@ -342,7 +345,6 @@ extension MainViewController: UITableViewDelegate {
                 }
                 self.tableView.reloadData()
                 print("Deleted an item from Freezer")
-                
             case Locations.pantry:
                 let itemToBeDeleted = self.store.pantryItems.filter(Filters.category, self.store.pantrySectionNames[indexPath.section])[indexPath.row]
                 try! realm.write {
@@ -351,7 +353,6 @@ extension MainViewController: UITableViewDelegate {
                 }
                 self.tableView.reloadData()
                 print("Deleted an item from Pantry")
-                
             case Locations.other:
                 let itemToBeDeleted = self.store.otherItems.filter(Filters.category, self.store.otherSectionNames[indexPath.section])[indexPath.row]
                 try! realm.write {
@@ -360,18 +361,18 @@ extension MainViewController: UITableViewDelegate {
                 }
                 self.tableView.reloadData()
                 print("Deleted an item from Other")
-                
             default:
                 break
             }
         }
+        
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
             // share item at indexPath
             print("EDIT Tapped")
         }
+        
         return [delete, edit]
     }
-
 }
 
 

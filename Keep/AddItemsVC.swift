@@ -9,33 +9,10 @@
 import UIKit
 import RealmSwift
 
-class AddItemsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIBarPositioningDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
+class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     
     // TODO: Save button
-    
     @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
-    var store = DataStore.sharedInstance
-    var originalTopMargin:CGFloat!
-    var location:Location = .Fridge
-    var quantity: Int = 1
-    var labelView: UILabel!
-    let picker = UIPickerView()
-    let datePicker1 = UIDatePicker()
-    let datePicker2 = UIDatePicker()
-    var activeTextField:UITextField?
-    let formatter = DateFormatter()
-    var nameTitle = ""
-    var selectedIndex: Int = 0
-    var selectedExpIndex: Int?
-    var allItems = Array(DataStore.sharedInstance.allItems)
-    var filteredItems = [Item]()
-    var filteredItemsNames = [String]()
-    
-    var purchaseDate = Date()
-    var expDate = Date()
-    
-    var list = ["1","2","3","4","5","6"]
-    
     @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bodyView: UIView!
@@ -52,6 +29,27 @@ class AddItemsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     @IBOutlet var expButtons: [UIButton]!
     @IBOutlet weak var categoryTextfield: UITextField!
     @IBOutlet weak var saveButton: UIButton!
+    
+    var store = DataStore.sharedInstance
+    var originalTopMargin:CGFloat!
+    var location:Location = .Fridge
+    var quantity: Int = 1
+    var labelView: UILabel!
+    let picker = UIPickerView()
+    let datePicker1 = UIDatePicker()
+    let datePicker2 = UIDatePicker()
+    var activeTextField:UITextField?
+    let formatter = DateFormatter()
+    var nameTitle = ""
+    var selectedIndex: Int = 0
+    var selectedExpIndex: Int?
+    var allItems = Array(DataStore.sharedInstance.allItems)
+    var filteredItems = [Item]()
+    var filteredItemsNames = [String]()
+    var purchaseDate = Date()
+    var expDate = Date()
+    
+    var list = ["1","2","3","4","5","6"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,12 +58,14 @@ class AddItemsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         quantityLabel.layer.borderWidth = 1
         quantityLabel.layer.borderColor = Colors.whiteFour.cgColor
         formatInitialData()
+        
         tableView.allowsSelection = true
         tableView.delegate = self
         tableView.layer.masksToBounds = true
         tableView.layer.borderColor = Colors.whiteFour.cgColor
         tableView.layer.borderWidth = 1.0
         tableView.separatorInset = .zero
+        
         formatDates()
         hideKeyboard()
         tableView.isHidden = true
@@ -95,91 +95,11 @@ class AddItemsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
-    // picker for category dropdown
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return list.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        //self.view.endEditing(true)
-        return list[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.categoryTextfield.text = list[row]
-    }
-    
-    func position(for bar: UIBarPositioning) -> UIBarPosition {
-        return .topAttached
-    }
-    
-    
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if (touch.view?.isDescendant(of: tableView))! {
-            return false
-        } else {
-            return true
-        }
-    }
     
     override func viewDidLayoutSubviews() {
         heightConstraint.constant = 80
     }
     
-    
-    func searchAutocompleteEntriesWithSubstring(_ substring: String) {
-        //filteredItems.removeAll(keepingCapacity: false)
-        filteredItemsNames.removeAll(keepingCapacity: false)
-        
-        for itemArray in allItems_ {
-            for item in itemArray {
-                //let myString: NSString! = item.name as NSString
-                let myString: NSString! = item as NSString
-                let substringRange: NSRange! = myString.range(of: substring)
-                
-                if substringRange.location == 0 {
-                    //filteredItems.append(item)
-                    filteredItemsNames.append(item)
-                }
-            }
-        }
-        tableView.reloadData()
-    }
-    
-    func formatDates(){
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        formatter.dateFormat = "MMM dd, yyyy"
-    }
-    
-    func customToolBarForPickers(){
-        let toolBar = UIToolbar()
-        toolBar.barStyle = UIBarStyle.default
-        toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor.darkGray
-        toolBar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePicker))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(donePicker))
-        
-        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-        
-        categoryTextfield.inputAccessoryView = toolBar
-        expDateTextfield.inputAccessoryView = toolBar
-        purchaseDateTextfield.inputAccessoryView = toolBar
-    }
-    
-    func donePicker(sender:UIBarButtonItem) {
-        view.isUserInteractionEnabled = true
-        activeTextField?.resignFirstResponder()
-        moveViewDown()
-    }
     
     @IBAction func didPressFavBtn(_ sender: UIButton) {
         favButton.isSelected = !favButton.isSelected
@@ -242,7 +162,6 @@ class AddItemsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         }
 
         for (index,button) in expButtons.enumerated() {
-            
             if index == index_ {
                 button.isSelected = true
                 button.layer.cornerRadius = 5
@@ -282,7 +201,6 @@ class AddItemsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         }
         
         for (index,button) in locationButtons.enumerated() {
-            
             if index == selectedIndex {
                 button.isSelected = true
                 
@@ -293,7 +211,6 @@ class AddItemsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
                 locationLabels[index].textColor = Colors.tealish
                 } else {
                 button.isSelected = false
-                
                 button.backgroundColor = .clear
                 button.layer.cornerRadius = 5
                 button.layer.borderWidth = 1
@@ -360,6 +277,37 @@ class AddItemsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         }
     }
     
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .topAttached
+    }
+    
+    
+    func searchAutocompleteEntriesWithSubstring(_ substring: String) {
+        //filteredItems.removeAll(keepingCapacity: false)
+        filteredItemsNames.removeAll(keepingCapacity: false)
+        
+        for itemArray in allItems_ {
+            for item in itemArray {
+                //let myString: NSString! = item.name as NSString
+                let myString: NSString! = item as NSString
+                let substringRange: NSRange! = myString.range(of: substring)
+                
+                if substringRange.location == 0 {
+                    //filteredItems.append(item)
+                    filteredItemsNames.append(item)
+                }
+            }
+        }
+        tableView.reloadData()
+    }
+    
+    func formatDates(){
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        formatter.dateFormat = "MMM dd, yyyy"
+    }
+    
+
     func showAlert() {
         labelView = UILabel(frame: CGRect(x: 0, y: 60, width: self.view.frame.width, height: 40))
         labelView.backgroundColor = Colors.tealish
@@ -424,29 +372,6 @@ class AddItemsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         datePicker2.setDate(currentDate, animated: false)
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        guard let name = nameTextField.text else { return false }
-        //guard let category = categoryTextfield.text else { return false }
-        if name != ""  {
-            DispatchQueue.main.async {
-                self.saveButton.titleLabel?.textColor = Colors.tealish
-                self.saveButton.isEnabled = true
-            }
-        }
-        /*
-         if let name = nameTextField.text , let category = categoryTextfield.text  {
-         DispatchQueue.main.async {
-         self.saveButton.titleLabel?.textColor = Colors.main
-         }
-         
-         saveButton.isEnabled = true
-         
-         }
-         */
-        return true
-    }
-    
-    
     func datePickerChanged(sender: UIDatePicker) {
         if sender == datePicker1 {
             purchaseDate = sender.date
@@ -462,6 +387,10 @@ class AddItemsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         saveButton.isEnabled = false
     }
     
+}
+
+// Keybord handling
+extension AddItemsVC {
     func moveViewUp() {
         if topMarginConstraint.constant != originalTopMargin { return }
         topMarginConstraint.constant -= 130
@@ -486,6 +415,28 @@ extension AddItemsVC: UITextFieldDelegate {
             searchAutocompleteEntriesWithSubstring(substring)
             return true
         }
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        guard let name = nameTextField.text else { return false }
+        //guard let category = categoryTextfield.text else { return false }
+        if name != ""  {
+            DispatchQueue.main.async {
+                self.saveButton.titleLabel?.textColor = Colors.tealish
+                self.saveButton.isEnabled = true
+            }
+        }
+        /*
+         if let name = nameTextField.text , let category = categoryTextfield.text  {
+         DispatchQueue.main.async {
+         self.saveButton.titleLabel?.textColor = Colors.main
+         }
+         
+         saveButton.isEnabled = true
+         
+         }
+         */
         return true
     }
     
@@ -534,7 +485,7 @@ extension AddItemsVC: UITextFieldDelegate {
 
 }
 
-extension AddItemsVC: UITableViewDataSource {
+extension AddItemsVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //if filteredItems.count == 0 {
         if filteredItemsNames.count == 0 {
@@ -544,9 +495,7 @@ extension AddItemsVC: UITableViewDataSource {
         //return filteredItems.count
         return filteredItemsNames.count
     }
-}
-
-extension AddItemsVC: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCell: UITableViewCell = tableView.cellForRow(at: indexPath)!
         
@@ -578,5 +527,63 @@ extension AddItemsVC: UITableViewDelegate {
         cell?.textLabel?.font = UIFont(name: Fonts.latoRegular, size: 13)
         cell?.textLabel?.textColor = Colors.whiteFour
         return cell!
+    }
+}
+
+// Pickers
+extension AddItemsVC : UIPickerViewDelegate, UIPickerViewDataSource {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        //self.view.endEditing(true)
+        return list[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.categoryTextfield.text = list[row]
+    }
+
+
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return list.count
+    }
+    
+    func customToolBarForPickers(){
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor.darkGray
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePicker))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(donePicker))
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        categoryTextfield.inputAccessoryView = toolBar
+        expDateTextfield.inputAccessoryView = toolBar
+        purchaseDateTextfield.inputAccessoryView = toolBar
+    }
+    
+    func donePicker(sender:UIBarButtonItem) {
+        view.isUserInteractionEnabled = true
+        activeTextField?.resignFirstResponder()
+        moveViewDown()
+    }
+
+}
+
+// Gesture recognizer
+extension AddItemsVC : UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if (touch.view?.isDescendant(of: tableView))! {
+            return false
+        } else {
+            return true
+        }
     }
 }
