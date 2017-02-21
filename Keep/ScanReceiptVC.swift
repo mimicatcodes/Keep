@@ -19,6 +19,7 @@ class ScanReceiptVC: UIViewController, UINavigationControllerDelegate {
     var emptyArray = [String]()
     let picker = UIImagePickerController()
     var isFinishedProcessing = false
+    var test = false
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var viewUnderImgV: UIView!
@@ -26,8 +27,6 @@ class ScanReceiptVC: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var libraryButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
-    
-    var test = false
 
     override func viewDidLoad() {
         super.viewDidLoad()

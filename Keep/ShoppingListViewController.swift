@@ -126,7 +126,6 @@ class ShoppingListViewController: UIViewController {
     }
 }
 
-
 extension ShoppingListViewController : UITableViewDelegate, UITableViewDataSource {
     func titleForIndexPath(_ indexPath: IndexPath) -> String {
         
@@ -156,5 +155,4 @@ extension ShoppingListViewController : UITableViewDelegate, UITableViewDataSourc
         configureSwipeButtons(cell: cell)
         return cell
     }
-
 }

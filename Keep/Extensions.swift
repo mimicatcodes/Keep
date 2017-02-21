@@ -25,7 +25,6 @@ extension UIViewController {
 }
 
 extension UITextField {
-
     func underlined(){
         let border = CALayer()
         let width = CGFloat(1.0)
@@ -38,7 +37,6 @@ extension UITextField {
 }
 
 extension UIView {
-    
     func underlinedBorder(){
         let border = CALayer()
         let width = CGFloat(1.0)
@@ -68,7 +66,6 @@ extension UIView {
         self.layer.masksToBounds = true
         self.layer.shadowOffset = .zero
     }
-    
 }
 
 // For rotation

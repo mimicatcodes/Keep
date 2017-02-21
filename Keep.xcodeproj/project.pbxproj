@@ -28,8 +28,6 @@
 		DD4853B31E199FB700BEAC02 /* AlcoholicBeverages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853B21E199FB700BEAC02 /* AlcoholicBeverages.swift */; };
 		DD4853B51E199FC000BEAC02 /* Meat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853B41E199FC000BEAC02 /* Meat.swift */; };
 		DD4853B91E199FD600BEAC02 /* Deli.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853B81E199FD600BEAC02 /* Deli.swift */; };
-		DD4853BB1E199FEB00BEAC02 /* CookingAndBaking.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853BA1E199FEB00BEAC02 /* CookingAndBaking.swift */; };
-		DD4853BF1E19A00900BEAC02 /* Other.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853BE1E19A00900BEAC02 /* Other.swift */; };
 		DD4853C71E19AF0000BEAC02 /* PackagedFoods.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853C61E19AF0000BEAC02 /* PackagedFoods.swift */; };
 		DD515D051E5BD3DD00415A2B /* StockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515D041E5BD3DD00415A2B /* StockCell.swift */; };
 		DD515D071E5BD44500415A2B /* ScannedItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD515D061E5BD44500415A2B /* ScannedItemCell.swift */; };
@@ -95,8 +93,6 @@
 		DD4853B21E199FB700BEAC02 /* AlcoholicBeverages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlcoholicBeverages.swift; sourceTree = "<group>"; };
 		DD4853B41E199FC000BEAC02 /* Meat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meat.swift; sourceTree = "<group>"; };
 		DD4853B81E199FD600BEAC02 /* Deli.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deli.swift; sourceTree = "<group>"; };
-		DD4853BA1E199FEB00BEAC02 /* CookingAndBaking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CookingAndBaking.swift; sourceTree = "<group>"; };
-		DD4853BE1E19A00900BEAC02 /* Other.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Other.swift; sourceTree = "<group>"; };
 		DD4853C61E19AF0000BEAC02 /* PackagedFoods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackagedFoods.swift; sourceTree = "<group>"; };
 		DD515D041E5BD3DD00415A2B /* StockCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockCell.swift; sourceTree = "<group>"; };
 		DD515D061E5BD44500415A2B /* ScannedItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannedItemCell.swift; sourceTree = "<group>"; };
@@ -193,13 +189,10 @@
 		DD1EA6361E0CA41D0034C54B /* Keep */ = {
 			isa = PBXGroup;
 			children = (
-				DDEC8CB71E458A48004C73CB /* tessdata */,
-				DD75B7AA1E3D52EF002053E5 /* Fonts */,
 				DDE189A71E354A8800306449 /* Helpers */,
-				DD48537D1E196C0400BEAC02 /* Controller */,
-				DD48537C1E196BF900BEAC02 /* View */,
-				DD4853A61E199F2400BEAC02 /* Constants */,
 				DD48537B1E196BF400BEAC02 /* Model */,
+				DD48537C1E196BF900BEAC02 /* View */,
+				DD48537D1E196C0400BEAC02 /* Controller */,
 			);
 			path = Keep;
 			sourceTree = "<group>";
@@ -244,6 +237,8 @@
 		DD4853A41E199DFB00BEAC02 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DDEC8CB71E458A48004C73CB /* tessdata */,
+				DD75B7AA1E3D52EF002053E5 /* Fonts */,
 				DD1EA6371E0CA41D0034C54B /* AppDelegate.swift */,
 				DD1EA6431E0CA41D0034C54B /* LaunchScreen.storyboard */,
 				DD1EA6461E0CA41D0034C54B /* Info.plist */,
@@ -260,7 +255,6 @@
 				DD4853B01E199FA600BEAC02 /* Bakery.swift */,
 				DD4853A21E19938700BEAC02 /* Beverages.swift */,
 				DD4853821E197CB500BEAC02 /* Condiments.swift */,
-				DD4853BA1E199FEB00BEAC02 /* CookingAndBaking.swift */,
 				DD4853A01E19920E00BEAC02 /* Dairy.swift */,
 				DD4853B81E199FD600BEAC02 /* Deli.swift */,
 				DD48539C1E198CCF00BEAC02 /* NoodlesGrainsSides.swift */,
@@ -269,7 +263,6 @@
 				DD4853AA1E199F8300BEAC02 /* HealthAndPersonal.swift */,
 				DD4853AE1E199F9D00BEAC02 /* FrozenFoods.swift */,
 				DD4853B41E199FC000BEAC02 /* Meat.swift */,
-				DD4853BE1E19A00900BEAC02 /* Other.swift */,
 				DD4853C61E19AF0000BEAC02 /* PackagedFoods.swift */,
 			);
 			name = Categories;
@@ -380,6 +373,7 @@
 		DDE189A71E354A8800306449 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				DD4853A61E199F2400BEAC02 /* Constants */,
 				DDE189A81E354A9A00306449 /* Extensions.swift */,
 			);
 			name = Helpers;
@@ -535,13 +529,11 @@
 				DDC3E9D11E20580B00459295 /* AddItemVC.swift in Sources */,
 				DDC3E9801E1C76E100459295 /* SearchVC.swift in Sources */,
 				DDC3E98F1E1CB87C00459295 /* AddListVC.swift in Sources */,
-				DD4853BF1E19A00900BEAC02 /* Other.swift in Sources */,
 				DD515D0D1E5BD5B400415A2B /* AccountCell.swift in Sources */,
 				DDC3EBA21E31450100459295 /* StockItem.swift in Sources */,
 				DDC3E9871E1C957000459295 /* ShoppingListViewController.swift in Sources */,
 				DD8586BB1E580C2A00065DDD /* CustomViews.swift in Sources */,
 				DDC3EBA61E3146D500459295 /* Location.swift in Sources */,
-				DD4853BB1E199FEB00BEAC02 /* CookingAndBaking.swift in Sources */,
 				DDC3EB9E1E2DBC3900459295 /* AddItemsVC.swift in Sources */,
 				DDE189A91E354A9A00306449 /* Extensions.swift in Sources */,
 				DD4853B31E199FB700BEAC02 /* AlcoholicBeverages.swift in Sources */,

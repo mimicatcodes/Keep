@@ -12,6 +12,9 @@ import RealmSwift
 class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     
     // TODO: Save button
+    // TODO: Make cateogory optional or set to default 'uncategorized' - for more accurate metric data, recommed users to enable categories
+    // TODO: Try to get rid of tags - let's use property values itself - WWDC!
+    
     @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var tableView: UITableView!

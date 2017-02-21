@@ -9,7 +9,6 @@
 import Foundation
 import RealmSwift
 
-
 class Item : Object {
     
     dynamic var name: String = ""
