@@ -24,7 +24,8 @@ class AddItemVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         setupViews()
         saveButton.isEnabled = false
-        saveButton.backgroundColor = .red
+        saveButton.backgroundColor = Colors.whiteTwo
+        saveButton.setTitleColor(Colors.tealish, for: .normal)
         itemTitleField.delegate = self
         itemTitleField.becomeFirstResponder()
         itemTitleField.autocapitalizationType = .words
@@ -73,10 +74,13 @@ class AddItemVC: UIViewController, UITextFieldDelegate {
         if textLength > 0 {
             saveButton.isEnabled = true
             saveButton.backgroundColor = Colors.tealish
+            saveButton.setTitleColor(.white, for: .normal)
+
             
         } else {
             saveButton.isEnabled = false
-            saveButton.backgroundColor = .red
+            saveButton.backgroundColor = Colors.whiteTwo
+            saveButton.setTitleColor(Colors.tealish, for: .normal)
         }
     }
     

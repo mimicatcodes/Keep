@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD0639CB1E5E961300BF7609 /* KeyboardHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0639CA1E5E961300BF7609 /* KeyboardHandling.swift */; };
 		DD0F51BE1E42DB0E004A6153 /* MoveToVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F51BD1E42DB0E004A6153 /* MoveToVC.swift */; };
 		DD1EA6381E0CA41D0034C54B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA6371E0CA41D0034C54B /* AppDelegate.swift */; };
 		DD1EA63D1E0CA41D0034C54B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD1EA63B1E0CA41D0034C54B /* Main.storyboard */; };
@@ -70,6 +71,7 @@
 /* Begin PBXFileReference section */
 		4E019349C32B54A0147D1EA6 /* Pods-Keep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keep.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Keep/Pods-Keep.debug.xcconfig"; sourceTree = "<group>"; };
 		A6BA35316A371A06E84DEF20 /* Pods_Keep.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Keep.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD0639CA1E5E961300BF7609 /* KeyboardHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHandling.swift; sourceTree = "<group>"; };
 		DD0F51BD1E42DB0E004A6153 /* MoveToVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveToVC.swift; sourceTree = "<group>"; };
 		DD1EA6341E0CA41D0034C54B /* Keep.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keep.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD1EA6371E0CA41D0034C54B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +168,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		DD0639C91E5E95E100BF7609 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				DD0639CA1E5E961300BF7609 /* KeyboardHandling.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		DD1EA62B1E0CA41D0034C54B = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +235,7 @@
 		DD48537D1E196C0400BEAC02 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				DD0639C91E5E95E100BF7609 /* Protocols */,
 				DD7B762E1E1B3389001DE6E8 /* Login */,
 				DD7B762D1E1B336C001DE6E8 /* Stock */,
 				DDC3E9831E1C953F00459295 /* Shopping List */,
@@ -520,6 +531,7 @@
 				DDC3EBA01E31365B00459295 /* Category.swift in Sources */,
 				DD786E311E4A69CE00B1F4E3 /* ScanReceiptVC.swift in Sources */,
 				DDD7D47A1E403E7200599382 /* AddFavoriteVC.swift in Sources */,
+				DD0639CB1E5E961300BF7609 /* KeyboardHandling.swift in Sources */,
 				DD786E331E4AED2F00B1F4E3 /* AddScannedItemVC.swift in Sources */,
 				DD4853A91E199F7400BEAC02 /* Household.swift in Sources */,
 				DD4853A11E19920E00BEAC02 /* Dairy.swift in Sources */,

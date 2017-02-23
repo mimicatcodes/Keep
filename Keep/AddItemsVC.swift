@@ -14,6 +14,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     // TODO: Save button
     // TODO: Make cateogory optional or set to default 'uncategorized' - for more accurate metric data, recommed users to enable categories
     // TODO: Try to get rid of tags - let's use property values itself - WWDC!
+    // TODO: dismiss the tableview when tapping the background
     
     @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var favButton: UIButton!
@@ -35,8 +36,14 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     
     var store = DataStore.sharedInstance
     var originalTopMargin:CGFloat!
+   
     var location:Location = .Fridge
     var quantity: Int = 1
+    var expDate = Date()
+    var purchaseDate = Date()
+    var category: String = "Uncategorized"
+    var isFavorited = false
+    
     var labelView: UILabel!
     let picker = UIPickerView()
     let datePicker1 = UIDatePicker()
@@ -49,9 +56,8 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     var allItems = Array(DataStore.sharedInstance.allItems)
     var filteredItems = [Item]()
     var filteredItemsNames = [String]()
-    var purchaseDate = Date()
-    var expDate = Date()
     
+    var itemToEdit:Item?
     var list = ["1","2","3","4","5","6"]
 
     override func viewDidLoad() {
@@ -76,17 +82,25 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
         picker.dataSource = self
         nameTextField.delegate = self
         nameTextField.autocapitalizationType = .words
+   
         categoryTextfield.autocapitalizationType = .words
         categoryTextfield.delegate = self
         categoryTextfield.inputView = picker
         nameTextField.text = nameTitle
-        favButton.isSelected = false
+        favButton.isSelected = isFavorited
+        
+        saveButton.isEnabled = false
+        nameTextField.addTarget(self, action: #selector(checkTextField(sender:)), for: .allEditingEvents)
+        
+        editItem()
+  
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         formatInitialData()
         print(nameTitle)
+        editItem()
         formatDates()
     }
     
@@ -230,34 +244,60 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        
         saveButton.isEnabled = false
-        
         guard let name = nameTextField.text else { return }
         guard let category = categoryTextfield.text else { return }
         
-        let item = Item(name: name.capitalized, quantity: String(quantity), exp: expDate, purchaseDate: purchaseDate, isConsumed: false, location: location.rawValue, category: category.capitalized)
-        
         let realm = try! Realm()
-        try! realm.write {
-            
-            realm.add(item)
-            if favButton.isSelected {
-                item.isFavorited = true
-                if item.isFavorited == true {
-                    let favItem = FavoritedItem(name: item.name)
-                    realm.add(favItem)
-                    print("fav item is \(item.isFavorited) AND \(favItem.name) has been added to realm's fv items")
-                }
-            } else {
-                item.isFavorited = false
-                print("completed")
-            }
-            print("***** \(item.name) is added to realm database in \(item.category) in \(item.location) ***** AND \(item.exp)")
-        }
-        showAlert()
-        resetAddItems()
         
+        if let itemToEdit = itemToEdit {
+            let itemEdited = store.allItems.filter{$0.uniqueID == itemToEdit.uniqueID}.first
+            try! realm.write {
+                itemEdited?.name = name
+                itemEdited?.quantity = "\(quantity)"
+                itemEdited?.exp = expDate
+                itemEdited?.purchaseDate = purchaseDate
+                itemEdited?.location = location.rawValue
+                itemEdited?.category = category.capitalized
+                
+                if favButton.isSelected {
+                    itemEdited?.isFavorited = true
+                    if itemEdited?.isFavorited == true {
+                        if let name = itemEdited?.name {
+                            let favItem = FavoritedItem(name: name)
+                            realm.add(favItem)
+                            print("fav item is \(itemEdited?.isFavorited) AND \(favItem.name) has been added to realm's fv items")
+                        }
+                    }
+                } else {
+                    itemEdited?.isFavorited = false
+                    print("Edited \(itemEdited!)")
+                }
+            }
+            dismiss(animated: true, completion: nil)
+            
+        } else {
+           let item = Item(name: name.capitalized, uniqueID: UUID().uuidString, quantity: String(quantity), exp: expDate, purchaseDate: purchaseDate, location: location.rawValue, category: category.capitalized)
+            
+            try! realm.write {
+                realm.add(item)
+                if favButton.isSelected {
+                    item.isFavorited = true
+                    if item.isFavorited == true {
+                        let favItem = FavoritedItem(name: item.name)
+                        realm.add(favItem)
+                        print("fav item is \(item.isFavorited) AND \(favItem.name) has been added to realm's fv items")
+                    }
+                } else {
+                    item.isFavorited = false
+                    print("completed")
+                }
+                print("***** \(item.name) is added to realm database in \(item.category) in \(item.location) ***** AND \(item.exp)")
+            }
+            resetAddItems()
+            showAlert()
+        }
+    
     }
     
     @IBAction func quantityMinusBtnTapped(_ sender: Any) {
@@ -277,6 +317,18 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
         quantityLabel.text = "\(quantity)"
         if quantityMinusButton.isEnabled == false {
             quantityMinusButton.isEnabled = true
+        }
+    }
+    
+    func editItem(){
+        if let item = itemToEdit {
+            nameTitle = item.name.capitalized
+            category = item.category
+            quantity = Int(item.quantity)!
+            purchaseDate = item.purchaseDate
+            expDate = item.exp
+            isFavorited = item.isFavorited
+            location = Location(rawValue:item.location)!
         }
     }
     
@@ -314,7 +366,11 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     func showAlert() {
         labelView = UILabel(frame: CGRect(x: 0, y: 60, width: self.view.frame.width, height: 40))
         labelView.backgroundColor = Colors.tealish
-        labelView.text = "Item added"
+        if itemToEdit != nil {
+            labelView.text = "Item edited"
+        } else {
+            labelView.text = "Item added"
+        }
         labelView.textAlignment = .center
         labelView.textColor = UIColor.white
         labelView.font = UIFont(name: Fonts.montserratRegular, size: 12)
@@ -331,29 +387,93 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     }
     
     func formatInitialData() {
+        print("IS THIS BEING CALLED?!!?!?")
         DispatchQueue.main.async {
             self.nameTextField.text = self.nameTitle
         }
         tableView.isHidden = true
-        categoryTextfield.text = ""
-        quantity = 1
-        quantityLabel.text = "\(quantity)"
-        for (index,button) in locationButtons.enumerated() {
-            if index == 0 {
-                button.isSelected = true
-                button.backgroundColor = .clear
-                button.layer.cornerRadius = 5
-                button.layer.borderWidth = 2
-                button.layer.borderColor = Colors.tealish.cgColor
-                locationLabels[index].textColor = Colors.tealish
-                
-            } else {
-                button.isSelected = false
-                button.backgroundColor = .clear
-                button.layer.cornerRadius = 5
-                button.layer.borderWidth = 1
-                button.layer.borderColor = UIColor.clear.cgColor
-                locationLabels[index].textColor = Colors.warmGreyThree
+        categoryTextfield.text = category
+        quantityLabel.text = String(quantity)
+        
+        switch location {
+        case .Fridge:
+            for (i,button) in locationButtons.enumerated() {
+                if i == 0 {
+                    button.isSelected = true
+                    button.backgroundColor = .clear
+                    button.layer.cornerRadius = 5
+                    button.layer.borderWidth = 2
+                    button.layer.borderColor = Colors.tealish.cgColor
+                    locationLabels[i].textColor = Colors.tealish
+                    
+                } else {
+                    button.isSelected = false
+                    button.backgroundColor = .clear
+                    button.layer.cornerRadius = 5
+                    button.layer.borderWidth = 1
+                    button.layer.borderColor = UIColor.clear.cgColor
+                    locationLabels[i].textColor = Colors.warmGreyThree
+                }
+            }
+
+        case .Freezer:
+            for (i,button) in locationButtons.enumerated() {
+                if i == 1 {
+                    button.isSelected = true
+                    button.backgroundColor = .clear
+                    button.layer.cornerRadius = 5
+                    button.layer.borderWidth = 2
+                    button.layer.borderColor = Colors.tealish.cgColor
+                    locationLabels[i].textColor = Colors.tealish
+                    
+                } else {
+                    button.isSelected = false
+                    button.backgroundColor = .clear
+                    button.layer.cornerRadius = 5
+                    button.layer.borderWidth = 1
+                    button.layer.borderColor = UIColor.clear.cgColor
+                    locationLabels[i].textColor = Colors.warmGreyThree
+                }
+            }
+            
+        case .Pantry:
+            for (i,button) in locationButtons.enumerated() {
+                if i == 2 {
+                    button.isSelected = true
+                    button.backgroundColor = .clear
+                    button.layer.cornerRadius = 5
+                    button.layer.borderWidth = 2
+                    button.layer.borderColor = Colors.tealish.cgColor
+                    locationLabels[i].textColor = Colors.tealish
+                    
+                } else {
+                    button.isSelected = false
+                    button.backgroundColor = .clear
+                    button.layer.cornerRadius = 5
+                    button.layer.borderWidth = 1
+                    button.layer.borderColor = UIColor.clear.cgColor
+                    locationLabels[i].textColor = Colors.warmGreyThree
+                }
+            }
+
+        case .Other:
+            for (i,button) in locationButtons.enumerated() {
+                if i == 3 {
+                    button.isSelected = true
+                    button.backgroundColor = .clear
+                    button.layer.cornerRadius = 5
+                    button.layer.borderWidth = 2
+                    button.layer.borderColor = Colors.tealish.cgColor
+                    locationLabels[i].textColor = Colors.tealish
+                    
+                } else {
+                    button.isSelected = false
+                    button.backgroundColor = .clear
+                    button.layer.cornerRadius = 5
+                    button.layer.borderWidth = 1
+                    button.layer.borderColor = UIColor.clear.cgColor
+                    locationLabels[i].textColor = Colors.warmGreyThree
+                }
             }
         }
         
@@ -365,12 +485,15 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
             button.setTitleColor(Colors.warmGreyThree, for: .normal)
         }
         
-        saveButton.titleLabel?.textColor = Colors.warmGreyThree
-        favButton.isSelected = false
+        if itemToEdit == nil {
+            nameTextField.becomeFirstResponder()
+        }
+        saveButton.setTitleColor(Colors.warmGreyThree, for: .normal)
+        favButton.isSelected = isFavorited
         
-        purchaseDateTextfield.text = formatter.string(from: Date()).capitalized
+        purchaseDateTextfield.text = formatter.string(from: purchaseDate).capitalized
+        expDateTextfield.text = formatter.string(from: expDate).capitalized
         let currentDate = Date()
-        expDateTextfield.text = formatter.string(from: Date()).capitalized
         datePicker1.setDate(currentDate, animated: false)
         datePicker2.setDate(currentDate, animated: false)
     }
@@ -383,7 +506,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
 }
 
 // Keybord handling
-extension AddItemsVC {
+extension AddItemsVC : KeyboardHandling {
     func moveViewUp() {
         if topMarginConstraint.constant != originalTopMargin { return }
         topMarginConstraint.constant -= 130
@@ -411,28 +534,21 @@ extension AddItemsVC: UITextFieldDelegate {
         return true
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        guard let name = nameTextField.text else { return false }
-        //guard let category = categoryTextfield.text else { return false }
-        if name != ""  {
-            DispatchQueue.main.async {
-                self.saveButton.titleLabel?.textColor = Colors.tealish
-                self.saveButton.isEnabled = true
-            }
+    func checkTextField(sender: UITextField) {
+        var textLength = 0
+        if let text = sender.text {
+            textLength = text.trimmingCharacters(in: .whitespacesAndNewlines).characters.count
         }
-        /*
-         if let name = nameTextField.text , let category = categoryTextfield.text  {
-         DispatchQueue.main.async {
-         self.saveButton.titleLabel?.textColor = Colors.main
-         }
-         
-         saveButton.isEnabled = true
-         
-         }
-         */
-        return true
+        if textLength > 0 {
+            saveButton.isEnabled = true
+            saveButton.titleLabel?.textColor = Colors.tealish
+            
+        } else {
+            saveButton.isEnabled = false
+            saveButton.titleLabel?.textColor = Colors.warmGreyFour
+        }
     }
-    
+
     func textFieldDidBeginEditing(_ textField: UITextField){
         activeTextField = textField
         if textField.tag == 1 {

@@ -68,6 +68,7 @@ struct Identifiers {
         static let addList = "addList"
         static let showItems = "showItems"
         static let addItemToSL = "addItemToSL"
+        static let editIems = "editItems"
     }
 }
 

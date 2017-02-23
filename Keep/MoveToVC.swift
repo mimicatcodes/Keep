@@ -10,9 +10,7 @@ import UIKit
 import RealmSwift
 
 class MoveToVC: UIViewController {
-    
-    // tealish faded colorissue
-    // label change color too?
+
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var bottomView: UIView!
@@ -28,7 +26,8 @@ class MoveToVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         saveButton.isEnabled = false
-        saveButton.backgroundColor = Colors.tealishFaded
+        saveButton.setTitleColor(Colors.tealish, for: .normal)
+        saveButton.backgroundColor = Colors.whiteTwo
         view.backgroundColor = Colors.dawn
     }
     
@@ -41,10 +40,11 @@ class MoveToVC: UIViewController {
         if store.tappedSLItemToSendToLocation != "" {
             if let location = location {
                 let name = store.tappedSLItemToSendToLocation
+                let uuid = UUID().uuidString
         
                 let realm = try! Realm()
                 try! realm.write {
-                    let item = Item(name: name, quantity: "1", exp: Date(), purchaseDate: Date(), isConsumed: false, location: location, category: "Uncategorized")
+                    let item = Item(name: name, uniqueID: uuid, quantity: "1", exp: Date(), purchaseDate: Date(), location: location, category: "Uncategorized")
                     realm.add(item)
                 }
             }
@@ -74,6 +74,7 @@ class MoveToVC: UIViewController {
             }
         }
         saveButton.isEnabled = true
+        saveButton.setTitleColor(.white, for: .normal)
         saveButton.backgroundColor = Colors.tealish
     }
 

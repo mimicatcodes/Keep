@@ -14,6 +14,13 @@ import TesseractOCR
 
 class ScanReceiptVC: UIViewController, UINavigationControllerDelegate {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var viewUnderImgV: UIView!
+    @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var libraryButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
+    
     var selectedImage: UIImage?
     var textsScanned:String = ""
     var emptyArray = [String]()
@@ -21,13 +28,6 @@ class ScanReceiptVC: UIViewController, UINavigationControllerDelegate {
     var isFinishedProcessing = false
     var test = false
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var viewUnderImgV: UIView!
-    @IBOutlet weak var cameraButton: UIButton!
-    @IBOutlet weak var libraryButton: UIButton!
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var imageView: UIImageView!
-
     override func viewDidLoad() {
         super.viewDidLoad()
         imageView.image = nil
@@ -77,7 +77,7 @@ class ScanReceiptVC: UIViewController, UINavigationControllerDelegate {
         saveButton.backgroundColor = Colors.tealishFaded
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             self.processScanning()
         }
 

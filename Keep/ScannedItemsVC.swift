@@ -12,6 +12,7 @@ class ScannedItemsVC: UIViewController {
     // TODO: limit num of characters entered in the textfield
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var topView: UIView!
+    
     let store = DataStore.sharedInstance
     var resultsArray = [String]()
     var titleString:String?
@@ -22,6 +23,7 @@ class ScannedItemsVC: UIViewController {
         tableView.dataSource = self
         tableView.separatorInset = .zero
         topView.underlinedBorder()
+
         NotificationCenter.default.addObserver(forName: NotificationName.refreshScannedItems, object: nil, queue: nil) { notification in
             print("notification is \(notification)")
             self.resultsArray.remove(at: self.store.scannedItemIndex!)
@@ -43,13 +45,6 @@ class ScannedItemsVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if titleString != nil, titleString != "" {
-            return true
-        }
-        return false
-    }
-    
     func addToInventory(sender: UIButton){
         titleString = resultsArray[sender.tag]
         
@@ -60,6 +55,13 @@ class ScannedItemsVC: UIViewController {
             print("scanned Item index is \(store.scannedItemIndex)")
             performSegue(withIdentifier: Identifiers.Segue.addScannedItem, sender: self)
         }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if titleString != nil, titleString != "" {
+            return true
+        }
+        return false
     }
 }
 

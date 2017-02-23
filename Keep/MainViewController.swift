@@ -10,9 +10,7 @@ import UIKit
 import RealmSwift
 
 class MainViewController: UIViewController {
-    // TODO: additions from scanned items need to be handled 
-    // TODO: Refresh controller
-    
+    // TODO: additions from scanned items need to be handled
     @IBOutlet weak var menuBarView: UIView!
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -39,6 +37,8 @@ class MainViewController: UIViewController {
             }
         }
     }
+    
+    let refresher = UIRefreshControl()
 
     var views: [UIView]!
     var buttons: [UIButton]!
@@ -50,6 +50,8 @@ class MainViewController: UIViewController {
     let formatter = DateFormatter()
     var plusButtonIsRotated = false
     
+    var itemToEdit: Item?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,6 +59,16 @@ class MainViewController: UIViewController {
         buttons = [fridgeButton, freezerButton, pantryButton, otherButton]
         labels = [fridgeLabel, freezerLabel, pantryLabel, otherLabel]
         setupInitialButtonStatus()
+        
+        if #available (iOS 10.0, *) {
+            tableView.refreshControl = refresher
+        } else {
+            tableView.addSubview(refresher)
+        }
+        
+        refresher.tintColor = Colors.lightTeal
+        //refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refresher.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
         
         tableView.allowsMultipleSelection = true
         tableView.tableFooterView = UIView() // Remove empty cells
@@ -66,7 +78,6 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         dismissBtns()
-        print("/nTHIS is view will appear getting called in mainVC")
         tableView.reloadData()
     }
     
@@ -101,6 +112,11 @@ class MainViewController: UIViewController {
             dismissBtns()
         }
         print("the button status is-------\(store.buttonStatus)")
+    }
+    
+    func refreshTableView(){
+        tableView.reloadData()
+        refresher.endRefreshing()
     }
     
     func setupInitialButtonStatus(){
@@ -221,6 +237,12 @@ class MainViewController: UIViewController {
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
+        
+        if segue.identifier == Identifiers.Segue.editIems {
+            let dest = segue.destination as! AddItemsVC
+            dest.itemToEdit = itemToEdit
+            print(itemToEdit ?? "******************* item To edit")
+        }
     }
 }
 
@@ -367,10 +389,30 @@ extension MainViewController: UITableViewDelegate {
         }
         
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-            // share item at indexPath
-            print("EDIT Tapped")
+            
+            switch self.store.buttonStatus {
+            case Locations.fridge:
+                self.itemToEdit = self.store.fridgeItems.filter(Filters.category, self.store.fridgeSectionNames[indexPath.section])[indexPath.row]
+                print(self.itemToEdit?.name ?? "NO VALUE")
+
+            case Locations.freezer:
+                self.itemToEdit = self.store.freezerItems.filter(Filters.category, self.store.freezerSectionNames[indexPath.section])[indexPath.row]
+                 print(self.itemToEdit?.name ?? "NO VALUE")
+                
+            case Locations.pantry:
+                self.itemToEdit = self.store.pantryItems.filter(Filters.category, self.store.pantrySectionNames[indexPath.section])[indexPath.row]
+                 print(self.itemToEdit?.name ?? "NO VALUE")
+                
+            case Locations.other:
+                self.itemToEdit = self.store.otherItems.filter(Filters.category, self.store.otherSectionNames[indexPath.section])[indexPath.row]
+                 print(self.itemToEdit?.name ?? "NO VALUE")
+            default:
+                break
+            }
+            
+            self.performSegue(withIdentifier: Identifiers.Segue.editIems, sender: nil)
         }
-        
+    
         return [delete, edit]
     }
 }

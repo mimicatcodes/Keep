@@ -150,9 +150,11 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
         guard let quantity = quantityLabel.text, quantity != "" else { return }
         guard let category = categoryField.text, category != "" else { return }
         
+        let uuid = UUID().uuidString
+        
         let realm = try! Realm()
         try! realm.write {
-            let item = Item(name: name, quantity: quantity, exp: expDate, purchaseDate: purchaseDate, isConsumed: false, location: location.rawValue, category: category)
+            let item = Item(name: name, uniqueID: uuid, quantity: quantity, exp: expDate, purchaseDate: purchaseDate, location: location.rawValue, category: category)
             print("scanned item to add to realm is \(item)")
             realm.add(item)
         }
@@ -229,7 +231,7 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
 }
 
 // Keyboard handling
-extension AddScannedItemVC {
+extension AddScannedItemVC : KeyboardHandling {
     func moveViewUp() {
         if topMarginConstraint.constant != originalTopMargin { return }
         topMarginConstraint.constant -= 100

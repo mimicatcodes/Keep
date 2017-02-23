@@ -23,7 +23,8 @@ class AddFavoriteVC: UIViewController, UITextFieldDelegate {
         nameField.textAlignment = .center
         nameField.autocapitalizationType = .words
         nameField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
-        saveButton.backgroundColor = .red
+        saveButton.backgroundColor = Colors.whiteTwo
+        saveButton.setTitleColor(Colors.tealish, for: .normal)
         setupViews()
     }
     
@@ -68,10 +69,11 @@ class AddFavoriteVC: UIViewController, UITextFieldDelegate {
         if textLength > 0 {
             saveButton.isEnabled = true
             saveButton.backgroundColor = Colors.tealish
+            saveButton.setTitleColor(.white, for: .normal)
             
         } else {
             saveButton.isEnabled = false
-            saveButton.backgroundColor = .red
+            saveButton.backgroundColor = Colors.whiteTwo
         }
     }
     

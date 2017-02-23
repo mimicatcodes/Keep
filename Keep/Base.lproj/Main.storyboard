@@ -2532,6 +2532,7 @@
                         <outlet property="tableView" destination="aHx-cJ-aag" id="xHp-Oe-ySH"/>
                         <outletCollection property="addButtons" destination="FN5-yg-hyv" collectionClass="NSMutableArray" id="sGw-zW-QAx"/>
                         <outletCollection property="addButtons" destination="edz-Nb-gib" collectionClass="NSMutableArray" id="c3i-HW-Vtc"/>
+                        <segue destination="RqP-1N-A4c" kind="presentation" identifier="editItems" id="7zL-7m-cTB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VWK-9u-iOE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3364,9 +3365,7 @@
                                                 <rect key="frame" x="181" y="0.0" width="175" height="59"/>
                                                 <color key="backgroundColor" red="0.13725490200000001" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
-                                                <state key="normal" title="Save">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
+                                                <state key="normal" title="Save"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="8"/>
@@ -3544,4 +3543,7 @@
         <image name="StockActive" width="26" height="26"/>
         <image name="StockBase" width="27" height="27"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="7zL-7m-cTB"/>
+    </inferredMetricsTieBreakers>
 </document>

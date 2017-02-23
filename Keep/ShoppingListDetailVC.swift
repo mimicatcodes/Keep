@@ -46,15 +46,6 @@ class ShoppingListDetailVC: UIViewController {
         print("----titleString is : --- \(titleString)")
         
         store.tappedSLItemToSendToLocation = titleString
-
-        /*
-        let firstActivityItem = "\(titleString)"
-        
-        let activityController = UIActivityViewController(activityItems: [firstActivityItem], applicationActivities: nil)
-        activityController.popoverPresentationController?.sourceView = self.view
-        activityController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
-        self.present(activityController, animated: true, completion: nil)
- */
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
