@@ -61,7 +61,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        saveButton.isEnabled = false
+
         customToolBarForPickers()
         quantityLabel.layer.borderWidth = 1
         quantityLabel.layer.borderColor = Colors.whiteFour.cgColor
@@ -88,7 +88,6 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
         nameTextField.text = nameTitle
         favButton.isSelected = isFavorited
         
-        saveButton.isEnabled = false
         nameTextField.addTarget(self, action: #selector(checkTextField(sender:)), for: .allEditingEvents)
         
         editItem()
@@ -243,7 +242,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        saveButton.isEnabled = false
+        //saveButton.isEnabled = false
         guard let name = nameTextField.text else { return }
         guard let category = categoryTextfield.text else { return }
         
@@ -486,8 +485,12 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
         
         if itemToEdit == nil {
             nameTextField.becomeFirstResponder()
+            saveButton.isEnabled = false
+            saveButton.setTitleColor(Colors.warmGreyThree, for: .normal)
+        } else {
+            saveButton.isEnabled = true
+            saveButton.setTitleColor(Colors.tealish, for: .normal)
         }
-        saveButton.setTitleColor(Colors.warmGreyThree, for: .normal)
         favButton.isSelected = isFavorited
         
         purchaseDateTextfield.text = formatter.string(from: purchaseDate).capitalized

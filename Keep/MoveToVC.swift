@@ -10,6 +10,8 @@ import UIKit
 import RealmSwift
 
 class MoveToVC: UIViewController {
+    
+    // TODO: name duplicates! - fix
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var topView: UIView!
