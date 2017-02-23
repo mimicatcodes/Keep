@@ -9,9 +9,6 @@
 import UIKit
 import TesseractOCR
 
-// TODO: Activitiy indicator / progress bar/ 
-// TODO: Activate button
-
 class ScanReceiptVC: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!

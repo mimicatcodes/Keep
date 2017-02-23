@@ -17,8 +17,6 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
     // TODO: favorite button 
     // TODO: minus button 
     
-    //let store = DataStore.sharedInstance
-    
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var favButton: UIButton!

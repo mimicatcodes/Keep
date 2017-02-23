@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 class MainViewController: UIViewController {
-    // TODO: additions from scanned items need to be handled
+
     @IBOutlet weak var menuBarView: UIView!
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
