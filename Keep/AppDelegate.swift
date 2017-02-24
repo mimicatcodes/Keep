@@ -17,14 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let colorNormal = Colors.warmGreyFive
         let colorSelected = Colors.tealish
         
-        if let font = UIFont(name: Fonts.montserratRegular, size: 16) {
+        if let font = UIFont(name: Fonts.montserratSemiBold, size: 16) {
             let navigationBarAppearace = UINavigationBar.appearance()
             navigationBarAppearace.titleTextAttributes = [NSFontAttributeName: font,  NSForegroundColorAttributeName: Colors.brownishGreyTwo]
             navigationBarAppearace.barTintColor = .white
             navigationBarAppearace.tintColor = Colors.warmGreyThree
             navigationBarAppearace.layer.borderColor = Colors.whiteFour.cgColor
             navigationBarAppearace.isTranslucent = false
-            navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName: Colors.warmGreyThree]
         }
         
         if let font = UIFont(name: Fonts.latoRegular, size: 11.0) {

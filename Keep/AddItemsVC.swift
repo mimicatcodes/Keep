@@ -11,7 +11,7 @@ import RealmSwift
 
 class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     
-    // TODO: Make cateogory optional or set to default 'uncategorized' - for more accurate metric data, recommed users to enable categories
+    // TODO: Make cateogory set to default 'uncategorized' -  disable textfield action - let users choose only from pickers
     // TODO: Try to get rid of tags - let's use property values itself - WWDC!
     // TODO: dismiss the tableview when tapping the background
     // TODO: FAV!!!!!!!!! - error
@@ -168,12 +168,10 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
             expDate = neverExpire! // 3 years later
             expDateTextfield.text = "None"
             print("Never")
-            
             moveViewDown()
             
         default:
             break
-            
         }
         
         for (index,button) in expButtons.enumerated() {
@@ -569,6 +567,25 @@ extension AddItemsVC: UITextFieldDelegate {
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        activeTextField?.resignFirstResponder()
+        activeTextField?.endEditing(true)
+        moveViewDown()
+        
+        if textField == nameTextField {
+            tableView.isHidden = true
+        }
+        return true
+    }
+    
+//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+//        if textField == categoryTextfield {
+//            textField.resignFirstResponder()
+//            return false
+//        }
+//        return true
+//    }
+//    
     func textFieldDidBeginEditing(_ textField: UITextField){
         activeTextField = textField
         if textField.tag == 1 {
@@ -601,27 +618,14 @@ extension AddItemsVC: UITextFieldDelegate {
         }
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        activeTextField?.resignFirstResponder()
-        activeTextField?.endEditing(true)
-        moveViewDown()
-        
-        if textField == nameTextField {
-            tableView.isHidden = true
-        }
-        return true
-    }
-    
 }
 
 extension AddItemsVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //if filteredItems.count == 0 {
         if filteredItemsNames.count == 0 {
             //return allItems.count
             return list.count
         }
-        //return filteredItems.count
         return filteredItemsNames.count
     }
     
@@ -629,16 +633,15 @@ extension AddItemsVC: UITableViewDataSource, UITableViewDelegate {
         let selectedCell: UITableViewCell = tableView.cellForRow(at: indexPath)!
         
         nameTextField.text = selectedCell.textLabel!.text!.capitalized
-        DispatchQueue.main.async {
-            self.tableView.isHidden = !tableView.isHidden
-        }
+       
+        tableView.isHidden = !tableView.isHidden
+        
         nameTextField.endEditing(true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "nameCell")
         
-        //if filteredItems.count == 0 {
         if filteredItemsNames.count == 0 {
             tableView.isHidden = true
             // ---- Dummy data ----------------------
@@ -647,9 +650,6 @@ extension AddItemsVC: UITableViewDataSource, UITableViewDelegate {
             
         } else {
             tableView.isHidden = false
-            
-            //cell?.textLabel?.text = self.filteredItems[indexPath.row].name
-            
             cell?.textLabel?.text = self.filteredItemsNames[indexPath.row]
         }
         
@@ -713,7 +713,6 @@ extension AddItemsVC : UIPickerViewDelegate, UIPickerViewDataSource {
             expDateTextfield.text = formatter.string(from: sender.date).capitalized
         }
     }
-    
 }
 
 // Gesture recognizer
@@ -726,18 +725,3 @@ extension AddItemsVC : UIGestureRecognizerDelegate {
         }
     }
 }
-
-
-
-//try! realm.write {
-//                itemToEdit.name = nameTitle
-//                itemToEdit.quantity = String(quantity)
-//                itemToEdit.exp = expDate
-//                itemToEdit.purchaseDate = purchaseDate
-//                itemToEdit.location = location.rawValue
-//                itemToEdit.category = category
-//                itemToEdit.isFavorited = isFavorited
-//                print("is it favorited or NOT \(isFavorited)" )
-
-
-

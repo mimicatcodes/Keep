@@ -81,6 +81,7 @@ struct Locations {
 
 struct Fonts {
     static let montserratRegular = "Montserrat-Regular"
+    static let montserratSemiBold = "Montserrat-SemiBold"
     static let latoRegular = "Lato-Regular"
     static let latoSemibold = "Lato-Semibold"
 }
