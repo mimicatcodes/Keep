@@ -259,7 +259,8 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
                 print("is it favorited or NOT \(isFavorited)")
                 
                 if isFavorited {
-                    if store.allFavoritedItems.filter({$0.name == itemToEdit.name}).count == 0 {
+                    if store.allFavoritedItems.filter({$0.name == itemToEdit.name}).count == 0{
+                        print("all favorite items with this \(itemToEdit.name) is \(store.allFavoritedItems.filter({$0.name == itemToEdit.name}).count)")
                         let favItem = FavoritedItem(name:itemToEdit.name)
                         realm.add(favItem)
                         
@@ -290,11 +291,15 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
                 item.isFavorited = isFavorited
                 
                 if isFavorited {
-                    let favItem = FavoritedItem(name: item.name)
-                    realm.add(favItem)
-                    print("fav item is \(item.isFavorited) AND \(favItem.name) has been added to realm's fv items")
-                } else {
-                    print("Nothing to add to Favorites DB beause isFavorited value is \(isFavorited)")
+                    if store.allFavoritedItems.filter({$0.name == item.name}).count == 0{
+                        print("all favorite items with this \(item.name) is \(store.allFavoritedItems.filter({$0.name == item.name}).count)")
+                        let favItem = FavoritedItem(name:item.name)
+                        realm.add(favItem)
+                        
+                        print("fav item is \(item.isFavorited) AND \(favItem.name) has been added to realm's fv items")
+                    } else {
+                        print("Nothing to add to Favorites DB beause isFavorited value is \(isFavorited)")
+                    }
                 }
             }
         }
