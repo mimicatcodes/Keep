@@ -14,6 +14,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     // TODO: Make cateogory optional or set to default 'uncategorized' - for more accurate metric data, recommed users to enable categories
     // TODO: Try to get rid of tags - let's use property values itself - WWDC!
     // TODO: dismiss the tableview when tapping the background
+    // TODO: FAV!!!!!!!!! - error
     
     @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var favButton: UIButton!
@@ -35,7 +36,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     
     var store = DataStore.sharedInstance
     var originalTopMargin:CGFloat!
-   
+    
     var location:Location = .Fridge
     var quantity: Int = 1
     var expDate = Date()
@@ -58,14 +59,14 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     
     var itemToEdit:Item?
     var list = ["1","2","3","4","5","6"]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         customToolBarForPickers()
         quantityLabel.layer.borderWidth = 1
         quantityLabel.layer.borderColor = Colors.whiteFour.cgColor
-        formatInitialData()
+        //formatInitialData()
         
         tableView.allowsSelection = true
         tableView.delegate = self
@@ -81,24 +82,21 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
         picker.dataSource = self
         nameTextField.delegate = self
         nameTextField.autocapitalizationType = .words
-   
+        
         categoryTextfield.autocapitalizationType = .words
         categoryTextfield.delegate = self
         categoryTextfield.inputView = picker
         nameTextField.text = nameTitle
-        favButton.isSelected = isFavorited
         
         nameTextField.addTarget(self, action: #selector(checkTextField(sender:)), for: .allEditingEvents)
         
-        editItem()
-  
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         formatInitialData()
         print(nameTitle)
-        editItem()
+        //favButton.isSelected = isFavorited
         formatDates()
     }
     
@@ -120,10 +118,12 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
         favButton.isSelected = !favButton.isSelected
         
         if favButton.isSelected {
-            print("Fav selected")
+            isFavorited = true
+            print("Fav selected \(isFavorited)")
             
         } else {
-            print("Not selected")
+            isFavorited = false
+            print("Fav Not selected \(isFavorited)")
         }
     }
     
@@ -175,7 +175,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
             break
             
         }
-
+        
         for (index,button) in expButtons.enumerated() {
             if index == index_ {
                 button.isSelected = true
@@ -224,7 +224,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
                 button.layer.borderWidth = 2
                 button.layer.borderColor = Colors.tealish.cgColor
                 locationLabels[index].textColor = Colors.tealish
-                } else {
+            } else {
                 button.isSelected = false
                 button.backgroundColor = .clear
                 button.layer.cornerRadius = 5
@@ -247,55 +247,60 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
         guard let category = categoryTextfield.text else { return }
         
         let realm = try! Realm()
-        
         if let itemToEdit = itemToEdit {
-            let itemEdited = store.allItems.filter{$0.uniqueID == itemToEdit.uniqueID}.first
             try! realm.write {
-                itemEdited?.name = name
-                itemEdited?.quantity = "\(quantity)"
-                itemEdited?.exp = expDate
-                itemEdited?.purchaseDate = purchaseDate
-                itemEdited?.location = location.rawValue
-                itemEdited?.category = category.capitalized
+                itemToEdit.name = name
+                itemToEdit.quantity = String(quantity)
+                itemToEdit.exp = expDate
+                itemToEdit.purchaseDate = purchaseDate
+                itemToEdit.location = location.rawValue
+                itemToEdit.category = category
+                itemToEdit.isFavorited = isFavorited
+                print("is it favorited or NOT \(isFavorited)")
                 
-                if favButton.isSelected {
-                    itemEdited?.isFavorited = true
-                    if itemEdited?.isFavorited == true {
-                        if let name = itemEdited?.name {
-                            let favItem = FavoritedItem(name: name)
-                            realm.add(favItem)
-                            print("fav item is \(itemEdited?.isFavorited) AND \(favItem.name) has been added to realm's fv items")
+                if isFavorited {
+                    if store.allFavoritedItems.filter({$0.name == itemToEdit.name}).count == 0 {
+                        let favItem = FavoritedItem(name:itemToEdit.name)
+                        realm.add(favItem)
+                        
+                    } else {
+                        print("Nothing to add to Favorites DB beause \(itemToEdit.name) already exists in favorite")
+                    }
+                    
+                } else {
+                    if store.allFavoritedItems.filter({$0.name == itemToEdit.name}).count > 0 {
+                        
+                        if let itemToDelete = store.allFavoritedItems.filter({$0.name == itemToEdit.name}).first {
+                            realm.delete(itemToDelete)
+                            
                         }
                     }
-                } else {
-                    itemEdited?.isFavorited = false
-                    print("Edited \(itemEdited!)")
                 }
             }
+            
+            print("Edited \(itemToEdit)")
             dismiss(animated: true, completion: nil)
             
         } else {
-           let item = Item(name: name.capitalized, uniqueID: UUID().uuidString, quantity: String(quantity), exp: expDate, purchaseDate: purchaseDate, location: location.rawValue, category: category.capitalized)
+            let item = Item(name: name.capitalized, uniqueID: UUID().uuidString, quantity: String(self.quantity), exp: self.expDate, purchaseDate: purchaseDate, location: location.rawValue, category: category.capitalized)
             
             try! realm.write {
+                
                 realm.add(item)
-                if favButton.isSelected {
-                    item.isFavorited = true
-                    if item.isFavorited == true {
-                        let favItem = FavoritedItem(name: item.name)
-                        realm.add(favItem)
-                        print("fav item is \(item.isFavorited) AND \(favItem.name) has been added to realm's fv items")
-                    }
+                item.isFavorited = isFavorited
+                
+                if isFavorited {
+                    let favItem = FavoritedItem(name: item.name)
+                    realm.add(favItem)
+                    print("fav item is \(item.isFavorited) AND \(favItem.name) has been added to realm's fv items")
                 } else {
-                    item.isFavorited = false
-                    print("completed")
+                    print("Nothing to add to Favorites DB beause isFavorited value is \(isFavorited)")
                 }
-                print("***** \(item.name) is added to realm database in \(item.category) in \(item.location) ***** AND \(item.exp)")
             }
-            resetAddItems()
-            showAlert()
         }
-    
+        
+        resetAddItems()
+        showAlert()
     }
     
     @IBAction func quantityMinusBtnTapped(_ sender: Any) {
@@ -318,22 +323,9 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
         }
     }
     
-    func editItem(){
-        if let item = itemToEdit {
-            nameTitle = item.name.capitalized
-            category = item.category
-            quantity = Int(item.quantity)!
-            purchaseDate = item.purchaseDate
-            expDate = item.exp
-            isFavorited = item.isFavorited
-            location = Location(rawValue:item.location)!
-        }
-    }
-    
     func position(for bar: UIBarPositioning) -> UIBarPosition {
         return .topAttached
     }
-    
     
     func searchAutocompleteEntriesWithSubstring(_ substring: String) {
         //filteredItems.removeAll(keepingCapacity: false)
@@ -360,7 +352,6 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
         formatter.dateFormat = "MMM dd, yyyy"
     }
     
-
     func showAlert() {
         labelView = UILabel(frame: CGRect(x: 0, y: 60, width: self.view.frame.width, height: 40))
         labelView.backgroundColor = Colors.tealish
@@ -385,13 +376,51 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     }
     
     func formatInitialData() {
-        print("IS THIS BEING CALLED?!!?!?")
-        DispatchQueue.main.async {
-            self.nameTextField.text = self.nameTitle
+        if let item = itemToEdit {
+            nameTitle = item.name.capitalized
+            category = item.category
+            quantity = Int(item.quantity)!
+            purchaseDate = item.purchaseDate
+            expDate = item.exp
+            print("CRAZY")
+            DispatchQueue.main.async {
+                self.favButton.isSelected = item.isFavorited
+                
+            }
+            //favButton.isSelected = item.isFavorited
+            //            isFavorited = item.isFavorited
+            //            if isFavorited == true {
+            //                favButton.isSelected = true
+            //            } else {
+            //                favButton.isSelected = false
+            //            }
+            location = Location(rawValue:item.location)!
+            saveButton.isEnabled = true
+            saveButton.setTitleColor(Colors.tealish, for: .normal)
+            
+        } else {
+            isFavorited = false
+            location = .Fridge
+            expDate = Date()
+            purchaseDate = Date()
+            quantity = 1
+            category = "Uncategorized"
+            nameTitle = ""
+            isFavorited = false
+            favButton.isSelected = false
+            nameTextField.becomeFirstResponder()
+            saveButton.isEnabled = false
+            saveButton.setTitleColor(Colors.warmGreyThree, for: .normal)
         }
+        
         tableView.isHidden = true
+        nameTextField.text = nameTitle
         categoryTextfield.text = category
         quantityLabel.text = String(quantity)
+        purchaseDateTextfield.text = formatter.string(from: purchaseDate).capitalized
+        expDateTextfield.text = formatter.string(from: expDate).capitalized
+        datePicker1.setDate(Date(), animated: false)
+        datePicker2.setDate(Date(), animated: false)
         
         switch location {
         case .Fridge:
@@ -413,7 +442,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
                     locationLabels[i].textColor = Colors.warmGreyThree
                 }
             }
-
+            
         case .Freezer:
             for (i,button) in locationButtons.enumerated() {
                 if i == 1 {
@@ -453,7 +482,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
                     locationLabels[i].textColor = Colors.warmGreyThree
                 }
             }
-
+            
         case .Other:
             for (i,button) in locationButtons.enumerated() {
                 if i == 3 {
@@ -482,22 +511,6 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
             button.layer.borderColor = Colors.warmGreyThree.cgColor
             button.setTitleColor(Colors.warmGreyThree, for: .normal)
         }
-        
-        if itemToEdit == nil {
-            nameTextField.becomeFirstResponder()
-            saveButton.isEnabled = false
-            saveButton.setTitleColor(Colors.warmGreyThree, for: .normal)
-        } else {
-            saveButton.isEnabled = true
-            saveButton.setTitleColor(Colors.tealish, for: .normal)
-        }
-        favButton.isSelected = isFavorited
-        
-        purchaseDateTextfield.text = formatter.string(from: purchaseDate).capitalized
-        expDateTextfield.text = formatter.string(from: expDate).capitalized
-        let currentDate = Date()
-        datePicker1.setDate(currentDate, animated: false)
-        datePicker2.setDate(currentDate, animated: false)
     }
     
     func resetAddItems(){
@@ -550,7 +563,7 @@ extension AddItemsVC: UITextFieldDelegate {
             saveButton.titleLabel?.textColor = Colors.warmGreyFour
         }
     }
-
+    
     func textFieldDidBeginEditing(_ textField: UITextField){
         activeTextField = textField
         if textField.tag == 1 {
@@ -593,7 +606,7 @@ extension AddItemsVC: UITextFieldDelegate {
         }
         return true
     }
-
+    
 }
 
 extension AddItemsVC: UITableViewDataSource, UITableViewDelegate {
@@ -651,8 +664,8 @@ extension AddItemsVC : UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.categoryTextfield.text = list[row]
     }
-
-
+    
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -695,7 +708,7 @@ extension AddItemsVC : UIPickerViewDelegate, UIPickerViewDataSource {
             expDateTextfield.text = formatter.string(from: sender.date).capitalized
         }
     }
-
+    
 }
 
 // Gesture recognizer
@@ -708,3 +721,18 @@ extension AddItemsVC : UIGestureRecognizerDelegate {
         }
     }
 }
+
+
+
+//try! realm.write {
+//                itemToEdit.name = nameTitle
+//                itemToEdit.quantity = String(quantity)
+//                itemToEdit.exp = expDate
+//                itemToEdit.purchaseDate = purchaseDate
+//                itemToEdit.location = location.rawValue
+//                itemToEdit.category = category
+//                itemToEdit.isFavorited = isFavorited
+//                print("is it favorited or NOT \(isFavorited)" )
+
+
+

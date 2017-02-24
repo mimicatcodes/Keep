@@ -91,8 +91,6 @@ class FavoritesViewController: UIViewController {
             for item in self.store.allItems {
                 if item.name == favItemToBeDeleted.name {
                     item.isFavorited = false
-                    print(item)
-                    print(item.isFavorited)
                 }
             }
             print("\(favItemToBeDeleted) has been deleted")
