@@ -10,7 +10,6 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -961,10 +960,10 @@
                                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="nameCell" rowHeight="20" id="hTp-YD-dGb">
-                                                        <rect key="frame" x="0.0" y="28" width="262.5" height="20"/>
+                                                        <rect key="frame" x="0.0" y="28" width="263" height="20"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hTp-YD-dGb" id="lX7-Ox-ZfW">
-                                                            <rect key="frame" x="0.0" y="0.0" width="262.5" height="19"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="263" height="19"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </tableViewCellContentView>
                                                     </tableViewCell>
@@ -1665,7 +1664,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CIQ-hZ-J3m">
-                                                <rect key="frame" x="20" y="29.5" width="126" height="40"/>
+                                                <rect key="frame" x="20" y="29.5" width="131" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="haZ-Xr-c2L"/>
                                                 </constraints>
@@ -2830,18 +2829,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="Ba5-WF-7bF">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="Gmn-Rx-uTe">
-                                <color key="tintColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="addItemBtnTapped:" destination="tgN-pG-HY1" id="aGj-gq-xrR"/>
-                                    <segue destination="Ncx-UL-xUg" kind="presentation" identifier="addItemToSL" modalPresentationStyle="overFullScreen" id="XLB-h6-E10"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="edit" id="HS1-7c-88m">
-                                <color key="tintColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Gmn-Rx-uTe">
+                            <color key="tintColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="addItemBtnTapped:" destination="tgN-pG-HY1" id="aGj-gq-xrR"/>
+                                <segue destination="Ncx-UL-xUg" kind="presentation" identifier="addItemToSL" modalPresentationStyle="overFullScreen" id="XLB-h6-E10"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="lVL-tI-0NJ" id="X8R-M5-o6N"/>
@@ -3439,7 +3433,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6NV-Q0-7le" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Account" image="AccountBase" selectedImage="AccountActive" id="vlE-cu-N9h"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Po4-If-Yas">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Po4-If-Yas">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3477,7 +3471,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AM9-6z-x9s" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Shopping List" image="ShoppingListBase1" selectedImage="ShoppingListActive-1" id="e3E-DE-a30"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="m0J-zS-r8q">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="m0J-zS-r8q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
