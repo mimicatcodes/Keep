@@ -9,28 +9,70 @@
 import UIKit
 import RealmSwift
 
-class SearchVC: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
-    // TODO: Fix search 
-    // TODO: include info - location, quantity 
+class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
+    // TODO: Fix search
+    // TODO: include info - location, quantity
     // TODO: Navigation - fix it
     
+    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var searchBarView: UIView!
     let store = DataStore.sharedInstance
     var filteredItems:Results<Item>?
-    let searchController = UISearchController(searchResultsController: nil)
-    
-    @IBOutlet weak var searchBar: UISearchBar!
+    var searchController: UISearchController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation = false
+        configureSearchControlloer()
         definesPresentationContext = true
-        tableView.tableHeaderView = searchController.searchBar
-        tableView.tableFooterView = UIView()
-        tableView.separatorInset = .zero
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    @IBAction func dismiss(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func configureSearchControlloer(){
+    
+        //searchBarView.underlinedBorder()
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
+        //searchController.searchBar.sizeToFit()
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.tintColor = .blue
+        searchController.searchBar.layer.borderColor = Colors.tealishFaded.cgColor
+        
+        let attributes = [
+            NSForegroundColorAttributeName : Colors.tealish,
+            NSFontAttributeName : UIFont(name: Fonts.montserratRegular, size: 15),
+        ]
+        searchController.searchBar.setImage(UIImage(named: "Clear"), for: .clear, state: .normal)
+        
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
+        
+        searchController.searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+        searchController.searchBar.layer.borderWidth = 1.0
+        
+        tableView.tableFooterView = UIView()
+        tableView.separatorInset = .zero
+        tableView.backgroundView = UIView()
+   
+        tableView.layer.masksToBounds = true
+        tableView.layer.borderColor = Colors.tealishFaded.cgColor
+        tableView.layer.borderWidth = 1.0
+        searchController.searchBar.frame.size.width = searchBarView.frame.size.width
+
+        searchBarView.addSubview(searchController.searchBar)
+    }
+    
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 45
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController.isActive && searchController.searchBar.text != "" {
             if let items = self.filteredItems {
                 return items.count
@@ -39,27 +81,37 @@ class SearchVC: UITableViewController, UISearchBarDelegate, UISearchResultsUpdat
         return store.allItems.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell") as! SearchCell
         
         if searchController.isActive && searchController.searchBar.text != "" {
-            cell?.textLabel?.text = self.filteredItems?[indexPath.row].name
+            cell.titleLabel?.text = filteredItems?[indexPath.row].name
         } else {
-            cell?.textLabel?.text = self.store.allItems[indexPath.row].name
+            cell.titleLabel?.text = store.allItems[indexPath.row].name
         }
-        return cell!
+        return cell
+    }
+    
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        //
     }
     
     func filterContentForSearch(_ searchString: String) {
-        let allItems = store.allItems
+        
         let predicate = NSPredicate(format: "name contains[c] %@", searchString)
-        self.filteredItems = allItems.filter(predicate)
-        self.tableView.reloadData()
+        filteredItems = store.allItems.filter(predicate)
+        tableView.reloadData()
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        self.filterContentForSearch(searchController.searchBar.text!)
+        
+        if let searchString = searchController.searchBar.text {
+            
+            filterContentForSearch(searchString)
+        }
     }
 }
+
 
 

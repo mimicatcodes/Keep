@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		DD0639CB1E5E961300BF7609 /* KeyboardHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0639CA1E5E961300BF7609 /* KeyboardHandling.swift */; };
 		DD0639CF1E5FEA7100BF7609 /* CategoryField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0639CE1E5FEA7100BF7609 /* CategoryField.swift */; };
+		DD0639D11E61ECF700BF7609 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0639D01E61ECF700BF7609 /* CustomSearchBar.swift */; };
+		DD0639D31E61F0C500BF7609 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0639D21E61F0C500BF7609 /* SearchCell.swift */; };
+		DD0639D51E61F23100BF7609 /* CustomSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0639D41E61F23000BF7609 /* CustomSearchController.swift */; };
 		DD0F51BE1E42DB0E004A6153 /* MoveToVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F51BD1E42DB0E004A6153 /* MoveToVC.swift */; };
 		DD1EA6381E0CA41D0034C54B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA6371E0CA41D0034C54B /* AppDelegate.swift */; };
 		DD1EA63D1E0CA41D0034C54B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD1EA63B1E0CA41D0034C54B /* Main.storyboard */; };
@@ -74,6 +77,9 @@
 		A6BA35316A371A06E84DEF20 /* Pods_Keep.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Keep.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD0639CA1E5E961300BF7609 /* KeyboardHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHandling.swift; sourceTree = "<group>"; };
 		DD0639CE1E5FEA7100BF7609 /* CategoryField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryField.swift; sourceTree = "<group>"; };
+		DD0639D01E61ECF700BF7609 /* CustomSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
+		DD0639D21E61F0C500BF7609 /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		DD0639D41E61F23000BF7609 /* CustomSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchController.swift; sourceTree = "<group>"; };
 		DD0F51BD1E42DB0E004A6153 /* MoveToVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveToVC.swift; sourceTree = "<group>"; };
 		DD1EA6341E0CA41D0034C54B /* Keep.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keep.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD1EA6371E0CA41D0034C54B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -306,6 +312,7 @@
 				DD515D0A1E5BD55900415A2B /* ListDetailCell.swift */,
 				DD515D0C1E5BD5B400415A2B /* AccountCell.swift */,
 				DD515D0E1E5BD60B00415A2B /* FavoriteCell.swift */,
+				DD0639D21E61F0C500BF7609 /* SearchCell.swift */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -333,6 +340,7 @@
 				DD786E301E4A69CE00B1F4E3 /* ScanReceiptVC.swift */,
 				DDEC8C8B1E456F29004C73CB /* ScannedItemsVC.swift */,
 				DD786E321E4AED2F00B1F4E3 /* AddScannedItemVC.swift */,
+				DD0639D41E61F23000BF7609 /* CustomSearchController.swift */,
 			);
 			name = Stock;
 			sourceTree = "<group>";
@@ -351,6 +359,7 @@
 			children = (
 				DD8586BA1E580C2A00065DDD /* CustomViews.swift */,
 				DD0639CE1E5FEA7100BF7609 /* CategoryField.swift */,
+				DD0639D01E61ECF700BF7609 /* CustomSearchBar.swift */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -555,7 +564,9 @@
 				DD4853B31E199FB700BEAC02 /* AlcoholicBeverages.swift in Sources */,
 				DDC3E9821E1C93F400459295 /* DataStore.swift in Sources */,
 				DD48539D1E198CCF00BEAC02 /* NoodlesGrainsSides.swift in Sources */,
+				DD0639D31E61F0C500BF7609 /* SearchCell.swift in Sources */,
 				DD1EA64D1E0CA5220034C54B /* Constants.swift in Sources */,
+				DD0639D51E61F23100BF7609 /* CustomSearchController.swift in Sources */,
 				DDD7D47C1E403FFE00599382 /* Favorites.swift in Sources */,
 				DDC3E98B1E1C958A00459295 /* SettingsViewController.swift in Sources */,
 				DD4853B51E199FC000BEAC02 /* Meat.swift in Sources */,
@@ -565,6 +576,7 @@
 				DD0F51BE1E42DB0E004A6153 /* MoveToVC.swift in Sources */,
 				DD515D0B1E5BD55900415A2B /* ListDetailCell.swift in Sources */,
 				DDC3EBA41E31451000459295 /* ShoppingItem.swift in Sources */,
+				DD0639D11E61ECF700BF7609 /* CustomSearchBar.swift in Sources */,
 				DD4853A31E19938700BEAC02 /* Beverages.swift in Sources */,
 				DD515D091E5BD4FA00415A2B /* ShoppingListCell.swift in Sources */,
 				DD4853B11E199FA600BEAC02 /* Bakery.swift in Sources */,

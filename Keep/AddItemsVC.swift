@@ -14,7 +14,6 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     // TODO: Make cateogory set to default 'uncategorized' -  disable textfield action - let users choose only from pickers
     // TODO: Try to get rid of tags - let's use property values itself - WWDC!
     // TODO: dismiss the tableview when tapping the background
-    // TODO: FAV!!!!!!!!! - error
     
     @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var favButton: UIButton!
@@ -385,18 +384,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
             quantity = Int(item.quantity)!
             purchaseDate = item.purchaseDate
             expDate = item.exp
-            print("CRAZY")
-            DispatchQueue.main.async {
-                self.favButton.isSelected = item.isFavorited
-                
-            }
-            //favButton.isSelected = item.isFavorited
-            //            isFavorited = item.isFavorited
-            //            if isFavorited == true {
-            //                favButton.isSelected = true
-            //            } else {
-            //                favButton.isSelected = false
-            //            }
+            favButton.isSelected = item.isFavorited
             location = Location(rawValue:item.location)!
             saveButton.isEnabled = true
             saveButton.setTitleColor(Colors.tealish, for: .normal)
@@ -545,9 +533,11 @@ extension AddItemsVC : KeyboardHandling {
 extension AddItemsVC: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == nameTextField {
-            let substring = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-            searchAutocompleteEntriesWithSubstring(substring)
-            return true
+            if let text = textField.text {
+                let subString = (text as NSString).replacingCharacters(in: range, with: string)
+                searchAutocompleteEntriesWithSubstring(subString)
+                return true
+            }
         }
         return true
     }
