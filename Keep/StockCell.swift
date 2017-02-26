@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MGSwipeTableCell
 
-class StockCell: UITableViewCell {
+class StockCell: MGSwipeTableCell {
 
     @IBOutlet weak var itemTitleLabel: UILabel!
     @IBOutlet weak var expDateLabel: UILabel!

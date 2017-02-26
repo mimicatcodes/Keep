@@ -35,12 +35,12 @@ class FavoritesViewController: UIViewController {
     }
     
     func configureSwipeButtons(cell:FavoriteCell, indexPath: IndexPath){
-        
-        let deleteButton = MGSwipeButton(title: "Delete", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
+
+        let deleteButton = MGSwipeButton(title: "", icon: UIImage(named:"Delete1"), backgroundColor: Colors.salmon){ (sender: MGSwipeTableCell) -> Bool in
             self.delete(indexPath: indexPath)
             return true
         }
-        
+
         let moveToStockBtn = MGSwipeButton(title: "Stock", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
             self.createAlert(withTitle: "Left1")
             return true
@@ -51,7 +51,7 @@ class FavoritesViewController: UIViewController {
             return true
         }
         
-        deleteButton.setPadding(30)
+        //deleteButton.setPadding(30)
         cell.rightButtons = [deleteButton]
         cell.rightExpansion.buttonIndex = 0
         
@@ -100,7 +100,6 @@ class FavoritesViewController: UIViewController {
         self.tableView.reloadData()
         print("Deleted an item from favoritedItems")
     }
-    
 }
 
 extension FavoritesViewController : UITableViewDelegate, UITableViewDataSource {

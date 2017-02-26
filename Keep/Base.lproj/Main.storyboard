@@ -2851,9 +2851,9 @@
                                                     </constraints>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="xgc-G9-zvJ" firstAttribute="height" secondItem="Y7R-p5-K2Y" secondAttribute="height" id="MWE-0Z-J79"/>
                                             <constraint firstItem="xgc-G9-zvJ" firstAttribute="centerY" secondItem="Y7R-p5-K2Y" secondAttribute="centerY" id="hfO-aH-Jl1"/>

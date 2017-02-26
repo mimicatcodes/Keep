@@ -31,17 +31,19 @@ struct Colors {
     static let warmGreyFive = UIColor(red: 151/255.0, green: 151/255.0, blue: 151/255.0, alpha: 1)
 
     static let greyishBrown = UIColor(red: 77/255.0, green: 77/255.0, blue: 77/255.0, alpha: 1)
-    
     static let brownishGrey = UIColor(red: 96/255.0, green: 96/255.0, blue: 96/255.0, alpha: 1)
     static let brownishGreyTwo = UIColor(red:100/255.0, green:100/255.0, blue:100/255.0, alpha: 1.0)
     
     static let pastelRed = UIColor(red: 237/255.0, green: 93/255.0, blue: 93/255.0, alpha: 1)
+    static let salmon = UIColor(red: 249/255.0, green: 117/255.0, blue: 102/255.0, alpha: 1)
     static let peachyPink = UIColor(red: 255/255.0, green: 137/255.0, blue: 137/255.0, alpha: 1)
 
     static let pinkishGrey = UIColor(red: 202/255.0, green: 202/255.0, blue: 202/255.0, alpha: 1)
     static let pinkishGreyTwo = UIColor(red: 201/255.0, green: 201/255.0, blue: 201/255.0, alpha: 1)
     
     static let dawn = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.10)
+    
+    static let dodgerBlue = UIColor(red: 76/255.0, green: 169/255.0, blue: 247/255.0, alpha: 1)
 }
 
 struct NotificationName {

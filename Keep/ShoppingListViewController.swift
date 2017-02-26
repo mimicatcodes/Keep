@@ -49,12 +49,12 @@ class ShoppingListViewController: UIViewController {
     }
     
     func configureSwipeButtons(cell:ShoppingListCell){
-        let rightButton1 = MGSwipeButton(title: "Delete", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
+        let rightButton1 = MGSwipeButton(title: "", icon: UIImage(named:"Delete2"), backgroundColor: Colors.salmon) { (sender: MGSwipeTableCell) -> Bool in
             self.createAlert(withTitle: "Delete")
             return true
         }
         
-        let rightButton2 = MGSwipeButton(title: "Edit", backgroundColor: UIColor.green) { (sender: MGSwipeTableCell) -> Bool in
+        let rightButton2 = MGSwipeButton(title: "", icon: UIImage(named:"EditBlue2"), backgroundColor: Colors.dodgerBlue)  { (sender: MGSwipeTableCell) -> Bool in
             self.shareList()
             return true
         }
@@ -69,13 +69,13 @@ class ShoppingListViewController: UIViewController {
             return true
         }
         
-        rightButton1.setPadding(38)
-        rightButton2.setPadding(38)
+//        rightButton1.setPadding(38)
+//        rightButton2.setPadding(38)
         cell.rightButtons = [rightButton1, rightButton2]
         cell.rightExpansion.buttonIndex = 0
         
-        leftButton1.setPadding(38)
-        leftButton2.setPadding(38)
+//        leftButton1.setPadding(100)
+//        leftButton2.setPadding(38)
         cell.leftButtons = [leftButton1, leftButton2]
         cell.leftExpansion.buttonIndex = 1
     }

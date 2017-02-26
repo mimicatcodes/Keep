@@ -8,8 +8,11 @@
 
 import UIKit
 import RealmSwift
+import MGSwipeTableCell
 
 class MainViewController: UIViewController {
+    
+    // TODO: Tableviewrowaction - custom font + image!
 
     @IBOutlet weak var menuBarView: UIView!
     @IBOutlet weak var plusButton: UIButton!
@@ -339,9 +342,88 @@ extension MainViewController: UITableViewDelegate {
         
         cell.selectionStyle = .none
         cell.separatorInset = .zero
+        configureSwipeButtons(cell: cell, indexPath: indexPath)
         
         return cell
     }
+    
+    func configureSwipeButtons(cell:StockCell, indexPath: IndexPath){
+        
+        let deleteButton = MGSwipeButton(title: "", icon: UIImage(named:"Delete2"), backgroundColor: Colors.salmon){ (sender: MGSwipeTableCell) -> Bool in
+            let realm = try! Realm()
+            
+            switch self.store.buttonStatus {
+            case Locations.fridge:
+                let itemToBeDeleted = self.store.fridgeItems.filter(Filters.category, self.store.fridgeSectionNames[indexPath.section])[indexPath.row]
+                
+                try! realm.write {
+                    print("\(itemToBeDeleted) has been deleted")
+                    realm.delete(itemToBeDeleted)
+                }
+                self.tableView.reloadData()
+                print("Deleted an item from a Fridge")
+            case Locations.freezer:
+                let itemToBeDeleted = self.store.freezerItems.filter(Filters.category, self.store.freezerSectionNames[indexPath.section])[indexPath.row]
+                try! realm.write {
+                    print("\(itemToBeDeleted) has been deleted")
+                    realm.delete(itemToBeDeleted)
+                }
+                self.tableView.reloadData()
+                print("Deleted an item from Freezer")
+            case Locations.pantry:
+                let itemToBeDeleted = self.store.pantryItems.filter(Filters.category, self.store.pantrySectionNames[indexPath.section])[indexPath.row]
+                try! realm.write {
+                    print("\(itemToBeDeleted) has been deleted")
+                    realm.delete(itemToBeDeleted)
+                }
+                self.tableView.reloadData()
+                print("Deleted an item from Pantry")
+            case Locations.other:
+                let itemToBeDeleted = self.store.otherItems.filter(Filters.category, self.store.otherSectionNames[indexPath.section])[indexPath.row]
+                try! realm.write {
+                    print("\(itemToBeDeleted) has been deleted")
+                    realm.delete(itemToBeDeleted)
+                }
+                self.tableView.reloadData()
+                print("Deleted an item from Other")
+            default:
+                break
+            }
+
+            return true
+        }
+        
+        let editButton = MGSwipeButton(title: "", icon: UIImage(named:"EditBlue2"), backgroundColor: Colors.dodgerBlue) { (sender: MGSwipeTableCell) -> Bool in
+            switch self.store.buttonStatus {
+            case Locations.fridge:
+                self.itemToEdit = self.store.fridgeItems.filter(Filters.category, self.store.fridgeSectionNames[indexPath.section])[indexPath.row]
+                print(self.itemToEdit?.name ?? "NO VALUE")
+                
+            case Locations.freezer:
+                self.itemToEdit = self.store.freezerItems.filter(Filters.category, self.store.freezerSectionNames[indexPath.section])[indexPath.row]
+                print(self.itemToEdit?.name ?? "NO VALUE")
+                
+            case Locations.pantry:
+                self.itemToEdit = self.store.pantryItems.filter(Filters.category, self.store.pantrySectionNames[indexPath.section])[indexPath.row]
+                print(self.itemToEdit?.name ?? "NO VALUE")
+                
+            case Locations.other:
+                self.itemToEdit = self.store.otherItems.filter(Filters.category, self.store.otherSectionNames[indexPath.section])[indexPath.row]
+                print(self.itemToEdit?.name ?? "NO VALUE")
+            default:
+                break
+            }
+            
+            self.performSegue(withIdentifier: Identifiers.Segue.editIems, sender: nil)
+            return true
+        }
+        
+        //deleteButton.setPadding(30)
+        cell.rightButtons = [deleteButton, editButton]
+        cell.rightExpansion.buttonIndex = 0
+    }
+
+    /*
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         dismissBtns()
@@ -386,7 +468,10 @@ extension MainViewController: UITableViewDelegate {
             default:
                 break
             }
+            
         }
+        
+        delete.backgroundColor = Colors.salmon
         
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
             
@@ -412,9 +497,12 @@ extension MainViewController: UITableViewDelegate {
             
             self.performSegue(withIdentifier: Identifiers.Segue.editIems, sender: nil)
         }
+        
+        //edit.backgroundColor = Colors.dodgerBlue
     
         return [delete, edit]
     }
+ */
 }
 
 
