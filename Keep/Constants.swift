@@ -46,6 +46,11 @@ struct Colors {
     static let dodgerBlue = UIColor(red: 76/255.0, green: 169/255.0, blue: 247/255.0, alpha: 1)
 }
 
+struct Keys {
+    static let searchField = "searchField"
+    static let placeholderLabel = "placeholderLabel"
+}
+
 struct NotificationName {
     static let refreshTableview = NSNotification.Name("RefeshTVNotification")
     static let refreshItemList = NSNotification.Name("RefreshItemListNotification")

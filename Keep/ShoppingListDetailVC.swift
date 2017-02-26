@@ -48,6 +48,29 @@ class ShoppingListDetailVC: UIViewController {
         
         store.tappedSLItemToSendToLocation = titleString
     }
+    
+    func configureSwipeButtons(cell:ListDetailCell, indexPath: IndexPath){
+        let rightButton1 = MGSwipeButton(title: "", icon: UIImage(named:"Delete1"), backgroundColor: Colors.salmon) { (sender: MGSwipeTableCell) -> Bool in
+            
+            let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", self.uniqueID)
+            let filteredItems = self.store.allShoppingItems.filter(predicate)
+            
+            let realm = try! Realm()
+            
+            try! realm.write {
+                let predicate2 = NSPredicate(format: Filters.uniqueID, self.uniqueID)
+                let filteredList2 = self.store.allShopingLists.filter(predicate2).first
+                
+                realm.delete(filteredItems[indexPath.row])
+                filteredList2?.numOfItems -= 1
+                print("Shopping list has \(filteredList2?.numOfItems) items")
+            }
+            self.tableView.reloadData()
+            return true
+        }
+        cell.rightButtons = [rightButton1]
+        cell.rightExpansion.buttonIndex = 0
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Identifiers.Segue.addItemToSL {
@@ -89,6 +112,7 @@ extension ShoppingListDetailVC : UITableViewDelegate, UITableViewDataSource {
             let name = tableView.indexPath(for: cell)?.row
             print(name ?? "Error")
         }
+        configureSwipeButtons(cell: cell, indexPath: indexPath)
         return cell
     }
     
@@ -113,23 +137,23 @@ extension ShoppingListDetailVC : UITableViewDelegate, UITableViewDataSource {
         return 55
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
-            let filteredItems = store.allShoppingItems.filter(predicate)
-
-            let realm = try! Realm()
-            
-            try! realm.write {
-                let predicate2 = NSPredicate(format: Filters.uniqueID, uniqueID)
-                let filteredList2 = store.allShopingLists.filter(predicate2).first
- 
-                realm.delete(filteredItems[indexPath.row])
-                filteredList2?.numOfItems -= 1
-                print("Shopping list has \(filteredList2?.numOfItems) items")
-            }
-            self.tableView.reloadData()
-        }
-    }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
+//            let filteredItems = store.allShoppingItems.filter(predicate)
+//
+//            let realm = try! Realm()
+//            
+//            try! realm.write {
+//                let predicate2 = NSPredicate(format: Filters.uniqueID, uniqueID)
+//                let filteredList2 = store.allShopingLists.filter(predicate2).first
+// 
+//                realm.delete(filteredItems[indexPath.row])
+//                filteredList2?.numOfItems -= 1
+//                print("Shopping list has \(filteredList2?.numOfItems) items")
+//            }
+//            self.tableView.reloadData()
+//        }
+//    }
 }
 

@@ -393,7 +393,7 @@ extension MainViewController: UITableViewDelegate {
             return true
         }
         
-        let editButton = MGSwipeButton(title: "", icon: UIImage(named:"EditBlue2"), backgroundColor: Colors.dodgerBlue) { (sender: MGSwipeTableCell) -> Bool in
+        let editButton = MGSwipeButton(title: "", icon: UIImage(named:"EditGrey2"), backgroundColor: Colors.pinkishGrey) { (sender: MGSwipeTableCell) -> Bool in
             switch self.store.buttonStatus {
             case Locations.fridge:
                 self.itemToEdit = self.store.fridgeItems.filter(Filters.category, self.store.fridgeSectionNames[indexPath.section])[indexPath.row]

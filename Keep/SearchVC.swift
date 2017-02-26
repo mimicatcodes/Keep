@@ -12,20 +12,21 @@ import RealmSwift
 class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
     // TODO: Fix search
     // TODO: include info - location, quantity
-    // TODO: Navigation - fix it
-    
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var searchBarView: UIView!
+    
     let store = DataStore.sharedInstance
     var filteredItems:Results<Item>?
     var searchController: UISearchController!
-    
+    var textFieldInsideUISearchBar: UITextField!
+    var textFieldInsideUISearchBarLabel: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureSearchControlloer()
         definesPresentationContext = true
         searchController.loadViewIfNeeded()
+        searchFieldStyling()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -58,36 +59,33 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         ]
         searchController.searchBar.setImage(UIImage(named: "Clear"), for: .clear, state: .normal)
         
-        searchController.searchBar.textColor = Colors.tealish
+        searchController.searchBar.textColor = Colors.warmGreyThree
         
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
         
         searchController.searchBar.setBackgroundImage(UIImage(), for: .top, barMetrics: .default)
         searchBarView.underlinedBorder()
-        //searchController.searchBar.layer.borderWidth = 1.0
         
         tableView.tableFooterView = UIView()
         tableView.separatorInset = .zero
         tableView.backgroundView = UIView()
-   
         
-        /*tableView.layer.masksToBounds = true
-        tableView.layer.borderColor = Colors.tealishFaded.cgColor
-        tableView.layer.borderWidth = 1.0*/
-
-       
-        // Add the search bar as a subview of the UIView you added above the table view
-        searchBarView.addSubview(searchController.searchBar)        // Call sizeToFit() on the search bar so it fits nicely in the UIView
+        searchBarView.addSubview(searchController.searchBar)
         searchController.searchBar.sizeToFit()
-        // For some reason, the search bar will extend outside the view to the left after calling sizeToFit. This next line corrects this.
         searchController.searchBar.frame.size.width = view.frame.size.width
     
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 45
+    func searchFieldStyling(){
+        textFieldInsideUISearchBar = searchController.searchBar.value(forKey: Keys.searchField) as? UITextField
+        textFieldInsideUISearchBarLabel = textFieldInsideUISearchBar!.value(forKey: Keys.placeholderLabel) as? UILabel
+        textFieldInsideUISearchBar?.font = UIFont(name: Fonts.montserratRegular, size: 15)
+        textFieldInsideUISearchBarLabel?.textColor = Colors.tealishFaded
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 55
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController.isActive && searchController.searchBar.text != "" {
@@ -102,9 +100,21 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell") as! SearchCell
         
         if searchController.isActive && searchController.searchBar.text != "" {
-            cell.titleLabel?.text = filteredItems?[indexPath.row].name
+            if let item = filteredItems?[indexPath.row] {
+                cell.titleLabel.text = item.name
+                if item.isExpired {
+                    cell.titleLabel.textColor = Colors.pastelRed
+                }
+                cell.quantityLabel.text = "x \(item.quantity)"
+                cell.locationLabel.text = item.location
+            }
         } else {
-            cell.titleLabel?.text = store.allItems[indexPath.row].name
+            cell.titleLabel.text = store.allItems[indexPath.row].name
+            if store.allItems[indexPath.row].isExpired {
+                cell.titleLabel.textColor = Colors.pastelRed
+            }
+            cell.quantityLabel.text = "x \(store.allItems[indexPath.row].quantity)"
+            cell.locationLabel.text = store.allItems[indexPath.row].location
         }
         return cell
     }

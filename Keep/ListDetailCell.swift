@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import MGSwipeTableCell
 
-class ListDetailCell:UITableViewCell {
+class ListDetailCell:MGSwipeTableCell {
     
     var tapAction: ((UITableViewCell) -> Void)?
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var checkBoxImgView: UIImageView!
     @IBOutlet weak var moveButton: UIButton!
-    @IBAction func moveButtonTapped(_ sender: UIButton) { tapAction?(self)}
+    @IBAction func moveButtonTapped(_ sender: UIButton) { tapAction?(self) }
     
 }

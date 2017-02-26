@@ -27,7 +27,6 @@ class ShoppingItem: Object {
 class ShoppingList: Object {
     
     dynamic var title: String = ""
-//    dynamic var isCreatedAt: String = ""
     dynamic var isCreatedAt: Date = Date()
     dynamic var numOfItems: Int = 0
     dynamic var uniqueID: String = ""
@@ -39,8 +38,5 @@ class ShoppingList: Object {
         self.init()
         self.title = title
         self.isCreatedAt = isCreatedAt
-        //self.isCreatedAt = isCreatedAt
-        
     }
-    
 }

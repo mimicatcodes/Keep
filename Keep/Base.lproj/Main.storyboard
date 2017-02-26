@@ -13,6 +13,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Lato-Bold.ttf">
+            <string>Lato-Bold</string>
+        </array>
         <array key="Lato-Regular.ttf">
             <string>Lato-Regular</string>
         </array>
@@ -1290,7 +1293,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UND-t7-KTf" userLabel="fridgeView">
-                                                <rect key="frame" x="0.0" y="28" width="94" height="96"/>
+                                                <rect key="frame" x="0.0" y="28" width="94.5" height="96"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCQ-10-AR7">
                                                         <rect key="frame" x="13" y="5" width="67" height="67"/>
@@ -1304,7 +1307,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fridge" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fH9-nr-f3D">
-                                                        <rect key="frame" x="0.0" y="72" width="94" height="19"/>
+                                                        <rect key="frame" x="0.0" y="72" width="94.5" height="19"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                         <color key="textColor" red="0.51372549019607838" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1322,10 +1325,10 @@
                                                 </constraints>
                                             </view>
                                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cpG-15-jaw" userLabel="freezerView">
-                                                <rect key="frame" x="94" y="28" width="93.5" height="96"/>
+                                                <rect key="frame" x="94.5" y="28" width="93" height="96"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Snn-VI-nzp">
-                                                        <rect key="frame" x="13" y="5.5" width="67" height="67"/>
+                                                        <rect key="frame" x="12.5" y="5.5" width="67" height="67"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Snn-VI-nzp" secondAttribute="height" multiplier="1:1" id="6o4-c4-Ad9"/>
                                                         </constraints>
@@ -1338,7 +1341,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Freezer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bn7-hW-asa">
-                                                        <rect key="frame" x="0.0" y="72" width="93.5" height="19"/>
+                                                        <rect key="frame" x="-0.5" y="72" width="94" height="19"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                         <color key="textColor" red="0.51372549019607838" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1353,7 +1356,7 @@
                                                 </constraints>
                                             </view>
                                             <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XqP-hE-GDP" userLabel="pantryView">
-                                                <rect key="frame" x="187.5" y="28" width="94" height="96"/>
+                                                <rect key="frame" x="187.5" y="28" width="94.5" height="96"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oYN-Qq-60A">
                                                         <rect key="frame" x="13.5" y="5.5" width="67" height="67"/>
@@ -1367,7 +1370,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pantry" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPO-a5-QWR">
-                                                        <rect key="frame" x="0.0" y="72" width="94" height="19"/>
+                                                        <rect key="frame" x="0.0" y="72" width="94.5" height="19"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                         <color key="textColor" red="0.51372549019607838" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1382,10 +1385,10 @@
                                                 </constraints>
                                             </view>
                                             <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lrt-yD-VxB" userLabel="otherView">
-                                                <rect key="frame" x="281.5" y="28" width="93.5" height="96"/>
+                                                <rect key="frame" x="282" y="28" width="93" height="96"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bB1-pC-WSW">
-                                                        <rect key="frame" x="12.5" y="5.5" width="67" height="67"/>
+                                                        <rect key="frame" x="13" y="5.5" width="67" height="67"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="bB1-pC-WSW" secondAttribute="height" multiplier="1:1" id="c57-5e-AVN"/>
                                                         </constraints>
@@ -1396,7 +1399,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Other" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9o-z0-7aF">
-                                                        <rect key="frame" x="0.0" y="72" width="93.5" height="19"/>
+                                                        <rect key="frame" x="-0.5" y="72" width="94" height="19"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                         <color key="textColor" red="0.51372549019607838" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1609,7 +1612,7 @@
                                 <rect key="frame" x="20" y="447" width="335" height="200"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BLP-Pb-Afy">
-                                        <rect key="frame" x="0.0" y="20" width="335" height="44"/>
+                                        <rect key="frame" x="0.0" y="20" width="335" height="43.5"/>
                                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                         <state key="normal" title="Take a photo of your receipt">
@@ -1642,10 +1645,10 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zQY-aJ-eLj">
-                                        <rect key="frame" x="0.0" y="64" width="335" height="24"/>
+                                        <rect key="frame" x="0.0" y="63.5" width="335" height="24.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="jGa-ab-ayS">
-                                                <rect key="frame" x="0.0" y="-1" width="335" height="24.5"/>
+                                                <rect key="frame" x="0.0" y="-1" width="335" height="25"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                 <color key="textColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2050,7 +2053,7 @@
                                 <rect key="frame" x="24" y="344" width="327" height="36"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yHJ-12-joB">
-                                        <rect key="frame" x="0.0" y="0.0" width="82" height="36"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="82.5" height="36"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                         <state key="normal" title="Fridge">
                                             <color key="titleColor" red="0.13725490200000001" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -2060,7 +2063,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pv9-uH-nx0">
-                                        <rect key="frame" x="82" y="0.0" width="81.5" height="36"/>
+                                        <rect key="frame" x="82.5" y="0.0" width="82" height="36"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                         <state key="normal" title="Freezer">
                                             <color key="titleColor" red="0.13725490200000001" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -2070,7 +2073,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eNd-Pv-OkN">
-                                        <rect key="frame" x="163.5" y="0.0" width="82" height="36"/>
+                                        <rect key="frame" x="164.5" y="0.0" width="82.5" height="36"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                         <state key="normal" title="Pantry">
                                             <color key="titleColor" red="0.13725490200000001" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -2080,7 +2083,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2e6-Lk-DRO">
-                                        <rect key="frame" x="245.5" y="0.0" width="81.5" height="36"/>
+                                        <rect key="frame" x="247" y="0.0" width="82" height="36"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                         <state key="normal" title="Other">
                                             <color key="titleColor" red="0.13725490200000001" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -2287,10 +2290,10 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="94"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Uw-iF-tzg" userLabel="FridgeView">
-                                        <rect key="frame" x="0.0" y="0.0" width="94" height="94"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="94.5" height="94"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1jp-kr-pSW">
-                                                <rect key="frame" x="0.0" y="10" width="94" height="57"/>
+                                                <rect key="frame" x="0.0" y="10" width="94.5" height="57"/>
                                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" image="FridgeBase"/>
                                                 <state key="selected" image="FridgeActive"/>
@@ -2300,7 +2303,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fridge" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QgJ-r8-pFX">
-                                                <rect key="frame" x="0.0" y="69" width="94" height="15"/>
+                                                <rect key="frame" x="0.0" y="69" width="94.5" height="15"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                 <color key="textColor" red="0.44313725490196076" green="0.44313725490196076" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2320,10 +2323,10 @@
                                         </constraints>
                                     </view>
                                     <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="57W-T6-aKt" userLabel="FreezerView">
-                                        <rect key="frame" x="94" y="0.0" width="93.5" height="94"/>
+                                        <rect key="frame" x="94.5" y="0.0" width="94" height="94"/>
                                         <subviews>
                                             <button opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y9t-zA-4mD">
-                                                <rect key="frame" x="0.0" y="10.5" width="93.5" height="57"/>
+                                                <rect key="frame" x="0.0" y="10.5" width="94" height="57"/>
                                                 <state key="normal" image="FreezerBase"/>
                                                 <state key="selected" image="FreezerActive"/>
                                                 <state key="highlighted" image="FreezerActive"/>
@@ -2332,7 +2335,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Freezer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aLc-gC-sjH">
-                                                <rect key="frame" x="0.0" y="69" width="93.5" height="15"/>
+                                                <rect key="frame" x="0.0" y="69" width="94" height="15"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                 <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2347,10 +2350,10 @@
                                         </constraints>
                                     </view>
                                     <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1D7-4P-myd" userLabel="PantryView">
-                                        <rect key="frame" x="187.5" y="0.0" width="94" height="94"/>
+                                        <rect key="frame" x="188.5" y="0.0" width="94.5" height="94"/>
                                         <subviews>
                                             <button opaque="NO" tag="2" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bqS-Dx-o40">
-                                                <rect key="frame" x="0.5" y="10.5" width="94" height="57"/>
+                                                <rect key="frame" x="0.5" y="10.5" width="94.5" height="57"/>
                                                 <state key="normal" image="PantryBase"/>
                                                 <state key="selected" image="PantryActive"/>
                                                 <state key="highlighted" image="PantryActive"/>
@@ -2359,7 +2362,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pantry" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cL5-Q5-qcX">
-                                                <rect key="frame" x="0.5" y="69" width="94" height="15"/>
+                                                <rect key="frame" x="0.5" y="69" width="94.5" height="15"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                 <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2373,10 +2376,10 @@
                                         </constraints>
                                     </view>
                                     <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9n0-L9-KbB" userLabel="OtherView">
-                                        <rect key="frame" x="281.5" y="0.0" width="93.5" height="94"/>
+                                        <rect key="frame" x="281" y="0.0" width="94" height="94"/>
                                         <subviews>
                                             <button opaque="NO" tag="3" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fan-0s-U4v">
-                                                <rect key="frame" x="0.0" y="10.5" width="93.5" height="57"/>
+                                                <rect key="frame" x="0.0" y="10.5" width="94" height="57"/>
                                                 <state key="normal" image="HouseholdBase"/>
                                                 <state key="selected" image="HouseholdActive"/>
                                                 <state key="highlighted" image="HouseholdActive"/>
@@ -2385,7 +2388,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Other" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpJ-6O-aVB">
-                                                <rect key="frame" x="0.0" y="69" width="93.5" height="15"/>
+                                                <rect key="frame" x="0.0" y="69" width="94" height="15"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                 <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2655,22 +2658,44 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mch-tW-Lsw">
-                                                    <rect key="frame" x="13" y="18" width="120" height="18"/>
+                                                    <rect key="frame" x="28" y="18" width="188" height="18"/>
+                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                                    <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fridge" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJq-Cq-uB4">
+                                                    <rect key="frame" x="297" y="19" width="50" height="16"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="120" id="kSE-K7-LvY"/>
+                                                        <constraint firstAttribute="width" constant="50" id="uBS-NM-8n0"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="13"/>
+                                                    <color key="textColor" red="0.44313725490196076" green="0.44313725490196076" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x 100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYL-zi-Yb5">
+                                                    <rect key="frame" x="237" y="19" width="40" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="Ajc-Rm-teb"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                                     <color key="textColor" red="0.44313725490196076" green="0.44313725490196076" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="mch-tW-Lsw" firstAttribute="leading" secondItem="i1y-Kz-gRx" secondAttribute="leadingMargin" constant="5" id="m3x-tw-sKL"/>
+                                                <constraint firstItem="mch-tW-Lsw" firstAttribute="width" secondItem="i1y-Kz-gRx" secondAttribute="width" multiplier="0.5" id="V5D-i8-AP5"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="uJq-Cq-uB4" secondAttribute="trailing" constant="20" id="aHk-cJ-A11"/>
+                                                <constraint firstItem="uJq-Cq-uB4" firstAttribute="leading" secondItem="JYL-zi-Yb5" secondAttribute="trailing" constant="20" id="f4W-ef-erK"/>
+                                                <constraint firstItem="mch-tW-Lsw" firstAttribute="leading" secondItem="i1y-Kz-gRx" secondAttribute="leadingMargin" constant="20" id="m3x-tw-sKL"/>
+                                                <constraint firstItem="JYL-zi-Yb5" firstAttribute="centerY" secondItem="uJq-Cq-uB4" secondAttribute="centerY" id="qhY-UF-39m"/>
+                                                <constraint firstItem="uJq-Cq-uB4" firstAttribute="centerY" secondItem="mch-tW-Lsw" secondAttribute="centerY" id="vVV-Bl-oeg"/>
                                                 <constraint firstItem="mch-tW-Lsw" firstAttribute="centerY" secondItem="i1y-Kz-gRx" secondAttribute="centerY" id="xAx-aC-P0B"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="locationLabel" destination="uJq-Cq-uB4" id="Ivy-e0-bbw"/>
+                                            <outlet property="quantityLabel" destination="JYL-zi-Yb5" id="1L1-jz-B3i"/>
                                             <outlet property="titleLabel" destination="mch-tW-Lsw" id="2eF-RX-chP"/>
                                         </connections>
                                     </tableViewCell>
@@ -2719,7 +2744,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="FuJ-se-cZS" firstAttribute="leading" secondItem="v35-CO-PcC" secondAttribute="leading" constant="25" id="2eR-Ax-OfO"/>
-                                    <constraint firstAttribute="trailing" secondItem="FuJ-se-cZS" secondAttribute="trailing" constant="24.5" id="3PT-RT-ZDe"/>
+                                    <constraint firstAttribute="trailing" secondItem="FuJ-se-cZS" secondAttribute="trailing" constant="25" id="3PT-RT-ZDe"/>
                                     <constraint firstItem="FuJ-se-cZS" firstAttribute="height" secondItem="v35-CO-PcC" secondAttribute="height" id="CzB-52-asz"/>
                                     <constraint firstAttribute="height" constant="40" id="O3z-gE-seP"/>
                                     <constraint firstItem="FuJ-se-cZS" firstAttribute="centerY" secondItem="v35-CO-PcC" secondAttribute="centerY" id="w9w-6U-NyX"/>
@@ -2752,7 +2777,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G75-Cy-Tca" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6179.7101449275369" y="-977.44565217391312"/>
+            <point key="canvasLocation" x="6178.3999999999996" y="-978.26086956521749"/>
         </scene>
         <!--Shopping List-->
         <scene sceneID="92X-sI-TcT">

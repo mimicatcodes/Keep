@@ -54,7 +54,7 @@ class ShoppingListViewController: UIViewController {
             return true
         }
         
-        let rightButton2 = MGSwipeButton(title: "", icon: UIImage(named:"EditBlue2"), backgroundColor: Colors.dodgerBlue)  { (sender: MGSwipeTableCell) -> Bool in
+        let rightButton2 = MGSwipeButton(title: "", icon: UIImage(named:"EditGrey2"), backgroundColor: Colors.pinkishGrey)  { (sender: MGSwipeTableCell) -> Bool in
             self.shareList()
             return true
         }
@@ -68,14 +68,10 @@ class ShoppingListViewController: UIViewController {
             self.createAlert(withTitle: "Left2")
             return true
         }
-        
-//        rightButton1.setPadding(38)
-//        rightButton2.setPadding(38)
+
         cell.rightButtons = [rightButton1, rightButton2]
         cell.rightExpansion.buttonIndex = 0
-        
-//        leftButton1.setPadding(100)
-//        leftButton2.setPadding(38)
+    
         cell.leftButtons = [leftButton1, leftButton2]
         cell.leftExpansion.buttonIndex = 1
     }
@@ -93,7 +89,6 @@ class ShoppingListViewController: UIViewController {
         
         for item in filteredItems {
             emptyArray.append(item.name)
-            
         }
         
         let activityController = UIActivityViewController(activityItems: [emptyArray], applicationActivities: nil)
