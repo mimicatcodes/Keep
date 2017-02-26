@@ -108,9 +108,9 @@ class SettingsViewController: UIViewController {
         // 4th Section
         numOfExpiredItems = store.allItems.filter("isExpired == true").count
         if numOfExpiredItems < 2 {
-            labelFour.text = "item"
+            labelFour.text = "item is"
         } else {
-            labelFour.text = "items"
+            labelFour.text = "items are"
         }
         numOfItemsExpiredLabel.text = "\(numOfExpiredItems)"
     }
