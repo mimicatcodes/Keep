@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
+class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
     // TODO: Fix search
     // TODO: include info - location, quantity
     // TODO: Navigation - fix it
@@ -25,6 +25,16 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         super.viewDidLoad()
         configureSearchControlloer()
         definesPresentationContext = true
+        searchController.loadViewIfNeeded()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        searchController.isActive = true
+    }
+    
+    func didPresentSearchController(_ searchController: UISearchController) {
+        searchController.searchBar.becomeFirstResponder()
     }
     
     @IBAction func dismiss(_ sender: Any) {
@@ -33,11 +43,11 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     
     func configureSearchControlloer(){
     
-        //searchBarView.underlinedBorder()
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
+        searchController.delegate = self
         searchController.searchBar.delegate = self
-        //searchController.searchBar.sizeToFit()
+        searchController.searchBar.sizeToFit()
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.tintColor = .blue
         searchController.searchBar.layer.borderColor = Colors.tealishFaded.cgColor
@@ -48,24 +58,31 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         ]
         searchController.searchBar.setImage(UIImage(named: "Clear"), for: .clear, state: .normal)
         
+        searchController.searchBar.textColor = Colors.tealish
+        
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
         
-        searchController.searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-        searchController.searchBar.layer.borderWidth = 1.0
+        searchController.searchBar.setBackgroundImage(UIImage(), for: .top, barMetrics: .default)
+        searchBarView.underlinedBorder()
+        //searchController.searchBar.layer.borderWidth = 1.0
         
         tableView.tableFooterView = UIView()
         tableView.separatorInset = .zero
         tableView.backgroundView = UIView()
    
-        tableView.layer.masksToBounds = true
+        
+        /*tableView.layer.masksToBounds = true
         tableView.layer.borderColor = Colors.tealishFaded.cgColor
-        tableView.layer.borderWidth = 1.0
-        searchController.searchBar.frame.size.width = searchBarView.frame.size.width
+        tableView.layer.borderWidth = 1.0*/
 
-        searchBarView.addSubview(searchController.searchBar)
+       
+        // Add the search bar as a subview of the UIView you added above the table view
+        searchBarView.addSubview(searchController.searchBar)        // Call sizeToFit() on the search bar so it fits nicely in the UIView
+        searchController.searchBar.sizeToFit()
+        // For some reason, the search bar will extend outside the view to the left after calling sizeToFit. This next line corrects this.
+        searchController.searchBar.frame.size.width = view.frame.size.width
+    
     }
-    
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 45
@@ -92,11 +109,6 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         return cell
     }
     
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        //
-    }
-    
     func filterContentForSearch(_ searchString: String) {
         
         let predicate = NSPredicate(format: "name contains[c] %@", searchString)
@@ -107,7 +119,6 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     func updateSearchResults(for searchController: UISearchController) {
         
         if let searchString = searchController.searchBar.text {
-            
             filterContentForSearch(searchString)
         }
     }

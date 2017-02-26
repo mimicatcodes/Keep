@@ -18,25 +18,28 @@ class SettingsViewController: UIViewController {
     var sections = ["My Account","Settings","Privacy Policy","Logout"]
     
     @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var secondTopView: UIView!
+    @IBOutlet weak var rightTopView: UIView!
+    @IBOutlet weak var rightMidView: UIView!
+    @IBOutlet weak var rightBottomView: UIView!
+    
     @IBOutlet weak var leftView: UIView!
-    @IBOutlet weak var secondLeftView: UIView!
     @IBOutlet weak var midView: UIView!
     @IBOutlet weak var radarChartView: RadarChartView!
 
     @IBOutlet weak var tableView: UITableView!
-    
+
     @IBOutlet weak var numOfItemsLabel: UILabel!
-    @IBOutlet weak var numOfItemsBoughtThisWeekLabel: UILabel!
+    @IBOutlet weak var numOfItemsExpiringThisWeekLabel: UILabel!
     @IBOutlet weak var numOfItemsExpiringLabel: UILabel!
     @IBOutlet weak var numOfItemsExpiredLabel: UILabel!
+    
     @IBOutlet weak var labelOne: UILabel!
     @IBOutlet weak var labelTwo: UILabel!
     @IBOutlet weak var labelThree: UILabel!
     @IBOutlet weak var labelFour: UILabel!
     
     var numOfItems: Int = 0
-    var numOfItemsBoughtThisWeek: Int = 0
+    var numOfItemsExpiringThisWeek: Int = 0
     var numOfExpiredItems: Int = 0
     var numOfExpiringItems: Int = 0
     
@@ -46,11 +49,9 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorInset = .zero
-        topView.underlinedBorder()
-        secondTopView.underlinedBorder()
-        midView.underlinedBorder()
-        leftView.rightBorder()
-        secondLeftView.rightBorder()
+        //topView.underlinedBorder()
+        //midView.underlinedBorder()
+        //leftView.underlinedBorder()
         setNumbers()
         
         // dummy data
@@ -58,6 +59,7 @@ class SettingsViewController: UIViewController {
         let numOfItemsInCategory = [10.0, 4.0, 6.0, 3.0, 8.0]
         
         setChart(dataPoints: categories, values: numOfItemsInCategory)
+        radarChartView.legend.enabled = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,16 +67,19 @@ class SettingsViewController: UIViewController {
         DispatchQueue.main.async {
             self.setNumbers()
         }
+        //topView.underlinedBorder()
+        //midView.underlinedBorder()
         print("View will appear called")
     }
+    
     
     func setNumbers(){
         // 1st Section
         numOfItems = store.allItems.count
         if numOfItems < 2 {
-             labelOne.text = "item in your stock"
+             labelOne.text = "item in stock"
         } else {
-            labelOne.text = "items in your stock"
+            labelOne.text = "items in stock"
         }
         numOfItemsLabel.text = "\(numOfItems)"
         /*
@@ -84,28 +89,28 @@ class SettingsViewController: UIViewController {
          let fallsBetween = (startDate...endDate).contains(Date())
  */
         // 2nd Section
-        if numOfItemsBoughtThisWeek < 2 {
-            labelTwo.text = "item bought this week"
+        if numOfItemsExpiringThisWeek < 2 {
+            labelTwo.text = "item is expiring"
         } else {
-            labelTwo.text = "items bought this week"
+            labelTwo.text = "items are expiring"
         }
-        numOfItemsBoughtThisWeekLabel.text = "\(numOfItemsBoughtThisWeek)"
+        numOfItemsExpiringThisWeekLabel.text = "\(numOfItemsExpiringThisWeek)"
         
         // 3rd Section
         numOfExpiringItems = store.allItems.filter("isExpiring == true AND isExpired == false").count
         if numOfExpiringItems < 2 {
-            labelThree.text = "item expiring"
+            labelThree.text = "item is expiring"
         } else {
-            labelThree.text = "items expiring"
+            labelThree.text = "items are expiring"
         }
         numOfItemsExpiringLabel.text = "\(numOfExpiringItems)"
         
         // 4th Section
         numOfExpiredItems = store.allItems.filter("isExpired == true").count
         if numOfExpiredItems < 2 {
-            labelFour.text = "item expired"
+            labelFour.text = "item"
         } else {
-            labelFour.text = "items expired"
+            labelFour.text = "items"
         }
         numOfItemsExpiredLabel.text = "\(numOfExpiredItems)"
     }
@@ -137,7 +142,6 @@ extension SettingsViewController {
         }
         
         let chartDataSet = RadarChartDataSet(values: dataEntries, label: nil)
-        
         chartDataSet.drawFilledEnabled = true
         chartDataSet.drawValuesEnabled = false
         chartDataSet.fillColor = Colors.tealish
