@@ -11,7 +11,7 @@ import RealmSwift
 import MGSwipeTableCell
 import NotificationCenter
 
-class ShoppingListDetailVC: UIViewController {
+class ShoppingListDetailVC: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -21,6 +21,8 @@ class ShoppingListDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = UIColor.clear
         tableView.allowsMultipleSelection = true
@@ -37,6 +39,38 @@ class ShoppingListDetailVC: UIViewController {
     @IBAction func addItemBtnTapped(_ sender: Any) {
         performSegue(withIdentifier: Identifiers.Segue.addItemToSL, sender: nil)
     }
+    /*
+    
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        let str = "Welcome"
+        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        let str = "Tap the button below to add your first grokkleglob."
+        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
+ */
+    
+//    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
+//        return UIImage(named: "sample3")
+//    }
+    /*
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView, for state: UIControlState) -> NSAttributedString? {
+        let str = "Add Grokkleglob"
+        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.callout)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
+ */
+    
+//    func emptyDataSet(_ scrollView: UIScrollView, didTap button: UIButton) {
+//        let ac = UIAlertController(title: "Button tapped!", message: nil, preferredStyle: .alert)
+//        ac.addAction(UIAlertAction(title: "Hurray", style: .default))
+//        present(ac, animated: true)
+//    }
+ 
     
     func buttonActions(sender:UIButton){
         let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)

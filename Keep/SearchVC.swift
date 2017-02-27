@@ -73,8 +73,11 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         searchBarView.addSubview(searchController.searchBar)
         searchController.searchBar.sizeToFit()
         searchController.searchBar.frame.size.width = view.frame.size.width
+        searchController.searchBar.placeholder =
+        "Search                                                            "
     
     }
+    
     
     func searchFieldStyling(){
         textFieldInsideUISearchBar = searchController.searchBar.value(forKey: Keys.searchField) as? UITextField
@@ -84,7 +87,7 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 55
+        return 60
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -103,9 +106,9 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
             if let item = filteredItems?[indexPath.row] {
                 cell.titleLabel.text = item.name
                 if item.isExpired {
-                    cell.titleLabel.textColor = Colors.pastelRed
+                    cell.expiredLabel.text = "Expired"
                 } else {
-                    cell.titleLabel.textColor = Colors.warmGreyThree
+                    cell.expiredLabel.text = ""
                 }
                 cell.quantityLabel.text = "x \(item.quantity)"
                 cell.locationLabel.text = item.location
@@ -113,9 +116,9 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         } else {
             cell.titleLabel.text = store.allItems[indexPath.row].name
             if store.allItems[indexPath.row].isExpired {
-                cell.titleLabel.textColor = Colors.pastelRed
+                cell.expiredLabel.text = "Expired"
             } else {
-                cell.titleLabel.textColor = Colors.warmGreyThree
+                cell.expiredLabel.text = ""
             }
             cell.quantityLabel.text = "x \(store.allItems[indexPath.row].quantity)"
             cell.locationLabel.text = store.allItems[indexPath.row].location

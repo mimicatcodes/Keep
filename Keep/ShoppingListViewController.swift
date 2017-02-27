@@ -11,7 +11,7 @@ import RealmSwift
 import MGSwipeTableCell
 import NotificationCenter
 
-class ShoppingListViewController: UIViewController {
+class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     // TODO: move activity view controller to the shoppinglist detail vc 
     // TODO: Delete alert
     
@@ -23,6 +23,8 @@ class ShoppingListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
         tableView.tableFooterView = UIView()
         definesPresentationContext = true
         formatDates()
@@ -42,6 +44,10 @@ class ShoppingListViewController: UIViewController {
         
         performSegue(withIdentifier: Identifiers.Segue.addList, sender: nil)
     }
+//    
+//    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
+//        return UIImage(named: "sample3")
+//    }
     
     func deleteList(indexPath: IndexPath, uniqueID: String) {
         

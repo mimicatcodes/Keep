@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import MGSwipeTableCell
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate  {
     
     // TODO: Tableviewrowaction - custom font + image!
 
@@ -74,6 +74,9 @@ class MainViewController: UIViewController {
         refresher.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
         
         tableView.allowsMultipleSelection = true
+        
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
         tableView.tableFooterView = UIView() // Remove empty cells
         formatDates()
         notificationAddObserver()
@@ -116,6 +119,11 @@ class MainViewController: UIViewController {
         }
         print("the button status is-------\(store.buttonStatus)")
     }
+    
+    
+//    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
+//        return UIImage(named: "sample3")
+//    }
     
     func refreshTableView(){
         tableView.reloadData()
@@ -503,6 +511,9 @@ extension MainViewController: UITableViewDelegate {
         return [delete, edit]
     }
  */
+    
 }
+
+
 
 

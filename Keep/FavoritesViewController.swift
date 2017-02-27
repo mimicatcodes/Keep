@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import MGSwipeTableCell
 
-class FavoritesViewController: UIViewController {
+class FavoritesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -18,6 +18,8 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
         tableView.tableFooterView = UIView()
         definesPresentationContext = true
         NotificationCenter.default.addObserver(forName: NotificationName.refreshFavorites, object: nil, queue: nil) { (notification) in
@@ -33,6 +35,10 @@ class FavoritesViewController: UIViewController {
         tableView.reloadData()
         
     }
+    
+//    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
+//        return UIImage(named: "sample3")
+//    }
     
     func configureSwipeButtons(cell:FavoriteCell, indexPath: IndexPath){
 

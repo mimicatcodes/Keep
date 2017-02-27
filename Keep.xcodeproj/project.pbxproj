@@ -50,6 +50,7 @@
 		DD786E311E4A69CE00B1F4E3 /* ScanReceiptVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD786E301E4A69CE00B1F4E3 /* ScanReceiptVC.swift */; };
 		DD786E331E4AED2F00B1F4E3 /* AddScannedItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD786E321E4AED2F00B1F4E3 /* AddScannedItemVC.swift */; };
 		DD786E361E50FAAF00B1F4E3 /* optionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD786E351E50FAAF00B1F4E3 /* optionsView.xib */; };
+		DD7F72191E63F65700BAE511 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7F72181E63F65700BAE511 /* UIScrollView+EmptyDataSet.m */; };
 		DD8586BB1E580C2A00065DDD /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8586BA1E580C2A00065DDD /* CustomViews.swift */; };
 		DDC3E9801E1C76E100459295 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E97F1E1C76E100459295 /* SearchVC.swift */; };
 		DDC3E9821E1C93F400459295 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E9811E1C93F400459295 /* DataStore.swift */; };
@@ -120,6 +121,8 @@
 		DD786E301E4A69CE00B1F4E3 /* ScanReceiptVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanReceiptVC.swift; sourceTree = "<group>"; };
 		DD786E321E4AED2F00B1F4E3 /* AddScannedItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScannedItemVC.swift; sourceTree = "<group>"; };
 		DD786E351E50FAAF00B1F4E3 /* optionsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = optionsView.xib; sourceTree = "<group>"; };
+		DD7F72171E63F65700BAE511 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
+		DD7F72181E63F65700BAE511 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
 		DD8586BA1E580C2A00065DDD /* CustomViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
 		DDC3E97F1E1C76E100459295 /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		DDC3E9811E1C93F400459295 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
@@ -256,6 +259,8 @@
 		DD4853A41E199DFB00BEAC02 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DD7F72171E63F65700BAE511 /* UIScrollView+EmptyDataSet.h */,
+				DD7F72181E63F65700BAE511 /* UIScrollView+EmptyDataSet.m */,
 				DDEC8CB71E458A48004C73CB /* tessdata */,
 				DD75B7AA1E3D52EF002053E5 /* Fonts */,
 				DD1EA6371E0CA41D0034C54B /* AppDelegate.swift */,
@@ -549,6 +554,7 @@
 				DD4853A11E19920E00BEAC02 /* Dairy.swift in Sources */,
 				DD1EA6381E0CA41D0034C54B /* AppDelegate.swift in Sources */,
 				DD1EA64F1E0CAEFF0034C54B /* LoginViewController.swift in Sources */,
+				DD7F72191E63F65700BAE511 /* UIScrollView+EmptyDataSet.m in Sources */,
 				DDC3E9891E1C957E00459295 /* FavoritesViewController.swift in Sources */,
 				DDC3E9D11E20580B00459295 /* AddItemVC.swift in Sources */,
 				DDC3E9801E1C76E100459295 /* SearchVC.swift in Sources */,

@@ -14,6 +14,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     // TODO: Make cateogory set to default 'uncategorized' -  disable textfield action - let users choose only from pickers
     // TODO: Try to get rid of tags - let's use property values itself - WWDC!
     // TODO: dismiss the tableview when tapping the background
+    // TODO: Fix pickers
     
     @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var favButton: UIButton!
@@ -292,18 +293,16 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
                 let today = Date()
                 var daysLeft = 0
                 daysLeft = daysBetweenTwoDates(start: today, end: expDate)
-                let realm = try! Realm()
-                try! realm.write {
-                    if daysLeft < 0 {
-                        item.isExpired = true
-                        isExpired = true
-                    } else if daysLeft >= 0 && daysLeft < 4  {
-                        item.isExpiring = true
-                        isExpired = true
-                    } else {
-                        item.isExpiring = false
-                        isExpired = false
-                    }
+                
+                if daysLeft < 0 {
+                    item.isExpired = true
+                    isExpired = true
+                } else if daysLeft >= 0 && daysLeft < 4  {
+                    item.isExpiring = true
+                    isExpired = true
+                } else {
+                    item.isExpiring = false
+                    isExpired = false
                 }
                 
                 if isFavorited {
@@ -422,7 +421,13 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
             isFavorited = false
             isExpired = false
             location = .Fridge
-            expDate = Date()
+            let today = Date()
+            let sevenDaysLater = Calendar.current.date(byAdding: .day, value: 7, to: today)
+            if let date = sevenDaysLater {
+                expDate = date
+            }
+
+//            expDate = Date()
             purchaseDate = Date()
             quantity = 1
             category = "Uncategorized"
@@ -598,14 +603,14 @@ extension AddItemsVC: UITextFieldDelegate {
         return true
     }
     
-//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-//        if textField == categoryTextfield {
-//            textField.resignFirstResponder()
-//            return false
-//        }
-//        return true
-//    }
-//    
+    //    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+    //        if textField == categoryTextfield {
+    //            textField.resignFirstResponder()
+    //            return false
+    //        }
+    //        return true
+    //    }
+    //
     func textFieldDidBeginEditing(_ textField: UITextField){
         activeTextField = textField
         if textField.tag == 1 {
@@ -653,7 +658,7 @@ extension AddItemsVC: UITableViewDataSource, UITableViewDelegate {
         let selectedCell: UITableViewCell = tableView.cellForRow(at: indexPath)!
         
         nameTextField.text = selectedCell.textLabel!.text!.capitalized
-       
+        
         tableView.isHidden = !tableView.isHidden
         
         nameTextField.endEditing(true)
@@ -679,7 +684,6 @@ extension AddItemsVC: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-// Pickers
 extension AddItemsVC : UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         //self.view.endEditing(true)
@@ -689,7 +693,6 @@ extension AddItemsVC : UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.categoryTextfield.text = list[row]
     }
-    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
