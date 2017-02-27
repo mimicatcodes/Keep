@@ -14,9 +14,9 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
     
     // TODO: fix pickers - date errors
     // TODO: Custom tool bar fonts - fix!
-    // TODO: favorite button 
-    // TODO: minus button 
-    // TODO: Save action - notify it's actually saved 
+    // TODO: favorite button
+    // TODO: minus button
+    // TODO: Save action - notify it's actually saved
     
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var nameField: UITextField!
@@ -45,6 +45,7 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
     var purchaseDate = Date()
     var location: Location = .Fridge
     var activeTextField:UITextField?
+    var isFavorited:Bool = false
     
     // dummy data
     let categories = ["1","2","3","4","5","6"]
@@ -73,12 +74,6 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
         formatDates()
     }
     
-    /*func customFontForBarButtonItems(left: UIBarButtonItem, right: UIBarButtonItem){
-        if let font = UIFont(name: Fonts.latoSemibold, size: 15) {
-            left.setTitleTextAttributes([NSFontAttributeName:font], for: .normal)
-            right.setTitleTextAttributes([NSFontAttributeName:font], for: .normal)
-        }
-    }*/
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         nameField.text = store.scannedItemToAdd
@@ -100,7 +95,16 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
     }
     
     @IBAction func favButtonTapped(_ sender: UIButton) {
-        // toggle status here
+        favButton.isSelected = !favButton.isSelected
+        
+        if favButton.isSelected {
+            isFavorited = true
+            print("Fav selected \(isFavorited)")
+            
+        } else {
+            isFavorited = false
+            print("Fav Not selected \(isFavorited)")
+        }
     }
     
     @IBAction func locationButtonTapped(_ sender: UIButton) {
@@ -141,7 +145,7 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
     }
     
     @IBAction func cancelBtnTapped(_ sender: UIButton) {
-         dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func saveBtnTapped(_ sender: UIButton) {
@@ -153,10 +157,32 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
         
         let realm = try! Realm()
         try! realm.write {
-            let item = Item(name: name, uniqueID: uuid, quantity: quantity, exp: expDate, purchaseDate: purchaseDate, location: location.rawValue, category: category)
+            let item = Item(name: name.lowercased().capitalized, uniqueID: uuid, quantity: quantity, exp: expDate, purchaseDate: purchaseDate, location: location.rawValue, category: category)
             print("scanned item to add to realm is \(item)")
+            item.isFavorited = isFavorited
             realm.add(item)
+            
+            if isFavorited {
+                if store.allFavoritedItems.filter({$0.name == item.name}).count == 0{
+                    print("all favorite items with this \(item.name) is \(store.allFavoritedItems.filter({$0.name == item.name}).count)")
+                    let favItem = FavoritedItem(name:item.name.lowercased().capitalized)
+                    realm.add(favItem)
+                    
+                } else {
+                    print("Nothing to add to Favorites DB beause \(item.name) already exists in favorite")
+                }
+                
+            } else {
+                if store.allFavoritedItems.filter({$0.name == item.name}).count > 0 {
+                    
+                    if let itemToDelete = store.allFavoritedItems.filter({$0.name == item.name}).first {
+                        realm.delete(itemToDelete)
+                        
+                    }
+                }
+            }
         }
+        
         NotificationCenter.default.post(name: NotificationName.refreshMainTV, object: nil)
         NotificationCenter.default.post(name: NotificationName.refreshScannedItems, object: nil)
         dismiss(animated: true, completion: nil)
@@ -189,7 +215,7 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
             minusButton.isEnabled = true
         }
     }
-
+    
     func formatInitialData() {
         categoryField.text = "Uncategorized"
         quantity = 1
@@ -208,7 +234,7 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
                 button.layer.cornerRadius = 5
             }
         }
-    
+        
         pDateField.text = formatter.string(from: Date()).capitalized
         let currentDate = Date()
         expDateField.text = formatter.string(from: Date()).capitalized
