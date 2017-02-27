@@ -13,11 +13,12 @@ import NotificationCenter
 
 class ShoppingListViewController: UIViewController {
     // TODO: move activity view controller to the shoppinglist detail vc 
+    // TODO: Delete alert
     
     @IBOutlet weak var tableView: UITableView!
     
     let store = DataStore.sharedInstance
-    var uniqueID: String = ""
+    var id = ""
     let formatter = DateFormatter()
 
     override func viewDidLoad() {
@@ -42,38 +43,42 @@ class ShoppingListViewController: UIViewController {
         performSegue(withIdentifier: Identifiers.Segue.addList, sender: nil)
     }
     
-    func deleteList(_ indexPath:IndexPath) {
+    func deleteList(indexPath: IndexPath, uniqueID: String) {
         
-        //store.shoppingLists?.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .left)
+        let filteredList = store.allShopingLists[indexPath.row]
+        
+        let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
+        let filteredItems = store.allShoppingItems.filter(predicate)
+        
+        let realm = try! Realm()
+        
+        try! realm.write {
+            print("From \(filteredList.title), + \(filteredItems.count) items deleted")
+
+            realm.delete(filteredItems)
+            realm.delete(filteredList)
+        }
+        
+        tableView.reloadData()
     }
     
-    func configureSwipeButtons(cell:ShoppingListCell){
+    func configureSwipeButtons(cell:ShoppingListCell, indexPath: IndexPath){
+        id = self.store.allShopingLists[indexPath.row].uniqueID
+
         let rightButton1 = MGSwipeButton(title: "", icon: UIImage(named:"Delete2"), backgroundColor: Colors.salmon) { (sender: MGSwipeTableCell) -> Bool in
-            self.createAlert(withTitle: "Delete")
+            self.deleteList(indexPath: indexPath, uniqueID: self.id)
+//            self.createAlert(withTitle: "Are you sure you want to delete this list?")
             return true
         }
         
         let rightButton2 = MGSwipeButton(title: "", icon: UIImage(named:"EditGrey2"), backgroundColor: Colors.pinkishGrey)  { (sender: MGSwipeTableCell) -> Bool in
-            self.shareList()
+            self.editList(indexPath: indexPath, uniqueID: self.id)
+            print("hello")
             return true
         }
         
-        let leftButton1 = MGSwipeButton(title: "Left1", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
-            self.createAlert(withTitle: "Left1")
-            return true
-        }
-        
-        let leftButton2 = MGSwipeButton(title: "Left2", backgroundColor: UIColor.yellow) { (sender: MGSwipeTableCell) -> Bool in
-            self.createAlert(withTitle: "Left2")
-            return true
-        }
-
         cell.rightButtons = [rightButton1, rightButton2]
         cell.rightExpansion.buttonIndex = 0
-    
-        cell.leftButtons = [leftButton1, leftButton2]
-        cell.leftExpansion.buttonIndex = 1
     }
     
     func formatDates() {
@@ -82,20 +87,8 @@ class ShoppingListViewController: UIViewController {
         formatter.dateFormat = "MMM dd, yyyy"
     }
     
-    func shareList(){
-        let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
-        let filteredItems = store.allShoppingItems.filter(predicate)
-        var emptyArray = String()
-        
-        for item in filteredItems {
-            emptyArray.append(item.name)
-        }
-        
-        let activityController = UIActivityViewController(activityItems: [emptyArray], applicationActivities: nil)
-        
-        activityController.popoverPresentationController?.sourceView = self.view
-        activityController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
-        self.present(activityController, animated: true, completion: nil)
+    func editList(indexPath: IndexPath, uniqueID: String){
+        performSegue(withIdentifier: Identifiers.Segue.addList, sender: nil)
     }
     
     func createAlert(withTitle:String) {
@@ -108,13 +101,20 @@ class ShoppingListViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Identifiers.Segue.showItems {
             if let index = tableView.indexPathForSelectedRow?.row {
-                let selectedTitle = store.allShopingLists[index]
+                let selectedList = store.allShopingLists[index]
                 let dest = segue.destination as! ShoppingListDetailVC
-                dest.name = selectedTitle.title
-                dest.uniqueID = selectedTitle.uniqueID
-                print(selectedTitle.uniqueID)
+                dest.name = selectedList.title
+                dest.uniqueID = selectedList.uniqueID
+                print(selectedList.uniqueID)
+            }
+        } else if segue.identifier == Identifiers.Segue.addList {
+            if id != "" {
+                let dest = segue.destination as! AddListVC
+                dest.listToEdit = store.allShopingLists.filter({$0.uniqueID == self.id}).first
+                print("\(self.id) is passed to addLISTVC")
             }
         }
+        
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
@@ -147,7 +147,7 @@ extension ShoppingListViewController : UITableViewDelegate, UITableViewDataSourc
         cell.createdAtLabel.text = createdAt
         cell.selectionStyle = .none
         cell.separatorInset = .zero
-        configureSwipeButtons(cell: cell)
+        configureSwipeButtons(cell: cell, indexPath: indexPath)
         return cell
     }
 }

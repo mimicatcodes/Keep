@@ -50,7 +50,7 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         tableView.separatorInset = .zero
         //topView.underlinedBorder()
-        //midView.underlinedBorder()
+        midView.underlinedBorder()
         //leftView.underlinedBorder()
         setNumbers()
         

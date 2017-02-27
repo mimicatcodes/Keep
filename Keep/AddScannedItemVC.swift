@@ -16,6 +16,7 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
     // TODO: Custom tool bar fonts - fix!
     // TODO: favorite button 
     // TODO: minus button 
+    // TODO: Save action - notify it's actually saved 
     
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var nameField: UITextField!
@@ -190,7 +191,7 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
     }
 
     func formatInitialData() {
-        categoryField.text = "Other"
+        categoryField.text = "Uncategorized"
         quantity = 1
         quantityLabel.text = "\(quantity)"
         
@@ -225,7 +226,6 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
         formatInitialData()
         saveButton.isEnabled = false
     }
-    
 }
 
 // Keyboard handling

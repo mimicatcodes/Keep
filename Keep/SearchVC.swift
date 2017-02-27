@@ -104,6 +104,8 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
                 cell.titleLabel.text = item.name
                 if item.isExpired {
                     cell.titleLabel.textColor = Colors.pastelRed
+                } else {
+                    cell.titleLabel.textColor = Colors.warmGreyThree
                 }
                 cell.quantityLabel.text = "x \(item.quantity)"
                 cell.locationLabel.text = item.location
@@ -112,6 +114,8 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
             cell.titleLabel.text = store.allItems[indexPath.row].name
             if store.allItems[indexPath.row].isExpired {
                 cell.titleLabel.textColor = Colors.pastelRed
+            } else {
+                cell.titleLabel.textColor = Colors.warmGreyThree
             }
             cell.quantityLabel.text = "x \(store.allItems[indexPath.row].quantity)"
             cell.locationLabel.text = store.allItems[indexPath.row].location

@@ -2625,7 +2625,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4478.2608695652179" y="-976.63043478260875"/>
+            <point key="canvasLocation" x="4518" y="-976"/>
         </scene>
         <!--SearchVC-->
         <scene sceneID="66N-gN-wpq">
@@ -2914,17 +2914,17 @@
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="addListTapped:" destination="PEo-up-NwA" id="m8e-5l-dtl"/>
-                                <segue destination="rYQ-hn-FK9" kind="presentation" identifier="addList" modalPresentationStyle="overFullScreen" id="h8m-Mk-h3K"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="4cL-GS-U8M" id="7MP-sT-GM8"/>
+                        <segue destination="rYQ-hn-FK9" kind="presentation" identifier="addList" id="ySJ-cl-QQz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LGX-jB-Pof" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4479.1999999999998" y="-276.61169415292358"/>
+            <point key="canvasLocation" x="4519" y="-277"/>
         </scene>
         <!--Title-->
         <scene sceneID="ofR-jK-cWY">
@@ -3667,7 +3667,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2g9-H2-PvJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3540" y="-276.61169415292358"/>
+            <point key="canvasLocation" x="3582" y="-277"/>
         </scene>
         <!--Stock-->
         <scene sceneID="dRC-z0-9DG">
@@ -3686,7 +3686,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ccD-xt-hvG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3540" y="-976.46176911544239"/>
+            <point key="canvasLocation" x="3582" y="-976"/>
         </scene>
     </scenes>
     <resources>

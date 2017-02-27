@@ -42,6 +42,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     var purchaseDate = Date()
     var category: String = "Uncategorized"
     var isFavorited = false
+    var isExpired = false
     
     var labelView: UILabel!
     let picker = UIPickerView()
@@ -176,6 +177,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
         for (index,button) in expButtons.enumerated() {
             if index == index_ {
                 button.isSelected = true
+                isExpired = false
                 button.layer.cornerRadius = 5
                 button.layer.borderWidth = 2
                 button.layer.borderColor = Colors.tealish.cgColor
@@ -189,7 +191,6 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
             }
         }
     }
-    
     
     @IBAction func didPressLocationBtn(_ sender: UIButton) {
         selectedIndex = sender.tag
@@ -253,6 +254,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
                 itemToEdit.location = location.rawValue
                 itemToEdit.category = category
                 itemToEdit.isFavorited = isFavorited
+                itemToEdit.isExpired = isExpired
                 print("is it favorited or NOT \(isFavorited)")
                 
                 if isFavorited {
@@ -286,6 +288,23 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
                 
                 realm.add(item)
                 item.isFavorited = isFavorited
+                
+                let today = Date()
+                var daysLeft = 0
+                daysLeft = daysBetweenTwoDates(start: today, end: expDate)
+                let realm = try! Realm()
+                try! realm.write {
+                    if daysLeft < 0 {
+                        item.isExpired = true
+                        isExpired = true
+                    } else if daysLeft >= 0 && daysLeft < 4  {
+                        item.isExpiring = true
+                        isExpired = true
+                    } else {
+                        item.isExpiring = false
+                        isExpired = false
+                    }
+                }
                 
                 if isFavorited {
                     if store.allFavoritedItems.filter({$0.name == item.name}).count == 0{
@@ -377,6 +396,15 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
         }
     }
     
+    func daysBetweenTwoDates(start: Date, end: Date) -> Int{
+        let currentCalendar = Calendar.current
+        
+        guard let start = currentCalendar.ordinality(of: .day, in: .era, for: start) else { return 0 }
+        guard let end = currentCalendar.ordinality(of: .day, in: .era, for: end) else { return 0 }
+        
+        return end - start
+    }
+    
     func formatInitialData() {
         if let item = itemToEdit {
             nameTitle = item.name.capitalized
@@ -384,6 +412,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
             quantity = Int(item.quantity)!
             purchaseDate = item.purchaseDate
             expDate = item.exp
+            isExpired = item.isExpired
             favButton.isSelected = item.isFavorited
             location = Location(rawValue:item.location)!
             saveButton.isEnabled = true
@@ -391,6 +420,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
             
         } else {
             isFavorited = false
+            isExpired = false
             location = .Fridge
             expDate = Date()
             purchaseDate = Date()

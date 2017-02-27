@@ -24,10 +24,8 @@ class ShoppingListDetailVC: UIViewController {
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = UIColor.clear
         tableView.allowsMultipleSelection = true
-        tableView.rowHeight = 100
         navigationItem.title = name?.capitalized
         definesPresentationContext = true
-     //navigationItem.leftBarButtonItem = editButtonItem
         NotificationCenter.default.addObserver(forName: NotificationName.refreshItemList, object: nil, queue: nil) { (notification) in
             print("notification is \(notification)")
             DispatchQueue.main.async {
@@ -137,23 +135,21 @@ extension ShoppingListDetailVC : UITableViewDelegate, UITableViewDataSource {
         return 55
     }
     
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
-//            let filteredItems = store.allShoppingItems.filter(predicate)
-//
-//            let realm = try! Realm()
-//            
-//            try! realm.write {
-//                let predicate2 = NSPredicate(format: Filters.uniqueID, uniqueID)
-//                let filteredList2 = store.allShopingLists.filter(predicate2).first
-// 
-//                realm.delete(filteredItems[indexPath.row])
-//                filteredList2?.numOfItems -= 1
-//                print("Shopping list has \(filteredList2?.numOfItems) items")
-//            }
-//            self.tableView.reloadData()
-//        }
-//    }
+    //    func shareList(){
+    //        let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
+    //        let filteredItems = store.allShoppingItems.filter(predicate)
+    //        var emptyArray = String()
+    //
+    //        for item in filteredItems {
+    //            emptyArray.append(item.name)
+    //        }
+    //
+    //        let activityController = UIActivityViewController(activityItems: [emptyArray], applicationActivities: nil)
+    //
+    //        activityController.popoverPresentationController?.sourceView = self.view
+    //        activityController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
+    //        self.present(activityController, animated: true, completion: nil)
+    //    }
+    
 }
 

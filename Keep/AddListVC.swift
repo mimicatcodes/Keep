@@ -16,9 +16,11 @@ class AddListVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var createListView: UIView!
     
+    var listToEdit: ShoppingList?
+    
     let store = DataStore.sharedInstance
     let currentDate = Date()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         listTitle.delegate = self
@@ -29,7 +31,15 @@ class AddListVC: UIViewController, UITextFieldDelegate {
         listTitle.autocapitalizationType = .words
         saveButton.backgroundColor = Colors.whiteTwo
         saveButton.setTitleColor(Colors.tealish, for: .normal)
+        initialSetting()
         listTitle.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
+    }
+    
+    func initialSetting(){
+        if let list = listToEdit {
+            listTitle.text = list.title
+            
+        }
     }
     
     @IBAction func dismissView(_ sender: Any) {
@@ -39,7 +49,7 @@ class AddListVC: UIViewController, UITextFieldDelegate {
     @IBAction func addBtnTapped(_ sender: UIButton) {
         save()
     }
-
+    
     @IBAction func cancelBtnTapped(_ sender: Any) {
         dismiss()
     }
@@ -55,13 +65,21 @@ class AddListVC: UIViewController, UITextFieldDelegate {
     
     func save() {
         guard let text = listTitle.text, !text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty else { return }
-        let list = ShoppingList(title: text, isCreatedAt: currentDate)
-        let uuid = UUID().uuidString
-        list.uniqueID = uuid
         
-        let realm = try! Realm()
-        try! realm.write {
-            realm.add(list)
+        if let listToEdit = listToEdit {
+            let realm = try! Realm()
+            try! realm.write {
+                listToEdit.title = text
+            }
+        } else {
+            let list = ShoppingList(title: text, isCreatedAt: currentDate)
+            let uuid = UUID().uuidString
+            list.uniqueID = uuid
+            
+            let realm = try! Realm()
+            try! realm.write {
+                realm.add(list)
+            }
         }
         
         NotificationCenter.default.post(name: NotificationName.refreshTableview, object: nil)
@@ -69,7 +87,9 @@ class AddListVC: UIViewController, UITextFieldDelegate {
     }
     
     func checkTextField(sender: UITextField) {
+        
         var textLength = 0
+        
         if let text = sender.text {
             textLength = text.trimmingCharacters(in: .whitespacesAndNewlines).characters.count
         }

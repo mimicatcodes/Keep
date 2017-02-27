@@ -82,7 +82,6 @@ class FavoritesViewController: UIViewController {
         
     }
     
-    
     private func delete(indexPath: IndexPath){
         
         let realm = try! Realm()
