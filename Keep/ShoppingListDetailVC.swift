@@ -17,7 +17,7 @@ class ShoppingListDetailVC: UIViewController, DZNEmptyDataSetSource, DZNEmptyDat
     
     let store = DataStore.sharedInstance
     var name:String?
-    var uniqueID: String = ""
+    var uniqueID: String = EmptyString.none
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,6 @@ class ShoppingListDetailVC: UIViewController, DZNEmptyDataSetSource, DZNEmptyDat
         navigationItem.title = name?.capitalized
         definesPresentationContext = true
         NotificationCenter.default.addObserver(forName: NotificationName.refreshItemList, object: nil, queue: nil) { (notification) in
-            print("notification is \(notification)")
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -73,18 +72,17 @@ class ShoppingListDetailVC: UIViewController, DZNEmptyDataSetSource, DZNEmptyDat
  
     
     func buttonActions(sender:UIButton){
-        let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
+        let predicate = NSPredicate(format: Filters.listUniqueID, uniqueID)
         let filteredItems = store.allShoppingItems.filter(predicate)
         let titleString = filteredItems[sender.tag].name
-        print("----titleString is : --- \(titleString)")
         
         store.tappedSLItemToSendToLocation = titleString
     }
     
     func configureSwipeButtons(cell:ListDetailCell, indexPath: IndexPath){
-        let rightButton1 = MGSwipeButton(title: "", icon: UIImage(named:"Delete1"), backgroundColor: Colors.salmon) { (sender: MGSwipeTableCell) -> Bool in
+        let rightButton1 = MGSwipeButton(title: EmptyString.none, icon: UIImage(named:ImageName.delete1), backgroundColor: Colors.salmon) { (sender: MGSwipeTableCell) -> Bool in
             
-            let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", self.uniqueID)
+            let predicate = NSPredicate(format: Filters.listUniqueID, self.uniqueID)
             let filteredItems = self.store.allShoppingItems.filter(predicate)
             
             let realm = try! Realm()
@@ -95,7 +93,6 @@ class ShoppingListDetailVC: UIViewController, DZNEmptyDataSetSource, DZNEmptyDat
                 
                 realm.delete(filteredItems[indexPath.row])
                 filteredList2?.numOfItems -= 1
-                print("Shopping list has \(filteredList2?.numOfItems) items")
             }
             self.tableView.reloadData()
             return true
@@ -114,7 +111,7 @@ class ShoppingListDetailVC: UIViewController, DZNEmptyDataSetSource, DZNEmptyDat
 
 extension ShoppingListDetailVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
+        let predicate = NSPredicate(format: Filters.listUniqueID, uniqueID)
         let filteredItems = store.allShoppingItems.filter(predicate)
         return filteredItems.count
     }
@@ -122,7 +119,7 @@ extension ShoppingListDetailVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:Identifiers.Cell.listDetailCell, for: indexPath) as! ListDetailCell
         
-        let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
+        let predicate = NSPredicate(format: Filters.listUniqueID, uniqueID)
         let filteredItems = store.allShoppingItems.filter(predicate)
         cell.titleLabel.text = filteredItems[indexPath.row].name
         cell.selectionStyle = .none
@@ -142,15 +139,14 @@ extension ShoppingListDetailVC : UITableViewDelegate, UITableViewDataSource {
         cell.moveButton.addTarget(self, action: #selector(buttonActions), for: .touchUpInside)
         cell.tapAction = { cell in
             let name = tableView.indexPath(for: cell)?.row
-            print(name ?? "Error")
+            print(name ?? "")
         }
         configureSwipeButtons(cell: cell, indexPath: indexPath)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Cell sected at \(indexPath.row)")
-        let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
+        let predicate = NSPredicate(format: Filters.listUniqueID, uniqueID)
         let filteredItems = store.allShoppingItems.filter(predicate)
         
         let realm = try! Realm()
@@ -161,7 +157,6 @@ extension ShoppingListDetailVC : UITableViewDelegate, UITableViewDataSource {
                 filteredItems[indexPath.row].isPurchased = false
             }
         }
-        print(filteredItems[indexPath.row].isPurchased)
         tableView.reloadData()
     }
     

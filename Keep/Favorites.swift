@@ -11,7 +11,7 @@ import RealmSwift
 
 class FavoritedItem : Object {
     
-    dynamic var name: String = ""
+    dynamic var name: String = EmptyString.none
 
     convenience init(name: String) {
         self.init()

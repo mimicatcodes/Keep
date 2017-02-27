@@ -15,7 +15,7 @@ class AddItemVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var saveButton: CustomButton!
     @IBOutlet weak var createItemView: UIView!
     @IBOutlet weak var itemTitleField: UITextField!
-    // To do: autocomplete?
+
     let store = DataStore.sharedInstance
     var listTitle:String?
     var uniqueID: String?

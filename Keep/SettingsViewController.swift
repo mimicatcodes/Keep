@@ -42,7 +42,6 @@ class SettingsViewController: UIViewController {
     var numOfItemsExpiringThisWeek: Int = 0
     var numOfExpiredItems: Int = 0
     var numOfExpiringItems: Int = 0
-    
     // dummy data
     var categories:[String]!
     
@@ -51,7 +50,6 @@ class SettingsViewController: UIViewController {
         tableView.separatorInset = .zero
         //topView.underlinedBorder()
         midView.underlinedBorder()
-        //leftView.underlinedBorder()
         setNumbers()
         
         // dummy data
@@ -67,9 +65,6 @@ class SettingsViewController: UIViewController {
         DispatchQueue.main.async {
             self.setNumbers()
         }
-        //topView.underlinedBorder()
-        //midView.underlinedBorder()
-        print("View will appear called")
     }
     
     
@@ -77,40 +72,36 @@ class SettingsViewController: UIViewController {
         // 1st Section
         numOfItems = store.allItems.count
         if numOfItems < 2 {
-             labelOne.text = "item in stock"
+             labelOne.text = Labels.singular
         } else {
-            labelOne.text = "items in stock"
+            labelOne.text = Labels.plural
         }
         numOfItemsLabel.text = "\(numOfItems)"
-        /*
-        let lastWeek = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: Date())
-        let thisWeek = Calendar.current.date(byAdding: .weekOfYear, value: 0, to: Date())
-        let nextWeek = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: Date())
-         let fallsBetween = (startDate...endDate).contains(Date())
- */
+        
         // 2nd Section
+        numOfItemsExpiringThisWeek = store.allItems.filter(Filters.isExpiringInAWeek).count
         if numOfItemsExpiringThisWeek < 2 {
-            labelTwo.text = "item is expiring"
+            labelTwo.text = Labels.signularExpiring
         } else {
-            labelTwo.text = "items are expiring"
+            labelTwo.text = Labels.pluralExpiring
         }
         numOfItemsExpiringThisWeekLabel.text = "\(numOfItemsExpiringThisWeek)"
         
         // 3rd Section
-        numOfExpiringItems = store.allItems.filter("isExpiring == true AND isExpired == false").count
+        numOfExpiringItems = store.allItems.filter(Filters.isExpiring).count
         if numOfExpiringItems < 2 {
-            labelThree.text = "item is expiring"
+            labelThree.text = Labels.signularExpiring
         } else {
-            labelThree.text = "items are expiring"
+            labelThree.text = Labels.pluralExpiring
         }
         numOfItemsExpiringLabel.text = "\(numOfExpiringItems)"
         
         // 4th Section
-        numOfExpiredItems = store.allItems.filter("isExpired == true").count
+        numOfExpiredItems = store.allItems.filter(Filters.isExpired).count
         if numOfExpiredItems < 2 {
-            labelFour.text = "item is"
+            labelFour.text = Labels.itemIs
         } else {
-            labelFour.text = "items are"
+            labelFour.text = Labels.ItemsAre
         }
         numOfItemsExpiredLabel.text = "\(numOfExpiredItems)"
     }
@@ -150,7 +141,7 @@ extension SettingsViewController {
         chartData.labels = dataPoints
         radarChartView.data = chartData
         
-        let font = UIFont(name: "Montserrat-Regular", size: 11)
+        let font = UIFont(name: Fonts.montserratRegular, size: 11)
         
         yAxis.drawLabelsEnabled = false
         xAxis.drawLabelsEnabled = true
@@ -161,8 +152,7 @@ extension SettingsViewController {
         xAxis.labelTextColor = Colors.tealish
         
         radarChartView.sizeToFit()
-        radarChartView.chartDescription?.text = ""
-        
+        radarChartView.chartDescription?.text = EmptyString.none
     }
 }
 

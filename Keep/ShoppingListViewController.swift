@@ -18,7 +18,7 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
     @IBOutlet weak var tableView: UITableView!
     
     let store = DataStore.sharedInstance
-    var id = ""
+    var id = String()
     let formatter = DateFormatter()
 
     override func viewDidLoad() {
@@ -30,7 +30,6 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
         formatDates()
         tableView.separatorColor = Colors.whiteThree
         NotificationCenter.default.addObserver(forName: NotificationName.refreshTableview, object: nil, queue: nil) { notification in
-            print("notification is \(notification)")
             self.tableView.reloadData()
         }
     }
@@ -53,14 +52,12 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
         
         let filteredList = store.allShopingLists[indexPath.row]
         
-        let predicate = NSPredicate(format: "list.uniqueID contains[c] %@", uniqueID)
+        let predicate = NSPredicate(format: Filters.listUniqueID, uniqueID)
         let filteredItems = store.allShoppingItems.filter(predicate)
         
         let realm = try! Realm()
         
         try! realm.write {
-            print("From \(filteredList.title), + \(filteredItems.count) items deleted")
-
             realm.delete(filteredItems)
             realm.delete(filteredList)
         }
@@ -71,15 +68,14 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
     func configureSwipeButtons(cell:ShoppingListCell, indexPath: IndexPath){
         id = self.store.allShopingLists[indexPath.row].uniqueID
 
-        let rightButton1 = MGSwipeButton(title: "", icon: UIImage(named:"Delete2"), backgroundColor: Colors.salmon) { (sender: MGSwipeTableCell) -> Bool in
+        let rightButton1 = MGSwipeButton(title: EmptyString.none, icon: UIImage(named:ImageName.delete2), backgroundColor: Colors.salmon) { (sender: MGSwipeTableCell) -> Bool in
             self.deleteList(indexPath: indexPath, uniqueID: self.id)
 //            self.createAlert(withTitle: "Are you sure you want to delete this list?")
             return true
         }
         
-        let rightButton2 = MGSwipeButton(title: "", icon: UIImage(named:"EditGrey2"), backgroundColor: Colors.pinkishGrey)  { (sender: MGSwipeTableCell) -> Bool in
+        let rightButton2 = MGSwipeButton(title: EmptyString.none, icon: UIImage(named:ImageName.editGrey2), backgroundColor: Colors.pinkishGrey)  { (sender: MGSwipeTableCell) -> Bool in
             self.editList(indexPath: indexPath, uniqueID: self.id)
-            print("hello")
             return true
         }
         
@@ -98,7 +94,7 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
     }
     
     func createAlert(withTitle:String) {
-        let alert = UIAlertController(title: withTitle, message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: withTitle, message: EmptyString.none, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { (action) in }
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
@@ -111,18 +107,16 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
                 let dest = segue.destination as! ShoppingListDetailVC
                 dest.name = selectedList.title
                 dest.uniqueID = selectedList.uniqueID
-                print(selectedList.uniqueID)
             }
         } else if segue.identifier == Identifiers.Segue.addList {
-            if id != "" {
+            if id != EmptyString.none {
                 let dest = segue.destination as! AddListVC
                 dest.listToEdit = store.allShopingLists.filter({$0.uniqueID == self.id}).first
-                print("\(self.id) is passed to addLISTVC")
             }
         }
         
         let backItem = UIBarButtonItem()
-        backItem.title = ""
+        backItem.title = EmptyString.none
         navigationItem.backBarButtonItem = backItem
     }
 }
@@ -145,7 +139,7 @@ extension ShoppingListViewController : UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.Cell.shoppingListCell) as! ShoppingListCell
         cell.numOfItemsView.layer.borderWidth = 1.2
-        cell.numOfItemsView.layer.borderColor = UIColor(red:35/255.0, green:213/255.0, blue:185/255.0, alpha: 1.0).cgColor
+        cell.numOfItemsView.layer.borderColor = Colors.tealish.cgColor
         cell.numOfItemsView.backgroundColor = UIColor.clear
         cell.numOfItemsRemainingLabel.text = String(describing: store.allShopingLists[indexPath.row].numOfItems)
         cell.shoppingListTitleLabel.text = store.allShopingLists[indexPath.row].title.capitalized

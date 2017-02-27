@@ -11,7 +11,7 @@ import RealmSwift
 
 class ShoppingItem: Object {
     
-    dynamic var name:String = ""
+    dynamic var name:String = EmptyString.none
     dynamic var quantity: String = "1"
     dynamic var isPurchased:Bool = false
     dynamic var list: ShoppingList? // to-one
@@ -26,10 +26,10 @@ class ShoppingItem: Object {
 
 class ShoppingList: Object {
     
-    dynamic var title: String = ""
+    dynamic var title: String = EmptyString.none
     dynamic var isCreatedAt: Date = Date()
     dynamic var numOfItems: Int = 0
-    dynamic var uniqueID: String = ""
+    dynamic var uniqueID: String = EmptyString.none
     let shoppingItems = LinkingObjects(fromType: ShoppingItem.self, property: "list")
     //let shoppingItems = List<ShoppingItem>() // to-many
     

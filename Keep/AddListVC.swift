@@ -106,7 +106,6 @@ class AddListVC: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // change to done
         save()
         return true
     }

@@ -11,16 +11,17 @@ import RealmSwift
 
 class Item : Object {
     
-    dynamic var name: String = ""
-    dynamic var uniqueID: String = ""
+    dynamic var name: String = EmptyString.none
+    dynamic var uniqueID: String = EmptyString.none
     dynamic var quantity : String = "1"
     dynamic var exp = Date()
     dynamic var purchaseDate = Date()
     dynamic var isExpired: Bool = false
     dynamic var isExpiring: Bool = false
+    dynamic var isExpiringInAWeek: Bool = false
     dynamic var isFavorited: Bool = false
-    dynamic var location: String = ""
-    dynamic var category: String = ""
+    dynamic var location: String = EmptyString.none
+    dynamic var category: String = EmptyString.none
     
     convenience init(name: String, uniqueID: String, quantity: String, exp: Date, purchaseDate: Date, location: String, category: String) {
         self.init()

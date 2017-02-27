@@ -99,11 +99,9 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
         
         if favButton.isSelected {
             isFavorited = true
-            print("Fav selected \(isFavorited)")
             
         } else {
             isFavorited = false
-            print("Fav Not selected \(isFavorited)")
         }
     }
     
@@ -115,16 +113,12 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
         switch selectedIndex {
         case 0:
             self.location = .Fridge
-            print(Locations.fridge)
         case 1:
             self.location = .Freezer
-            print(Locations.freezer)
         case 2:
             self.location = .Pantry
-            print(Locations.pantry)
         case 3:
             self.location = .Other
-            print(Locations.other)
         default:
             break
         }
@@ -149,27 +143,23 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
     }
     
     @IBAction func saveBtnTapped(_ sender: UIButton) {
-        guard let name = nameField.text, name != "" else { return }
-        guard let quantity = quantityLabel.text, quantity != "" else { return }
-        guard let category = categoryField.text, category != "" else { return }
+        guard let name = nameField.text, name != EmptyString.none else { return }
+        guard let quantity = quantityLabel.text, quantity != EmptyString.none else { return }
+        guard let category = categoryField.text, category != EmptyString.none else { return }
         
         let uuid = UUID().uuidString
         
         let realm = try! Realm()
         try! realm.write {
             let item = Item(name: name.lowercased().capitalized, uniqueID: uuid, quantity: quantity, exp: expDate, purchaseDate: purchaseDate, location: location.rawValue, category: category)
-            print("scanned item to add to realm is \(item)")
             item.isFavorited = isFavorited
             realm.add(item)
             
             if isFavorited {
                 if store.allFavoritedItems.filter({$0.name == item.name}).count == 0{
-                    print("all favorite items with this \(item.name) is \(store.allFavoritedItems.filter({$0.name == item.name}).count)")
                     let favItem = FavoritedItem(name:item.name.lowercased().capitalized)
                     realm.add(favItem)
                     
-                } else {
-                    print("Nothing to add to Favorites DB beause \(item.name) already exists in favorite")
                 }
                 
             } else {
@@ -338,7 +328,6 @@ extension AddScannedItemVC : UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField){
         activeTextField = textField
-        print("???????????\(activeTextField)")
         if textField.tag == 0 {
             pDateField.inputView = datePicker1
             datePicker1.datePickerMode = .date

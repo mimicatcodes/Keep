@@ -12,8 +12,6 @@ import MGSwipeTableCell
 
 class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate  {
     
-    // TODO: Tableviewrowaction - custom font + image!
-
     @IBOutlet weak var menuBarView: UIView!
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -70,14 +68,13 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
         }
         
         refresher.tintColor = Colors.lightTeal
-        //refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresher.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
         
         tableView.allowsMultipleSelection = true
         
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
-        tableView.tableFooterView = UIView() // Remove empty cells
+        tableView.tableFooterView = UIView()
         formatDates()
         notificationAddObserver()
     }
@@ -101,14 +98,12 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
         for (i,button) in buttons.enumerated() {
             if i == sender.tag {
                 store.buttonStatus = locations[i]
-                print("Selected sender.tag value is --------\(sender.tag)")
                 button.isSelected = true
                 button.setTitleColor(Colors.lightTeal, for: .selected)
                 views[i].backgroundColor = Colors.lightTeal
                 labels[i].textColor = UIColor.white
                 tableView.reloadData()
             } else {
-                print("NOT selected sender.tag value is --------\(sender.tag)")
                 button.isSelected = false
                 button.setTitleColor(Colors.warmGreyThree, for: .normal)
                 views[i].backgroundColor = Colors.whiteTwo
@@ -117,7 +112,6 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
             }
             dismissBtns()
         }
-        print("the button status is-------\(store.buttonStatus)")
     }
     
     
@@ -155,7 +149,6 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
     
     func notificationAddObserver(){
         NotificationCenter.default.addObserver(forName: NotificationName.refreshMainTV, object: nil, queue: nil) { notification in
-            print("notification is \(notification)")
             self.tableView.reloadData()
         }
     }
@@ -197,17 +190,23 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
         
         cell.itemTitleLabel.text = filteredItem.name.lowercased().capitalized
         let pDate = formatter.string(from: filteredItem.purchaseDate)
-        cell.purchaseDate.text = "Purchased on " + pDate
+        cell.purchaseDate.text = Labels.purchasedOn + pDate
         expDate = filteredItem.exp
         daysLeft = daysBetweenTwoDates(start: today, end: expDate)
         let realm = try! Realm()
         try! realm.write {
             if daysLeft < 0 {
                 filteredItem.isExpired = true
+                filteredItem.isExpiring = false
+                filteredItem.isExpiringInAWeek = false
             } else if daysLeft >= 0 && daysLeft < 4  {
                 filteredItem.isExpiring = true
+                filteredItem.isExpired = false
+                filteredItem.isExpiringInAWeek = true
             } else {
+                filteredItem.isExpired = false
                 filteredItem.isExpiring = false
+                filteredItem.isExpiringInAWeek = true
             }
         }
         configureExpireLabels(cell: cell, daysLeft: daysLeft)
@@ -216,21 +215,22 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
     
     func configureExpireLabels(cell: StockCell, daysLeft: Int){
         if daysLeft == 0 {
-            cell.expDateLabel.text = "Expiring today"
+            cell.expDateLabel.text = Labels.expiringToday
             cell.expDateLabel.textColor = Colors.pastelRed
         } else if daysLeft == 1 {
-            cell.expDateLabel.text = "\(daysLeft) day left"
+            cell.expDateLabel.text = "\(daysLeft)" + Labels.dayLeft
+            
             cell.expDateLabel.textColor = Colors.pastelRed
 
         } else if daysLeft == 2 || daysLeft == 3 {
-            cell.expDateLabel.text = "\(daysLeft) days left"
+            cell.expDateLabel.text = "\(daysLeft)" + Labels.daysLeft
             cell.expDateLabel.textColor = Colors.pastelRed
 
         } else if daysLeft > 3 {
-            cell.expDateLabel.text = "\(daysLeft) days left"
+            cell.expDateLabel.text = "\(daysLeft)" + Labels.daysLeft
             cell.expDateLabel.textColor = Colors.warmGreyThree
         } else  {
-            cell.expDateLabel.text = "Expired!"
+            cell.expDateLabel.text = Labels.expired
             cell.expDateLabel.textColor = Colors.pastelRed
         }
     }
@@ -246,13 +246,12 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let backItem = UIBarButtonItem()
-        backItem.title = ""
+        backItem.title = EmptyString.none
         navigationItem.backBarButtonItem = backItem
         
         if segue.identifier == Identifiers.Segue.editIems {
             let dest = segue.destination as! AddItemsVC
             dest.itemToEdit = itemToEdit
-            print(itemToEdit ?? "******************* item To edit")
         }
     }
 }
@@ -310,7 +309,7 @@ extension MainViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        var title = ""
+        var title = EmptyString.none
         
         switch store.buttonStatus {
         case Locations.fridge:
@@ -357,7 +356,7 @@ extension MainViewController: UITableViewDelegate {
     
     func configureSwipeButtons(cell:StockCell, indexPath: IndexPath){
         
-        let deleteButton = MGSwipeButton(title: "", icon: UIImage(named:"Delete2"), backgroundColor: Colors.salmon){ (sender: MGSwipeTableCell) -> Bool in
+        let deleteButton = MGSwipeButton(title: EmptyString.none, icon: UIImage(named:ImageName.delete2), backgroundColor: Colors.salmon){ (sender: MGSwipeTableCell) -> Bool in
             let realm = try! Realm()
             
             switch self.store.buttonStatus {
@@ -365,35 +364,27 @@ extension MainViewController: UITableViewDelegate {
                 let itemToBeDeleted = self.store.fridgeItems.filter(Filters.category, self.store.fridgeSectionNames[indexPath.section])[indexPath.row]
                 
                 try! realm.write {
-                    print("\(itemToBeDeleted) has been deleted")
                     realm.delete(itemToBeDeleted)
                 }
                 self.tableView.reloadData()
-                print("Deleted an item from a Fridge")
             case Locations.freezer:
                 let itemToBeDeleted = self.store.freezerItems.filter(Filters.category, self.store.freezerSectionNames[indexPath.section])[indexPath.row]
                 try! realm.write {
-                    print("\(itemToBeDeleted) has been deleted")
                     realm.delete(itemToBeDeleted)
                 }
                 self.tableView.reloadData()
-                print("Deleted an item from Freezer")
             case Locations.pantry:
                 let itemToBeDeleted = self.store.pantryItems.filter(Filters.category, self.store.pantrySectionNames[indexPath.section])[indexPath.row]
                 try! realm.write {
-                    print("\(itemToBeDeleted) has been deleted")
                     realm.delete(itemToBeDeleted)
                 }
                 self.tableView.reloadData()
-                print("Deleted an item from Pantry")
             case Locations.other:
                 let itemToBeDeleted = self.store.otherItems.filter(Filters.category, self.store.otherSectionNames[indexPath.section])[indexPath.row]
                 try! realm.write {
-                    print("\(itemToBeDeleted) has been deleted")
                     realm.delete(itemToBeDeleted)
                 }
                 self.tableView.reloadData()
-                print("Deleted an item from Other")
             default:
                 break
             }
@@ -401,23 +392,19 @@ extension MainViewController: UITableViewDelegate {
             return true
         }
         
-        let editButton = MGSwipeButton(title: "", icon: UIImage(named:"EditGrey2"), backgroundColor: Colors.pinkishGrey) { (sender: MGSwipeTableCell) -> Bool in
+        let editButton = MGSwipeButton(title: EmptyString.none, icon: UIImage(named:ImageName.editGrey2), backgroundColor: Colors.pinkishGrey) { (sender: MGSwipeTableCell) -> Bool in
             switch self.store.buttonStatus {
             case Locations.fridge:
                 self.itemToEdit = self.store.fridgeItems.filter(Filters.category, self.store.fridgeSectionNames[indexPath.section])[indexPath.row]
-                print(self.itemToEdit?.name ?? "NO VALUE")
                 
             case Locations.freezer:
                 self.itemToEdit = self.store.freezerItems.filter(Filters.category, self.store.freezerSectionNames[indexPath.section])[indexPath.row]
-                print(self.itemToEdit?.name ?? "NO VALUE")
                 
             case Locations.pantry:
                 self.itemToEdit = self.store.pantryItems.filter(Filters.category, self.store.pantrySectionNames[indexPath.section])[indexPath.row]
-                print(self.itemToEdit?.name ?? "NO VALUE")
                 
             case Locations.other:
                 self.itemToEdit = self.store.otherItems.filter(Filters.category, self.store.otherSectionNames[indexPath.section])[indexPath.row]
-                print(self.itemToEdit?.name ?? "NO VALUE")
             default:
                 break
             }

@@ -23,7 +23,6 @@ class FavoritesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmpty
         tableView.tableFooterView = UIView()
         definesPresentationContext = true
         NotificationCenter.default.addObserver(forName: NotificationName.refreshFavorites, object: nil, queue: nil) { (notification) in
-            print("notification is \(notification)")
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -42,7 +41,7 @@ class FavoritesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmpty
     
     func configureSwipeButtons(cell:FavoriteCell, indexPath: IndexPath){
 
-        let deleteButton = MGSwipeButton(title: "", icon: UIImage(named:"Delete1"), backgroundColor: Colors.salmon){ (sender: MGSwipeTableCell) -> Bool in
+        let deleteButton = MGSwipeButton(title: EmptyString.none, icon: UIImage(named:ImageName.delete1), backgroundColor: Colors.salmon){ (sender: MGSwipeTableCell) -> Bool in
             self.delete(indexPath: indexPath)
             return true
         }
@@ -70,7 +69,7 @@ class FavoritesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmpty
     
     func createAlert(withTitle:String) {
         
-        let alert = UIAlertController(title: withTitle, message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: withTitle, message: EmptyString.none, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
             
         }
@@ -98,12 +97,9 @@ class FavoritesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmpty
                     item.isFavorited = false
                 }
             }
-            print("\(favItemToBeDeleted) has been deleted")
             realm.delete(favItemToBeDeleted)
-            
         }
         self.tableView.reloadData()
-        print("Deleted an item from favoritedItems")
     }
 }
 
@@ -117,7 +113,7 @@ extension FavoritesViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteCell", for: indexPath) as! FavoriteCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.Cell.favoriteCell, for: indexPath) as! FavoriteCell
         cell.favoriteTitle.text = store.allFavoritedItems[indexPath.row].name
         cell.separatorInset = .zero
         cell.selectionStyle = .none

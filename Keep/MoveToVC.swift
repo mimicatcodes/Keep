@@ -39,7 +39,7 @@ class MoveToVC: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
-        if store.tappedSLItemToSendToLocation != "" {
+        if store.tappedSLItemToSendToLocation != EmptyString.none {
             if let location = location {
                 let name = store.tappedSLItemToSendToLocation
                 let uuid = UUID().uuidString
@@ -64,13 +64,9 @@ class MoveToVC: UIViewController {
         for (i,button) in buttons.enumerated() {
             if i == sender.tag {
                 location = locations[i]
-                print("selected location is:\(location)")
-                print("Selected sender.tag value is --------\(sender.tag)")
                 button.isSelected = true
                 button.setTitleColor(Colors.tealish, for: .selected)
-                print("is button selected? \(button.isSelected)")
             } else {
-                print("NOT selected sender.tag value is --------\(i)")
                 button.isSelected = false
                 button.setTitleColor(Colors.warmGreyThree, for: .normal)
             }
@@ -85,12 +81,10 @@ class MoveToVC: UIViewController {
     }
     
     func setupViews(){
-        if store.tappedSLItemToSendToLocation != "" {
+        if store.tappedSLItemToSendToLocation != EmptyString.none {
             DispatchQueue.main.async {
                 self.itemTitleLabel.text = "Add \(self.store.tappedSLItemToSendToLocation) to"
             }
-        } else {
-            print("Not possible")
-        }
+        } 
     }
 }

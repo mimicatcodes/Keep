@@ -45,6 +45,8 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     var category: String = "Uncategorized"
     var isFavorited = false
     var isExpired = false
+    var isExpiring = false
+    var isExpiringInAWeek = false
     
     var labelView: UILabel!
     let picker = UIPickerView()
@@ -52,7 +54,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     let datePicker2 = UIDatePicker()
     var activeTextField:UITextField?
     let formatter = DateFormatter()
-    var nameTitle = ""
+    var nameTitle = EmptyString.none
     var selectedIndex: Int = 0
     var selectedExpIndex: Int?
     var allItems = Array(DataStore.sharedInstance.allItems)
@@ -97,7 +99,6 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         formatInitialData()
-        print(nameTitle)
         //favButton.isSelected = isFavorited
         formatDates()
     }
@@ -121,11 +122,9 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
         
         if favButton.isSelected {
             isFavorited = true
-            print("Fav selected \(isFavorited)")
             
         } else {
             isFavorited = false
-            print("Fav Not selected \(isFavorited)")
         }
     }
     
@@ -169,7 +168,6 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
             let neverExpire = Calendar.current.date(byAdding: .day, value: 1095, to: today)
             expDate = neverExpire! // 3 years later
             expDateTextfield.text = "None"
-            print("Never")
             moveViewDown()
             
         default:
@@ -200,16 +198,12 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
         switch selectedIndex {
         case 0:
             self.location = .Fridge
-            print("-------Fridge btn tapped: location is \(location)")
         case 1:
             self.location = .Freezer
-            print("-------Freezer btn tapped: location is \(location)")
         case 2:
             self.location = .Pantry
-            print("-------Pantry btn tapped: location is \(location)")
         case 3:
             self.location = .Other
-            print("-------Other btn tapped: location is \(location)")
         default:
             break
             
@@ -237,7 +231,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
-        nameTitle = ""
+        nameTitle = EmptyString.none
         dismiss(animated: true, completion: nil)
     }
     
@@ -257,16 +251,14 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
                 itemToEdit.category = category
                 itemToEdit.isFavorited = isFavorited
                 itemToEdit.isExpired = isExpired
-                print("is it favorited or NOT \(isFavorited)")
+                itemToEdit.isExpiring = isExpiring
+                itemToEdit.isExpiringInAWeek = isExpiringInAWeek
                 
                 if isFavorited {
                     if store.allFavoritedItems.filter({$0.name == itemToEdit.name}).count == 0{
-                        print("all favorite items with this \(itemToEdit.name) is \(store.allFavoritedItems.filter({$0.name == itemToEdit.name}).count)")
                         let favItem = FavoritedItem(name:itemToEdit.name)
                         realm.add(favItem)
                         
-                    } else {
-                        print("Nothing to add to Favorites DB beause \(itemToEdit.name) already exists in favorite")
                     }
                     
                 } else {
@@ -280,7 +272,6 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
                 }
             }
             
-            print("Edited \(itemToEdit)")
             dismiss(animated: true, completion: nil)
             
         } else {
@@ -297,24 +288,33 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
                 
                 if daysLeft < 0 {
                     item.isExpired = true
-                    isExpired = true
-                } else if daysLeft >= 0 && daysLeft < 4  {
-                    item.isExpiring = true
-                    isExpired = true
-                } else {
                     item.isExpiring = false
+                    item.isExpiringInAWeek = false
+                    isExpired = true
+                    isExpiring  = false
+                    isExpiringInAWeek = false
+                    
+                } else if daysLeft >= 0 && daysLeft < 4  {
+                    item.isExpired = false
+                    item.isExpiring = true
+                    item.isExpiringInAWeek = true
                     isExpired = false
+                    isExpiring = true
+                    isExpiringInAWeek = true
+                    
+                } else {
+                    item.isExpired = false
+                    item.isExpiring = false
+                    item.isExpiringInAWeek = true
+                    isExpired = false
+                    isExpiring = false
+                    isExpiringInAWeek = true
                 }
                 
                 if isFavorited {
                     if store.allFavoritedItems.filter({$0.name == item.name}).count == 0{
-                        print("all favorite items with this \(item.name) is \(store.allFavoritedItems.filter({$0.name == item.name}).count)")
                         let favItem = FavoritedItem(name:item.name)
                         realm.add(favItem)
-                        
-                        print("fav item is \(item.isFavorited) AND \(favItem.name) has been added to realm's fv items")
-                    } else {
-                        print("Nothing to add to Favorites DB beause isFavorited value is \(isFavorited)")
                     }
                 }
             }
@@ -349,17 +349,16 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     }
     
     func searchAutocompleteEntriesWithSubstring(_ substring: String) {
-        //filteredItems.removeAll(keepingCapacity: false)
+        
         filteredItemsNames.removeAll(keepingCapacity: false)
         
         for itemArray in allItems_ {
             for item in itemArray {
-                //let myString: NSString! = item.name as NSString
+          
                 let myString: NSString! = item as NSString
                 let substringRange: NSRange! = myString.range(of: substring)
                 
                 if substringRange.location == 0 {
-                    //filteredItems.append(item)
                     filteredItemsNames.append(item)
                 }
             }
@@ -377,9 +376,9 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
         labelView = UILabel(frame: CGRect(x: 0, y: 60, width: self.view.frame.width, height: 40))
         labelView.backgroundColor = Colors.tealish
         if itemToEdit != nil {
-            labelView.text = "Item edited"
+            labelView.text = Labels.itemEdited
         } else {
-            labelView.text = "Item added"
+            labelView.text = Labels.itemAdded
         }
         labelView.textAlignment = .center
         labelView.textColor = UIColor.white
@@ -412,7 +411,9 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
             quantity = Int(item.quantity)!
             purchaseDate = item.purchaseDate
             expDate = item.exp
+            isExpiring = item.isExpiring
             isExpired = item.isExpired
+            isExpiringInAWeek = item.isExpiringInAWeek
             favButton.isSelected = item.isFavorited
             location = Location(rawValue:item.location)!
             saveButton.isEnabled = true
@@ -420,6 +421,8 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
             
         } else {
             isFavorited = false
+            isExpiringInAWeek = false
+            isExpiring = false
             isExpired = false
             location = .Fridge
             let today = Date()
@@ -428,11 +431,10 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
                 expDate = date
             }
 
-//            expDate = Date()
             purchaseDate = Date()
             quantity = 1
             category = "Uncategorized"
-            nameTitle = ""
+            nameTitle = EmptyString.none
             isFavorited = false
             favButton.isSelected = false
             nameTextField.becomeFirstResponder()
@@ -547,7 +549,6 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     
 }
 
-// Keybord handling
 extension AddItemsVC : KeyboardHandling {
     func moveViewUp() {
         if topMarginConstraint.constant != originalTopMargin { return }
@@ -666,7 +667,7 @@ extension AddItemsVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "nameCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.Cell.nameCell)
         
         if filteredItemsNames.count == 0 {
             tableView.isHidden = true
@@ -710,9 +711,9 @@ extension AddItemsVC : UIPickerViewDelegate, UIPickerViewDataSource {
         toolBar.tintColor = UIColor.darkGray
         toolBar.sizeToFit()
         
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePicker))
+        let doneButton = UIBarButtonItem(title: Labels.done, style: .plain, target: self, action: #selector(donePicker))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(donePicker))
+        let cancelButton = UIBarButtonItem(title: Labels.cancel, style: .plain, target: self, action: #selector(donePicker))
         
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
@@ -739,7 +740,6 @@ extension AddItemsVC : UIPickerViewDelegate, UIPickerViewDataSource {
     }
 }
 
-// Gesture recognizer
 extension AddItemsVC : UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if (touch.view?.isDescendant(of: tableView))! {

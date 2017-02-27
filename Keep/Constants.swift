@@ -42,13 +42,13 @@ struct Colors {
     static let pinkishGreyTwo = UIColor(red: 201/255.0, green: 201/255.0, blue: 201/255.0, alpha: 1)
     
     static let dawn = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.10)
-    
-    static let dodgerBlue = UIColor(red: 76/255.0, green: 169/255.0, blue: 247/255.0, alpha: 1)
-}
+    }
 
 struct Keys {
     static let searchField = "searchField"
     static let placeholderLabel = "placeholderLabel"
+    static let name = "name"
+    static let category = "category"
 }
 
 struct NotificationName {
@@ -67,15 +67,18 @@ struct Identifiers {
         static let listDetailCell = "listDetailCell"
         static let accountCell = "accountCell"
         static let scannedItemCell = "scannedItemCell"
+        static let searchCell = "searchCell"
+        static let favoriteCell = "favoriteCell"
+        static let nameCell = "nameCell"
     }
     struct Segue {
-        //static let toNavForScannedItems = "toNavForScannedItems"
         static let toScannedItems = "toScannedItems"
         static let addScannedItem = "addScannedItem"
         static let addList = "addList"
         static let showItems = "showItems"
         static let addItemToSL = "addItemToSL"
         static let editIems = "editItems"
+        static let unwindToMain = "unwindToMain"
     }
 }
 
@@ -100,5 +103,54 @@ struct TesseractLang {
 struct Filters {
     static let category = "category == %@"
     static let uniqueID = "uniqueID contains[c] %@"
+    static let listUniqueID = "list.uniqueID contains[c] %@"
+    static let name = "name contains[c] %@"
+    static let isExpiringInAWeek = "isExpiringInAWeek == true"
+    static let isExpiring = "isExpiring == true AND isExpired == false"
+    static let isExpired = "isExpired == true"
+    static let fridge = "location == 'Fridge'"
+    static let freezer = "location == 'Freezer'"
+    static let pantry = "location == 'Pantry'"
+    static let other = "location == 'Other'"
 }
+
+struct EmptyString {
+    static let none = ""
+}
+
+struct Labels {
+    static let done = "Done"
+    static let cancel = "Cancel"
+    static let expired = "Expired!"
+    static let expiring = "Expiring soon"
+    static let expiringToday = "Expiring today"
+    static let dayLeft = " day left"
+    static let daysLeft = " days left"
+    static let purchasedOn = "Purchased on "
+    static let itemEdited = "Item edited"
+    static let itemAdded = "Item added"
+    
+    static let singular = "item in stock"
+    static let plural = "items in stock"
+    static let signularExpiring = "item is expiring"
+    static let pluralExpiring = "items are expiring"
+    
+    static let itemIs = "Item is"
+    static let ItemsAre = "Items are"
+}
+
+
+struct SearchPlaceholder {
+    static let search =  "Search                                                            "
+}
+
+struct ImageName {
+    static let clear = "Clear"
+    static let delete1 = "Delete1"
+    static let delete2 = "Delete2"
+    static let editGrey1 = "EditGrey1"
+    static let editGrey2 = "EditGrey2"
+}
+
+
 

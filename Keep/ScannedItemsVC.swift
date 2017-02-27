@@ -25,7 +25,6 @@ class ScannedItemsVC: UIViewController {
         topView.underlinedBorder()
 
         NotificationCenter.default.addObserver(forName: NotificationName.refreshScannedItems, object: nil, queue: nil) { notification in
-            print("notification is \(notification)")
             self.resultsArray.remove(at: self.store.scannedItemIndex!)
             self.tableView.reloadData()
         }
@@ -37,8 +36,7 @@ class ScannedItemsVC: UIViewController {
     }
     
     @IBAction func homeButtonTapped(_ sender: Any) {
-      print("Go back to main menu")
-        performSegue(withIdentifier: "unwindToMain", sender: self)
+        performSegue(withIdentifier: Identifiers.Segue.unwindToMain, sender: self)
     }
     
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
@@ -48,17 +46,15 @@ class ScannedItemsVC: UIViewController {
     func addToInventory(sender: UIButton){
         titleString = resultsArray[sender.tag]
         
-        if let title = titleString, title != "" {
-            print("----titleString is : --- \(title)")
+        if let title = titleString, title != EmptyString.none {
             store.scannedItemToAdd = title
             store.scannedItemIndex = sender.tag
-            print("scanned Item index is \(store.scannedItemIndex)")
             performSegue(withIdentifier: Identifiers.Segue.addScannedItem, sender: self)
         }
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if titleString != nil, titleString != "" {
+        if titleString != nil, titleString != EmptyString.none {
             return true
         }
         return false
@@ -74,7 +70,6 @@ extension ScannedItemsVC : UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.Cell.scannedItemCell, for: indexPath) as! ScannedItemCell
         
         cell.titleLabel.text = resultsArray[indexPath.row]
-        print(resultsArray[indexPath.row])
         cell.selectionStyle = .none
         cell.editAddButton.layer.cornerRadius = 8
         cell.editAddButton.tag = indexPath.row

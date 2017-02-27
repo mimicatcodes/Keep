@@ -19,7 +19,7 @@ class ScanReceiptVC: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var imageView: UIImageView!
     
     var selectedImage: UIImage?
-    var textsScanned:String = ""
+    var textsScanned:String = EmptyString.none
     var emptyArray = [String]()
     let picker = UIImagePickerController()
     var isFinishedProcessing = false
@@ -77,7 +77,6 @@ class ScanReceiptVC: UIViewController, UINavigationControllerDelegate {
             self.processScanning()
         }
 
-        print(emptyArray)
     }
     
     
@@ -182,12 +181,11 @@ extension ScanReceiptVC : G8TesseractDelegate {
         tesseract.delegate = self
         tesseract.image = img
         tesseract.recognize()
-        print(tesseract.recognizedText)
         textsScanned = tesseract.recognizedText
-        print(textsScanned)
+        
         let newlineChars = NSCharacterSet.newlines
-        let elementsArray = textsScanned.components(separatedBy: newlineChars).filter {!$0.isEmpty        }
-        print(elementsArray)
+        let elementsArray = textsScanned.components(separatedBy: newlineChars).filter {!$0.isEmpty}
+        
         for string in elementsArray {
             let result = string.trimmingCharacters(in: CharacterSet(charactersIn: "01234567890.,"))
             emptyArray.append(result)
@@ -196,14 +194,5 @@ extension ScanReceiptVC : G8TesseractDelegate {
                 self.imageView.image = nil
             }
         }
-    }
-    
-    func progressImageRecognition(for tesseract: G8Tesseract!) {
-        updateProgress(with: Float(tesseract.progress))
-    }
-    
-    func updateProgress(with value: Float) {
-        print("\n")
-        print("value: \(value)")
     }
 }

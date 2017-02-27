@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
-    // TODO: Fix search
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBarView: UIView!
     
@@ -56,12 +56,11 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
             NSForegroundColorAttributeName : Colors.tealish,
             NSFontAttributeName : UIFont(name: Fonts.montserratRegular, size: 15),
         ]
-        searchController.searchBar.setImage(UIImage(named: "Clear"), for: .clear, state: .normal)
+        searchController.searchBar.setImage(UIImage(named: ImageName.clear), for: .clear, state: .normal)
         
         searchController.searchBar.textColor = Colors.warmGreyThree
         
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
-        
         searchController.searchBar.setBackgroundImage(UIImage(), for: .top, barMetrics: .default)
         searchBarView.underlinedBorder()
         
@@ -73,10 +72,8 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         searchController.searchBar.sizeToFit()
         searchController.searchBar.frame.size.width = view.frame.size.width
         searchController.searchBar.placeholder =
-        "Search                                                            "
-    
+        SearchPlaceholder.search
     }
-    
     
     func searchFieldStyling(){
         textFieldInsideUISearchBar = searchController.searchBar.value(forKey: Keys.searchField) as? UITextField
@@ -90,7 +87,7 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.isActive && searchController.searchBar.text != "" {
+        if searchController.isActive && searchController.searchBar.text != EmptyString.none {
             if let items = self.filteredItems {
                 return items.count
             }
@@ -99,15 +96,17 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell") as! SearchCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.Cell.searchCell) as! SearchCell
         
-        if searchController.isActive && searchController.searchBar.text != "" {
+        if searchController.isActive && searchController.searchBar.text != EmptyString.none {
             if let item = filteredItems?[indexPath.row] {
                 cell.titleLabel.text = item.name
                 if item.isExpired {
-                    cell.expiredLabel.text = "Expired"
+                    cell.expiredLabel.text = Labels.expired
+                } else if item.isExpiring {
+                    cell.expiredLabel.text = Labels.expiring
                 } else {
-                    cell.expiredLabel.text = ""
+                    cell.expiredLabel.text = EmptyString.none
                 }
                 cell.quantityLabel.text = "x \(item.quantity)"
                 cell.locationLabel.text = item.location
@@ -115,9 +114,11 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         } else {
             cell.titleLabel.text = store.allItems[indexPath.row].name
             if store.allItems[indexPath.row].isExpired {
-                cell.expiredLabel.text = "Expired"
+                cell.expiredLabel.text = Labels.expired
+            } else if store.allItems[indexPath.row].isExpiring {
+                cell.expiredLabel.text = Labels.expiring
             } else {
-                cell.expiredLabel.text = ""
+                cell.expiredLabel.text = EmptyString.none
             }
             cell.quantityLabel.text = "x \(store.allItems[indexPath.row].quantity)"
             cell.locationLabel.text = store.allItems[indexPath.row].location
@@ -127,7 +128,7 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     
     func filterContentForSearch(_ searchString: String) {
         
-        let predicate = NSPredicate(format: "name contains[c] %@", searchString)
+        let predicate = NSPredicate(format: Filters.name, searchString)
         filteredItems = store.allItems.filter(predicate)
         tableView.reloadData()
     }

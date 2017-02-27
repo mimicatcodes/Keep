@@ -17,8 +17,6 @@
 		DD1EA6421E0CA41D0034C54B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD1EA6411E0CA41D0034C54B /* Assets.xcassets */; };
 		DD1EA6451E0CA41D0034C54B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD1EA6431E0CA41D0034C54B /* LaunchScreen.storyboard */; };
 		DD1EA64D1E0CA5220034C54B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA64C1E0CA5220034C54B /* Constants.swift */; };
-		DD1EA64F1E0CAEFF0034C54B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA64E1E0CAEFF0034C54B /* LoginViewController.swift */; };
-		DD1EA6511E0CAFEB0034C54B /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA6501E0CAFEB0034C54B /* ForgotPasswordViewController.swift */; };
 		DD2C38A31E3D7CD000A7C709 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD2C38A21E3D7CD000A7C709 /* Lato-Bold.ttf */; };
 		DD48537F1E196C4200BEAC02 /* Produce.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD48537E1E196C4200BEAC02 /* Produce.swift */; };
 		DD4853831E197CB500BEAC02 /* Condiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4853821E197CB500BEAC02 /* Condiments.swift */; };
@@ -87,8 +85,6 @@
 		DD1EA6441E0CA41D0034C54B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD1EA6461E0CA41D0034C54B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD1EA64C1E0CA5220034C54B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		DD1EA64E1E0CAEFF0034C54B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		DD1EA6501E0CAFEB0034C54B /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		DD2C38A21E3D7CD000A7C709 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 		DD48537E1E196C4200BEAC02 /* Produce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Produce.swift; sourceTree = "<group>"; };
 		DD4853821E197CB500BEAC02 /* Condiments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Condiments.swift; sourceTree = "<group>"; };
@@ -244,7 +240,6 @@
 			isa = PBXGroup;
 			children = (
 				DD0639C91E5E95E100BF7609 /* Protocols */,
-				DD7B762E1E1B3389001DE6E8 /* Login */,
 				DD7B762D1E1B336C001DE6E8 /* Stock */,
 				DDC3E9831E1C953F00459295 /* Shopping List */,
 				DDC3E9851E1C954E00459295 /* Settings */,
@@ -345,15 +340,6 @@
 				DD786E321E4AED2F00B1F4E3 /* AddScannedItemVC.swift */,
 			);
 			name = Stock;
-			sourceTree = "<group>";
-		};
-		DD7B762E1E1B3389001DE6E8 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				DD1EA64E1E0CAEFF0034C54B /* LoginViewController.swift */,
-				DD1EA6501E0CAFEB0034C54B /* ForgotPasswordViewController.swift */,
-			);
-			name = Login;
 			sourceTree = "<group>";
 		};
 		DD8586B91E580C1200065DDD /* Custom Views */ = {
@@ -539,7 +525,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDC3E98D1E1CB86200459295 /* ShoppingListDetailVC.swift in Sources */,
-				DD1EA6511E0CAFEB0034C54B /* ForgotPasswordViewController.swift in Sources */,
 				DD515D051E5BD3DD00415A2B /* StockCell.swift in Sources */,
 				DD4853AF1E199F9D00BEAC02 /* FrozenFoods.swift in Sources */,
 				DDC3EBA01E31365B00459295 /* Category.swift in Sources */,
@@ -550,7 +535,6 @@
 				DD4853A91E199F7400BEAC02 /* Household.swift in Sources */,
 				DD4853A11E19920E00BEAC02 /* Dairy.swift in Sources */,
 				DD1EA6381E0CA41D0034C54B /* AppDelegate.swift in Sources */,
-				DD1EA64F1E0CAEFF0034C54B /* LoginViewController.swift in Sources */,
 				DD7F72191E63F65700BAE511 /* UIScrollView+EmptyDataSet.m in Sources */,
 				DDC3E9891E1C957E00459295 /* FavoritesViewController.swift in Sources */,
 				DDC3E9D11E20580B00459295 /* AddItemVC.swift in Sources */,
