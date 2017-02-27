@@ -11,7 +11,6 @@ import RealmSwift
 
 class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
     // TODO: Fix search
-    // TODO: include info - location, quantity
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBarView: UIView!
     

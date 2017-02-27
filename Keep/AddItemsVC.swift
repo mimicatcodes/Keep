@@ -15,6 +15,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     // TODO: Try to get rid of tags - let's use property values itself - WWDC!
     // TODO: dismiss the tableview when tapping the background
     // TODO: Fix pickers
+    // TODO: Limit characters 
     
     @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var favButton: UIButton!

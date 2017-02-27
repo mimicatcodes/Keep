@@ -14,7 +14,6 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
     
     // TODO: fix pickers - date errors
     // TODO: Custom tool bar fonts - fix!
-    // TODO: favorite button
     // TODO: minus button
     // TODO: Save action - notify it's actually saved
     
@@ -46,6 +45,7 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
     var location: Location = .Fridge
     var activeTextField:UITextField?
     var isFavorited:Bool = false
+    let lengthLimit = 20
     
     // dummy data
     let categories = ["1","2","3","4","5","6"]
@@ -354,6 +354,14 @@ extension AddScannedItemVC : UITextFieldDelegate {
         } else if textField.tag == 2 {
             moveViewUp()
         }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        
+        let newLength = text.characters.count + string.characters.count - range.length
+        
+        return newLength <= lengthLimit
     }
 }
 

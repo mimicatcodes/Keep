@@ -9,7 +9,7 @@
 import UIKit
 
 class ScannedItemsVC: UIViewController {
-    // TODO: limit num of characters entered in the textfield
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var topView: UIView!
     

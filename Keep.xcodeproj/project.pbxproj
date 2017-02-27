@@ -11,7 +11,6 @@
 		DD0639CF1E5FEA7100BF7609 /* CategoryField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0639CE1E5FEA7100BF7609 /* CategoryField.swift */; };
 		DD0639D11E61ECF700BF7609 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0639D01E61ECF700BF7609 /* CustomSearchBar.swift */; };
 		DD0639D31E61F0C500BF7609 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0639D21E61F0C500BF7609 /* SearchCell.swift */; };
-		DD0639D51E61F23100BF7609 /* CustomSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0639D41E61F23000BF7609 /* CustomSearchController.swift */; };
 		DD0F51BE1E42DB0E004A6153 /* MoveToVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F51BD1E42DB0E004A6153 /* MoveToVC.swift */; };
 		DD1EA6381E0CA41D0034C54B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA6371E0CA41D0034C54B /* AppDelegate.swift */; };
 		DD1EA63D1E0CA41D0034C54B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD1EA63B1E0CA41D0034C54B /* Main.storyboard */; };
@@ -80,7 +79,6 @@
 		DD0639CE1E5FEA7100BF7609 /* CategoryField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryField.swift; sourceTree = "<group>"; };
 		DD0639D01E61ECF700BF7609 /* CustomSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		DD0639D21E61F0C500BF7609 /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
-		DD0639D41E61F23000BF7609 /* CustomSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchController.swift; sourceTree = "<group>"; };
 		DD0F51BD1E42DB0E004A6153 /* MoveToVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveToVC.swift; sourceTree = "<group>"; };
 		DD1EA6341E0CA41D0034C54B /* Keep.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keep.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD1EA6371E0CA41D0034C54B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -144,7 +142,7 @@
 		DDEC8CB71E458A48004C73CB /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
 		DDEC8CB91E458AF1004C73CB /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		DDEC8CBB1E458B02004C73CB /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
-		DDEC8CBD1E458CF7004C73CB /* Keep-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Keep-Bridging-Header.h"; sourceTree = "<group>"; };
+		DDEC8CBD1E458CF7004C73CB /* Keep-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Keep-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		F17A8080E837D95CDFD38B65 /* Pods-Keep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keep.release.xcconfig"; path = "Pods/Target Support Files/Pods-Keep/Pods-Keep.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -195,7 +193,6 @@
 				DD1EA6351E0CA41D0034C54B /* Products */,
 				D172EE28FA2053B384BD78CA /* Pods */,
 				86D9C18FBCDF483B6AF1B24D /* Frameworks */,
-				DDEC8CBD1E458CF7004C73CB /* Keep-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -259,6 +256,7 @@
 		DD4853A41E199DFB00BEAC02 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DDEC8CBD1E458CF7004C73CB /* Keep-Bridging-Header.h */,
 				DD7F72171E63F65700BAE511 /* UIScrollView+EmptyDataSet.h */,
 				DD7F72181E63F65700BAE511 /* UIScrollView+EmptyDataSet.m */,
 				DDEC8CB71E458A48004C73CB /* tessdata */,
@@ -345,7 +343,6 @@
 				DD786E301E4A69CE00B1F4E3 /* ScanReceiptVC.swift */,
 				DDEC8C8B1E456F29004C73CB /* ScannedItemsVC.swift */,
 				DD786E321E4AED2F00B1F4E3 /* AddScannedItemVC.swift */,
-				DD0639D41E61F23000BF7609 /* CustomSearchController.swift */,
 			);
 			name = Stock;
 			sourceTree = "<group>";
@@ -572,7 +569,6 @@
 				DD48539D1E198CCF00BEAC02 /* NoodlesGrainsSides.swift in Sources */,
 				DD0639D31E61F0C500BF7609 /* SearchCell.swift in Sources */,
 				DD1EA64D1E0CA5220034C54B /* Constants.swift in Sources */,
-				DD0639D51E61F23100BF7609 /* CustomSearchController.swift in Sources */,
 				DDD7D47C1E403FFE00599382 /* Favorites.swift in Sources */,
 				DDC3E98B1E1C958A00459295 /* SettingsViewController.swift in Sources */,
 				DD4853B51E199FC000BEAC02 /* Meat.swift in Sources */,

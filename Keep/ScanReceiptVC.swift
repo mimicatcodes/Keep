@@ -67,7 +67,6 @@ class ScanReceiptVC: UIViewController, UINavigationControllerDelegate {
     }
     
     @IBAction func scanButtonTapped(_ sender: Any) {
-        
         cameraButton.isEnabled = false
         libraryButton.isEnabled = false
         saveButton.isEnabled = false
@@ -102,11 +101,11 @@ class ScanReceiptVC: UIViewController, UINavigationControllerDelegate {
         } else {
             print("No camera")
         }
+        
         picker.allowsEditing = false
     }
     
     func handleLibraryImage(){
-        
         let picker = UIImagePickerController()
         
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
@@ -173,7 +172,6 @@ extension ScanReceiptVC : UIImagePickerControllerDelegate {
     }
 }
 
-// Tesseract OCR related
 extension ScanReceiptVC : G8TesseractDelegate {
     func processScanning(){
         guard let img = imageView.image  else { return }
