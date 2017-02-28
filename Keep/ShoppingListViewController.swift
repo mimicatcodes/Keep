@@ -20,6 +20,7 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
     let store = DataStore.sharedInstance
     var id = String()
     let formatter = DateFormatter()
+    var listToEdit: ShoppingList?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,43 +40,34 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
         tableView.reloadData()
     }
     
-    @IBAction func addListTapped(_ sender: Any) {
-        
-        performSegue(withIdentifier: Identifiers.Segue.addList, sender: nil)
-    }
 //    
 //    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
 //        return UIImage(named: "sample3")
 //    }
     
-    func deleteList(indexPath: IndexPath, uniqueID: String) {
-        
-        let filteredList = store.allShopingLists[indexPath.row]
-        
-        let predicate = NSPredicate(format: Filters.listUniqueID, uniqueID)
-        let filteredItems = store.allShoppingItems.filter(predicate)
-        
-        let realm = try! Realm()
-        
-        try! realm.write {
-            realm.delete(filteredItems)
-            realm.delete(filteredList)
-        }
-        
-        tableView.reloadData()
-    }
-    
     func configureSwipeButtons(cell:ShoppingListCell, indexPath: IndexPath){
-        id = self.store.allShopingLists[indexPath.row].uniqueID
-
+        
         let rightButton1 = MGSwipeButton(title: EmptyString.none, icon: UIImage(named:ImageName.delete2), backgroundColor: Colors.salmon) { (sender: MGSwipeTableCell) -> Bool in
-            self.deleteList(indexPath: indexPath, uniqueID: self.id)
+            let uniqueID = self.store.allShopingLists[indexPath.row].uniqueID
+            let selectedList = self.store.allShopingLists[indexPath.row]
+            
+            let predicate = NSPredicate(format: Filters.listUniqueID, uniqueID)
+            let filteredItems = self.store.allShoppingItems.filter(predicate)
+            
+            let realm = try! Realm()
+            
+            try! realm.write {
+                realm.delete(filteredItems)
+                realm.delete(selectedList)
+            }
+            self.tableView.reloadData()
 //            self.createAlert(withTitle: "Are you sure you want to delete this list?")
             return true
         }
         
         let rightButton2 = MGSwipeButton(title: EmptyString.none, icon: UIImage(named:ImageName.editGrey2), backgroundColor: Colors.pinkishGrey)  { (sender: MGSwipeTableCell) -> Bool in
-            self.editList(indexPath: indexPath, uniqueID: self.id)
+            self.listToEdit = self.store.allShopingLists[indexPath.row]
+            self.performSegue(withIdentifier: Identifiers.Segue.addList, sender: self)
             return true
         }
         
@@ -87,10 +79,6 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
         formatter.dateFormat = "MMM dd, yyyy"
-    }
-    
-    func editList(indexPath: IndexPath, uniqueID: String){
-        performSegue(withIdentifier: Identifiers.Segue.addList, sender: nil)
     }
     
     func createAlert(withTitle:String) {
@@ -107,14 +95,12 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
                 let dest = segue.destination as! ShoppingListDetailVC
                 dest.name = selectedList.title
                 dest.uniqueID = selectedList.uniqueID
+                print(selectedList.uniqueID)
             }
         } else if segue.identifier == Identifiers.Segue.addList {
-            if id != EmptyString.none {
                 let dest = segue.destination as! AddListVC
-                dest.listToEdit = store.allShopingLists.filter({$0.uniqueID == self.id}).first
-            }
+                dest.listToEdit = listToEdit
         }
-        
         let backItem = UIBarButtonItem()
         backItem.title = EmptyString.none
         navigationItem.backBarButtonItem = backItem
@@ -123,7 +109,6 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
 
 extension ShoppingListViewController : UITableViewDelegate, UITableViewDataSource {
     func titleForIndexPath(_ indexPath: IndexPath) -> String {
-        
         return store.allShopingLists[indexPath.row].title
     }
     

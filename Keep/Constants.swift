@@ -79,6 +79,8 @@ struct Identifiers {
         static let addItemToSL = "addItemToSL"
         static let editIems = "editItems"
         static let unwindToMain = "unwindToMain"
+        static let favToStock = "favToStock"
+        static let moveToStock = "moveListItemToStock"
     }
 }
 

@@ -11,12 +11,6 @@ import RealmSwift
 
 class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     
-    // TODO: Make cateogory set to default 'uncategorized' -  disable textfield action - let users choose only from pickers
-    // TODO: Try to get rid of tags - let's use property values itself - WWDC!
-    // TODO: dismiss the tableview when tapping the background
-    // TODO: Fix pickers
-    // TODO: Limit characters 
-    
     @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -61,6 +55,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     var filteredItems = [Item]()
     var filteredItemsNames = [String]()
     
+    var lengthLimit = 20
     var itemToEdit:Item?
     var list = ["1","2","3","4","5","6"]
     
@@ -571,14 +566,16 @@ extension AddItemsVC: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == nameTextField {
             if let text = textField.text {
+                let newLength = text.characters.count + string.characters.count - range.length
                 let subString = (text as NSString).replacingCharacters(in: range, with: string)
                 searchAutocompleteEntriesWithSubstring(subString)
-                return true
+                return newLength <= lengthLimit
             }
         }
         return true
     }
     
+        
     func checkTextField(sender: UITextField) {
         var textLength = 0
         if let text = sender.text {

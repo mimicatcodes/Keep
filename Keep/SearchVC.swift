@@ -112,7 +112,8 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
                 cell.locationLabel.text = item.location
             }
         } else {
-            cell.titleLabel.text = store.allItems[indexPath.row].name
+            let allItems = store.allItems.sorted(byProperty: Keys.name, ascending: true)
+            cell.titleLabel.text = allItems[indexPath.row].name
             if store.allItems[indexPath.row].isExpired {
                 cell.expiredLabel.text = Labels.expired
             } else if store.allItems[indexPath.row].isExpiring {

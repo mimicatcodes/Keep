@@ -47,11 +47,14 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
     var isFavorited:Bool = false
     let lengthLimit = 20
     
+    var itemToAdd: String? 
+    
     // dummy data
     let categories = ["1","2","3","4","5","6"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        adjustSpacing()
         nameField.delegate = self
         nameField.autocapitalizationType = .words
         expDateField.delegate = self
@@ -76,7 +79,6 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        nameField.text = store.scannedItemToAdd
         formatInitialData()
         formatDates()
     }
@@ -99,7 +101,6 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
         
         if favButton.isSelected {
             isFavorited = true
-            
         } else {
             isFavorited = false
         }
@@ -143,6 +144,7 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
     }
     
     @IBAction func saveBtnTapped(_ sender: UIButton) {
+    
         guard let name = nameField.text, name != EmptyString.none else { return }
         guard let quantity = quantityLabel.text, quantity != EmptyString.none else { return }
         guard let category = categoryField.text, category != EmptyString.none else { return }
@@ -159,15 +161,12 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
                 if store.allFavoritedItems.filter({$0.name == item.name}).count == 0{
                     let favItem = FavoritedItem(name:item.name.lowercased().capitalized)
                     realm.add(favItem)
-                    
                 }
                 
             } else {
                 if store.allFavoritedItems.filter({$0.name == item.name}).count > 0 {
-                    
                     if let itemToDelete = store.allFavoritedItems.filter({$0.name == item.name}).first {
                         realm.delete(itemToDelete)
-                        
                     }
                 }
             }
@@ -176,6 +175,13 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
         NotificationCenter.default.post(name: NotificationName.refreshMainTV, object: nil)
         NotificationCenter.default.post(name: NotificationName.refreshScannedItems, object: nil)
         dismiss(animated: true, completion: nil)
+    }
+
+    func adjustSpacing(){
+        nameField.layer.sublayerTransform = CATransform3DMakeTranslation(15, 0, 0)
+        expDateField.layer.sublayerTransform = CATransform3DMakeTranslation(15, 0, 0)
+        pDateField.layer.sublayerTransform = CATransform3DMakeTranslation(15, 0, 0)
+        categoryField.layer.sublayerTransform = CATransform3DMakeTranslation(15, 0, 0)
     }
     
     func configureAppearances(){
@@ -207,6 +213,13 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
     }
     
     func formatInitialData() {
+        
+        if let item = itemToAdd {
+            nameField.text = item
+        } else {
+            nameField.text = store.scannedItemToAdd
+        }
+        
         categoryField.text = "Uncategorized"
         quantity = 1
         quantityLabel.text = "\(quantity)"
@@ -227,7 +240,11 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
         
         pDateField.text = formatter.string(from: Date()).capitalized
         let currentDate = Date()
-        expDateField.text = formatter.string(from: Date()).capitalized
+        let sevenDaysLater = Calendar.current.date(byAdding: .day, value: 7, to: currentDate)
+        if let date = sevenDaysLater {
+            expDate = date
+            expDateField.text = formatter.string(from: date).capitalized
+        }
         datePicker1.setDate(currentDate, animated: false)
         datePicker2.setDate(currentDate, animated: false)
     }
@@ -244,7 +261,6 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
     }
 }
 
-// Keyboard handling
 extension AddScannedItemVC : KeyboardHandling {
     func moveViewUp() {
         if topMarginConstraint.constant != originalTopMargin { return }
@@ -263,7 +279,6 @@ extension AddScannedItemVC : KeyboardHandling {
     }
 }
 
-// Pickers
 extension AddScannedItemVC : UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -306,9 +321,9 @@ extension AddScannedItemVC : UIPickerViewDelegate, UIPickerViewDataSource {
         toolBar.tintColor = UIColor.darkGray
         toolBar.sizeToFit()
         
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePicker))
+        let doneButton = UIBarButtonItem(title: Labels.done, style: .plain, target: self, action: #selector(donePicker))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(donePicker))
+        let cancelButton = UIBarButtonItem(title: Labels.cancel, style: .plain, target: self, action: #selector(donePicker))
         
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
@@ -319,7 +334,6 @@ extension AddScannedItemVC : UIPickerViewDelegate, UIPickerViewDataSource {
     }
 }
 
-// Textfield
 extension AddScannedItemVC : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         activeTextField?.resignFirstResponder()

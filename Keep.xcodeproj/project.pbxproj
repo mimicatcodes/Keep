@@ -48,6 +48,7 @@
 		DD786E331E4AED2F00B1F4E3 /* AddScannedItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD786E321E4AED2F00B1F4E3 /* AddScannedItemVC.swift */; };
 		DD786E361E50FAAF00B1F4E3 /* optionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD786E351E50FAAF00B1F4E3 /* optionsView.xib */; };
 		DD7F72191E63F65700BAE511 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7F72181E63F65700BAE511 /* UIScrollView+EmptyDataSet.m */; };
+		DD7F721B1E64FD1600BAE511 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7F721A1E64FD1500BAE511 /* CustomLabel.swift */; };
 		DD8586BB1E580C2A00065DDD /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8586BA1E580C2A00065DDD /* CustomViews.swift */; };
 		DDC3E9801E1C76E100459295 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E97F1E1C76E100459295 /* SearchVC.swift */; };
 		DDC3E9821E1C93F400459295 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E9811E1C93F400459295 /* DataStore.swift */; };
@@ -117,6 +118,7 @@
 		DD786E351E50FAAF00B1F4E3 /* optionsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = optionsView.xib; sourceTree = "<group>"; };
 		DD7F72171E63F65700BAE511 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
 		DD7F72181E63F65700BAE511 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
+		DD7F721A1E64FD1500BAE511 /* CustomLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		DD8586BA1E580C2A00065DDD /* CustomViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
 		DDC3E97F1E1C76E100459295 /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		DDC3E9811E1C93F400459295 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 				DD8586BA1E580C2A00065DDD /* CustomViews.swift */,
 				DD0639CE1E5FEA7100BF7609 /* CategoryField.swift */,
 				DD0639D01E61ECF700BF7609 /* CustomSearchBar.swift */,
+				DD7F721A1E64FD1500BAE511 /* CustomLabel.swift */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -569,6 +572,7 @@
 				DD4853AB1E199F8300BEAC02 /* HealthAndPersonal.swift in Sources */,
 				DD515D0F1E5BD60B00415A2B /* FavoriteCell.swift in Sources */,
 				DDEC8C8C1E456F29004C73CB /* ScannedItemsVC.swift in Sources */,
+				DD7F721B1E64FD1600BAE511 /* CustomLabel.swift in Sources */,
 				DD4853B91E199FD600BEAC02 /* Deli.swift in Sources */,
 				DD4853C71E19AF0000BEAC02 /* PackagedFoods.swift in Sources */,
 				DD5D7DC91E329BA300C2317D /* MainViewController.swift in Sources */,

@@ -11,8 +11,6 @@ import RealmSwift
 
 class MoveToVC: UIViewController {
     
-    // TODO: name duplicates! - fix
-
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var bottomView: UIView!
@@ -46,8 +44,13 @@ class MoveToVC: UIViewController {
         
                 let realm = try! Realm()
                 try! realm.write {
-                    let item = Item(name: name, uniqueID: uuid, quantity: "1", exp: Date(), purchaseDate: Date(), location: location, category: "Uncategorized")
-                    realm.add(item)
+                    let today = Date()
+                    let sevenDaysLater = Calendar.current.date(byAdding: .day, value: 7, to: today)
+                    if let date = sevenDaysLater {
+                        let item = Item(name: name, uniqueID: uuid, quantity: "1", exp: date, purchaseDate: Date(), location: location, category: "Uncategorized")
+                    
+                        realm.add(item)
+                    }
                 }
             }
         }

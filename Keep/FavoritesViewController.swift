@@ -15,6 +15,7 @@ class FavoritesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmpty
     @IBOutlet weak var tableView: UITableView!
     
     let store = DataStore.sharedInstance
+    var favItemToAddToStock: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,6 @@ class FavoritesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmpty
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         tableView.reloadData()
-        
     }
     
 //    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
@@ -47,7 +47,7 @@ class FavoritesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmpty
         }
 
         let moveToStockBtn = MGSwipeButton(title: "Stock", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
-            self.createAlert(withTitle: "Left1")
+            self.moveToStock(indexPath: indexPath)
             return true
         }
         
@@ -56,7 +56,6 @@ class FavoritesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmpty
             return true
         }
         
-        //deleteButton.setPadding(30)
         cell.rightButtons = [deleteButton]
         cell.rightExpansion.buttonIndex = 0
         
@@ -64,31 +63,29 @@ class FavoritesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmpty
         moveToSLBtn.setPadding(30)
         cell.leftButtons = [moveToStockBtn, moveToSLBtn]
         cell.leftExpansion.buttonIndex = 1
-        
     }
     
     func createAlert(withTitle:String) {
         
         let alert = UIAlertController(title: withTitle, message: EmptyString.none, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
-            
-        }
-        
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in }
         alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
         
     }
     
-    private func moveToStock(){
+    private func moveToStock(indexPath: IndexPath){
+        
+        favItemToAddToStock = self.store.allFavoritedItems[indexPath.row].name
+        performSegue(withIdentifier: Identifiers.Segue.favToStock, sender: self)
         
     }
     
-    private func moveToSL(){
+    private func moveToSL(indexPath: IndexPath){
         
     }
     
     private func delete(indexPath: IndexPath){
-        
         let realm = try! Realm()
         try! realm.write {
             let favItemToBeDeleted = self.store.allFavoritedItems[indexPath.row]
@@ -99,7 +96,16 @@ class FavoritesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmpty
             }
             realm.delete(favItemToBeDeleted)
         }
-        self.tableView.reloadData()
+        tableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Identifiers.Segue.favToStock {
+            let dest = segue.destination as! AddScannedItemVC
+            if let item = favItemToAddToStock {
+                dest.itemToAdd = item
+            }
+        }
     }
 }
 

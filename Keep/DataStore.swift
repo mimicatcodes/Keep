@@ -24,16 +24,7 @@ class DataStore{
     var scannedItemToAdd = EmptyString.none
     var scannedItemIndex:Int?
 
-     /*
-     let lastWeekDate = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: Date())
-     
-     let nextWeekDate = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: Date())
-     
-     let thisWeek = Calendar.current.date(byAdding: .weekOfYear, value: 0, to: Date())
-
-     let fallsBetween = (startDate...endDate).contains(Date())
-
- */
+    var listToEdit:ShoppingList?
     var tappedSLItemToSendToLocation = EmptyString.none
     var listID = EmptyString.none
 

@@ -39,6 +39,8 @@ class AddListVC: UIViewController, UITextFieldDelegate {
         if let list = listToEdit {
             listTitle.text = list.title
             
+        } else {
+            listTitle.text = EmptyString.none
         }
     }
     
@@ -106,6 +108,7 @@ class AddListVC: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // change to done
         save()
         return true
     }
