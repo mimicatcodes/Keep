@@ -46,23 +46,14 @@ class FavoritesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmpty
             return true
         }
 
-        let moveToStockBtn = MGSwipeButton(title: "Stock", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
-            self.moveToStock(indexPath: indexPath)
-            return true
-        }
+//        let moveToStockBtn = MGSwipeButton(title: "Stock", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
+//            self.moveToStock(indexPath: indexPath)
+//            return true
+//        }
         
-        let moveToSLBtn = MGSwipeButton(title: "SL", backgroundColor: UIColor.yellow) { (sender: MGSwipeTableCell) -> Bool in
-            self.createAlert(withTitle: "Left2")
-            return true
-        }
         
         cell.rightButtons = [deleteButton]
         cell.rightExpansion.buttonIndex = 0
-        
-        moveToStockBtn.setPadding(30)
-        moveToSLBtn.setPadding(30)
-        cell.leftButtons = [moveToStockBtn, moveToSLBtn]
-        cell.leftExpansion.buttonIndex = 1
     }
     
     func createAlert(withTitle:String) {
@@ -74,14 +65,10 @@ class FavoritesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmpty
         
     }
     
-    private func moveToStock(indexPath: IndexPath){
+    func moveToStock(indexPath: IndexPath){
         
         favItemToAddToStock = self.store.allFavoritedItems[indexPath.row].name
         performSegue(withIdentifier: Identifiers.Segue.favToStock, sender: self)
-        
-    }
-    
-    private func moveToSL(indexPath: IndexPath){
         
     }
     
@@ -127,4 +114,11 @@ extension FavoritesViewController : UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        moveToStock(indexPath: indexPath)
+        
+    }
 }
+
+

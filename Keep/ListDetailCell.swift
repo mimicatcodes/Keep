@@ -11,10 +11,10 @@ import MGSwipeTableCell
 
 class ListDetailCell:MGSwipeTableCell {
     
-    //var tapAction: ((UITableViewCell) -> Void)?
+    var tapAction: ((UITableViewCell) -> Void)?
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var checkBoxImgView: UIImageView!
-    //@IBOutlet weak var moveButton: UIButton!
-    //@IBAction func moveButtonTapped(_ sender: UIButton) { tapAction?(self) }
+    @IBOutlet weak var moveButton: UIButton!
+    @IBAction func moveButtonTapped(_ sender: UIButton) { tapAction?(self) }
     
 }

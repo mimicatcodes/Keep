@@ -12,8 +12,6 @@ import MGSwipeTableCell
 import NotificationCenter
 
 class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
-    // TODO: move activity view controller to the shoppinglist detail vc 
-    // TODO: Delete alert
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -48,20 +46,7 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
     func configureSwipeButtons(cell:ShoppingListCell, indexPath: IndexPath){
         
         let rightButton1 = MGSwipeButton(title: EmptyString.none, icon: UIImage(named:ImageName.delete2), backgroundColor: Colors.salmon) { (sender: MGSwipeTableCell) -> Bool in
-            let uniqueID = self.store.allShopingLists[indexPath.row].uniqueID
-            let selectedList = self.store.allShopingLists[indexPath.row]
-            
-            let predicate = NSPredicate(format: Filters.listUniqueID, uniqueID)
-            let filteredItems = self.store.allShoppingItems.filter(predicate)
-            
-            let realm = try! Realm()
-            
-            try! realm.write {
-                realm.delete(filteredItems)
-                realm.delete(selectedList)
-            }
-            self.tableView.reloadData()
-//            self.createAlert(withTitle: "Are you sure you want to delete this list?")
+            self.alertForDelete(indexPath: indexPath)
             return true
         }
         
@@ -75,19 +60,42 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
         cell.rightExpansion.buttonIndex = 0
     }
     
+    func alertForDelete(indexPath: IndexPath){
+        let alertController = UIAlertController(title: "Are you sure you want to delete this list?",  message: "All items in the list will be deleted.", preferredStyle: .alert)
+    
+        let deleteAction = UIAlertAction(title: "Delete", style: .default, handler: { action in
+            print("Delete pressed")
+            let uniqueID = self.store.allShopingLists[indexPath.row].uniqueID
+            let selectedList = self.store.allShopingLists[indexPath.row]
+            
+            let predicate = NSPredicate(format: Filters.listUniqueID, uniqueID)
+            let filteredItems = self.store.allShoppingItems.filter(predicate)
+            
+            let realm = try! Realm()
+            
+            try! realm.write {
+                realm.delete(filteredItems)
+                realm.delete(selectedList)
+            }
+            
+            self.tableView.reloadData()
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+            print("Cancel Pressed")
+        }
+        
+        alertController.addAction(deleteAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
     func formatDates() {
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
         formatter.dateFormat = "MMM dd, yyyy"
     }
-    
-    func createAlert(withTitle:String) {
-        let alert = UIAlertController(title: withTitle, message: EmptyString.none, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in }
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
-    }
-
+  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Identifiers.Segue.showItems {
             if let index = tableView.indexPathForSelectedRow?.row {

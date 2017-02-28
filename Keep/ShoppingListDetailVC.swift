@@ -75,15 +75,6 @@ class ShoppingListDetailVC: UIViewController, DZNEmptyDataSetSource, DZNEmptyDat
 //        ac.addAction(UIAlertAction(title: "Hurray", style: .default))
 //        present(ac, animated: true)
 //    }
- 
-    /*
-    func buttonActions(sender:UIButton){
-        let predicate = NSPredicate(format: Filters.listUniqueID, uniqueID)
-        let filteredItems = store.allShoppingItems.filter(predicate)
-        let titleString = filteredItems[sender.tag].name
-        
-        store.tappedSLItemToSendToLocation = titleString
-    }*/
     
     func configureSwipeButtons(cell:ListDetailCell, indexPath: IndexPath){
         let deleteButton = MGSwipeButton(title: EmptyString.none, icon: UIImage(named:ImageName.delete1), backgroundColor: Colors.salmon) { (sender: MGSwipeTableCell) -> Bool in
@@ -103,24 +94,9 @@ class ShoppingListDetailVC: UIViewController, DZNEmptyDataSetSource, DZNEmptyDat
             self.tableView.reloadData()
             return true
         }
-        
-        let moveToStockButton =  MGSwipeButton(title: EmptyString.none, icon: UIImage(named:ImageName.delete1), backgroundColor: Colors.salmon) { (sender: MGSwipeTableCell) -> Bool in
-            
-            let predicate = NSPredicate(format: Filters.listUniqueID, self.uniqueID)
-            let filteredItems = self.store.allShoppingItems.filter(predicate)
-            self.itemToAddToStock = filteredItems[indexPath.row].name
-            if self.itemToAddToStock != nil {
-                self.performSegue(withIdentifier: Identifiers.Segue.moveToStock, sender: self)
-
-            }
-            return true
-        }
 
         cell.rightButtons = [deleteButton]
         cell.rightExpansion.buttonIndex = 0
-        cell.leftButtons = [moveToStockButton]
-        cell.leftExpansion.buttonIndex = 0
-        
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -155,12 +131,27 @@ extension ShoppingListDetailVC : UITableViewDelegate, UITableViewDataSource {
         if filteredItems[indexPath.row].isPurchased == true {
             cell.titleLabel.textColor = Colors.whiteFour
             cell.checkBoxImgView.image = #imageLiteral(resourceName: "ChecklistActive2")
+            cell.moveButton.isHidden = false
         } else {
             cell.titleLabel.textColor = UIColor(red: 77/255.0, green: 77/255.0, blue: 77/255.0, alpha: 1)
             cell.checkBoxImgView.image = #imageLiteral(resourceName: "ChecklistBase2")
+            cell.moveButton.isHidden = true
         }
+        
+        cell.moveButton.tag = indexPath.row
+        cell.moveButton.addTarget(self, action: #selector(buttonActions), for: .touchUpInside)
+        cell.tapAction = { cell in }
         configureSwipeButtons(cell: cell, indexPath: indexPath)
         return cell
+    }
+    
+   func buttonActions(sender:UIButton){
+        let predicate = NSPredicate(format: Filters.listUniqueID, uniqueID)
+        let filteredItems = store.allShoppingItems.filter(predicate)
+        itemToAddToStock = filteredItems[sender.tag].name
+        if self.itemToAddToStock != nil {
+            performSegue(withIdentifier: Identifiers.Segue.moveToStock, sender: self)
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
