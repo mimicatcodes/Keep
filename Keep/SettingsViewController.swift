@@ -15,7 +15,7 @@ class SettingsViewController: UIViewController {
     let store = DataStore.sharedInstance
     let today = Date()
     
-    var sections = ["My Account","Settings","Privacy Policy","Logout"]
+    var sections = ["Set Time for Reminder", "Send Feedback"]
     
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var rightTopView: UIView!
@@ -105,14 +105,6 @@ class SettingsViewController: UIViewController {
         }
         numOfItemsExpiredLabel.text = "\(numOfExpiredItems)"
     }
-    
-    func daysBetweenTwoDates(start: Date, end: Date) -> Int{
-        let currentCalendar = Calendar.current
-        
-        guard let start = currentCalendar.ordinality(of: .day, in: .era, for: start) else { return 0 }
-        guard let end = currentCalendar.ordinality(of: .day, in: .era, for: end) else { return 0 }
-        return end - start
-    }
 }
 
 // Charts API
@@ -164,8 +156,12 @@ extension SettingsViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell =  tableView.dequeueReusableCell(withIdentifier: Identifiers.Cell.accountCell, for: indexPath) as! AccountCell
         cell.title.text = sections[indexPath.row]
-        
+        cell.selectionStyle = .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 45
     }
 }
 

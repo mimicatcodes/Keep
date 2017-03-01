@@ -83,7 +83,7 @@ extension FloatingPoint {
 
 // For search controller textField
 extension UISearchBar {
-    var textColor:UIColor? {
+    var textColor: UIColor? {
         get {
             if let textField = self.value(forKey: "searchField") as? UITextField  {
                 return textField.textColor
@@ -100,3 +100,8 @@ extension UISearchBar {
     }
 }
 
+extension Date {
+    var localTime: String {
+        return description(with: Locale.current)
+    }
+}

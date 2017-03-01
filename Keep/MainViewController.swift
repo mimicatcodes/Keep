@@ -192,7 +192,7 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
         let pDate = formatter.string(from: filteredItem.purchaseDate)
         cell.purchaseDate.text = Labels.purchasedOn + pDate
         expDate = filteredItem.exp
-        daysLeft = daysBetweenTwoDates(start: today, end: expDate)
+        daysLeft = Helper.daysBetweenTwoDates(start: today, end: expDate)
         let realm = try! Realm()
         try! realm.write {
             if daysLeft < 0 {
@@ -233,15 +233,6 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
             cell.expDateLabel.text = Labels.expired
             cell.expDateLabel.textColor = Colors.pastelRed
         }
-    }
-    
-    func daysBetweenTwoDates(start: Date, end: Date) -> Int{
-        let currentCalendar = Calendar.current
-        
-        guard let start = currentCalendar.ordinality(of: .day, in: .era, for: start) else { return 0 }
-        guard let end = currentCalendar.ordinality(of: .day, in: .era, for: end) else { return 0 }
-        
-        return end - start
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

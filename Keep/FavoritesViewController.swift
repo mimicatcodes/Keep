@@ -40,36 +40,25 @@ class FavoritesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmpty
 //    }
     
     func configureSwipeButtons(cell:FavoriteCell, indexPath: IndexPath){
-
         let deleteButton = MGSwipeButton(title: EmptyString.none, icon: UIImage(named:ImageName.delete1), backgroundColor: Colors.salmon){ (sender: MGSwipeTableCell) -> Bool in
             self.delete(indexPath: indexPath)
             return true
         }
 
-//        let moveToStockBtn = MGSwipeButton(title: "Stock", backgroundColor: UIColor.red) { (sender: MGSwipeTableCell) -> Bool in
-//            self.moveToStock(indexPath: indexPath)
-//            return true
-//        }
-        
-        
         cell.rightButtons = [deleteButton]
         cell.rightExpansion.buttonIndex = 0
     }
     
     func createAlert(withTitle:String) {
-        
         let alert = UIAlertController(title: withTitle, message: EmptyString.none, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { (action) in }
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
-        
     }
     
     func moveToStock(indexPath: IndexPath){
-        
         favItemToAddToStock = self.store.allFavoritedItems[indexPath.row].name
         performSegue(withIdentifier: Identifiers.Segue.favToStock, sender: self)
-        
     }
     
     private func delete(indexPath: IndexPath){

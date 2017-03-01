@@ -279,7 +279,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
                 
                 let today = Date()
                 var daysLeft = 0
-                daysLeft = daysBetweenTwoDates(start: today, end: expDate)
+                daysLeft = Helper.daysBetweenTwoDates(start: today, end: expDate)
                 
                 if daysLeft < 0 {
                     item.isExpired = true
@@ -388,15 +388,6 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
         if labelView != nil {
             labelView.removeFromSuperview()
         }
-    }
-    
-    func daysBetweenTwoDates(start: Date, end: Date) -> Int{
-        let currentCalendar = Calendar.current
-        
-        guard let start = currentCalendar.ordinality(of: .day, in: .era, for: start) else { return 0 }
-        guard let end = currentCalendar.ordinality(of: .day, in: .era, for: end) else { return 0 }
-        
-        return end - start
     }
     
     func formatInitialData() {

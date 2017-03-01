@@ -49,6 +49,8 @@
 		DD786E361E50FAAF00B1F4E3 /* optionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD786E351E50FAAF00B1F4E3 /* optionsView.xib */; };
 		DD7F72191E63F65700BAE511 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7F72181E63F65700BAE511 /* UIScrollView+EmptyDataSet.m */; };
 		DD7F721B1E64FD1600BAE511 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7F721A1E64FD1500BAE511 /* CustomLabel.swift */; };
+		DD7F721D1E6655AE00BAE511 /* SetTimeForReminderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7F721C1E6655AE00BAE511 /* SetTimeForReminderVC.swift */; };
+		DD7F721F1E66807500BAE511 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7F721E1E66807400BAE511 /* Helper.swift */; };
 		DD8586BB1E580C2A00065DDD /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8586BA1E580C2A00065DDD /* CustomViews.swift */; };
 		DDC3E9801E1C76E100459295 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E97F1E1C76E100459295 /* SearchVC.swift */; };
 		DDC3E9821E1C93F400459295 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E9811E1C93F400459295 /* DataStore.swift */; };
@@ -119,6 +121,8 @@
 		DD7F72171E63F65700BAE511 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
 		DD7F72181E63F65700BAE511 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
 		DD7F721A1E64FD1500BAE511 /* CustomLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
+		DD7F721C1E6655AE00BAE511 /* SetTimeForReminderVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetTimeForReminderVC.swift; sourceTree = "<group>"; };
+		DD7F721E1E66807400BAE511 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		DD8586BA1E580C2A00065DDD /* CustomViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
 		DDC3E97F1E1C76E100459295 /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		DDC3E9811E1C93F400459295 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
@@ -380,6 +384,7 @@
 			isa = PBXGroup;
 			children = (
 				DDC3E98A1E1C958A00459295 /* SettingsViewController.swift */,
+				DD7F721C1E6655AE00BAE511 /* SetTimeForReminderVC.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -387,6 +392,7 @@
 		DDE189A71E354A8800306449 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				DD7F721E1E66807400BAE511 /* Helper.swift */,
 				DD4853A61E199F2400BEAC02 /* Constants */,
 				DDE189A81E354A9A00306449 /* Extensions.swift */,
 			);
@@ -539,6 +545,7 @@
 				DD4853A11E19920E00BEAC02 /* Dairy.swift in Sources */,
 				DD1EA6381E0CA41D0034C54B /* AppDelegate.swift in Sources */,
 				DD7F72191E63F65700BAE511 /* UIScrollView+EmptyDataSet.m in Sources */,
+				DD7F721F1E66807500BAE511 /* Helper.swift in Sources */,
 				DDC3E9891E1C957E00459295 /* FavoritesViewController.swift in Sources */,
 				DDC3E9D11E20580B00459295 /* AddItemVC.swift in Sources */,
 				DDC3E9801E1C76E100459295 /* SearchVC.swift in Sources */,
@@ -575,6 +582,7 @@
 				DD7F721B1E64FD1600BAE511 /* CustomLabel.swift in Sources */,
 				DD4853B91E199FD600BEAC02 /* Deli.swift in Sources */,
 				DD4853C71E19AF0000BEAC02 /* PackagedFoods.swift in Sources */,
+				DD7F721D1E6655AE00BAE511 /* SetTimeForReminderVC.swift in Sources */,
 				DD5D7DC91E329BA300C2317D /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

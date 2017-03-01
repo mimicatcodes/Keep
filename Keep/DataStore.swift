@@ -18,7 +18,7 @@ class DataStore{
     var freezerItems = try! Realm().objects(Item.self).filter(Filters.freezer)
     var pantryItems = try! Realm().objects(Item.self).filter(Filters.pantry)
     var otherItems = try! Realm().objects(Item.self).filter(Filters.other)
-    
+
     var allShopingLists = try! Realm().objects(ShoppingList.self)
     
     var scannedItemToAdd = EmptyString.none
@@ -30,6 +30,8 @@ class DataStore{
 
     var allFavoritedItems = try! Realm().objects(FavoritedItem.self).sorted(byProperty: Keys.name, ascending: true)
     var allShoppingItems = try! Realm().objects(ShoppingItem.self)
+    
+    //var defaultTimeForReminder = Date().
     
     var fridgeSectionNames: [String] {
         
