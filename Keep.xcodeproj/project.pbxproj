@@ -393,8 +393,8 @@
 			isa = PBXGroup;
 			children = (
 				DD7F721E1E66807400BAE511 /* Helper.swift */,
-				DD4853A61E199F2400BEAC02 /* Constants */,
 				DDE189A81E354A9A00306449 /* Extensions.swift */,
+				DD4853A61E199F2400BEAC02 /* Constants */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";

@@ -30,9 +30,7 @@ class DataStore{
 
     var allFavoritedItems = try! Realm().objects(FavoritedItem.self).sorted(byProperty: Keys.name, ascending: true)
     var allShoppingItems = try! Realm().objects(ShoppingItem.self)
-    
-    //var defaultTimeForReminder = Date().
-    
+        
     var fridgeSectionNames: [String] {
         
         return Set(fridgeItems.value(forKeyPath: Keys.category) as! [String]).sorted()

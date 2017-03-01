@@ -18,20 +18,36 @@ class SetTimeForReminderVC: UIViewController {
     
     let userDefaults = UserDefaults.standard
     var selectedTime = Date()
+    var selectedDateComponents = DateComponents()
+    let calendar = Calendar.current
+    
+    var hour: Int?
+    var minute: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("--------------\(userDefaults.object(forKey: "timeForReminder"))")
-        selectedTime = userDefaults.object(forKey: "timeForReminder") as? Date ?? Date()
-        print(selectedTime.localTime)
-        selectedTimeLabel.text = formatter.string(from: selectedTime)
+        if let hr =  UserDefaults.standard.value(forKey: "hour") as? Int, let minute = UserDefaults.standard.value(forKey: "minute") as? Int {
+            if hr < 12 {
+                selectedTimeLabel.text = "\(hr):\(minute) AM"
+            } else {
+                selectedTimeLabel.text = "\(hr):\(minute) PM"
+            }
+        }
         configureDatePicker()
         formatDate()
     }
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
-        userDefaults.set(selectedTime, forKey:"timeForReminder")
-        Helper.setLocalNotification(date: selectedTime)
+        let calendar = Calendar.current
+        
+        hour = calendar.component(.hour, from: selectedTime)
+        minute = calendar.component(.minute, from: selectedTime)
+
+        if let hour = hour, let minute = minute {
+            userDefaults.set(hour, forKey:"hour")
+            userDefaults.set(minute, forKey: "minute")
+            print("newly set hour is \(hour) and minute is \(minute)")
+        }
         dismiss(animated: true, completion: nil)
     }
 
@@ -54,7 +70,6 @@ class SetTimeForReminderVC: UIViewController {
     
     func datePickerChanged(sender: UIDatePicker) {
         selectedTime = sender.date
-        print(selectedTime)
         selectedTimeLabel.text = formatter.string(from: sender.date)
     }
 }

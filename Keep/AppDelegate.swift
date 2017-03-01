@@ -15,28 +15,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let currentDate = Date()
-        let calendar = Calendar.current
-        var components = calendar.dateComponents( [.hour, .minute], from:currentDate)
-
-        components.hour = 1
-        components.minute = 7
-        
-        let userDefaults = UserDefaults.standard
-        if userDefaults.value(forKey: "timeForReminder") == nil {
-            userDefaults.set(currentDate, forKey: "timeForReminder")
-            Helper.setLocalNotification(date: currentDate)
-            print("local time is ---- \(currentDate.localTime)")
-        } else {
-            print(userDefaults.set(currentDate, forKey: "timeForReminder"))
-
-        }
-        
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (allowed, error) in
-            print(error?.localizedDescription ?? "No Error!")
-        }
+        UserDefaults.standard.set(10, forKey: "hour")
+        UserDefaults.standard.set(30, forKey: "minute")
         
         UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (allowed, error) in
+            if allowed {
+                print("success")
+            } else {
+                print("Not allowed")
+            }
+        }
+        
+        if let hour = UserDefaults.standard.value(forKey: "hour") as? Int, let minute = UserDefaults.standard.value(forKey: "minute") as? Int {
+            Helper.setUpNotification(hour: hour, minute: minute)
+            print("Hour is \(hour) and minute is \(minute)")
+        } else {
+            print("Notifications cannot be sent")
+        }
         
         let colorNormal = Colors.warmGreyFive
         let colorSelected = Colors.tealish

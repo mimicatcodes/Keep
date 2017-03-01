@@ -24,9 +24,11 @@ class ScannedItemsVC: UIViewController {
         tableView.separatorInset = .zero
         topView.underlinedBorder()
 
+        if titleString == nil {
         NotificationCenter.default.addObserver(forName: NotificationName.refreshScannedItems, object: nil, queue: nil) { notification in
             self.resultsArray.remove(at: self.store.scannedItemIndex!)
             self.tableView.reloadData()
+            }
         }
     }
     

@@ -67,7 +67,9 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
         picker.delegate = self
         picker.dataSource = self
         pDateField.inputView = datePicker1
+        datePicker1.datePickerMode = .date
         expDateField.inputView = datePicker2
+        datePicker2.datePickerMode = .date
         categoryField.inputView = picker
         if quantity == 1 {
             minusButton.isEnabled = false

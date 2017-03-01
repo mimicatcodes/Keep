@@ -11,6 +11,8 @@ import RealmSwift
 
 class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     
+    // FIX PICKER _ Cannot select today !!!!!!!!!!!!!!!!!!!!!!!!
+    
     @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -88,7 +90,6 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
         nameTextField.text = nameTitle
         
         nameTextField.addTarget(self, action: #selector(checkTextField(sender:)), for: .allEditingEvents)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,7 +111,6 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
     override func viewDidLayoutSubviews() {
         heightConstraint.constant = 80
     }
-    
     
     @IBAction func didPressFavBtn(_ sender: UIButton) {
         favButton.isSelected = !favButton.isSelected
@@ -201,7 +201,6 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
             self.location = .Other
         default:
             break
-            
         }
         
         for (index,button) in locationButtons.enumerated() {
@@ -224,6 +223,8 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
             }
         }
     }
+    
+    
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
         nameTitle = EmptyString.none
@@ -253,7 +254,6 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
                     if store.allFavoritedItems.filter({$0.name == itemToEdit.name}).count == 0{
                         let favItem = FavoritedItem(name:itemToEdit.name)
                         realm.add(favItem)
-                        
                     }
                     
                 } else {
@@ -261,7 +261,6 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
                         
                         if let itemToDelete = store.allFavoritedItems.filter({$0.name == itemToEdit.name}).first {
                             realm.delete(itemToDelete)
-                            
                         }
                     }
                 }
@@ -279,7 +278,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
                 
                 let today = Date()
                 var daysLeft = 0
-                daysLeft = Helper.daysBetweenTwoDates(start: today, end: expDate)
+                daysLeft = Helper.daysBetweenTwoDates(start: today, end: item.exp)
                 
                 if daysLeft < 0 {
                     item.isExpired = true
@@ -532,7 +531,6 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
         formatInitialData()
         saveButton.isEnabled = false
     }
-    
 }
 
 extension AddItemsVC : KeyboardHandling {
@@ -565,7 +563,6 @@ extension AddItemsVC: UITextFieldDelegate {
         }
         return true
     }
-    
         
     func checkTextField(sender: UITextField) {
         var textLength = 0
@@ -632,7 +629,6 @@ extension AddItemsVC: UITextFieldDelegate {
             moveViewDown()
         }
     }
-    
 }
 
 extension AddItemsVC: UITableViewDataSource, UITableViewDelegate {

@@ -76,9 +76,7 @@ class ScanReceiptVC: UIViewController, UINavigationControllerDelegate {
         DispatchQueue.global(qos: .userInitiated).async {
             self.processScanning()
         }
-
     }
-    
     
     func enableSaveButton(){
         if imageView.image != nil {
@@ -184,8 +182,7 @@ extension ScanReceiptVC : G8TesseractDelegate {
         textsScanned = tesseract.recognizedText
         
         let newlineChars = NSCharacterSet.newlines
-        let elementsArray = textsScanned.components(separatedBy: newlineChars).filter {!$0.isEmpty}
-        
+        let elementsArray = textsScanned.components(separatedBy: newlineChars).filter {!$0.isEmpty        }
         for string in elementsArray {
             let result = string.trimmingCharacters(in: CharacterSet(charactersIn: "01234567890.,"))
             emptyArray.append(result)
