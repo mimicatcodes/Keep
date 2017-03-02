@@ -9,7 +9,7 @@
 import UIKit
 
 class SetTimeForReminderVC: UIViewController {
-
+    
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var selectedTimeLabel: UILabel!
     
@@ -18,7 +18,6 @@ class SetTimeForReminderVC: UIViewController {
     
     let userDefaults = UserDefaults.standard
     var selectedTime = Date()
-    var selectedDateComponents = DateComponents()
     let calendar = Calendar.current
     
     var hour: Int?
@@ -26,11 +25,14 @@ class SetTimeForReminderVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let hr =  UserDefaults.standard.value(forKey: "hour") as? Int, let minute = UserDefaults.standard.value(forKey: "minute") as? Int {
+        if let hr =  userDefaults.value(forKey: "hour") as? Int, let min = userDefaults.value(forKey: "minute") as? Int {
             if hr < 12 {
-                selectedTimeLabel.text = "\(hr):\(minute) AM"
+                let m = String(format: "%02d", min)
+                selectedTimeLabel.text = "\(hr):\(m) AM"
             } else {
-                selectedTimeLabel.text = "\(hr):\(minute) PM"
+                let m = String(format: "%02d", min)
+                let h = String(format: "%02d", (hr - 12))
+                selectedTimeLabel.text = "\(h):\(m) PM"
             }
         }
         configureDatePicker()
@@ -38,11 +40,10 @@ class SetTimeForReminderVC: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
-        let calendar = Calendar.current
         
         hour = calendar.component(.hour, from: selectedTime)
         minute = calendar.component(.minute, from: selectedTime)
-
+        
         if let hour = hour, let minute = minute {
             userDefaults.set(hour, forKey:"hour")
             userDefaults.set(minute, forKey: "minute")
@@ -50,7 +51,7 @@ class SetTimeForReminderVC: UIViewController {
         }
         dismiss(animated: true, completion: nil)
     }
-
+    
     @IBAction func dismissTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }

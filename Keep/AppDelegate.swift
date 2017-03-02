@@ -15,9 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        UserDefaults.standard.set(10, forKey: "hour")
-        UserDefaults.standard.set(30, forKey: "minute")
-        
         UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (allowed, error) in
             if allowed {
@@ -31,7 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             Helper.setUpNotification(hour: hour, minute: minute)
             print("Hour is \(hour) and minute is \(minute)")
         } else {
-            print("Notifications cannot be sent")
+            UserDefaults.standard.set(22, forKey: "hour")
+            UserDefaults.standard.set(35, forKey: "minute")
+            Helper.setUpNotification(hour: 22, minute: 35)
         }
         
         let colorNormal = Colors.warmGreyFive
