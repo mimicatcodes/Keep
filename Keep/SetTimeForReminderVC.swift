@@ -49,6 +49,10 @@ class SetTimeForReminderVC: UIViewController {
             userDefaults.set(minute, forKey: "minute")
             print("newly set hour is \(hour) and minute is \(minute)")
         }
+        if let hour = UserDefaults.standard.value(forKey: "hour") as? Int, let minute = UserDefaults.standard.value(forKey: "minute") as? Int {
+            Helper.setUpNotification(hour: hour, minute: minute)
+            print("success?")
+        }
         dismiss(animated: true, completion: nil)
     }
     
@@ -58,7 +62,7 @@ class SetTimeForReminderVC: UIViewController {
     
     func configureDatePicker(){
         datePicker.datePickerMode = .time
-        datePicker.minuteInterval = 10
+        datePicker.minuteInterval = 1
         datePicker.layer.borderWidth = 1.0
         datePicker.layer.borderColor = Colors.tealish.cgColor
         datePicker.layer.cornerRadius = 8.0

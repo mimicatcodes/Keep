@@ -19,9 +19,7 @@ class Helper {
     }
     
     static func setUpNotification(hour:Int, minute:Int){
-        
-        print("-------------------- \(hour) and \(minute)")
-        
+
         let store = DataStore.sharedInstance
         
         var itemsExpiringToday:[Item] = []
@@ -39,7 +37,7 @@ class Helper {
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
             
             let center = UNUserNotificationCenter.current()
-            center.removeAllPendingNotificationRequests()
+            //center.removeAllPendingNotificationRequests()
             
             let content = UNMutableNotificationContent()
             content.title = "Testing title"
@@ -59,7 +57,7 @@ class Helper {
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
             
             let center = UNUserNotificationCenter.current()
-            center.removeAllPendingNotificationRequests()
+            //center.removeAllPendingNotificationRequests()
             
             let content = UNMutableNotificationContent()
             content.title = "Testing title 2"
@@ -73,59 +71,6 @@ class Helper {
             
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
             center.add(request)
-        }
-    }
-    
-    static func setLocalNotification(date: Date) {
-        let store = DataStore.sharedInstance
-        let components = Calendar.current.dateComponents( [.hour, .minute], from:date)
-        var itemsExpiringToday:[Item] = []
-        for item in store.allItems {
-            if daysBetweenTwoDates(start: Date(), end: item.exp) == 0 {
-                itemsExpiringToday.append(item)
-            }
-        }
-        
-        if itemsExpiringToday.count > 0 {
-            
-            let notificationCenter = UNUserNotificationCenter.current()
-            let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
-            let content = UNMutableNotificationContent()
-            
-            if itemsExpiringToday.count == 1 {
-                content.title = "You have \(itemsExpiringToday.count) item expiring today."
-                content.subtitle = "Make sure to eat it up!"
-            } else {
-                content.title = "You have \(itemsExpiringToday.count) items expiring today - make sure to eat them up!"
-                content.subtitle = "Make sure to eat them up!"
-            }
-            
-            content.body = "auhhhhh"
-            content.badge = 1
-            content.sound = UNNotificationSound.default()
-            content.categoryIdentifier = ""
-            
-            let request = UNNotificationRequest(identifier: "expNotification", content: content, trigger: trigger)
-            notificationCenter.add(request) { (error) in
-                print(error?.localizedDescription ?? "\(request.content)")
-            }
-        } else {
-            let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
-            
-            let content = UNMutableNotificationContent()
-            
-            content.title = "TEST"
-            content.subtitle = "Open Keep and see what you can make for lunch today!"
-            content.body = "TEST"
-            content.badge = 1 //?
-            content.sound = UNNotificationSound.default()
-            content.categoryIdentifier = ""
-            
-            let request = UNNotificationRequest(identifier: "noExpNotification", content: content, trigger: trigger)
-            
-            UNUserNotificationCenter.current().add(request) { (error) in
-                print(error?.localizedDescription ?? "\(request.content)")
-            }
         }
     }
 }

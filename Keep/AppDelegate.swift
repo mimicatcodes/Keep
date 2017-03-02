@@ -15,54 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        UNUserNotificationCenter.current().delegate = self
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (allowed, error) in
-            if allowed {
-                print("success")
-            } else {
-                print("Not allowed")
-            }
-        }
-        
-        if let hour = UserDefaults.standard.value(forKey: "hour") as? Int, let minute = UserDefaults.standard.value(forKey: "minute") as? Int {
-            Helper.setUpNotification(hour: hour, minute: minute)
-            print("Hour is \(hour) and minute is \(minute)")
-        } else {
-            UserDefaults.standard.set(22, forKey: "hour")
-            UserDefaults.standard.set(35, forKey: "minute")
-            Helper.setUpNotification(hour: 22, minute: 35)
-        }
-        
-        let colorNormal = Colors.warmGreyFive
-        let colorSelected = Colors.tealish
-        
-        if let font = UIFont(name: Fonts.montserratSemiBold, size: 16) {
-            let navigationBarAppearace = UINavigationBar.appearance()
-            navigationBarAppearace.titleTextAttributes = [NSFontAttributeName: font,  NSForegroundColorAttributeName: Colors.brownishGreyTwo]
-            navigationBarAppearace.barTintColor = .white
-            navigationBarAppearace.tintColor = Colors.warmGreyThree
-            navigationBarAppearace.layer.borderColor = Colors.whiteFour.cgColor
-            navigationBarAppearace.isTranslucent = false
-        }
-        
-        if let font = UIFont(name: Fonts.latoRegular, size: 11.0) {
-            let attributesNormal = [
-                NSForegroundColorAttributeName: colorNormal,
-                NSFontAttributeName : font
-            ]
-            
-            let attributesSelected = [
-                NSForegroundColorAttributeName : colorSelected,
-                NSFontAttributeName : font
-            ]
-            
-            UITabBarItem.appearance().setTitleTextAttributes(attributesNormal, for: .normal)
-            UITabBarItem.appearance().setTitleTextAttributes(attributesSelected, for: .selected)
-        }
-        UITabBar.appearance().tintColor = colorSelected
+        setUpLocalNotification()
+        styleNavigationAndTapBarElements()
         return true
     }
-    
+
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler(.alert)// notification in the foreground
     }
@@ -95,6 +52,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
     }
     
+}
+
+extension AppDelegate {
+    fileprivate func setUpLocalNotification(){
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (allowed, error) in
+            if allowed {
+                print("success")
+            } else {
+                print("Not allowed")
+            }
+        }
+        
+        if let hour = UserDefaults.standard.value(forKey: "hour") as? Int, let minute = UserDefaults.standard.value(forKey: "minute") as? Int {
+            print("Hour is \(hour) and minute is \(minute)")
+        } else {
+            UserDefaults.standard.set(0, forKey: "hour")
+            UserDefaults.standard.set(4, forKey: "minute")
+            Helper.setUpNotification(hour: 0, minute: 4)
+        }
+    }
     
+    fileprivate func styleNavigationAndTapBarElements(){
+        let colorNormal = Colors.warmGreyFive
+        let colorSelected = Colors.tealish
+        
+        if let font = UIFont(name: Fonts.montserratSemiBold, size: 16) {
+            let navigationBarAppearace = UINavigationBar.appearance()
+            navigationBarAppearace.titleTextAttributes = [NSFontAttributeName: font,  NSForegroundColorAttributeName: Colors.brownishGreyTwo]
+            navigationBarAppearace.barTintColor = .white
+            navigationBarAppearace.tintColor = Colors.warmGreyThree
+            navigationBarAppearace.layer.borderColor = Colors.whiteFour.cgColor
+            navigationBarAppearace.isTranslucent = false
+        }
+        
+        if let font = UIFont(name: Fonts.latoRegular, size: 11.0) {
+            let attributesNormal = [
+                NSForegroundColorAttributeName: colorNormal,
+                NSFontAttributeName : font
+            ]
+            
+            let attributesSelected = [
+                NSForegroundColorAttributeName : colorSelected,
+                NSFontAttributeName : font
+            ]
+            
+            UITabBarItem.appearance().setTitleTextAttributes(attributesNormal, for: .normal)
+            UITabBarItem.appearance().setTitleTextAttributes(attributesSelected, for: .selected)
+        }
+        UITabBar.appearance().tintColor = colorSelected
+    }
+
 }
 
