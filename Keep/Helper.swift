@@ -19,7 +19,7 @@ class Helper {
     }
     
     static func setUpNotification(hour:Int, minute:Int){
-
+        
         let store = DataStore.sharedInstance
         
         var itemsExpiringToday:[Item] = []
@@ -40,37 +40,28 @@ class Helper {
             //center.removeAllPendingNotificationRequests()
             
             let content = UNMutableNotificationContent()
-            content.title = "Testing title"
-            content.body = "Testing title"
-            content.categoryIdentifier = "reminder"
-            //content.userInfo = ["": ""]
-            content.sound = .default()
+            
+            if itemsExpiringToday.count == 1 {
+                content.title = "Spoiler Alert!"
+                content.subtitle = "\(itemsExpiringToday.count) item is expiring today!"
+                content.body = "Use it today before it goes bad!"
+                content.categoryIdentifier = "reminder"
+                //content.userInfo = ["": ""]
+                content.sound = .default()
+            } else {
+                content.title = "Spoiler Alert!"
+                content.subtitle = "\(itemsExpiringToday.count) items are expiring today!"
+                content.body = "Make sure to use them today!"
+                content.categoryIdentifier = "reminder"
+                //content.userInfo = ["": ""]
+                content.sound = .default()
+            }
             
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
             center.add(request)
             
         } else {
-            var dateComponents = DateComponents()
-            dateComponents.hour = hour
-            dateComponents.minute = minute
-            
-            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-            
-            let center = UNUserNotificationCenter.current()
-            //center.removeAllPendingNotificationRequests()
-            
-            let content = UNMutableNotificationContent()
-            content.title = "Testing title 2"
-            content.body = "Testing title 2"
-            content.categoryIdentifier = "reminderTwo"
-            //content.userInfo = ["": ""]
-            content.sound = .default()
-            
-            print(UserDefaults.standard.value(forKey: "hour") as? Int ?? "NO HOUR ----")
-            print(UserDefaults.standard.value(forKey: "minute") as? Int ?? "NO MINUTE -----")
-            
-            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-            center.add(request)
+            print("no notification needed - no expiring items today")
         }
     }
 }
