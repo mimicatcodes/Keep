@@ -104,10 +104,6 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
         originalTopMargin = topMarginConstraint.constant
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
     override func viewDidLayoutSubviews() {
         heightConstraint.constant = 80
     }
@@ -600,7 +596,7 @@ extension AddItemsVC: UITextFieldDelegate {
     //
     func textFieldDidBeginEditing(_ textField: UITextField){
         activeTextField = textField
-        if textField.tag == 1 {
+        if textField == purchaseDateTextfield {
             moveViewUp()
             tableView.isHidden = true
             purchaseDateTextfield.inputView = datePicker1
@@ -608,7 +604,7 @@ extension AddItemsVC: UITextFieldDelegate {
             datePicker1.addTarget(self, action: #selector(self.datePickerChanged(sender:)) , for: .valueChanged)
             purchaseDateTextfield.text = formatter.string(from: datePicker1.date).capitalized
             moveViewDown()
-        } else if textField.tag == 2 {
+        } else if textField == expDateTextfield {
             moveViewUp()
             tableView.isHidden = true
             expDateTextfield.inputView = datePicker2

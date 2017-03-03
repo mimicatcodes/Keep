@@ -10,6 +10,13 @@ import Foundation
 import UserNotifications
 
 class Helper {
+    
+    static func formatDates(formatter: DateFormatter){
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        formatter.dateFormat = "MMM dd, yyyy"
+    }
+    
     static func daysBetweenTwoDates(start: Date, end: Date) -> Int{
         let currentCalendar = Calendar.current
         

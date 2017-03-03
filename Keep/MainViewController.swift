@@ -241,7 +241,9 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
         navigationItem.backBarButtonItem = backItem
         
         if segue.identifier == Identifiers.Segue.editIems {
-            let dest = segue.destination as! AddItemsVC
+            //let dest = segue.destination as! AddItemsVC
+            let dest = segue.destination as! AddItemsManuallyVC
+
             dest.itemToEdit = itemToEdit
         }
     }

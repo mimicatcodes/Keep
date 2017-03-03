@@ -10,13 +10,20 @@ import UIKit
 import NotificationCenter
 import RealmSwift
 
-class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigationControllerDelegate  {
+class AddScannedItemVC: UIViewController {
     
     // TODO: fix pickers - date errors
     // TODO: Custom tool bar fonts - fix!
     // TODO: minus button
     // TODO: Save action - notify it's actually saved
     
+    // Buttons 
+    
+    // Textfields
+    
+    // Labels
+    
+    //
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var favButton: UIButton!
@@ -32,12 +39,14 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
     
     let store = DataStore.sharedInstance
     var originalTopMargin: CGFloat!
+    
     let picker = UIPickerView()
     let datePicker1 = UIDatePicker()
     let datePicker2 = UIDatePicker()
+    
     var selectedIndex: Int = 0
-    var selectedExpIndex: Int?
-    var filteredItems = [Item]()
+    //var selectedExpIndex: Int?
+    //var filteredItems = [Item]()
     let formatter = DateFormatter()
     var quantity = 1
     var expDate = Date()
@@ -76,13 +85,13 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
         } else {
             minusButton.isEnabled = true
         }
-        formatDates()
+        Helper.formatDates(formatter: formatter)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         formatInitialData()
-        formatDates()
+        Helper.formatDates(formatter: formatter)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -176,6 +185,7 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
         
         NotificationCenter.default.post(name: NotificationName.refreshMainTV, object: nil)
         NotificationCenter.default.post(name: NotificationName.refreshScannedItems, object: nil)
+        activeTextField?.endEditing(true)
         dismiss(animated: true, completion: nil)
     }
 
@@ -246,15 +256,10 @@ class AddScannedItemVC: UIViewController, UIBarPositioningDelegate, UINavigation
         if let date = sevenDaysLater {
             expDate = date
             expDateField.text = formatter.string(from: date).capitalized
+            //datePicker2.setDate(expDate, animated: false)
         }
         datePicker1.setDate(currentDate, animated: false)
-        datePicker2.setDate(currentDate, animated: false)
-    }
-    
-    func formatDates(){
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        formatter.dateFormat = "MMM dd, yyyy"
+        //datePicker2.setDate(currentDate, animated: false)
     }
     
     func resetAddItems(){
