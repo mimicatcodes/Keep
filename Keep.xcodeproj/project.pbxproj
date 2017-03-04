@@ -247,7 +247,6 @@
 		DD48537D1E196C0400BEAC02 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				DD0639C91E5E95E100BF7609 /* Protocols */,
 				DD7B762D1E1B336C001DE6E8 /* Stock */,
 				DDC3E9831E1C953F00459295 /* Shopping List */,
 				DDC3E9851E1C954E00459295 /* Settings */,
@@ -397,6 +396,7 @@
 			children = (
 				DD7F721E1E66807400BAE511 /* Helper.swift */,
 				DDE189A81E354A9A00306449 /* Extensions.swift */,
+				DD0639C91E5E95E100BF7609 /* Protocols */,
 				DD4853A61E199F2400BEAC02 /* Constants */,
 			);
 			name = Helpers;

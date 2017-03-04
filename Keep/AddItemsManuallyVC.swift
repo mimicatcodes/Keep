@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationControllerDelegate {
+class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate {
 
     // tableview for autocomplete
     @IBOutlet weak var favoriteButton: UIButton!
@@ -402,6 +402,46 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
             saveButton.setTitleColor(Colors.warmGreyFour, for: .normal)
         }
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("hahahahaha")
+        if filteredItemsNames.count == 0 {
+            //return allItems.count
+            return 5
+        }
+        return filteredItemsNames.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCell: UITableViewCell = tableView.cellForRow(at: indexPath)!
+        print("jajajajajaja")
+        
+        nameTextField.text = selectedCell.textLabel!.text!.capitalized
+        
+        tableView.isHidden = !tableView.isHidden
+        
+        nameTextField.endEditing(true)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.Cell.nameCell)
+        
+        if filteredItemsNames.count == 0 {
+            tableView.isHidden = true
+            // ---- Dummy data ----------------------
+            cell?.textLabel?.text = "HI"
+            //list[indexPath.row]
+            // ---- Dummy data ----------------------
+            
+        } else {
+            tableView.isHidden = false
+            cell?.textLabel?.text = self.filteredItemsNames[indexPath.row]
+        }
+        
+        cell?.textLabel?.font = UIFont(name: Fonts.latoRegular, size: 13)
+        cell?.textLabel?.textColor = Colors.whiteFour
+        return cell!
+    }
 }
 
 
@@ -526,6 +566,8 @@ extension AddItemsManuallyVC {
     }
 }
 
+/*
+
 extension AddItemsManuallyVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("hahahahaha")
@@ -567,6 +609,7 @@ extension AddItemsManuallyVC: UITableViewDataSource, UITableViewDelegate {
         return cell!
     }
 }
+ */
 
 extension AddItemsManuallyVC: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
