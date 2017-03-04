@@ -905,7 +905,7 @@
                                                 </constraints>
                                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="nameCell" rowHeight="20" id="hTp-YD-dGb">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="20" id="hTp-YD-dGb">
                                                         <rect key="frame" x="0.0" y="28" width="262.5" height="20"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hTp-YD-dGb" id="lX7-Ox-ZfW">
@@ -2379,6 +2379,36 @@
                                     <constraint firstItem="XGc-l9-YbV" firstAttribute="centerY" secondItem="qyt-34-ssf" secondAttribute="centerY" id="yTK-5t-pb7"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Dk2-2g-cWA">
+                                <rect key="frame" x="24" y="136" width="278" height="100"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="XsE-KS-oXN"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="nameCell" textLabel="751-jz-gbo" style="IBUITableViewCellStyleDefault" id="kJ6-9y-x8O">
+                                        <rect key="frame" x="0.0" y="28" width="278" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kJ6-9y-x8O" id="Eij-eW-s8a">
+                                            <rect key="frame" x="0.0" y="0.0" width="278" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="751-jz-gbo">
+                                                    <rect key="frame" x="15" y="0.0" width="248" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Hjs-ld-xoD" id="MoO-Dc-XFf"/>
+                                    <outlet property="delegate" destination="Hjs-ld-xoD" id="J51-Tq-o2o"/>
+                                </connections>
+                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JHO-4z-6Qb" userLabel="topView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                 <subviews>
@@ -2413,25 +2443,9 @@
                                     <constraint firstAttribute="bottom" secondItem="lwe-DR-CV9" secondAttribute="bottom" constant="8" id="yUy-SO-7xr"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Dk2-2g-cWA">
-                                <rect key="frame" x="24" y="136" width="278" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="XsE-KS-oXN"/>
-                                </constraints>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kJ6-9y-x8O">
-                                        <rect key="frame" x="0.0" y="28" width="278" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kJ6-9y-x8O" id="Eij-eW-s8a">
-                                            <rect key="frame" x="0.0" y="0.0" width="278" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="d4m-Kz-NZM" firstAttribute="top" secondItem="JHO-4z-6Qb" secondAttribute="bottom" constant="10" id="1CX-Vh-Lan"/>
                             <constraint firstItem="Ika-0o-Kby" firstAttribute="leading" secondItem="T3V-Jg-9ud" secondAttribute="leading" id="1P4-BM-Mqr"/>
@@ -2490,6 +2504,9 @@
                             <constraint firstItem="MVU-Ou-bvj" firstAttribute="top" secondItem="ueS-aZ-1h2" secondAttribute="bottom" constant="5" id="x6k-nA-i1E"/>
                             <constraint firstItem="Rdb-Gx-fsX" firstAttribute="leading" secondItem="rwI-bB-tBX" secondAttribute="leading" id="xWf-xA-SXq"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="1Sx-sR-z3F" appends="YES" id="UQr-aF-CKz"/>
+                        </connections>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
@@ -2513,6 +2530,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZgJ-l7-Xrv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="1Sx-sR-z3F"/>
             </objects>
             <point key="canvasLocation" x="5333.6000000000004" y="-994.45277361319347"/>
         </scene>

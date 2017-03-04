@@ -59,12 +59,13 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
     var list = ["1","2","3","4","5","6"]
     
     var allItems = Array(DataStore.sharedInstance.allItems)
-    var filteredItems = [Item]()
     var filteredItemsNames = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         locationButtons = [fridgeButton, freezerButton, pantryButton, otherButton]
+        tableView.delegate = self
+        tableView.dataSource = self
         formatInitialData()
         customToolBarForPickers()
         nameTextField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
@@ -319,7 +320,6 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
     
     func configureTableView(){
         tableView.allowsSelection = true
-        tableView.delegate = self
         tableView.layer.masksToBounds = true
         tableView.layer.borderColor = Colors.whiteFour.cgColor
         tableView.layer.borderWidth = 1.0
@@ -362,7 +362,7 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
     }
     
     func showAlert() {
-        labelView = UILabel(frame: CGRect(x: 0, y: 60, width: self.view.frame.width, height: 40))
+        labelView = UILabel(frame: CGRect(x: 0, y: 70, width: self.view.frame.width, height: 40))
         labelView.backgroundColor = Colors.tealish
         if itemToEdit != nil {
             labelView.text = Labels.itemEdited
@@ -416,6 +416,7 @@ extension AddItemsManuallyVC : UITextFieldDelegate {
         if textField == nameTextField {
             tableView.isHidden = true
         }
+        
         return true
     }
     
@@ -529,15 +530,17 @@ extension AddItemsManuallyVC {
 
 extension AddItemsManuallyVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("hahahahaha")
         if filteredItemsNames.count == 0 {
             //return allItems.count
-            return list.count
+            return 0
         }
         return filteredItemsNames.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCell: UITableViewCell = tableView.cellForRow(at: indexPath)!
+        print("jajajajajaja")
         
         nameTextField.text = selectedCell.textLabel!.text!.capitalized
         
@@ -563,6 +566,16 @@ extension AddItemsManuallyVC: UITableViewDataSource, UITableViewDelegate {
         cell?.textLabel?.font = UIFont(name: Fonts.latoRegular, size: 13)
         cell?.textLabel?.textColor = Colors.whiteFour
         return cell!
+    }
+}
+
+extension AddItemsManuallyVC: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if (touch.view?.isDescendant(of: tableView))! {
+            return false
+        } else {
+            return true
+        }
     }
 }
 
