@@ -64,8 +64,6 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
     override func viewDidLoad() {
         super.viewDidLoad()
         locationButtons = [fridgeButton, freezerButton, pantryButton, otherButton]
-        tableView.delegate = self
-        tableView.dataSource = self
         formatInitialData()
         customToolBarForPickers()
         nameTextField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
@@ -533,7 +531,7 @@ extension AddItemsManuallyVC: UITableViewDataSource, UITableViewDelegate {
         print("hahahahaha")
         if filteredItemsNames.count == 0 {
             //return allItems.count
-            return 0
+            return 5
         }
         return filteredItemsNames.count
     }
@@ -555,7 +553,8 @@ extension AddItemsManuallyVC: UITableViewDataSource, UITableViewDelegate {
         if filteredItemsNames.count == 0 {
             tableView.isHidden = true
             // ---- Dummy data ----------------------
-            cell?.textLabel?.text = list[indexPath.row]
+            cell?.textLabel?.text = "HI"
+                //list[indexPath.row]
             // ---- Dummy data ----------------------
             
         } else {
