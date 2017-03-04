@@ -75,7 +75,7 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
         tableView.tableFooterView = UIView()
-        formatDates()
+        Helper.formatDates(formatter: formatter)
         notificationAddObserver()
     }
     
@@ -175,12 +175,6 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
             }
         }, completion: nil)
         
-    }
-    
-    func formatDates(){
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        formatter.dateFormat = "MMM dd, yyyy"
     }
     
     func configureCells(cell:StockCell, indexPath: IndexPath, filteredItem: Item ){

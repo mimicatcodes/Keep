@@ -16,7 +16,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     let store = DataStore.sharedInstance
     let today = Date()
     
-    var sections = ["Set Time for Reminder", "Send Feedback"]
+    var sections:[SettingMenu] = [.reminder, .sendFeedback]
     
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var rightTopView: UIView!
@@ -113,7 +113,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients(["getkeep@gmail.com"])
+            mail.setToRecipients(["trykeepapp@gmail.com"])
             mail.setSubject("Hi Keep Team!")
             mail.setMessageBody("", isHTML: true)
             
@@ -178,7 +178,7 @@ extension SettingsViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell =  tableView.dequeueReusableCell(withIdentifier: Identifiers.Cell.accountCell, for: indexPath) as! AccountCell
-        cell.title.text = sections[indexPath.row]
+        cell.title.text = sections[indexPath.row].rawValue
         cell.selectionStyle = .none
         return cell
     }

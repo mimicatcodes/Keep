@@ -26,7 +26,7 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
         tableView.emptyDataSetDelegate = self
         tableView.tableFooterView = UIView()
         definesPresentationContext = true
-        formatDates()
+        Helper.formatDates(formatter: formatter)
         tableView.separatorColor = Colors.whiteThree
         NotificationCenter.default.addObserver(forName: NotificationName.refreshTableview, object: nil, queue: nil) { notification in
             self.tableView.reloadData()
@@ -89,11 +89,6 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true, completion: nil)
-    }
-    func formatDates() {
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        formatter.dateFormat = "MMM dd, yyyy"
     }
   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

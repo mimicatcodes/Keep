@@ -26,10 +26,17 @@ class SetTimeForReminderVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let hr =  userDefaults.value(forKey: "hour") as? Int, let min = userDefaults.value(forKey: "minute") as? Int {
-            if hr < 12 {
+            
+            if hr < 12 && hr > 0 {
                 let m = String(format: "%02d", min)
                 selectedTimeLabel.text = "\(hr):\(m) AM"
-            } else {
+            } else if hr == 12 {
+                let m = String(format: "%02d", min)
+                selectedTimeLabel.text = "\(12):\(m) PM"
+            } else if hr == 0 {
+                let m = String(format: "%02d", min)
+                selectedTimeLabel.text = "\(12):\(m) AM"
+            }else {
                 let m = String(format: "%02d", min)
                 let h = String(format: "%02d", (hr - 12))
                 selectedTimeLabel.text = "\(h):\(m) PM"

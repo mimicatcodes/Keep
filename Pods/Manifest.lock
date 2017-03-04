@@ -3,6 +3,7 @@ PODS:
     - Charts/Core (= 3.0.1)
   - Charts/Core (3.0.1)
   - MGSwipeTableCell (1.5.6)
+  - paper-onboarding (2.0.1)
   - Realm (2.1.1):
     - Realm/Headers (= 2.1.1)
   - Realm/Headers (2.1.1)
@@ -13,6 +14,7 @@ PODS:
 DEPENDENCIES:
   - Charts (~> 3.0.1)
   - MGSwipeTableCell
+  - paper-onboarding (~> 2.0.1)
   - RealmSwift
   - TesseractOCRiOS (from `https://github.com/gali8/Tesseract-OCR-iOS.git`)
 
@@ -28,10 +30,11 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Charts: 0e84f4418e87dad6a9edde221fba37ebb51d3ba7
   MGSwipeTableCell: 616700eb0ffd1c611ba909066cb7fd739790a0a7
+  paper-onboarding: a8e001214d9ce9decf78e160b3823f396dbd51ac
   Realm: a55959c0b171a5fe5267406d17f314fec3cefaae
   RealmSwift: 749fd955bf8d6471c21d218b9389a47aaeccfe3f
   TesseractOCRiOS: 729989db3984bb60ba3addb053569b172d48c409
 
-PODFILE CHECKSUM: 9b4d9e92bdbef972fba5db4a11b63ddb113e8c0f
+PODFILE CHECKSUM: b975ef9a1b1c72d64d6a8aacc73652741e28607e
 
 COCOAPODS: 1.0.1

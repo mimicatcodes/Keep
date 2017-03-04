@@ -155,6 +155,14 @@ struct ImageName {
     static let editGrey1 = "EditGrey1"
     static let editGrey2 = "EditGrey2"
 }
+//
+//struct SettingMenu {
+//    static let reminder = "Set Time for Reminder"
+//    static let feedback = "Send Feedback"
+//}
 
-
+enum SettingMenu : String {
+    case reminder = "Set Time for Reminder"
+    case sendFeedback = "Send Feedback"
+}
 

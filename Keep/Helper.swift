@@ -44,20 +44,20 @@ class Helper {
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
             
             let center = UNUserNotificationCenter.current()
-            //center.removeAllPendingNotificationRequests()
+            center.removeAllPendingNotificationRequests()
             
             let content = UNMutableNotificationContent()
             
             if itemsExpiringToday.count == 1 {
                 content.title = "Spoiler Alert!"
-                content.subtitle = "\(itemsExpiringToday.count) item is expiring today!"
+                content.subtitle = "\(itemsExpiringToday.count) item is expiring today."
                 content.body = "Use it today before it goes bad!"
                 content.categoryIdentifier = "reminder"
                 //content.userInfo = ["": ""]
                 content.sound = .default()
             } else {
                 content.title = "Spoiler Alert!"
-                content.subtitle = "\(itemsExpiringToday.count) items are expiring today!"
+                content.subtitle = "\(itemsExpiringToday.count) items are expiring today."
                 content.body = "Make sure to use them today!"
                 content.categoryIdentifier = "reminder"
                 //content.userInfo = ["": ""]
