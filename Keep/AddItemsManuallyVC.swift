@@ -81,9 +81,9 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
         originTopMargin = topMarginConstraint.constant
     }
     
-    override func viewDidLayoutSubviews() {
-        heightConstraint.constant = 80
-    }
+//    override func viewDidLayoutSubviews() {
+//        heightConstraint.constant = 80
+//    }
     
     @IBAction func cancelTapped(_ sender: Any) {
         activeTextField?.endEditing(true)
@@ -186,7 +186,7 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
             isFavorited = false
         }
     }
-    
+ 
     @IBAction func minustBtnTapped(_ sender: Any) {
         if quantity == 1 {
             quantityMinusButton.isEnabled = false
@@ -319,6 +319,7 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
     func configureTableView(){
         tableView.allowsSelection = true
         tableView.layer.masksToBounds = true
+        tableView.layer.cornerRadius = 8
         tableView.layer.borderColor = Colors.whiteFour.cgColor
         tableView.layer.borderWidth = 1.0
         tableView.separatorInset = .zero
@@ -439,7 +440,7 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
         }
         
         cell?.textLabel?.font = UIFont(name: Fonts.latoRegular, size: 13)
-        cell?.textLabel?.textColor = Colors.whiteFour
+        cell?.textLabel?.textColor = Colors.tealishFaded
         return cell!
     }
 }

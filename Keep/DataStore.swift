@@ -13,13 +13,13 @@ class DataStore{
     static let sharedInstance = DataStore()
     fileprivate init(){}
     
-    var allItems = try! Realm().objects(Item.self)
+    var allItems = try! Realm().objects(Item.self).sorted(byProperty: Keys.name, ascending: true)
     var fridgeItems = try! Realm().objects(Item.self).filter(Filters.fridge)
     var freezerItems = try! Realm().objects(Item.self).filter(Filters.freezer)
     var pantryItems = try! Realm().objects(Item.self).filter(Filters.pantry)
     var otherItems = try! Realm().objects(Item.self).filter(Filters.other)
 
-    var allShopingLists = try! Realm().objects(ShoppingList.self)
+    var allShopingLists = try! Realm().objects(ShoppingList.self).sorted(byProperty: Keys.title, ascending: true)
     
     var scannedItemToAdd = EmptyString.none
     var scannedItemIndex:Int?
@@ -29,10 +29,9 @@ class DataStore{
     var listID = EmptyString.none
 
     var allFavoritedItems = try! Realm().objects(FavoritedItem.self).sorted(byProperty: Keys.name, ascending: true)
-    var allShoppingItems = try! Realm().objects(ShoppingItem.self)
+    var allShoppingItems = try! Realm().objects(ShoppingItem.self).sorted(byProperty: Keys.name, ascending: true)
         
     var fridgeSectionNames: [String] {
-        
         return Set(fridgeItems.value(forKeyPath: Keys.category) as! [String]).sorted()
     }
 

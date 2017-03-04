@@ -49,6 +49,7 @@ struct Keys {
     static let placeholderLabel = "placeholderLabel"
     static let name = "name"
     static let category = "category"
+    static let title = "title"
 }
 
 struct NotificationName {
