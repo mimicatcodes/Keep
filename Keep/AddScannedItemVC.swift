@@ -12,18 +12,10 @@ import RealmSwift
 
 class AddScannedItemVC: UIViewController {
     
-    // TODO: fix pickers - date errors
     // TODO: Custom tool bar fonts - fix!
     // TODO: minus button
     // TODO: Save action - notify it's actually saved
     
-    // Buttons 
-    
-    // Textfields
-    
-    // Labels
-    
-    //
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var favButton: UIButton!
@@ -256,10 +248,9 @@ class AddScannedItemVC: UIViewController {
         if let date = sevenDaysLater {
             expDate = date
             expDateField.text = formatter.string(from: date).capitalized
-            //datePicker2.setDate(expDate, animated: false)
+            datePicker2.date = expDate
         }
-        datePicker1.setDate(currentDate, animated: false)
-        //datePicker2.setDate(currentDate, animated: false)
+        datePicker1.date = currentDate
     }
     
     func resetAddItems(){
@@ -349,19 +340,20 @@ extension AddScannedItemVC : UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField){
         activeTextField = textField
-        if textField.tag == 0 {
+        if textField == pDateField {
             pDateField.inputView = datePicker1
             datePicker1.datePickerMode = .date
             datePicker1.addTarget(self, action: #selector(self.datePickerChanged(sender:)) , for: .valueChanged)
             pDateField.text = formatter.string(from: datePicker1.date).capitalized
             moveViewDown()
-        } else if textField.tag == 1 {
+        } else if textField == expDateField {
             expDateField.inputView = datePicker2
-            datePicker2.datePickerMode = UIDatePickerMode.date
+            expDate = datePicker2.date
+            datePicker2.datePickerMode = .date
             datePicker2.addTarget(self, action: #selector(self.datePickerChanged(sender:)), for: .valueChanged)
-            expDateField.text = formatter.string(from: datePicker2.date).capitalized
+            expDateField.text = formatter.string(from: expDate).capitalized
             moveViewDown()
-        } else if textField.tag == 2 {
+        } else if textField == categoryField {
             moveViewUp()
         }
     }

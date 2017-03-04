@@ -11,7 +11,6 @@ import RealmSwift
 
 class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate {
 
-    // tableview for autocomplete
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var quantityLabel: CustomLabel!
@@ -71,7 +70,6 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //originTopMargin = topMarginConstraint.constant
         formatInitialData()
         Helper.formatDates(formatter: formatter)
     }
@@ -80,11 +78,7 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
         super.viewDidAppear(animated)
         originTopMargin = topMarginConstraint.constant
     }
-    
-//    override func viewDidLayoutSubviews() {
-//        heightConstraint.constant = 80
-//    }
-    
+
     @IBAction func cancelTapped(_ sender: Any) {
         activeTextField?.endEditing(true)
         dismiss(animated: true, completion: nil)
@@ -289,8 +283,8 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
         picker.dataSource = self
         datePickerOne.datePickerMode = .date
         datePickerTwo.datePickerMode = .date
-        datePickerOne.setDate(Date(), animated: false)
-        datePickerOne.setDate(Date(), animated: false)
+        datePickerOne.date = Date()
+        datePickerTwo.date = expDate
         categoryField.inputView = picker
         
         if quantity == 1 {
@@ -443,6 +437,24 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
         cell?.textLabel?.textColor = Colors.tealishFaded
         return cell!
     }
+    
+    func searchAutocompleteEntriesWithSubstring(_ substring: String) {
+        
+        filteredItemsNames.removeAll(keepingCapacity: false)
+        
+        for itemArray in allItems_ {
+            for item in itemArray {
+                
+                let myString: NSString! = item as NSString
+                let substringRange: NSRange! = myString.range(of: substring)
+                
+                if substringRange.location == 0 {
+                    filteredItemsNames.append(item)
+                }
+            }
+        }
+        tableView.reloadData()
+    }
 }
 
 
@@ -547,23 +559,4 @@ extension AddItemsManuallyVC: UIPickerViewDelegate, UIPickerViewDataSource {
 }
 
 
-extension AddItemsManuallyVC {
-    func searchAutocompleteEntriesWithSubstring(_ substring: String) {
-        
-        filteredItemsNames.removeAll(keepingCapacity: false)
-        
-        for itemArray in allItems_ {
-            for item in itemArray {
-                
-                let myString: NSString! = item as NSString
-                let substringRange: NSRange! = myString.range(of: substring)
-                
-                if substringRange.location == 0 {
-                    filteredItemsNames.append(item)
-                }
-            }
-        }
-        tableView.reloadData()
-    }
-}
 

@@ -61,7 +61,6 @@
 		DDC3E98D1E1CB86200459295 /* ShoppingListDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E98C1E1CB86100459295 /* ShoppingListDetailVC.swift */; };
 		DDC3E98F1E1CB87C00459295 /* AddListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E98E1E1CB87C00459295 /* AddListVC.swift */; };
 		DDC3E9D11E20580B00459295 /* AddItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E9D01E20580B00459295 /* AddItemVC.swift */; };
-		DDC3EB9E1E2DBC3900459295 /* AddItemsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3EB9D1E2DBC3900459295 /* AddItemsVC.swift */; };
 		DDC3EBA01E31365B00459295 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3EB9F1E31365B00459295 /* Category.swift */; };
 		DDC3EBA21E31450100459295 /* StockItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3EBA11E31450100459295 /* StockItem.swift */; };
 		DDC3EBA41E31451000459295 /* ShoppingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3EBA31E31451000459295 /* ShoppingItem.swift */; };
@@ -134,7 +133,6 @@
 		DDC3E98C1E1CB86100459295 /* ShoppingListDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingListDetailVC.swift; sourceTree = "<group>"; };
 		DDC3E98E1E1CB87C00459295 /* AddListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListVC.swift; sourceTree = "<group>"; };
 		DDC3E9D01E20580B00459295 /* AddItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemVC.swift; sourceTree = "<group>"; };
-		DDC3EB9D1E2DBC3900459295 /* AddItemsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemsVC.swift; sourceTree = "<group>"; };
 		DDC3EB9F1E31365B00459295 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		DDC3EBA11E31450100459295 /* StockItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockItem.swift; sourceTree = "<group>"; };
 		DDC3EBA31E31451000459295 /* ShoppingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingItem.swift; sourceTree = "<group>"; };
@@ -340,12 +338,11 @@
 			isa = PBXGroup;
 			children = (
 				DD5D7DC81E329BA300C2317D /* MainViewController.swift */,
+				DD7F72241E69FAB600BAE511 /* AddItemsManuallyVC.swift */,
 				DDC3E97F1E1C76E100459295 /* SearchVC.swift */,
-				DDC3EB9D1E2DBC3900459295 /* AddItemsVC.swift */,
 				DD786E301E4A69CE00B1F4E3 /* ScanReceiptVC.swift */,
 				DDEC8C8B1E456F29004C73CB /* ScannedItemsVC.swift */,
 				DD786E321E4AED2F00B1F4E3 /* AddScannedItemVC.swift */,
-				DD7F72241E69FAB600BAE511 /* AddItemsManuallyVC.swift */,
 			);
 			name = Stock;
 			sourceTree = "<group>";
@@ -559,7 +556,6 @@
 				DDC3E9871E1C957000459295 /* ShoppingListViewController.swift in Sources */,
 				DD8586BB1E580C2A00065DDD /* CustomViews.swift in Sources */,
 				DDC3EBA61E3146D500459295 /* Location.swift in Sources */,
-				DDC3EB9E1E2DBC3900459295 /* AddItemsVC.swift in Sources */,
 				DDE189A91E354A9A00306449 /* Extensions.swift in Sources */,
 				DD4853B31E199FB700BEAC02 /* AlcoholicBeverages.swift in Sources */,
 				DDC3E9821E1C93F400459295 /* DataStore.swift in Sources */,
