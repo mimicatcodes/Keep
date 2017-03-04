@@ -143,6 +143,7 @@ class AddScannedItemVC: UIViewController {
     }
     
     @IBAction func cancelBtnTapped(_ sender: UIButton) {
+        activeTextField?.endEditing(true)
         dismiss(animated: true, completion: nil)
     }
     

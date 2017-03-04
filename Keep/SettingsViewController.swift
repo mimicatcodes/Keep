@@ -9,8 +9,9 @@
 import UIKit
 import RealmSwift
 import Charts
+import MessageUI
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     let store = DataStore.sharedInstance
     let today = Date()
@@ -44,6 +45,8 @@ class SettingsViewController: UIViewController {
     var numOfExpiringItems: Int = 0
     // dummy data
     var categories:[String]!
+    
+    let mailComposerVC = MFMailComposeViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,6 +108,26 @@ class SettingsViewController: UIViewController {
         }
         numOfItemsExpiredLabel.text = "\(numOfExpiredItems)"
     }
+    
+    func sendFeedback() {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["getkeep@gmail.com"])
+            mail.setSubject("Hi Keep Team!")
+            mail.setMessageBody("", isHTML: true)
+            
+            mail.navigationBar.tintColor = UIColor.white
+            present(mail, animated: true)
+        } else {
+            print("Unable to send an email")
+        }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
+
 }
 
 // Charts API
@@ -162,6 +185,14 @@ extension SettingsViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 45
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            performSegue(withIdentifier: Identifiers.Segue.setReminder, sender: self)
+        } else {
+            sendFeedback()
+        }
     }
 }
 
