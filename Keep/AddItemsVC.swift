@@ -72,6 +72,7 @@ class AddItemsVC: UIViewController, UIBarPositioningDelegate {
         tableView.allowsSelection = true
         tableView.delegate = self
         tableView.layer.masksToBounds = true
+        tableView.layer.cornerRadius = 8
         tableView.layer.borderColor = Colors.whiteFour.cgColor
         tableView.layer.borderWidth = 1.0
         tableView.separatorInset = .zero
