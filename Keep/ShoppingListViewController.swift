@@ -36,11 +36,11 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-    }
+    } 
     
 //    
 //    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
-//        return UIImage(named: "sample3")
+//        return UIImage(named: "sample_")
 //    }
     
     func configureSwipeButtons(cell:ShoppingListCell, indexPath: IndexPath){

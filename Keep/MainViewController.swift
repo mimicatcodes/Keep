@@ -116,7 +116,7 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
     
     
 //    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
-//        return UIImage(named: "sample3")
+//        return UIImage(named: "sample_")
 //    }
     
     func refreshTableView(){
