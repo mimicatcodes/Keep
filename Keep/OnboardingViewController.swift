@@ -14,6 +14,11 @@ class OnboardingViewController: UIViewController, PaperOnboardingDataSource, Pap
     @IBOutlet weak var onboarding: PaperOnboarding!
     @IBOutlet weak var getStartedButton: UIButton!
     
+    @IBAction func getStartedButtonTapped(_ sender: Any) {
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(true, forKey: "onboardingComplete")
+        userDefaults.synchronize()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         onboarding.delegate = self

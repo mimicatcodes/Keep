@@ -15,9 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//        window?.rootViewController = vc
-//        window?.makeKeyAndVisible()
+        checkOnboardingStatus()
         setUpLocalNotification()
         styleNavigationAndTapBarElements()
         return true
@@ -58,6 +56,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 }
 
 extension AppDelegate {
+    
+    fileprivate func checkOnboardingStatus(){
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var initialVC = storyboard.instantiateViewController(withIdentifier: "Onboarding")
+
+        if UserDefaults.standard.bool(forKey: "onboardingComplete") {
+            initialVC = storyboard.instantiateViewController(withIdentifier: "MainApp")
+        }
+        
+        window?.rootViewController = initialVC
+        window?.makeKeyAndVisible()
+    }
+    
     fileprivate func setUpLocalNotification(){
         UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (allowed, error) in
