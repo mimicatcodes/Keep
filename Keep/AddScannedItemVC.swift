@@ -37,8 +37,6 @@ class AddScannedItemVC: UIViewController {
     let datePicker2 = UIDatePicker()
     
     var selectedIndex: Int = 0
-    //var selectedExpIndex: Int?
-    //var filteredItems = [Item]()
     let formatter = DateFormatter()
     var quantity = 1
     var expDate = Date()

@@ -85,7 +85,7 @@ extension FloatingPoint {
 extension UISearchBar {
     var textColor: UIColor? {
         get {
-            if let textField = self.value(forKey: "searchField") as? UITextField  {
+            if let textField = self.value(forKey: Keys.searchField) as? UITextField  {
                 return textField.textColor
             } else {
                 return nil
@@ -93,7 +93,7 @@ extension UISearchBar {
         }
         
         set (newValue) {
-            if let textField = self.value(forKey: "searchField") as? UITextField  {
+            if let textField = self.value(forKey: Keys.searchField) as? UITextField  {
                 textField.textColor = newValue
             }
         }
@@ -103,5 +103,11 @@ extension UISearchBar {
 extension Date {
     var localTime: String {
         return description(with: Locale.current)
+    }
+}
+
+extension UIColor {
+    static func rgb(_ red: CGFloat,_ green: CGFloat,_ blue: CGFloat,_ alpha: CGFloat) -> UIColor {
+        return UIColor(red: red/255.0, green: green/255.0, blue: blue/255.0, alpha: alpha)
     }
 }

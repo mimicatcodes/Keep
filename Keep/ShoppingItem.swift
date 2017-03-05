@@ -14,7 +14,7 @@ class ShoppingItem: Object {
     dynamic var name:String = EmptyString.none
     dynamic var quantity: String = "1"
     dynamic var isPurchased:Bool = false
-    dynamic var list: ShoppingList? // to-one
+    dynamic var list: ShoppingList? 
 
     convenience init(name: String, isPurchased: Bool) {
         

@@ -34,7 +34,6 @@ class OnboardingViewController: UIViewController, PaperOnboardingDataSource, Pap
     func onboardingItemsCount() -> Int {
         return 3
     }
-
     
     func onboardingWillTransitonToIndex(_ index: Int) {
         if index == 1 {

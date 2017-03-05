@@ -33,7 +33,6 @@ class Item : Object {
         self.location = location
         self.category = category
     }
-    
-  }
-    
+}
+
 

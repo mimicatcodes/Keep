@@ -14,7 +14,7 @@ class Helper {
     static func formatDates(formatter: DateFormatter){
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
-        formatter.dateFormat = "MMM dd, yyyy"
+        formatter.dateFormat = DateFormat.monthDayYear
     }
     
     static func daysBetweenTwoDates(start: Date, end: Date) -> Int{
@@ -49,17 +49,17 @@ class Helper {
             let content = UNMutableNotificationContent()
             
             if itemsExpiringToday.count == 1 {
-                content.title = "Spoiler Alert!"
-                content.subtitle = "\(itemsExpiringToday.count) item is expiring today."
-                content.body = "Use it today before it goes bad!"
-                content.categoryIdentifier = "reminder"
+                content.title = LocalNotification.title
+                content.subtitle = "\(itemsExpiringToday.count)" + LocalNotification.subtitleSingular
+                content.body = LocalNotification.bodySingular
+                content.categoryIdentifier = LocalNotification.categoryIdentifier
                 //content.userInfo = ["": ""]
                 content.sound = .default()
             } else {
-                content.title = "Spoiler Alert!"
-                content.subtitle = "\(itemsExpiringToday.count) items are expiring today."
-                content.body = "Make sure to use them today!"
-                content.categoryIdentifier = "reminder"
+                content.title = LocalNotification.title
+                content.subtitle = "\(itemsExpiringToday.count)" + LocalNotification.subtitlePlural
+                content.body = LocalNotification.bodyPlular
+                content.categoryIdentifier = LocalNotification.categoryIdentifier
                 //content.userInfo = ["": ""]
                 content.sound = .default()
             }
@@ -68,7 +68,7 @@ class Helper {
             center.add(request)
             
         } else {
-            print("no notification needed - no expiring items today")
+            print(LocalNotification.messageforNoNeed)
         }
     }
 }

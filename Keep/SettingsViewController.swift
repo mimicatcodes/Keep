@@ -13,11 +13,6 @@ import MessageUI
 
 class SettingsViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
-    let store = DataStore.sharedInstance
-    let today = Date()
-    
-    var sections:[SettingMenu] = [.reminder, .sendFeedback]
-    
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var rightTopView: UIView!
     @IBOutlet weak var rightMidView: UIView!
@@ -39,13 +34,14 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     @IBOutlet weak var labelThree: UILabel!
     @IBOutlet weak var labelFour: UILabel!
     
+    let store = DataStore.sharedInstance
+    var sections:[SettingMenu] = [.reminder, .sendFeedback]
     var numOfItems: Int = 0
     var numOfItemsExpiringThisWeek: Int = 0
     var numOfExpiredItems: Int = 0
     var numOfExpiringItems: Int = 0
     // dummy data
-    var categories:[String]!
-    
+    let numOfItemsInCategory:[Double] = [10.0, 4.0, 6.0, 3.0, 8.0]
     let mailComposerVC = MFMailComposeViewController()
     
     override func viewDidLoad() {
@@ -54,13 +50,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         //topView.underlinedBorder()
         midView.underlinedBorder()
         setNumbers()
-        
-        // dummy data
-        categories = ["Protein","Dairy","Vegetales","Fruits","Grains"]
-        let numOfItemsInCategory = [10.0, 4.0, 6.0, 3.0, 8.0]
-        
-        setChart(dataPoints: categories, values: numOfItemsInCategory)
-        radarChartView.legend.enabled = false
+        setChart(dataPoints: FoodGroups.categories, values: numOfItemsInCategory)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,7 +59,6 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
             self.setNumbers()
         }
     }
-    
     
     func setNumbers(){
         // 1st Section
@@ -168,6 +157,7 @@ extension SettingsViewController {
         
         radarChartView.sizeToFit()
         radarChartView.chartDescription?.text = EmptyString.none
+        radarChartView.legend.enabled = false
     }
 }
 
@@ -198,11 +188,7 @@ extension SettingsViewController : UITableViewDelegate, UITableViewDataSource {
 
 @objc(RadarChartFormatter)
 class ChartFormatter:NSObject,IAxisValueFormatter{
-    
-     let categories = ["Protein","Dairy","Vegetales","Fruits","Grains"]
-    
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return categories[Int(value)]
+        return FoodGroups.categories[Int(value)]
     }
-    
 }

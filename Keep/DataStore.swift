@@ -48,6 +48,4 @@ class DataStore{
     }
     
     var buttonStatus = Locations.fridge
-    var favItemToEdit:FavoritedItem?
-    
 }

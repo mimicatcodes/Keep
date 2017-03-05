@@ -399,20 +399,17 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("hahahahaha")
         if filteredItemsNames.count == 0 {
-            //return allItems.count
-            return 5
+            return allItems.count
         }
         return filteredItemsNames.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCell: UITableViewCell = tableView.cellForRow(at: indexPath)!
-        print("jajajajajaja")
         
         nameTextField.text = selectedCell.textLabel!.text!.capitalized
-        
+    
         tableView.isHidden = !tableView.isHidden
         
         nameTextField.endEditing(true)

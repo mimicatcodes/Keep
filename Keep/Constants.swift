@@ -11,40 +11,39 @@ import UIKit
 import NotificationCenter
 
 struct Colors {
-    
-    static let duckEggBlue = UIColor(red: 229/255.0, green: 253/255.0, blue: 249/255.0, alpha: 1)
-    static let lightTeal = UIColor(red: 133/255.0, green: 219/255.0, blue: 205/255.0, alpha: 1)
-    static let lightTealTwo = UIColor(red: 178/255.0, green: 231/255.0, blue: 222/255.0, alpha: 1)
-    static let lightTealThree = UIColor(red: 135/255.0, green: 219/255.0, blue: 206/255.0, alpha: 1)
+    static let duckEggBlue = UIColor.rgb(229, 253, 249, 1)
+    static let lightTeal = UIColor.rgb(133, 219, 205, 1)
+    static let lightTealTwo = UIColor.rgb(178, 231, 222, 1)
+    static let lightTealThree = UIColor.rgb(135, 219, 206, 1)
 
-    static let tealish =  UIColor(red: 35/255.0, green: 213/255.0, blue: 185/255.0, alpha: 1)
-    static let tealishFaded = UIColor(red: 35/255.0, green: 213/255.0, blue: 185/255.0, alpha: 0.3)
+    static let tealish =  UIColor.rgb(35, 213, 185, 1)
+    static let tealishFaded = UIColor.rgb(35, 213, 185, 0.3)
     
-    static let whiteTwo = UIColor(red: 245/255.0, green: 245/255.0, blue: 245/255.0, alpha: 1)
-    static let whiteThree = UIColor(red:219/255.0, green:219/255.0, blue:219/255.0, alpha: 1.0)
-    static let whiteFour = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1)
-    static let whiteFive = UIColor(red: 213/255.0, green: 213/255.0, blue: 213/255.0, alpha: 1)
-    static let whiteSix = UIColor(red: 242/255.0, green: 242/255.0, blue: 242/255.0, alpha: 1)
+    static let whiteTwo = UIColor.rgb(245, 245, 245, 1)
+    static let whiteThree = UIColor.rgb(219, 219, 219, 1)
+    static let whiteFour = UIColor.rgb(229, 229, 229, 1)
+    static let whiteFive = UIColor.rgb(213, 213, 213, 1)
+    static let whiteSix = UIColor.rgb(242, 242, 242, 1)
 
-    static let warmGrey = UIColor(red: 131/255.0, green: 131/255.0, blue: 131/255.0, alpha: 1)
-    static let warmGreyTwo = UIColor(red: 146/255.0, green: 146/255.0, blue: 146/255.0, alpha: 1)
-    static let warmGreyThree = UIColor(red: 113/255.0, green: 113/255.0, blue: 113/255.0, alpha: 1)
-    static let warmGreyFour = UIColor(red: 123/255.0, green: 123/255.0, blue: 123/255.0, alpha: 1)
-    static let warmGreyFive = UIColor(red: 151/255.0, green: 151/255.0, blue: 151/255.0, alpha: 1)
+    static let warmGrey = UIColor.rgb(131, 131, 131, 1)
+    static let warmGreyTwo = UIColor.rgb(146, 146, 146, 1)
+    static let warmGreyThree = UIColor.rgb(113, 113, 113, 1)
+    static let warmGreyFour = UIColor.rgb(123, 123, 123, 1)
+    static let warmGreyFive = UIColor.rgb(151, 151, 151, 1)
 
-    static let greyishBrown = UIColor(red: 77/255.0, green: 77/255.0, blue: 77/255.0, alpha: 1)
-    static let brownishGrey = UIColor(red: 96/255.0, green: 96/255.0, blue: 96/255.0, alpha: 1)
-    static let brownishGreyTwo = UIColor(red:100/255.0, green:100/255.0, blue:100/255.0, alpha: 1.0)
-    static let brownishGreyThree = UIColor(red:94/255.0, green:94/255.0, blue:94/255.0, alpha: 1.0)
+    static let greyishBrown = UIColor.rgb(77, 77, 77, 1)
+    static let brownishGrey = UIColor.rgb(96, 96, 96, 1)
+    static let brownishGreyTwo = UIColor.rgb(100, 100, 100, 1)
+    static let brownishGreyThree = UIColor.rgb(94, 94, 94, 1)
     
-    static let pastelRed = UIColor(red: 237/255.0, green: 93/255.0, blue: 93/255.0, alpha: 1)
-    static let salmon = UIColor(red: 249/255.0, green: 117/255.0, blue: 102/255.0, alpha: 1)
-    static let peachyPink = UIColor(red: 255/255.0, green: 137/255.0, blue: 137/255.0, alpha: 1)
+    static let pastelRed = UIColor.rgb(237, 93, 93, 1)
+    static let salmon = UIColor.rgb(249, 117, 102, 1)
+    static let peachyPink = UIColor.rgb(255, 137, 137, 1)
 
-    static let pinkishGrey = UIColor(red: 202/255.0, green: 202/255.0, blue: 202/255.0, alpha: 1)
-    static let pinkishGreyTwo = UIColor(red: 201/255.0, green: 201/255.0, blue: 201/255.0, alpha: 1)
+    static let pinkishGrey = UIColor.rgb(202, 202, 202, 1)
+    static let pinkishGreyTwo = UIColor.rgb(201, 201, 201, 1)
     
-    static let dawn = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.10)
+    static let dawn = UIColor.rgb(0, 0, 0, 0.10)
     }
 
 struct Keys {
@@ -155,6 +154,23 @@ struct OnBoarding {
     static let produceBody = "KEEP alerts you before your food expires, so you can always eat your produce at its best condition."
 }
 
+struct LocalNotification {
+    static let title = "Spoiler Alert!"
+    static let subtitleSingular = " item is expiring today"
+    static let subtitlePlural = " items are expiring today"
+    static let bodySingular = "Use it today before it goes bad!"
+    static let bodyPlular = "Make sure to use them today!"
+    static let categoryIdentifier = "reminder"
+    static let messageforNoNeed = "no notification needed - no expiring items today"
+}
+
+struct DateFormat {
+    static let monthDayYear = "MMM dd, yyyy"
+}
+struct FoodGroups {
+    static let categories = ["Protein","Dairy","Vegetales","Fruits","Grains"]
+}
+
 struct SearchPlaceholder {
     static let search =  "Search                                                            "
 }
@@ -176,7 +192,6 @@ enum SettingMenu : String {
     case reminder = "Set Time for Reminder"
     case sendFeedback = "Send Feedback"
 }
-
 
 extension UIImage {
     enum Asset: String {
