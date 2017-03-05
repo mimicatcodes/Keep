@@ -17,6 +17,5 @@ class FavoritedItem : Object {
         self.init()
         self.name = name
     }
-    
 }
 

@@ -146,6 +146,14 @@ struct Labels {
     static let ItemsAre = "Items are"
 }
 
+struct OnBoarding {
+    static let checkListTitle = "Stay Organized"
+    static let checkListBody = "Running out of stock? Create a shopping list to remind yourself and start shopping easily"
+    static let piggyBankTitle = "Save Money"
+    static let piggyBankBody = "By keeping track of your food, you are actually reducing chances of  food waste and saving your money."
+    static let produceTitle = "Be Healthy"
+    static let produceBody = "KEEP alerts you before your food expires, so you can always eat your produce at its best condition."
+}
 
 struct SearchPlaceholder {
     static let search =  "Search                                                            "
@@ -158,11 +166,11 @@ struct ImageName {
     static let editGrey1 = "EditGrey1"
     static let editGrey2 = "EditGrey2"
 }
-//
-//struct SettingMenu {
-//    static let reminder = "Set Time for Reminder"
-//    static let feedback = "Send Feedback"
-//}
+
+enum Location : String {
+    case Fridge, Freezer, Pantry, Other
+}
+
 
 enum SettingMenu : String {
     case reminder = "Set Time for Reminder"
