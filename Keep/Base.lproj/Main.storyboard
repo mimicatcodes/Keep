@@ -48,18 +48,36 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="bEC-Nq-jrL" id="Ofr-A1-bX3"/>
+                                    <outlet property="delegate" destination="bEC-Nq-jrL" id="ah5-I5-oT5"/>
                                 </connections>
                             </view>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DA3-hX-hdm">
+                                <rect key="frame" x="0.0" y="512.5" width="375" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="acR-mR-fOy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="18"/>
+                                <state key="normal" title="Get Started">
+                                    <color key="titleColor" red="0.13725490200000001" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="ldg-uk-zyl" kind="show" id="1oj-xx-gIc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="DA3-hX-hdm" firstAttribute="centerX" secondItem="L84-Wg-XUL" secondAttribute="centerX" id="Eg2-ZZ-IJ4"/>
                             <constraint firstItem="kqK-hV-xdc" firstAttribute="top" secondItem="L84-Wg-XUL" secondAttribute="top" id="K7u-2S-tuy"/>
+                            <constraint firstItem="DA3-hX-hdm" firstAttribute="centerY" secondItem="L84-Wg-XUL" secondAttribute="centerY" multiplier="1.6" id="YiM-Ak-cOF"/>
                             <constraint firstAttribute="trailing" secondItem="kqK-hV-xdc" secondAttribute="trailing" id="bYp-yb-sfY"/>
                             <constraint firstItem="hlp-PJ-FOy" firstAttribute="top" secondItem="kqK-hV-xdc" secondAttribute="bottom" id="hpU-xH-ZLH"/>
                             <constraint firstItem="kqK-hV-xdc" firstAttribute="leading" secondItem="L84-Wg-XUL" secondAttribute="leading" id="lBP-Hv-NPc"/>
+                            <constraint firstItem="DA3-hX-hdm" firstAttribute="width" secondItem="L84-Wg-XUL" secondAttribute="width" id="qKz-m6-xUg"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="getStartedButton" destination="DA3-hX-hdm" id="ZJf-5t-reD"/>
                         <outlet property="onboarding" destination="kqK-hV-xdc" id="3kz-Af-amb"/>
                     </connections>
                 </viewController>

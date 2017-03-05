@@ -9,12 +9,14 @@
 import UIKit
 import paper_onboarding
 
-class OnboardingViewController: UIViewController, PaperOnboardingDataSource {
+class OnboardingViewController: UIViewController, PaperOnboardingDataSource, PaperOnboardingDelegate {
 
     @IBOutlet weak var onboarding: PaperOnboarding!
- 
+    @IBOutlet weak var getStartedButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        onboarding.delegate = self
     }
     
     func onboardingItemAtIndex(_ index: Int) -> OnboardingItemInfo {
@@ -33,5 +35,27 @@ class OnboardingViewController: UIViewController, PaperOnboardingDataSource {
         return 3
     }
 
+    
+    func onboardingWillTransitonToIndex(_ index: Int) {
+        if index == 1 {
+            if getStartedButton.alpha == 1 {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.getStartedButton.alpha = 0
+                })
+            }
+        }
+    }
+    
+    func onboardingConfigurationItem(_ item: OnboardingContentViewItem, index: Int) {
+        
+    }
+    
+    func onboardingDidTransitonToIndex(_ index: Int) {
+        if index == 2 {
+            UIView.animate(withDuration: 0.4, animations: { 
+                self.getStartedButton.alpha = 1.0
+            })
+        }
+    }
 }
 

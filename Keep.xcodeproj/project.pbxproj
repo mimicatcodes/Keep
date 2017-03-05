@@ -46,7 +46,6 @@
 		DD75B7BA1E3D7A93002053E5 /* Montserrat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = DD75B7B91E3D7A93002053E5 /* Montserrat-Light.otf */; };
 		DD786E311E4A69CE00B1F4E3 /* ScanReceiptVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD786E301E4A69CE00B1F4E3 /* ScanReceiptVC.swift */; };
 		DD786E331E4AED2F00B1F4E3 /* AddScannedItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD786E321E4AED2F00B1F4E3 /* AddScannedItemVC.swift */; };
-		DD786E361E50FAAF00B1F4E3 /* optionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD786E351E50FAAF00B1F4E3 /* optionsView.xib */; };
 		DD7CCA331E6B458900B31D55 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7CCA321E6B458900B31D55 /* OnboardingViewController.swift */; };
 		DD7CCA351E6B46E600B31D55 /* paper_onboarding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD7CCA341E6B46E600B31D55 /* paper_onboarding.framework */; };
 		DD7F72191E63F65700BAE511 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7F72181E63F65700BAE511 /* UIScrollView+EmptyDataSet.m */; };
@@ -119,7 +118,6 @@
 		DD75B7B91E3D7A93002053E5 /* Montserrat-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.otf"; sourceTree = "<group>"; };
 		DD786E301E4A69CE00B1F4E3 /* ScanReceiptVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanReceiptVC.swift; sourceTree = "<group>"; };
 		DD786E321E4AED2F00B1F4E3 /* AddScannedItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScannedItemVC.swift; sourceTree = "<group>"; };
-		DD786E351E50FAAF00B1F4E3 /* optionsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = optionsView.xib; sourceTree = "<group>"; };
 		DD7CCA321E6B458900B31D55 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		DD7CCA341E6B46E600B31D55 /* paper_onboarding.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = paper_onboarding.framework; path = "../../Library/Developer/Xcode/DerivedData/Keep-gqdphxubroiioscwgstwgwwpszft/Build/Products/Debug-iphonesimulator/paper-onboarding/paper_onboarding.framework"; sourceTree = "<group>"; };
 		DD7F72171E63F65700BAE511 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
@@ -243,7 +241,6 @@
 				DD515D031E5BD3BE00415A2B /* Custom Cells */,
 				DD8586B91E580C1200065DDD /* Custom Views */,
 				DD1EA63B1E0CA41D0034C54B /* Main.storyboard */,
-				DD786E351E50FAAF00B1F4E3 /* optionsView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -481,7 +478,6 @@
 				DD1EA6451E0CA41D0034C54B /* LaunchScreen.storyboard in Resources */,
 				DD2C38A31E3D7CD000A7C709 /* Lato-Bold.ttf in Resources */,
 				DD75B7B81E3D5536002053E5 /* Lato-Semibold.ttf in Resources */,
-				DD786E361E50FAAF00B1F4E3 /* optionsView.xib in Resources */,
 				DDEC8CB81E458A48004C73CB /* tessdata in Resources */,
 				DD1EA6421E0CA41D0034C54B /* Assets.xcassets in Resources */,
 				DD1EA63D1E0CA41D0034C54B /* Main.storyboard in Resources */,
