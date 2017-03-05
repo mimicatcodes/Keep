@@ -11,6 +11,8 @@ import UIKit
 import NotificationCenter
 
 struct Colors {
+    
+    static let duckEggBlue = UIColor(red: 229/255.0, green: 253/255.0, blue: 249/255.0, alpha: 1)
     static let lightTeal = UIColor(red: 133/255.0, green: 219/255.0, blue: 205/255.0, alpha: 1)
     static let lightTealTwo = UIColor(red: 178/255.0, green: 231/255.0, blue: 222/255.0, alpha: 1)
     static let lightTealThree = UIColor(red: 135/255.0, green: 219/255.0, blue: 206/255.0, alpha: 1)
@@ -33,6 +35,7 @@ struct Colors {
     static let greyishBrown = UIColor(red: 77/255.0, green: 77/255.0, blue: 77/255.0, alpha: 1)
     static let brownishGrey = UIColor(red: 96/255.0, green: 96/255.0, blue: 96/255.0, alpha: 1)
     static let brownishGreyTwo = UIColor(red:100/255.0, green:100/255.0, blue:100/255.0, alpha: 1.0)
+    static let brownishGreyThree = UIColor(red:94/255.0, green:94/255.0, blue:94/255.0, alpha: 1.0)
     
     static let pastelRed = UIColor(red: 237/255.0, green: 93/255.0, blue: 93/255.0, alpha: 1)
     static let salmon = UIColor(red: 249/255.0, green: 117/255.0, blue: 102/255.0, alpha: 1)
@@ -164,5 +167,22 @@ struct ImageName {
 enum SettingMenu : String {
     case reminder = "Set Time for Reminder"
     case sendFeedback = "Send Feedback"
+}
+
+
+extension UIImage {
+    enum Asset: String {
+        case checkList = "checkList"
+        case piggyBank = "piggyBank"
+        case produce = "produce"
+        
+        var image: UIImage {
+            return UIImage(asset: self)
+        }
+    }
+    
+    convenience init!(asset: Asset) {
+        self.init(named: asset.rawValue)
+    }
 }
 

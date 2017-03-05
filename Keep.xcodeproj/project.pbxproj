@@ -47,6 +47,8 @@
 		DD786E311E4A69CE00B1F4E3 /* ScanReceiptVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD786E301E4A69CE00B1F4E3 /* ScanReceiptVC.swift */; };
 		DD786E331E4AED2F00B1F4E3 /* AddScannedItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD786E321E4AED2F00B1F4E3 /* AddScannedItemVC.swift */; };
 		DD786E361E50FAAF00B1F4E3 /* optionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD786E351E50FAAF00B1F4E3 /* optionsView.xib */; };
+		DD7CCA331E6B458900B31D55 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7CCA321E6B458900B31D55 /* OnboardingViewController.swift */; };
+		DD7CCA351E6B46E600B31D55 /* paper_onboarding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD7CCA341E6B46E600B31D55 /* paper_onboarding.framework */; };
 		DD7F72191E63F65700BAE511 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7F72181E63F65700BAE511 /* UIScrollView+EmptyDataSet.m */; };
 		DD7F721B1E64FD1600BAE511 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7F721A1E64FD1500BAE511 /* CustomLabel.swift */; };
 		DD7F721D1E6655AE00BAE511 /* SetTimeForReminderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7F721C1E6655AE00BAE511 /* SetTimeForReminderVC.swift */; };
@@ -118,6 +120,8 @@
 		DD786E301E4A69CE00B1F4E3 /* ScanReceiptVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanReceiptVC.swift; sourceTree = "<group>"; };
 		DD786E321E4AED2F00B1F4E3 /* AddScannedItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScannedItemVC.swift; sourceTree = "<group>"; };
 		DD786E351E50FAAF00B1F4E3 /* optionsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = optionsView.xib; sourceTree = "<group>"; };
+		DD7CCA321E6B458900B31D55 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		DD7CCA341E6B46E600B31D55 /* paper_onboarding.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = paper_onboarding.framework; path = "../../Library/Developer/Xcode/DerivedData/Keep-gqdphxubroiioscwgstwgwwpszft/Build/Products/Debug-iphonesimulator/paper-onboarding/paper_onboarding.framework"; sourceTree = "<group>"; };
 		DD7F72171E63F65700BAE511 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
 		DD7F72181E63F65700BAE511 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
 		DD7F721A1E64FD1500BAE511 /* CustomLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
@@ -153,6 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD7CCA351E6B46E600B31D55 /* paper_onboarding.framework in Frameworks */,
 				EEB43B8163D4806DB7C3C1BC /* Pods_Keep.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -163,6 +168,7 @@
 		86D9C18FBCDF483B6AF1B24D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DD7CCA341E6B46E600B31D55 /* paper_onboarding.framework */,
 				DDEC8CBB1E458B02004C73CB /* CoreImage.framework */,
 				DDEC8CB91E458AF1004C73CB /* libstdc++.6.0.9.tbd */,
 				A6BA35316A371A06E84DEF20 /* Pods_Keep.framework */,
@@ -245,6 +251,7 @@
 		DD48537D1E196C0400BEAC02 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				DD7CCA311E6B456900B31D55 /* Onboarding */,
 				DD7B762D1E1B336C001DE6E8 /* Stock */,
 				DDC3E9831E1C953F00459295 /* Shopping List */,
 				DDC3E9851E1C954E00459295 /* Settings */,
@@ -345,6 +352,14 @@
 				DD786E321E4AED2F00B1F4E3 /* AddScannedItemVC.swift */,
 			);
 			name = Stock;
+			sourceTree = "<group>";
+		};
+		DD7CCA311E6B456900B31D55 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				DD7CCA321E6B458900B31D55 /* OnboardingViewController.swift */,
+			);
+			name = Onboarding;
 			sourceTree = "<group>";
 		};
 		DD8586B91E580C1200065DDD /* Custom Views */ = {
@@ -577,6 +592,7 @@
 				DD515D091E5BD4FA00415A2B /* ShoppingListCell.swift in Sources */,
 				DD4853B11E199FA600BEAC02 /* Bakery.swift in Sources */,
 				DD4853AB1E199F8300BEAC02 /* HealthAndPersonal.swift in Sources */,
+				DD7CCA331E6B458900B31D55 /* OnboardingViewController.swift in Sources */,
 				DD515D0F1E5BD60B00415A2B /* FavoriteCell.swift in Sources */,
 				DDEC8C8C1E456F29004C73CB /* ScannedItemsVC.swift in Sources */,
 				DD7F721B1E64FD1600BAE511 /* CustomLabel.swift in Sources */,
