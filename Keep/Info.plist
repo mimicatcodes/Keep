@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Keep library use</string>
+	<string>Keep will access a receipt saved in your library.</string>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>Keep photo use</string>
+	<string>Keep will take a picture of your receipt to scan.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Keep camera use</string>
+	<string>Keep will take a picture of your receipt to scan.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>

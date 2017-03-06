@@ -48,8 +48,7 @@ class AddScannedItemVC: UIViewController {
     
     var itemToAdd: String? 
     
-    // dummy data
-    let categories = ["1","2","3","4","5","6"]
+    let categories = FoodGroups.groceryCategories
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -286,14 +285,14 @@ extension AddScannedItemVC : UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        categoryField.text = categories[row]
+        categoryField.text = categories[row].rawValue
         categoryField.resignFirstResponder()
         categoryField.endEditing(true)
         moveViewDown()
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return categories[row]
+        return categories[row].rawValue
     }
     
     func datePickerChanged(sender: UIDatePicker) {

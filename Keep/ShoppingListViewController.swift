@@ -38,10 +38,9 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
         tableView.reloadData()
     } 
     
-//    
-//    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
-//        return UIImage(named: "sample_")
-//    }
+    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
+        return UIImage(named: "shoppingListDetail_empty")
+    }
     
     func configureSwipeButtons(cell:ShoppingListCell, indexPath: IndexPath){
         

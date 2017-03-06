@@ -8,7 +8,7 @@
 
 import Foundation
 
-var cheese = [
+var dairy = [
     
     "America cheese",
     "Bleu cheese",
@@ -40,91 +40,54 @@ var cheese = [
     "Pepper Jack",
     "Dry Jack",
     "String cheese",
-    "Vegetarian cheese"
-    
-]
-
-
-var milk = [
-    
+    "Vegetarian cheese",
     "Whole Milk",
     "2% Fat Milk",
     "1% Fat Milk",
     "Low Fat Milk",
     "Fat-Free Milk",
-    "Whole Lactose Reduced Milk",
-    "2% Fat Lactose Reduced Milk",
-    "Fat-Free Lactose Reduced Milk",
+    "Whole Lactose Milk",
+    "2% Lactose Milk",
+    "Fat-Free Lactose Milk",
     "Whole Lactose-Free Milk",
-    "2% Fat Lactose-Free Milk",
-    "Fat-Free Lactose-Free Milk",
+    "2% Lactose-Free Milk",
+    "Nonfat Lactose-Free Milk",
     "Powdered (Dry) Milk",
-    "Nonfat Powdered (Dry) Milk",
+    "Nonfat Powdered Milk",
     "Evaporated Milk",
     "Condensed Milk",
     "Skimmed Evaporated Milk",
     "Chocolate Flavored Milk",
     "Strawberry Flavored Milk",
     "Skim Milk",
-    "Banana milk"
-]
-
-
-var yougurts = [
-    
+    "Banana milk",
     "Yogurt - Whole Milk",
     "Yogurt - Low Fat",
     "Yogurt - Fat-Free",
-    "Fruit Yogurt - Whole Milk",
-    "Fruit Yogurt - Low Fat",
     "Fat-Free Fruit Yogurt",
     "Greek Plain Yogurt",
     "Greek Low Fat Yogurt",
     "Greek Nonfat Yogurt",
     "Drinkable Yogurt",
-    "Lowfat Drinkable Yogurt"
-    
-    ]
-
-
-
-var butterSpreadsMargarine = [
-    
+    "Lowfat Drinkable Yogurt",
     "Butter - Salted",
     "Butter - Unsalted",
     "Margarine",
     "Block Butter",
     "Spreadable Butter",
-    "Olive Spread & Margarine",
-    "Sunflower Spread & Margarine ",
+    "Olive Spread",
+    "Sunflower Spread",
     "Organic Butter & Spread ",
     "Flavored & Sweet Butter ",
     "Dairy Free Spread",
-    "Cholesterol Lowering Spread",
     "Baking Fat",
-    "Cooking Fat"
-
-    ]
-
-var creamAndCreamers = [
-    
+    "Cooking Fat",
     "Sour Cream",
-    "Whipped Cream"
-    
-    ]
+    "Whipped Cream",
+    "Ice Cream",
+    "Gelato",
+    "Popsicle",
+    "Frozen Yogurt"
+]
 
-var eggs = [
-    
-    "Brown Eggs",
-    "White Eggs",
-    "Eggs",
-    "Organic Eggs",
-    "Free-range Eggs",
-    "Cage-free Eggs"
-
-    ]
-
-var iceCream = ["Ice Cream", "Gelato", "Popsicle", "Frozen Yogurt"]
-
-var puddingAndGelatin = ["Pudding", "Gelatin"]
 

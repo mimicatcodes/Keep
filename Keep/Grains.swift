@@ -1,5 +1,5 @@
 //
-//  PastaAndNoodles.swift
+//  Grains.swift
 //  Keep
 //
 //  Created by Luna An on 1/1/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-var pastaAndNoodles : [String] = [
+var pastaAndNoodles  = [
     
     "Spaghettoni",
     "Spaghetti",
@@ -24,9 +24,9 @@ var pastaAndNoodles : [String] = [
     "Fusilli lunghi",
     "Fusilli bucati",
     "Pici",
-    "Soba - そば (Japanese)",
-    "Udon - うどん (Japanese)",
-    "Cu mian - 粗麵 (Chinese)",
+    "Soba - そば",
+    "Udon - うどん",
+    "Cu mian - 粗麵",
     "Ziti",
     "Zitoni",
     "Spaghetti alla chitarra",
@@ -48,14 +48,14 @@ var pastaAndNoodles : [String] = [
     "Pillus",
     "Pizzoccheri",
     "Sagnarelli",
-    "Scialatelli or scilatielli",
+    "Scialatelli",
     "Stringozzi",
     "Tagliatelle",
     "Taglierini",
     "Trenette",
     "Tripoline",
-    "Shahe fen -(Chinese)",
-    "Biáng biáng noodles - Chinese",
+    "Shahe fen",
+    "Biáng biáng noodles",
     "Calamarata",
     "Calamaretti",
     "Cannelloni",
@@ -176,10 +176,11 @@ var pastaAndNoodles : [String] = [
     "Sacchettoni",
     "Tortellini",
     "Tortelloni",
-    "Ramen"
+    "Ramen",
+    "Whole Wheat Pasta",
 ]
 
-var grains = [
+var otherGrains = [
     
     "Amaranth",
     "Barley",
@@ -198,7 +199,8 @@ var grains = [
     "Oat Cereal",
     "Oatmeal",
     "Popcorn",
-    "Whole Wheat Cereal Flakes",
+    "Cerials",
+    "Cereal Flakes",
     "Muesli",
     "Rolled Oats",
     "Quinoa",
@@ -207,25 +209,38 @@ var grains = [
     "Spelt",
     "Teff",
     "Triticale",
-    "Whole Grain Barley",
     "Wheat Berries",
-    "Whole Grain Cornmeal",
+    "Cornmeal",
     "Whole Rye",
-    "Whole Wheat Bread",
-    "Whole Wheat Couscous",
-    "Whole Wheat Crackers",
-    "Whole Wheat Pasta",
-    "Whole Wheat Pita Bread",
-    "Whole Wheat Sandwich Buns And Rolls",
-    "Whole Wheat Tortillas",
+    "Pita Bread",
+    "Tortillas",
     "Wild Rice",
     "White Rice",
-    
-]
-
-
-var sides = [
-    
+    "Baguettes",
+    "Bagels",
+    "Bialys",
+    "Knishes",
+    "Croissants",
+    "Danish",
+    "Pumpernickel",
+    "Rye Bread",
+    "Rolls & Buns",
+    "Sourdough",
+    "White Bread",
+    "Sliced Bread",
+    "Whole Wheat Bread",
+    "Multigrain Bread",
+    "Cake",
+    "Cupcake",
+    "Chocolate Treats",
+    "Cookies",
+    "Brownies",
+    "Muffins",
+    "Scones",
+    "Pies",
+    "Tarts",
+    "Pudding",
+    "Soufflé",
     "Cornbread",
     "Corn Tortillas",
     "Couscous",
@@ -234,9 +249,6 @@ var sides = [
     "Pitas",
     "Pretzels",
     "Naan"
- 
 ]
 
 
-
-// Pasta sauce?

@@ -59,11 +59,11 @@ extension AppDelegate {
     
     fileprivate func checkOnboardingStatus(){
         window = UIWindow(frame: UIScreen.main.bounds)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        var initialVC = storyboard.instantiateViewController(withIdentifier: "Onboarding")
+        let storyboard = UIStoryboard(name: Identifiers.Storyboard.main, bundle: nil)
+        var initialVC = storyboard.instantiateViewController(withIdentifier: Identifiers.Storyboard.onboarding)
 
-        if UserDefaults.standard.bool(forKey: "onboardingComplete") {
-            initialVC = storyboard.instantiateViewController(withIdentifier: "MainApp")
+        if UserDefaults.standard.bool(forKey: Keys.UserDefaults.onboardingComplete) {
+            initialVC = storyboard.instantiateViewController(withIdentifier: Identifiers.Storyboard.mainApp)
         }
         
         window?.rootViewController = initialVC
@@ -80,11 +80,11 @@ extension AppDelegate {
             }
         }
         
-        if let hour = UserDefaults.standard.value(forKey: "hour") as? Int, let minute = UserDefaults.standard.value(forKey: "minute") as? Int {
+        if let hour = UserDefaults.standard.value(forKey: Keys.UserDefaults.hour) as? Int, let minute = UserDefaults.standard.value(forKey: Keys.UserDefaults.minute) as? Int {
             print("Hour is \(hour) and minute is \(minute)")
         } else {
-            UserDefaults.standard.set(0, forKey: "hour")
-            UserDefaults.standard.set(4, forKey: "minute")
+            UserDefaults.standard.set(0, forKey: Keys.UserDefaults.hour)
+            UserDefaults.standard.set(4, forKey: Keys.UserDefaults.minute)
             Helper.setUpNotification(hour: 0, minute: 4)
         }
     }

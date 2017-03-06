@@ -16,7 +16,7 @@ class OnboardingViewController: UIViewController, PaperOnboardingDataSource, Pap
     
     @IBAction func getStartedButtonTapped(_ sender: Any) {
         let userDefaults = UserDefaults.standard
-        userDefaults.set(true, forKey: "onboardingComplete")
+        userDefaults.set(true, forKey: Keys.UserDefaults.onboardingComplete)
         userDefaults.synchronize()
     }
     override func viewDidLoad() {

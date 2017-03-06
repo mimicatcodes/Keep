@@ -52,6 +52,12 @@ struct Keys {
     static let name = "name"
     static let category = "category"
     static let title = "title"
+    
+    struct UserDefaults {
+        static let hour = "hour"
+        static let minute = "minute"
+        static let onboardingComplete = "onboardingComplete"
+    }
 }
 
 struct NotificationName {
@@ -85,6 +91,12 @@ struct Identifiers {
         static let favToStock = "favToStock"
         static let moveToStock = "moveListItemToStock"
         static let setReminder = "setReminder"
+    }
+    
+    struct Storyboard {
+        static let main = "Main"
+        static let onboarding = "Onboarding"
+        static let mainApp = "MainApp"
     }
 }
 
@@ -168,7 +180,12 @@ struct DateFormat {
     static let monthDayYear = "MMM dd, yyyy"
 }
 struct FoodGroups {
-    static let categories = ["Protein","Dairy","Vegetales","Fruits","Grains"]
+    static let categories = [FiveFoodGroups.Protein.rawValue,FiveFoodGroups.Grains.rawValue,FiveFoodGroups.Dairy.rawValue,FiveFoodGroups.Fruits.rawValue,FiveFoodGroups.Vegetables.rawValue]
+    static let groceryCategories:[FoodCategories] = [.vegetables, .fruits, .pastasAndNoodles, .otherGrains, .dairy, .meatsSeafoodsAndEggs, .condimentsAndSauce, .beansPeasAndTofu, .nutsAndSeeds, .beverages, .alcoholicBeverages, .healthAndPersonalCare, .householdAndCleaning, .other, .uncategorized]
+}
+
+struct FoodItems {
+    static let all  = [vegetables, fruits, pastaAndNoodles, otherGrains, dairy, meatsSeafoodsAndEggs, beansPeaseAndTofu, nutsAndSeeds, alcoholicBeverages, condimentsAndSauce, healthAndPersonalCare, householdAndCleaning]
 }
 
 struct SearchPlaceholder {
@@ -181,6 +198,14 @@ struct ImageName {
     static let delete2 = "Delete2"
     static let editGrey1 = "EditGrey1"
     static let editGrey2 = "EditGrey2"
+}
+
+enum FiveFoodGroups: String {
+    case Protein
+    case Dairy
+    case Vegetables
+    case Fruits
+    case Grains
 }
 
 enum Location : String {

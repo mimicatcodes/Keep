@@ -51,11 +51,11 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
     let formatter = DateFormatter()
     
     var activeTextField:UITextField?
-    let lengthLimit = 20
+    let lengthLimit = 23
     var selectedIndex = 0
     
     var itemToEdit: Item?
-    var list = ["1","2","3","4","5","6"]
+    let categories = FoodGroups.groceryCategories
     
     var allItems = Array(DataStore.sharedInstance.allItems)
     var filteredItemsNames = [String]()
@@ -294,7 +294,6 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
         }
         Helper.formatDates(formatter: formatter)
 
-
         for (index, button) in locationButtons.enumerated() {
             if index == selectedIndex {
                 button.isSelected = true
@@ -439,7 +438,7 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
         
         filteredItemsNames.removeAll(keepingCapacity: false)
         
-        for itemArray in allItems_ {
+        for itemArray in FoodItems.all {
             for item in itemArray {
                 
                 let myString: NSString! = item as NSString
@@ -506,18 +505,18 @@ extension AddItemsManuallyVC: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return list.count
+        return categories.count
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        categoryField.text = list[row]
+        categoryField.text = categories[row].rawValue
         categoryField.resignFirstResponder()
         categoryField.endEditing(true)
         moveViewDown()
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return list[row]
+        return categories[row].rawValue
     }
     
     func datePickerChanged(sender: UIDatePicker) {

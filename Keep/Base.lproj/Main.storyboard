@@ -2774,7 +2774,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lettuce" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJF-xf-SvH">
-                                                            <rect key="frame" x="20" y="16" width="188" height="17"/>
+                                                            <rect key="frame" x="20" y="16" width="195" height="17"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="17" id="S9k-3V-3wg"/>
                                                             </constraints>
@@ -2783,7 +2783,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7 Days Left" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpk-J6-VV0">
-                                                            <rect key="frame" x="254" y="25" width="101" height="25"/>
+                                                            <rect key="frame" x="261.5" y="25" width="93.5" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="25" id="fgW-sc-kv8"/>
                                                             </constraints>
@@ -2792,7 +2792,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purchased on Jan 2, 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="47m-mU-HMi">
-                                                            <rect key="frame" x="20" y="40" width="188" height="13"/>
+                                                            <rect key="frame" x="20" y="40" width="195" height="13"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="13" id="bzb-G5-IjL"/>
                                                             </constraints>
@@ -2801,7 +2801,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qnG-Xe-NER">
-                                                            <rect key="frame" x="216" y="25" width="38" height="25"/>
+                                                            <rect key="frame" x="223.5" y="25" width="38" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="25" id="2Nc-bf-X9l"/>
                                                             </constraints>
@@ -2811,12 +2811,12 @@
                                                         </label>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="QJF-xf-SvH" firstAttribute="width" secondItem="YZ5-Yc-0M9" secondAttribute="width" multiplier="0.5" id="2xO-ih-RhE"/>
+                                                        <constraint firstItem="QJF-xf-SvH" firstAttribute="width" secondItem="YZ5-Yc-0M9" secondAttribute="width" multiplier="0.52" id="2xO-ih-RhE"/>
                                                         <constraint firstItem="qnG-Xe-NER" firstAttribute="centerY" secondItem="fpk-J6-VV0" secondAttribute="centerY" id="4QR-C6-RT8"/>
                                                         <constraint firstItem="QJF-xf-SvH" firstAttribute="centerY" secondItem="YZ5-Yc-0M9" secondAttribute="centerY" multiplier="0.65" id="Faa-j7-OhR"/>
                                                         <constraint firstItem="47m-mU-HMi" firstAttribute="leading" secondItem="QJF-xf-SvH" secondAttribute="leading" id="HAg-ay-1Qd"/>
                                                         <constraint firstItem="fpk-J6-VV0" firstAttribute="centerY" secondItem="YZ5-Yc-0M9" secondAttribute="centerY" id="IrJ-OI-3Qc"/>
-                                                        <constraint firstItem="fpk-J6-VV0" firstAttribute="width" secondItem="YZ5-Yc-0M9" secondAttribute="width" multiplier="0.27" id="Khw-tf-XxW"/>
+                                                        <constraint firstItem="fpk-J6-VV0" firstAttribute="width" secondItem="YZ5-Yc-0M9" secondAttribute="width" multiplier="0.25" id="Khw-tf-XxW"/>
                                                         <constraint firstItem="47m-mU-HMi" firstAttribute="top" secondItem="QJF-xf-SvH" secondAttribute="bottom" constant="7" id="OAh-Ei-taG"/>
                                                         <constraint firstItem="qnG-Xe-NER" firstAttribute="width" secondItem="YZ5-Yc-0M9" secondAttribute="width" multiplier="0.1" id="XVD-xc-bEN"/>
                                                         <constraint firstItem="fpk-J6-VV0" firstAttribute="leading" secondItem="qnG-Xe-NER" secondAttribute="trailing" id="Xxd-ac-D8i"/>
