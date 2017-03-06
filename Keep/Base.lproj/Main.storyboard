@@ -395,19 +395,19 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="187.5" height="166"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IMQ-ZW-hml">
-                                                        <rect key="frame" x="28" y="34.5" width="33" height="15"/>
+                                                        <rect key="frame" x="37.5" y="34.5" width="33" height="15"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="12"/>
                                                         <color key="textColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0fq-Rt-VO8">
-                                                        <rect key="frame" x="28" y="54.5" width="131.5" height="58"/>
+                                                        <rect key="frame" x="37.5" y="54.5" width="131.5" height="58"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="52"/>
                                                         <color key="textColor" red="0.13725490200000001" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="items in stock" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HP2-v5-sqz">
-                                                        <rect key="frame" x="28" y="117.5" width="86.5" height="15"/>
+                                                        <rect key="frame" x="37.5" y="117.5" width="86.5" height="15"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="12"/>
                                                         <color key="textColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -416,7 +416,7 @@
                                                 <constraints>
                                                     <constraint firstItem="0fq-Rt-VO8" firstAttribute="height" secondItem="mH5-JV-JyT" secondAttribute="height" multiplier="0.35" id="7KT-AD-IHy"/>
                                                     <constraint firstItem="HP2-v5-sqz" firstAttribute="leading" secondItem="0fq-Rt-VO8" secondAttribute="leading" id="9Pe-Q6-H2P"/>
-                                                    <constraint firstItem="0fq-Rt-VO8" firstAttribute="centerX" secondItem="mH5-JV-JyT" secondAttribute="centerX" id="Mbm-3x-juK"/>
+                                                    <constraint firstItem="0fq-Rt-VO8" firstAttribute="centerX" secondItem="mH5-JV-JyT" secondAttribute="centerX" multiplier="1.1" id="Mbm-3x-juK"/>
                                                     <constraint firstItem="IMQ-ZW-hml" firstAttribute="leading" secondItem="0fq-Rt-VO8" secondAttribute="leading" id="VAm-do-k8L"/>
                                                     <constraint firstItem="0fq-Rt-VO8" firstAttribute="centerY" secondItem="mH5-JV-JyT" secondAttribute="centerY" id="mri-UU-aod"/>
                                                     <constraint firstItem="HP2-v5-sqz" firstAttribute="top" secondItem="0fq-Rt-VO8" secondAttribute="bottom" constant="5" id="pTG-wm-vuR"/>

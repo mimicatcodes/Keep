@@ -40,24 +40,34 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     var numOfItemsExpiringThisWeek: Int = 0
     var numOfExpiredItems: Int = 0
     var numOfExpiringItems: Int = 0
-    // dummy data
-    let numOfItemsInCategory:[Double] = [10.0, 4.0, 6.0, 3.0, 8.0]
     let mailComposerVC = MFMailComposeViewController()
+    var numOfItemsInCategory:[Double] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorInset = .zero
+        print("========= \(numOfItemsInCategory)")
+        numOfItemsInCategory = [store.itemsInVegetables, store.itemsInFruits, store.itemsInGrains, store.itemsInDairy, store.itemsInProtein]
         //topView.underlinedBorder()
         midView.underlinedBorder()
         setNumbers()
-        setChart(dataPoints: FoodGroups.categories, values: numOfItemsInCategory)
+        setData()
+        setChart(dataPoints: FoodGroups.categories, values: self.numOfItemsInCategory)
+        NotificationCenter.default.addObserver(forName: NotificationName.refreshCharts, object: nil, queue: nil) { notification in
+            self.setChart(dataPoints: FoodGroups.categories, values: self.numOfItemsInCategory)
+        }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        setData()
+        setChart(dataPoints: FoodGroups.categories, values: self.numOfItemsInCategory)
         DispatchQueue.main.async {
             self.setNumbers()
         }
+         print("========= \(numOfItemsInCategory)")
+
     }
     
     func setNumbers(){
@@ -116,14 +126,34 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
     }
-
+    
+    func setData(){
+        let itemsInVegetables = Double(store.allItems.filter(Filters.vegetables).count)
+        print(store.allItems.filter(Filters.vegetables))
+        
+        let itemsInFruits = Double(store.allItems.filter(Filters.fruits).count)
+        print(store.allItems.filter(Filters.fruits))
+        
+        let itemsInPasta = Double(store.allItems.filter(Filters.grainsPasta).count)
+        let itemsInOtherGrains = Double(store.allItems.filter(Filters.grainsOther).count)
+        
+        let itemsInDairy = Double(store.allItems.filter(Filters.dairy).count)
+        
+        let itemsInMeats = Double(store.allItems.filter(Filters.proteinMeats).count)
+        print(store.allItems.filter(Filters.proteinMeats))
+        let itemsInBeans = Double(store.allItems.filter(Filters.proteinBeans).count)
+        print(store.allItems.filter(Filters.proteinBeans))
+        let itemsInNuts =  Double(store.allItems.filter(Filters.proteinNuts).count)
+        numOfItemsInCategory = [itemsInVegetables, itemsInFruits, itemsInPasta + itemsInOtherGrains, itemsInDairy, itemsInMeats + itemsInBeans + itemsInNuts]
+    }
 }
 
 // Charts API
 extension SettingsViewController {
     func setChart(dataPoints: [String], values: [Double]) {
+    
         radarChartView.noDataText = "No chart data available yet. Please add items in your inventory"
-        
+       
         let chartFormatter = ChartFormatter()
         let yAxis = radarChartView.yAxis
         let xAxis = radarChartView.xAxis
@@ -158,7 +188,9 @@ extension SettingsViewController {
         radarChartView.sizeToFit()
         radarChartView.chartDescription?.text = EmptyString.none
         radarChartView.legend.enabled = false
+        
     }
+    
 }
 
 extension SettingsViewController : UITableViewDelegate, UITableViewDataSource {

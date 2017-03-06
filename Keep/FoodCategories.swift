@@ -11,7 +11,7 @@ import Foundation
 enum FoodCategories : String {
     
     // MARK: vegetables
-    case vegetables = "Vetetables"
+    case vegetables = "Vegetables"
     
     // MARK: Fruits
     case fruits = "Fruits"
@@ -24,7 +24,7 @@ enum FoodCategories : String {
     case dairy = "Dairy"
     
     // MARK: Protein
-    case meatsSeafoodsAndEggs = "Meats, Seafoods, Eggs and Tofu"
+    case meatsSeafoodsAndEggs = "Meats, Seafoods, and Eggs"
     case beansPeasAndTofu = "Beans, Peas and Tofu"
     case nutsAndSeeds = "Nuts and Seeds"
 

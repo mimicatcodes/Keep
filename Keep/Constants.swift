@@ -67,6 +67,7 @@ struct NotificationName {
     static let refreshFavorites = NSNotification.Name("RefreshFavorites")
     static let refreshScannedItems = NSNotification.Name("RefreshScannedItems")
     static let refreshMainTV = NSNotification.Name("RefreshMainTV")
+    static let refreshCharts = NSNotification.Name("RefreshCharts")
 }
 
 struct Identifiers {
@@ -130,6 +131,19 @@ struct Filters {
     static let freezer = "location == 'Freezer'"
     static let pantry = "location == 'Pantry'"
     static let other = "location == 'Other'"
+    
+    static let vegetables = "category == 'Vegetables'"
+    
+    static let fruits = "category == 'Fruits'"
+    
+    static let grainsPasta = "category CONTAINS[c] 'Pastas'"
+    static let grainsOther = "category CONTAINS[c] 'Grains'"
+    
+    static let proteinMeats = "category CONTAINS[c] 'Meats'"
+    static let proteinBeans = "category CONTAINS[c] 'Beans'"
+    static let proteinNuts = "category CONTAINS[c] 'Nuts'"
+    
+    static let dairy = "category == 'Dairy'"
 }
 
 struct EmptyString {
@@ -180,8 +194,8 @@ struct DateFormat {
     static let monthDayYear = "MMM dd, yyyy"
 }
 struct FoodGroups {
-    static let categories = [FiveFoodGroups.Protein.rawValue,FiveFoodGroups.Grains.rawValue,FiveFoodGroups.Dairy.rawValue,FiveFoodGroups.Fruits.rawValue,FiveFoodGroups.Vegetables.rawValue]
-    static let groceryCategories:[FoodCategories] = [.vegetables, .fruits, .pastasAndNoodles, .otherGrains, .dairy, .meatsSeafoodsAndEggs, .condimentsAndSauce, .beansPeasAndTofu, .nutsAndSeeds, .beverages, .alcoholicBeverages, .healthAndPersonalCare, .householdAndCleaning, .other, .uncategorized]
+    static let categories = [FiveFoodGroups.Vegetables.rawValue, FiveFoodGroups.Fruits.rawValue, FiveFoodGroups.Grains.rawValue, FiveFoodGroups.Dairy.rawValue, FiveFoodGroups.Protein.rawValue]
+    static let groceryCategories:[FoodCategories] = [.uncategorized, .vegetables, .fruits, .pastasAndNoodles, .otherGrains, .dairy, .meatsSeafoodsAndEggs, .condimentsAndSauce, .beansPeasAndTofu, .nutsAndSeeds, .beverages, .alcoholicBeverages, .healthAndPersonalCare, .householdAndCleaning, .other]
 }
 
 struct FoodItems {

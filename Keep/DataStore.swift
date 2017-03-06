@@ -18,6 +18,12 @@ class DataStore{
     var freezerItems = try! Realm().objects(Item.self).filter(Filters.freezer)
     var pantryItems = try! Realm().objects(Item.self).filter(Filters.pantry)
     var otherItems = try! Realm().objects(Item.self).filter(Filters.other)
+    
+    var itemsInVegetables = Double(try! Realm().objects(Item.self).filter(Filters.vegetables).count)
+    var itemsInFruits = Double(try! Realm().objects(Item.self).filter(Filters.fruits).count)
+    var itemsInGrains = Double(try! Realm().objects(Item.self).filter(Filters.grainsPasta).count + (try! Realm().objects(Item.self).filter(Filters.grainsOther).count))
+    var itemsInDairy = Double(try! Realm().objects(Item.self).filter(Filters.dairy).count)
+    var itemsInProtein = Double(try! Realm().objects(Item.self).filter(Filters.proteinMeats).count + (try! Realm().objects(Item.self).filter(Filters.proteinBeans)).count + (try! Realm().objects(Item.self).filter(Filters.proteinNuts)).count)
 
     var allShopingLists = try! Realm().objects(ShoppingList.self).sorted(byProperty: Keys.title, ascending: true)
     

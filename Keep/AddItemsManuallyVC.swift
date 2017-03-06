@@ -10,6 +10,13 @@ import UIKit
 import RealmSwift
 
 class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate {
+    
+    // TODO: Tableview - hide it
+    // TODO: Picker rest to component 0
+    // Categoriy picker
+    // Refactor resetAddITems
+    
+    
 
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
@@ -165,7 +172,7 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
                 }
             }
         }
-        
+        NotificationCenter.default.post(name: NotificationName.refreshCharts, object: nil)
         activeTextField?.endEditing(true)
         resetAddItems()
         showAlert()
@@ -281,11 +288,14 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
         expDateField.text = formatter.string(from: expDate).capitalized
         picker.delegate = self
         picker.dataSource = self
+        picker.reloadAllComponents()
+        picker.selectedRow(inComponent: 0)
+        categoryField.inputView = picker
         datePickerOne.datePickerMode = .date
         datePickerTwo.datePickerMode = .date
         datePickerOne.date = Date()
         datePickerTwo.date = expDate
-        categoryField.inputView = picker
+        
         
         if quantity == 1 {
             quantityMinusButton.isEnabled = false
@@ -419,18 +429,13 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
         
         if filteredItemsNames.count == 0 {
             tableView.isHidden = true
-            // ---- Dummy data ----------------------
-            cell?.textLabel?.text = "HI"
-            //list[indexPath.row]
-            // ---- Dummy data ----------------------
-            
         } else {
             tableView.isHidden = false
             cell?.textLabel?.text = self.filteredItemsNames[indexPath.row]
         }
-        
         cell?.textLabel?.font = UIFont(name: Fonts.latoRegular, size: 13)
         cell?.textLabel?.textColor = Colors.tealishFaded
+        
         return cell!
     }
     
@@ -449,6 +454,7 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
                 }
             }
         }
+        
         tableView.reloadData()
     }
 }
