@@ -195,7 +195,7 @@ struct DateFormat {
 }
 struct FoodGroups {
     static let categories = [FiveFoodGroups.Vegetables.rawValue, FiveFoodGroups.Fruits.rawValue, FiveFoodGroups.Grains.rawValue, FiveFoodGroups.Dairy.rawValue, FiveFoodGroups.Protein.rawValue]
-    static let groceryCategories:[FoodCategories] = [.uncategorized, .vegetables, .fruits, .pastasAndNoodles, .otherGrains, .dairy, .meatsSeafoodsAndEggs, .condimentsAndSauce, .beansPeasAndTofu, .nutsAndSeeds, .beverages, .alcoholicBeverages, .healthAndPersonalCare, .householdAndCleaning, .other]
+    static let groceryCategories:[FoodCategories] = [.other, .vegetables, .fruits, .pastasAndNoodles, .otherGrains, .dairy, .meatsSeafoodsAndEggs, .condimentsAndSauce, .beansPeasAndTofu, .nutsAndSeeds, .beverages, .alcoholicBeverages, .healthAndPersonalCare, .householdAndCleaning ]
 }
 
 struct FoodItems {

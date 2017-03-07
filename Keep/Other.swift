@@ -235,12 +235,12 @@ var condimentsAndSauce = [
     "Worcestershire Sauce",
     "Yeast Extract Spread",
     "Yeast, Nutritional",
-    "Pasta sauce",
-    "Tomato sauce",
+    "Pasta Sauce",
+    "Tomato Sauce",
     "Hummus",
-    "Yogurt dip",
-    "Strawberry jam",
-    "Blueberry jam",
+    "Yogurt Dip",
+    "Strawberry Jam",
+    "Blueberry Jam",
     "Mixed-berry Jam"
     
 ]

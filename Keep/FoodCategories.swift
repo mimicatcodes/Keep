@@ -35,6 +35,37 @@ enum FoodCategories : String {
     case healthAndPersonalCare = "Health and Personal Care"
     case householdAndCleaning = "Household and Cleaning"
     case other = "Other"
-    case uncategorized = "Uncategorized"
 }
 
+var grains: [String:[String]] = [
+    "Pastas And Noodles" : pastaAndNoodles,
+    "Other Grains" : otherGrains,
+]
+
+var vegetable: [String:[String]] = [
+    "Vegetables": vegetables
+]
+
+var fruit: [String:[String]] = [
+    "Fruits": fruits
+]
+
+var proteins: [String:[String]] = [
+    "Meats, Seafoods And Eggs": meatsSeafoodsAndEggs,
+    "Beans, Pease And Tofu": beansPeaseAndTofu,
+    "Nuts And Seeds" : nutsAndSeeds
+]
+
+var dairies: [String:[String]] = [
+    "Dairy": dairy
+]
+
+var other: [String:[String]] = [
+    "Beverages" : beverages,
+    "Alcoholic Beverages" : alcoholicBeverages,
+    "Condiments and Suace" : condimentsAndSauce,
+    "Health and Personal Care" : healthAndPersonalCare,
+    "Household and Cleaning" : householdAndCleaning
+]
+
+var foodGroups = [grains, vegetable, fruit, proteins, dairies, other]

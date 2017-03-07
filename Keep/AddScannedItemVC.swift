@@ -58,7 +58,7 @@ class AddScannedItemVC: UIViewController {
         expDateField.delegate = self
         pDateField.delegate = self
         categoryField.delegate = self
-        categoryField.autocapitalizationType = .words
+        //categoryField.autocapitalizationType = .words
         formatInitialData()
         customToolBarForPickers()
         configureAppearances()
@@ -222,7 +222,7 @@ class AddScannedItemVC: UIViewController {
             nameField.text = store.scannedItemToAdd
         }
         
-        categoryField.text = "Uncategorized"
+        categoryField.text = "Other"
         quantity = 1
         quantityLabel.text = "\(quantity)"
         

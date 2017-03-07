@@ -9,15 +9,15 @@
 import UIKit
 import RealmSwift
 
-class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate {
+class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate {
     
     // TODO: Tableview - hide it
     // TODO: Picker rest to component 0
     // Categoriy picker
     // Refactor resetAddITems
+    // Fill category logic - apply to other vcs
+    // location for edited items
     
-    
-
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var quantityLabel: CustomLabel!
@@ -40,6 +40,7 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
     var locationButtons:[UIButton] = []
     var originTopMargin: CGFloat!
     
+    let realm = try! Realm()
     let store = DataStore.sharedInstance
     var nameTitle = EmptyString.none
     var location:Location = .Fridge
@@ -47,10 +48,11 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
     var expDate = Date()
     var purchaseDate = Date()
     var isFavorited = false
-    var isExpired = false
-    var isExpiring = false
-    var isExpiringInAWeek = false
-    var category: String = "Uncategorized"
+//    var isExpired = false
+//    var isExpiring = false
+//    var isExpiringInAWeek = false
+    var category: String = "Other"
+    let today = Date()
     
     let picker = UIPickerView()
     let datePickerOne = UIDatePicker()
@@ -73,6 +75,7 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
         formatInitialData()
         customToolBarForPickers()
         nameTextField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
+        nameTextField.addTarget(self, action: #selector(fillCategory), for: .allEditingEvents)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,7 +88,7 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
         super.viewDidAppear(animated)
         originTopMargin = topMarginConstraint.constant
     }
-
+    
     @IBAction func cancelTapped(_ sender: Any) {
         activeTextField?.endEditing(true)
         dismiss(animated: true, completion: nil)
@@ -95,7 +98,6 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
         guard let name = nameTextField.text else { return }
         guard let category = categoryField.text else { return }
         
-        let realm = try! Realm()
         if let item = itemToEdit {
             try! realm.write {
                 item.name = name
@@ -104,25 +106,13 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
                 item.purchaseDate = purchaseDate
                 item.location = location.rawValue
                 item.category = category
-                item.isFavorited = isFavorited
-                item.isExpired = isExpired
-                item.isExpiring = isExpiring
-                item.isExpiringInAWeek = isExpiringInAWeek
+                configureExpires(item: item)
+//                item.isExpired = isExpired
+//                item.isExpiring = isExpiring
+//                item.isExpiringInAWeek = isExpiringInAWeek
                 
-                if isFavorited {
-                    if store.allFavoritedItems.filter({$0.name == item.name}).count == 0{
-                        let favItem = FavoritedItem(name:item.name)
-                        realm.add(favItem)
-                    }
-                    
-                } else {
-                    if store.allFavoritedItems.filter({$0.name == item.name}).count > 0 {
-                        
-                        if let itemToDelete = store.allFavoritedItems.filter({$0.name == item.name}).first {
-                            realm.delete(itemToDelete)
-                        }
-                    }
-                }
+                configureFavorites(item: item)
+                deleteFavorites(item: item)
             }
             
             dismiss(animated: true, completion: nil)
@@ -133,52 +123,22 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
             try! realm.write {
                 
                 realm.add(item)
-                item.isFavorited = isFavorited
-                
-                let today = Date()
-                var daysLeft = 0
-                daysLeft = Helper.daysBetweenTwoDates(start: today, end: item.exp)
-                
-                if daysLeft < 0 {
-                    item.isExpired = true
-                    item.isExpiring = false
-                    item.isExpiringInAWeek = false
-                    isExpired = true
-                    isExpiring  = false
-                    isExpiringInAWeek = false
-                    
-                } else if daysLeft >= 0 && daysLeft < 4  {
-                    item.isExpired = false
-                    item.isExpiring = true
-                    item.isExpiringInAWeek = true
-                    isExpired = false
-                    isExpiring = true
-                    isExpiringInAWeek = true
-                    
-                } else {
-                    item.isExpired = false
-                    item.isExpiring = false
-                    item.isExpiringInAWeek = true
-                    isExpired = false
-                    isExpiring = false
-                    isExpiringInAWeek = true
-                }
-                
-                if isFavorited {
-                    if store.allFavoritedItems.filter({$0.name == item.name}).count == 0{
-                        let favItem = FavoritedItem(name:item.name)
-                        realm.add(favItem)
-                    }
-                }
+                configureExpires(item: item)
+                configureFavorites(item: item)
+               
+                picker.reloadAllComponents()
+                picker.selectedRow(inComponent: 0)
             }
         }
         NotificationCenter.default.post(name: NotificationName.refreshCharts, object: nil)
         activeTextField?.endEditing(true)
-        resetAddItems()
+        //resetAddItems()
+        resetView()
         showAlert()
     }
     
     @IBAction func favoriteBtnTapped(_ sender: Any) {
+        tableView.isHidden = true
         favoriteButton.isSelected = !favoriteButton.isSelected
         
         if favoriteButton.isSelected {
@@ -187,26 +147,29 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
             isFavorited = false
         }
     }
- 
+    
     @IBAction func minustBtnTapped(_ sender: Any) {
-        if quantity == 1 {
-            quantityMinusButton.isEnabled = false
-        } else {
-            quantityPlusButton.isEnabled = true
+        tableView.isHidden = true
+        if quantity > 1 {
             quantity -= 1
-            quantityLabel.text = "\(quantity)"
+        } else {
+            quantityMinusButton.isEnabled = false
         }
+        
+        quantityLabel.text = "\(quantity)"
     }
     
     @IBAction func plusBtnTapped(_ sender: Any) {
+        tableView.isHidden = true
         quantity += 1
         quantityLabel.text = "\(quantity)"
-        if quantityMinusButton.isEnabled == false {
-            quantityPlusButton.isEnabled = true
+        if quantity > 1 {
+            quantityMinusButton.isEnabled = true
         }
     }
     
     @IBAction func locationBtnTapped(_ sender: UIButton) {
+        tableView.isHidden = true
         moveViewDown()
         categoryField.endEditing(true)
         categoryField.resignFirstResponder()
@@ -223,20 +186,7 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
         default:
             break
         }
-        
-        for (index, button) in locationButtons.enumerated() {
-            if index == selectedIndex {
-                button.isSelected = true
-                button.backgroundColor = Colors.tealish
-                button.setTitleColor(.white, for: .selected)
-                button.layer.cornerRadius = 5
-            } else {
-                button.isSelected = false
-                button.backgroundColor = Colors.whiteTwo
-                button.setTitleColor(Colors.tealish, for: .normal)
-                button.layer.cornerRadius = 5
-            }
-        }
+        configureLocationButtons()
     }
     
     
@@ -244,66 +194,120 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
         adjustSpacing()
         configureAppearances()
         configureTableView()
-         if let item = itemToEdit {
+        if let item = itemToEdit {
             nameTitle = item.name.capitalized
             category = item.category
             quantity = Int(item.quantity)!
             purchaseDate = item.purchaseDate
             expDate = item.exp
-            isExpiring = item.isExpiring
-            isExpired = item.isExpired
-            isExpiringInAWeek = item.isExpiringInAWeek
+//            isExpiring = item.isExpiring
+//            isExpired = item.isExpired
+//            isExpiringInAWeek = item.isExpiringInAWeek
             favoriteButton.isSelected = item.isFavorited
             location = Location(rawValue:item.location)!
+            switch location {
+            case .Fridge:
+                selectedIndex = 0
+            case .Freezer:
+                selectedIndex = 1
+            case .Pantry:
+                selectedIndex = 2
+            case .Other:
+                selectedIndex = 3
+            }
             saveButton.isEnabled = true
             saveButton.setTitleColor(Colors.tealish, for: .normal)
-         } else {
-            isFavorited = false
-            isExpiringInAWeek = false
-            isExpiring = false
-            isExpired = false
-            location = .Fridge
-            let today = Date()
-            let sevenDaysLater = Calendar.current.date(byAdding: .day, value: 7, to: today)
-            if let date = sevenDaysLater {
-                expDate = date
-            }
-            nameTextField.autocapitalizationType = .words
-            categoryField.autocapitalizationType = .words
-            purchaseDate = Date()
-            quantity = 1
-            category = "Uncategorized"
-            nameTitle = EmptyString.none
-            isFavorited = false
-            favoriteButton.isSelected = false
-            nameTextField.becomeFirstResponder()
-            saveButton.isEnabled = false
-            saveButton.setTitleColor(Colors.warmGreyThree, for: .normal)
+            
+        } else {
+            resetView()
+           // configureQuantityButtons()
         }
         
+        configureTextfields()
+        configurePickerSettings()
+        configureQuantityButtons()
+        configureLocationButtons()
+        Helper.formatDates(formatter: formatter)
+    }
+    
+    func configureFavorites(item: Item) {
+        item.isFavorited = isFavorited
+        if isFavorited {
+            if store.allFavoritedItems.filter({$0.name == item.name}).count == 0{
+                let favItem = FavoritedItem(name:item.name)
+                realm.add(favItem)
+            }
+        }
+    }
+    
+    func deleteFavorites(item:Item){
+        if !isFavorited {
+            if store.allFavoritedItems.filter({$0.name == item.name}).count > 0 {
+                if let itemToDelete = store.allFavoritedItems.filter({$0.name == item.name}).first {
+                    realm.delete(itemToDelete)
+                }
+            }
+        }
+    }
+    
+    func configureExpires(item: Item){
+        var daysLeft = 0
+        daysLeft = Helper.daysBetweenTwoDates(start: today, end: item.exp)
+        
+        if daysLeft < 0 {
+            item.isExpired = true
+            item.isExpiring = false
+            item.isExpiringInAWeek = false
+//            isExpired = true
+//            isExpiring  = false
+//            isExpiringInAWeek = false
+            
+        } else if daysLeft >= 0 && daysLeft < 4  {
+            item.isExpired = false
+            item.isExpiring = true
+            item.isExpiringInAWeek = true
+//            isExpired = false
+//            isExpiring = true
+//            isExpiringInAWeek = true
+            
+        } else {
+            item.isExpired = false
+            item.isExpiring = false
+            item.isExpiringInAWeek = true
+//            isExpired = false
+//            isExpiring = false
+//            isExpiringInAWeek = true
+        }
+    }
+    
+    func configureTextfields(){
         nameTextField.text = nameTitle
-        categoryField.text = category
         quantityLabel.text = String(quantity)
         purchaseDateField.text = formatter.string(from: purchaseDate).capitalized
         expDateField.text = formatter.string(from: expDate).capitalized
-        picker.delegate = self
-        picker.dataSource = self
-        picker.reloadAllComponents()
-        picker.selectedRow(inComponent: 0)
-        categoryField.inputView = picker
-        datePickerOne.datePickerMode = .date
-        datePickerTwo.datePickerMode = .date
-        datePickerOne.date = Date()
-        datePickerTwo.date = expDate
-        
-        
+        categoryField.text = category
+    }
+    
+    func configureQuantityButtons(){
         if quantity == 1 {
             quantityMinusButton.isEnabled = false
         } else {
             quantityMinusButton.isEnabled = true
         }
-        Helper.formatDates(formatter: formatter)
-
+    }
+    
+    func configurePickerSettings(){
+        categoryField.inputView = picker
+        picker.delegate = self
+        picker.dataSource = self
+        datePickerOne.datePickerMode = .date
+        datePickerTwo.datePickerMode = .date
+        datePickerOne.date = Date()
+        datePickerTwo.date = expDate
+    }
+    
+    
+    func configureLocationButtons() {
         for (index, button) in locationButtons.enumerated() {
             if index == selectedIndex {
                 button.isSelected = true
@@ -345,23 +349,6 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
         locationView.layer.cornerRadius = 8
         categoryField.layer.cornerRadius = 8
     }
-
-   
-    func moveViewDown() {
-        if topMarginConstraint.constant == originTopMargin { return }
-        topMarginConstraint.constant = originTopMargin
-        UIView.animate(withDuration: 0.2, animations: { () -> Void in
-            self.view.layoutIfNeeded()
-        })
-    }
-    
-    func moveViewUp() {
-        if topMarginConstraint.constant != originTopMargin { return }
-        topMarginConstraint.constant -= 100
-        UIView.animate(withDuration: 0.2, animations: { () -> Void in
-            self.view.layoutIfNeeded()
-        })
-    }
     
     func showAlert() {
         labelView = UILabel(frame: CGRect(x: 0, y: 70, width: self.view.frame.width, height: 40))
@@ -391,6 +378,34 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
         saveButton.isEnabled = false
     }
     
+    func resetView(){
+        tableView.isHidden = true
+        nameTextField.text = EmptyString.none
+        nameTextField.autocapitalizationType = .words
+        nameTextField.becomeFirstResponder()
+        quantity = 1
+        quantityLabel.text = "1"
+        //configureQuantityButtons()
+        isFavorited = false
+        favoriteButton.isSelected = false
+        purchaseDate = today
+        let sevenDaysLater = Calendar.current.date(byAdding: .day, value: 7, to: today)
+        if let date = sevenDaysLater {
+            expDate = date
+        }
+        purchaseDateField.text = formatter.string(from: purchaseDate).capitalized
+        expDateField.text = formatter.string(from: expDate).capitalized
+        picker.reloadAllComponents()
+        categoryField.text = "Other"
+
+        location = .Fridge
+        selectedIndex = 0
+        configureLocationButtons()
+        
+        saveButton.isEnabled = false
+        saveButton.setTitleColor(Colors.warmGreyThree, for: .normal)
+    }
+    
     func checkTextField(sender: UITextField) {
         var textLength = 0
         if let text = sender.text {
@@ -418,7 +433,7 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
         let selectedCell: UITableViewCell = tableView.cellForRow(at: indexPath)!
         
         nameTextField.text = selectedCell.textLabel!.text!.capitalized
-    
+        
         tableView.isHidden = !tableView.isHidden
         
         nameTextField.endEditing(true)
@@ -457,6 +472,23 @@ class AddItemsManuallyVC: UIViewController, KeyboardHandling, UINavigationContro
         
         tableView.reloadData()
     }
+    
+    func fillCategory(){
+        print("-------------------------------------------------------------")
+        guard let name = nameTextField.text else { return }
+        
+        for foodGroup in foodGroups {
+            for (key, value) in foodGroup {
+                if value.contains(name) {
+                    DispatchQueue.main.async {
+                        self.categoryField.text = key
+                    }
+                } else {
+                    self.categoryField.text = "Other"
+                }
+            }
+        }
+    }
 }
 
 
@@ -469,12 +501,15 @@ extension AddItemsManuallyVC : UITextFieldDelegate {
         if textField == nameTextField {
             tableView.isHidden = true
         }
-        
         return true
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField){
         activeTextField = textField
+        if activeTextField != nameTextField {
+            tableView.isHidden = true
+        }
+        
         if textField == purchaseDateField {
             purchaseDateField.inputView = datePickerOne
             datePickerOne.datePickerMode = .date
@@ -516,6 +551,10 @@ extension AddItemsManuallyVC: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         categoryField.text = categories[row].rawValue
+        if activeTextField == categoryField {
+            pickerView.reloadAllComponents()
+            
+        }
         categoryField.resignFirstResponder()
         categoryField.endEditing(true)
         moveViewDown()
@@ -560,5 +599,21 @@ extension AddItemsManuallyVC: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 }
 
-
+extension AddItemsManuallyVC : KeyboardHandling {
+    func moveViewDown() {
+        if topMarginConstraint.constant == originTopMargin { return }
+        topMarginConstraint.constant = originTopMargin
+        UIView.animate(withDuration: 0.2, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    func moveViewUp() {
+        if topMarginConstraint.constant != originTopMargin { return }
+        topMarginConstraint.constant -= 100
+        UIView.animate(withDuration: 0.2, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+    }
+}
 

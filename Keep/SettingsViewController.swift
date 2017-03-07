@@ -46,12 +46,13 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorInset = .zero
+        setData()
         print("========= \(numOfItemsInCategory)")
-        numOfItemsInCategory = [store.itemsInVegetables, store.itemsInFruits, store.itemsInGrains, store.itemsInDairy, store.itemsInProtein]
+
+//        numOfItemsInCategory = [store.itemsInVegetables, store.itemsInFruits, store.itemsInGrains, store.itemsInDairy, store.itemsInProtein]
         //topView.underlinedBorder()
         midView.underlinedBorder()
         setNumbers()
-        setData()
         setChart(dataPoints: FoodGroups.categories, values: self.numOfItemsInCategory)
         NotificationCenter.default.addObserver(forName: NotificationName.refreshCharts, object: nil, queue: nil) { notification in
             self.setChart(dataPoints: FoodGroups.categories, values: self.numOfItemsInCategory)
