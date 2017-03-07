@@ -29,6 +29,7 @@ class AddScannedItemVC: UIViewController {
     @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
     
     let store = DataStore.sharedInstance
+    let realm = try! Realm()
     var originalTopMargin: CGFloat!
     
     let picker = UIPickerView()
@@ -44,6 +45,7 @@ class AddScannedItemVC: UIViewController {
     var activeTextField:UITextField?
     var isFavorited:Bool = false
     let lengthLimit = 20
+    var category: String = "Other"
     
     var itemToAdd: String? 
     
@@ -52,33 +54,19 @@ class AddScannedItemVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         adjustSpacing()
-        nameField.delegate = self
-        nameField.autocapitalizationType = .words
-        expDateField.delegate = self
-        pDateField.delegate = self
-        categoryField.delegate = self
+        configureAppearances()
+        configurePickers()
+        setDelegatesForTextfields()
         formatInitialData()
         customToolBarForPickers()
-        configureAppearances()
-        picker.delegate = self
-        picker.dataSource = self
-        pDateField.inputView = datePicker1
-        datePicker1.datePickerMode = .date
-        expDateField.inputView = datePicker2
-        datePicker2.datePickerMode = .date
-        categoryField.inputView = picker
-        if quantity == 1 {
-            minusButton.isEnabled = false
-        } else {
-            minusButton.isEnabled = true
-        }
-        Helper.formatDates(formatter: formatter)
+
+        nameField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
+        nameField.addTarget(self, action: #selector(fillCategory), for: .allEditingEvents)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         formatInitialData()
-        Helper.formatDates(formatter: formatter)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -146,29 +134,14 @@ class AddScannedItemVC: UIViewController {
     
         guard let name = nameField.text, name != EmptyString.none else { return }
         guard let quantity = quantityLabel.text, quantity != EmptyString.none else { return }
-        guard let category = categoryField.text, category != EmptyString.none else { return }
         
         let uuid = UUID().uuidString
         
-        let realm = try! Realm()
         try! realm.write {
             let item = Item(name: name.lowercased().capitalized, uniqueID: uuid, quantity: quantity, exp: expDate, purchaseDate: purchaseDate, location: location.rawValue, category: category)
-            item.isFavorited = isFavorited
             realm.add(item)
-            
-            if isFavorited {
-                if store.allFavoritedItems.filter({$0.name == item.name}).count == 0{
-                    let favItem = FavoritedItem(name:item.name.lowercased().capitalized)
-                    realm.add(favItem)
-                }
-                
-            } else {
-                if store.allFavoritedItems.filter({$0.name == item.name}).count > 0 {
-                    if let itemToDelete = store.allFavoritedItems.filter({$0.name == item.name}).first {
-                        realm.delete(itemToDelete)
-                    }
-                }
-            }
+            configureFavorites(item: item)
+            deleteFavorites(item: item)
         }
         
         NotificationCenter.default.post(name: NotificationName.refreshMainTV, object: nil)
@@ -176,7 +149,60 @@ class AddScannedItemVC: UIViewController {
         activeTextField?.endEditing(true)
         dismiss(animated: true, completion: nil)
     }
+    
+    func configureFavorites(item: Item) {
+        item.isFavorited = isFavorited
+        if isFavorited {
+            if store.allFavoritedItems.filter({$0.name == item.name}).count == 0{
+                let favItem = FavoritedItem(name:item.name)
+                realm.add(favItem)
+            }
+        }
+    }
+    
+    func deleteFavorites(item:Item){
+        if !isFavorited {
+            if store.allFavoritedItems.filter({$0.name == item.name}).count > 0 {
+                if let itemToDelete = store.allFavoritedItems.filter({$0.name == item.name}).first {
+                    realm.delete(itemToDelete)
+                }
+            }
+        }
+    }
+    
+    func setDelegatesForTextfields(){
+        nameField.delegate = self
+        expDateField.delegate = self
+        pDateField.delegate = self
+        categoryField.delegate = self
+    }
+    
+    func configurePickers(){
+        picker.delegate = self
+        picker.dataSource = self
+        pDateField.inputView = datePicker1
+        datePicker1.datePickerMode = .date
+        expDateField.inputView = datePicker2
+        datePicker2.datePickerMode = .date
+        categoryField.inputView = picker
+    }
 
+    func fillCategory(){
+        guard let name = nameField.text else { return }
+        
+        for foodGroup in foodGroups {
+            for (key, value) in foodGroup {
+                if value.contains(name) {
+                    DispatchQueue.main.async {
+                        self.categoryField.text = key
+                    }
+                } else {
+                    self.categoryField.text = "Other"
+                }
+            }
+        }
+    }
+    
     func adjustSpacing(){
         nameField.layer.sublayerTransform = CATransform3DMakeTranslation(15, 0, 0)
         expDateField.layer.sublayerTransform = CATransform3DMakeTranslation(15, 0, 0)
@@ -216,14 +242,75 @@ class AddScannedItemVC: UIViewController {
         
         if let item = itemToAdd {
             nameField.text = item
+            
+        } else {
+            nameField.text = store.scannedItemToAdd
+            
+        }
+        
+        fillCategory()
+        configureLocationButtons()
+        configureTextFields()
+        configureQuantityButtons()
+        configurePickersDates()
+        
+        saveButton.isEnabled = true
+        saveButton.setTitleColor(Colors.tealish, for: .normal)
+
+        Helper.formatDates(formatter: formatter)
+    }
+    
+    
+    func checkTextField(sender: UITextField) {
+        var textLength = 0
+        if let text = sender.text {
+            textLength = text.trimmingCharacters(in: .whitespacesAndNewlines).characters.count
+        }
+        
+        if textLength > 0 {
+            saveButton.isEnabled = true
+            saveButton.setTitleColor(Colors.tealish, for: .normal)
+            
+        } else {
+            saveButton.isEnabled = false
+            saveButton.setTitleColor(Colors.warmGreyFour, for: .normal)
+        }
+    }
+
+    func configurePickersDates(){
+        purchaseDate = Date()
+        datePicker1.setDate(purchaseDate, animated: true)
+        let sevenDaysLater = Calendar.current.date(byAdding: .day, value: 7, to: Date())
+        if let date = sevenDaysLater {
+            expDate = date
+            datePicker2.setDate(expDate, animated: true)
+        }
+        picker.selectRow(0, inComponent: 0, animated: true)
+    }
+    
+    func configureTextFields(){
+        nameField.autocapitalizationType = .words
+        if let item = itemToAdd {
+            nameField.text = item
         } else {
             nameField.text = store.scannedItemToAdd
         }
-        
-        categoryField.text = "Other"
         quantity = 1
-        quantityLabel.text = "\(quantity)"
-        
+        quantityLabel.text = String(quantity)
+        pDateField.text =  formatter.string(from: purchaseDate).capitalized
+        expDateField.text = formatter.string(from: expDate).capitalized
+        categoryField.text = category
+    }
+    
+    func configureQuantityButtons(){
+        if quantity == 1 {
+            minusButton.isEnabled = false
+        } else {
+            minusButton.isEnabled = true
+        }
+    }
+    
+    func configureLocationButtons(){
         for (index,button) in locationButtons.enumerated() {
             if index == 0 {
                 button.isSelected = true
@@ -237,21 +324,6 @@ class AddScannedItemVC: UIViewController {
                 button.layer.cornerRadius = 5
             }
         }
-        
-        pDateField.text = formatter.string(from: Date()).capitalized
-        let currentDate = Date()
-        let sevenDaysLater = Calendar.current.date(byAdding: .day, value: 7, to: currentDate)
-        if let date = sevenDaysLater {
-            expDate = date
-            expDateField.text = formatter.string(from: date).capitalized
-            datePicker2.date = expDate
-        }
-        datePicker1.date = currentDate
-    }
-    
-    func resetAddItems(){
-        formatInitialData()
-        saveButton.isEnabled = false
     }
 }
 

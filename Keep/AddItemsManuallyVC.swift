@@ -14,50 +14,53 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     // Fill category logic - apply to other vc
     // seperate tv alements from vc
     
-    @IBOutlet weak var favoriteButton: UIButton!
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var quantityLabel: CustomLabel!
-    @IBOutlet weak var quantityMinusButton: UIButton!
-    @IBOutlet weak var quantityPlusButton: UIButton!
-    @IBOutlet weak var purchaseDateField: UITextField!
-    @IBOutlet weak var expDateField: UITextField!
+    @IBOutlet weak var favoriteButton: UIButton! //
+    @IBOutlet weak var nameTextField: UITextField! //
+    @IBOutlet weak var quantityLabel: CustomLabel! //
+    @IBOutlet weak var quantityMinusButton: UIButton! //
+    @IBOutlet weak var quantityPlusButton: UIButton! //
+    @IBOutlet weak var purchaseDateField: UITextField! //
+    @IBOutlet weak var expDateField: UITextField! //
+    
     @IBOutlet weak var fridgeButton: UIButton!
     @IBOutlet weak var freezerButton: UIButton!
     @IBOutlet weak var pantryButton: UIButton!
     @IBOutlet weak var otherButton: UIButton!
-    @IBOutlet weak var categoryField: CategoryField!
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
-    @IBOutlet weak var locationView: UIView!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     
-    var labelView: UILabel!
-    var locationButtons:[UIButton] = []
-    var originTopMargin: CGFloat!
+    @IBOutlet weak var categoryField: CategoryField!//
+    @IBOutlet weak var saveButton: UIButton!//
+    @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!//
+    @IBOutlet weak var locationView: UIView! //
+    @IBOutlet weak var tableView: UITableView! // -
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint! // -
     
-    let realm = try! Realm()
-    let store = DataStore.sharedInstance
-    var nameTitle = EmptyString.none
-    var location:Location = .Fridge
-    var quantity: Int = 1
-    var expDate = Date()
-    var purchaseDate = Date()
-    var isFavorited = false
+    var labelView: UILabel! // -
+    var locationButtons:[UIButton] = [] //
+    var originTopMargin: CGFloat! //
+    
+    let realm = try! Realm() //
+    let store = DataStore.sharedInstance //
+    var nameTitle = EmptyString.none // -
+    var location:Location = .Fridge //
+    var quantity: Int = 1 //
+    var expDate = Date() //
+    var purchaseDate = Date() //
+    var isFavorited = false //
     var category: String = "Other"
     let today = Date()
     
     let picker = UIPickerView()
     let datePickerOne = UIDatePicker()
     let datePickerTwo = UIDatePicker()
-    let formatter = DateFormatter()
+    let formatter = DateFormatter() //
     
-    var activeTextField:UITextField?
-    let lengthLimit = 23
-    var selectedIndex = 0
+    var activeTextField:UITextField? //
+    let lengthLimit = 23 //
+    var selectedIndex = 0 //
     
     var itemToEdit: Item?
-    let categories = FoodGroups.groceryCategories
+    //var itemToAdd: String?
+    let categories = FoodGroups.groceryCategories //
     
     var allItems = Array(DataStore.sharedInstance.allItems)
     var filteredItemsNames = [String]()
@@ -66,7 +69,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         super.viewDidLoad()
         locationButtons = [fridgeButton, freezerButton, pantryButton, otherButton]
         formatInitialData()
-        customToolBarForPickers()
+        //customToolBarForPickers()
         nameTextField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
         nameTextField.addTarget(self, action: #selector(fillCategory), for: .allEditingEvents)
     }
@@ -74,7 +77,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         formatInitialData()
-        Helper.formatDates(formatter: formatter)
+        //Helper.formatDates(formatter: formatter)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -269,6 +272,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     }
     
     func configurePickerSettings(){
+        customToolBarForPickers()
         categoryField.inputView = picker
         picker.delegate = self
         picker.dataSource = self
@@ -363,6 +367,8 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         }
         purchaseDateField.text = formatter.string(from: purchaseDate).capitalized
         expDateField.text = formatter.string(from: expDate).capitalized
+        
+        // configureTextifelds?
 
         picker.selectRow(0, inComponent: 0, animated: true)
         categoryField.text = "Other"

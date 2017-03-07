@@ -63,7 +63,7 @@ var dairies: [String:[String]] = [
 var other: [String:[String]] = [
     "Beverages" : beverages,
     "Alcoholic Beverages" : alcoholicBeverages,
-    "Condiments and Suace" : condimentsAndSauce,
+    "Condiments and Sauce" : condimentsAndSauce,
     "Health and Personal Care" : healthAndPersonalCare,
     "Household and Cleaning" : householdAndCleaning
 ]
