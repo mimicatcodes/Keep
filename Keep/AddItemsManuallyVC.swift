@@ -10,13 +10,9 @@ import UIKit
 import RealmSwift
 
 class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate {
-    
-    // TODO: Tableview - hide it
-    // TODO: Picker rest to component 0
-    // Categoriy picker
-    // Refactor resetAddITems
-    // Fill category logic - apply to other vcs
-    // location for edited items
+
+    // Fill category logic - apply to other vc
+    // seperate tv alements from vc
     
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
@@ -48,9 +44,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     var expDate = Date()
     var purchaseDate = Date()
     var isFavorited = false
-//    var isExpired = false
-//    var isExpiring = false
-//    var isExpiringInAWeek = false
     var category: String = "Other"
     let today = Date()
     
@@ -107,10 +100,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
                 item.location = location.rawValue
                 item.category = category
                 configureExpires(item: item)
-//                item.isExpired = isExpired
-//                item.isExpiring = isExpiring
-//                item.isExpiringInAWeek = isExpiringInAWeek
-                
                 configureFavorites(item: item)
                 deleteFavorites(item: item)
             }
@@ -118,21 +107,17 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
             dismiss(animated: true, completion: nil)
             
         } else {
-            let item = Item(name: name.capitalized, uniqueID: UUID().uuidString, quantity: String(self.quantity), exp: self.expDate, purchaseDate: purchaseDate, location: location.rawValue, category: category.capitalized)
+            let item = Item(name: name.capitalized, uniqueID: UUID().uuidString, quantity: String(self.quantity), exp: expDate, purchaseDate: purchaseDate, location: location.rawValue, category: category)
             
             try! realm.write {
-                
-                realm.add(item)
                 configureExpires(item: item)
                 configureFavorites(item: item)
-               
-                picker.reloadAllComponents()
-                picker.selectedRow(inComponent: 0)
+                realm.add(item)
             }
         }
+        
         NotificationCenter.default.post(name: NotificationName.refreshCharts, object: nil)
         activeTextField?.endEditing(true)
-        //resetAddItems()
         resetView()
         showAlert()
     }
@@ -200,9 +185,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
             quantity = Int(item.quantity)!
             purchaseDate = item.purchaseDate
             expDate = item.exp
-//            isExpiring = item.isExpiring
-//            isExpired = item.isExpired
-//            isExpiringInAWeek = item.isExpiringInAWeek
             favoriteButton.isSelected = item.isFavorited
             location = Location(rawValue:item.location)!
             switch location {
@@ -220,7 +202,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
             
         } else {
             resetView()
-           // configureQuantityButtons()
         }
         
         configureTextfields()
@@ -258,25 +239,16 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
             item.isExpired = true
             item.isExpiring = false
             item.isExpiringInAWeek = false
-//            isExpired = true
-//            isExpiring  = false
-//            isExpiringInAWeek = false
             
         } else if daysLeft >= 0 && daysLeft < 4  {
             item.isExpired = false
             item.isExpiring = true
             item.isExpiringInAWeek = true
-//            isExpired = false
-//            isExpiring = true
-//            isExpiringInAWeek = true
-            
+
         } else {
             item.isExpired = false
             item.isExpiring = false
             item.isExpiringInAWeek = true
-//            isExpired = false
-//            isExpiring = false
-//            isExpiringInAWeek = true
         }
     }
     
@@ -373,11 +345,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         }
     }
     
-    func resetAddItems(){
-        formatInitialData()
-        saveButton.isEnabled = false
-    }
-    
     func resetView(){
         tableView.isHidden = true
         nameTextField.text = EmptyString.none
@@ -385,17 +352,19 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         nameTextField.becomeFirstResponder()
         quantity = 1
         quantityLabel.text = "1"
-        //configureQuantityButtons()
         isFavorited = false
         favoriteButton.isSelected = false
         purchaseDate = today
+        datePickerOne.setDate(purchaseDate, animated: true)
         let sevenDaysLater = Calendar.current.date(byAdding: .day, value: 7, to: today)
         if let date = sevenDaysLater {
             expDate = date
+            datePickerTwo.setDate(expDate, animated: true)
         }
         purchaseDateField.text = formatter.string(from: purchaseDate).capitalized
         expDateField.text = formatter.string(from: expDate).capitalized
-        picker.reloadAllComponents()
+
+        picker.selectRow(0, inComponent: 0, animated: true)
         categoryField.text = "Other"
 
         location = .Fridge

@@ -13,7 +13,6 @@ import RealmSwift
 class AddScannedItemVC: UIViewController {
     
     // TODO: Custom tool bar fonts - fix!
-    // TODO: minus button
     // TODO: Save action - notify it's actually saved
     
     @IBOutlet weak var saveButton: UIButton!
@@ -58,7 +57,6 @@ class AddScannedItemVC: UIViewController {
         expDateField.delegate = self
         pDateField.delegate = self
         categoryField.delegate = self
-        //categoryField.autocapitalizationType = .words
         formatInitialData()
         customToolBarForPickers()
         configureAppearances()
