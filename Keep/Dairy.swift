@@ -8,7 +8,7 @@
 
 import Foundation
 
-var dairy = [
+var dairy: Set<String> = [
     
     "America Cheese",
     "Bleu Cheese",
@@ -41,14 +41,14 @@ var dairy = [
     "Dry Jack",
     "String Cheese",
     "Vegetarian Cheese",
-    "Whole Milk",
-    "2% Fat Milk",
-    "1% Fat Milk",
-    "Low Fat Milk",
-    "Fat-Free Milk",
-    "Whole Lactose Milk",
-    "2% Lactose Milk",
-    "Fat-Free Lactose Milk",
+    "Milk - Whole",
+    "Milk - 2%",
+    "Milk - 1%",
+    "Milk - Low Fat",
+    "Milk - Fat-free",
+    "Milk - Whole Lactose",
+    "Lactose Milk 2%",
+    "Lactose Milk Fat-Free",
     "Whole Lactose-Free Milk",
     "2% Lactose-Free Milk",
     "Nonfat Lactose-Free Milk",

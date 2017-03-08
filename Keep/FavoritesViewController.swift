@@ -80,6 +80,7 @@ class FavoritesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmpty
             let dest = segue.destination as! AddScannedItemVC
             if let item = favItemToAddToStock {
                 dest.itemToAdd = item
+                dest.isFromFavorite = true
             }
         }
     }

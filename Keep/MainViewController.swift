@@ -183,8 +183,8 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
         var daysLeft: Int = 0
         
         cell.itemTitleLabel.text = filteredItem.name.lowercased().capitalized
-        let pDate = formatter.string(from: filteredItem.purchaseDate)
-        cell.purchaseDate.text = Labels.purchasedOn + pDate
+        let addedWhen = formatter.string(from: filteredItem.addedDate)
+        cell.purchaseDate.text = Labels.addedOn + addedWhen
         expDate = filteredItem.exp
         daysLeft = Helper.daysBetweenTwoDates(start: today, end: expDate)
         let realm = try! Realm()
@@ -206,6 +206,28 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
         configureExpireLabels(cell: cell, daysLeft: daysLeft)
         cell.quantityLabel.text = "x " + filteredItem.quantity
     }
+    
+    func configureExpires(item: Item){
+        var daysLeft = 0
+        daysLeft = Helper.daysBetweenTwoDates(start: Date(), end: item.exp)
+        
+        if daysLeft < 0 {
+            item.isExpired = true
+            item.isExpiring = false
+            item.isExpiringInAWeek = false
+            
+        } else if daysLeft >= 0 && daysLeft < 4  {
+            item.isExpired = false
+            item.isExpiring = true
+            item.isExpiringInAWeek = true
+            
+        } else {
+            item.isExpired = false
+            item.isExpiring = false
+            item.isExpiringInAWeek = true
+        }
+    }
+
     
     func configureExpireLabels(cell: StockCell, daysLeft: Int){
         if daysLeft == 0 {
@@ -235,7 +257,6 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
         navigationItem.backBarButtonItem = backItem
         
         if segue.identifier == Identifiers.Segue.editIems {
-            //let dest = segue.destination as! AddItemsVC
             let dest = segue.destination as! AddItemsManuallyVC
 
             dest.itemToEdit = itemToEdit
@@ -375,7 +396,6 @@ extension MainViewController: UITableViewDelegate {
             default:
                 break
             }
-
             return true
         }
         
@@ -399,93 +419,9 @@ extension MainViewController: UITableViewDelegate {
             self.performSegue(withIdentifier: Identifiers.Segue.editIems, sender: nil)
             return true
         }
-        
-        //deleteButton.setPadding(30)
         cell.rightButtons = [deleteButton, editButton]
         cell.rightExpansion.buttonIndex = 0
     }
-
-    /*
-    
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        dismissBtns()
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            
-            let realm = try! Realm()
-            
-            switch self.store.buttonStatus {
-            case Locations.fridge:
-                let itemToBeDeleted = self.store.fridgeItems.filter(Filters.category, self.store.fridgeSectionNames[indexPath.section])[indexPath.row]
-                
-                try! realm.write {
-                    print("\(itemToBeDeleted) has been deleted")
-                    realm.delete(itemToBeDeleted)
-                }
-                self.tableView.reloadData()
-                print("Deleted an item from a Fridge")
-            case Locations.freezer:
-                let itemToBeDeleted = self.store.freezerItems.filter(Filters.category, self.store.freezerSectionNames[indexPath.section])[indexPath.row]
-                try! realm.write {
-                    print("\(itemToBeDeleted) has been deleted")
-                    realm.delete(itemToBeDeleted)
-                }
-                self.tableView.reloadData()
-                print("Deleted an item from Freezer")
-            case Locations.pantry:
-                let itemToBeDeleted = self.store.pantryItems.filter(Filters.category, self.store.pantrySectionNames[indexPath.section])[indexPath.row]
-                try! realm.write {
-                    print("\(itemToBeDeleted) has been deleted")
-                    realm.delete(itemToBeDeleted)
-                }
-                self.tableView.reloadData()
-                print("Deleted an item from Pantry")
-            case Locations.other:
-                let itemToBeDeleted = self.store.otherItems.filter(Filters.category, self.store.otherSectionNames[indexPath.section])[indexPath.row]
-                try! realm.write {
-                    print("\(itemToBeDeleted) has been deleted")
-                    realm.delete(itemToBeDeleted)
-                }
-                self.tableView.reloadData()
-                print("Deleted an item from Other")
-            default:
-                break
-            }
-            
-        }
-        
-        delete.backgroundColor = Colors.salmon
-        
-        let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-            
-            switch self.store.buttonStatus {
-            case Locations.fridge:
-                self.itemToEdit = self.store.fridgeItems.filter(Filters.category, self.store.fridgeSectionNames[indexPath.section])[indexPath.row]
-                print(self.itemToEdit?.name ?? "NO VALUE")
-
-            case Locations.freezer:
-                self.itemToEdit = self.store.freezerItems.filter(Filters.category, self.store.freezerSectionNames[indexPath.section])[indexPath.row]
-                 print(self.itemToEdit?.name ?? "NO VALUE")
-                
-            case Locations.pantry:
-                self.itemToEdit = self.store.pantryItems.filter(Filters.category, self.store.pantrySectionNames[indexPath.section])[indexPath.row]
-                 print(self.itemToEdit?.name ?? "NO VALUE")
-                
-            case Locations.other:
-                self.itemToEdit = self.store.otherItems.filter(Filters.category, self.store.otherSectionNames[indexPath.section])[indexPath.row]
-                 print(self.itemToEdit?.name ?? "NO VALUE")
-            default:
-                break
-            }
-            
-            self.performSegue(withIdentifier: Identifiers.Segue.editIems, sender: nil)
-        }
-        
-        //edit.backgroundColor = Colors.dodgerBlue
-    
-        return [delete, edit]
-    }
- */
-    
 }
 
 

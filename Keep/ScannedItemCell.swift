@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MGSwipeTableCell
 
-class ScannedItemCell: UITableViewCell {
+class ScannedItemCell: MGSwipeTableCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var editAddButton: UIButton!

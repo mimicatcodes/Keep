@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MGSwipeTableCell
 
 class ScannedItemsVC: UIViewController {
 
@@ -61,6 +62,17 @@ class ScannedItemsVC: UIViewController {
         }
         return false
     }
+    
+    func configureSwipeButtons(cell:ScannedItemCell, indexPath: IndexPath){
+        let deleteButton = MGSwipeButton(title: EmptyString.none, icon: UIImage(named:ImageName.delete2), backgroundColor: Colors.salmon){ (sender: MGSwipeTableCell) -> Bool in
+            self.resultsArray.remove(at: indexPath.row)
+            self.tableView.reloadData()
+            return true
+        }
+        
+        cell.rightButtons = [deleteButton]
+        cell.rightExpansion.buttonIndex = 0
+    }
 }
 
 extension ScannedItemsVC : UITableViewDataSource, UITableViewDelegate {
@@ -76,7 +88,8 @@ extension ScannedItemsVC : UITableViewDataSource, UITableViewDelegate {
         cell.editAddButton.layer.cornerRadius = 8
         cell.editAddButton.tag = indexPath.row
         cell.editAddButton.addTarget(self, action: #selector(addToInventory), for: .touchUpInside)
-        
+        configureSwipeButtons(cell: cell, indexPath: indexPath)
+
         return cell
     }
     

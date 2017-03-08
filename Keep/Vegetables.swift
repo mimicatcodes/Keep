@@ -2,13 +2,13 @@
 //  Vegetables.swift
 //  Keep
 //
-//  Created by Mirim An on 3/6/17.
+//  Created by Luna An on 3/6/17.
 //  Copyright © 2017 Mimicatcodes. All rights reserved.
 //
 
 import Foundation
 
-var vegetables: [String] = [
+var vegetables: Set<String> = [
     
     "Artichoke",
     "Arugula",

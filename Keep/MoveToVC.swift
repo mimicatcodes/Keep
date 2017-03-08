@@ -47,7 +47,9 @@ class MoveToVC: UIViewController {
                     let today = Date()
                     let sevenDaysLater = Calendar.current.date(byAdding: .day, value: 7, to: today)
                     if let date = sevenDaysLater {
-                        let item = Item(name: name, uniqueID: uuid, quantity: "1", exp: date, purchaseDate: Date(), location: location, category: "Other")
+//                        let item = Item(name: name, uniqueID: uuid, quantity: "1", exp: date, purchaseDate: Date(), location: location, category: "Other")
+                        let item = Item(name: name, uniqueID: uuid, quantity: "1", exp: date, addedDate: Date(), location: location, category: "Other")
+
                     
                         realm.add(item)
                     }

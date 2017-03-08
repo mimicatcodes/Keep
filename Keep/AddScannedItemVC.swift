@@ -13,7 +13,10 @@ import RealmSwift
 class AddScannedItemVC: UIViewController {
     
     // TODO: Custom tool bar fonts - fix!
+    // EXp date - convenient options to be added
+    // Keyboard height
     // TODO: Save action - notify it's actually saved
+    // Tableview
     
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var nameField: UITextField!
@@ -33,21 +36,21 @@ class AddScannedItemVC: UIViewController {
     var originalTopMargin: CGFloat!
     
     let picker = UIPickerView()
-    let datePicker1 = UIDatePicker()
-    let datePicker2 = UIDatePicker()
+    let datePicker = UIDatePicker()
     
     var selectedIndex: Int = 0
     let formatter = DateFormatter()
     var quantity = 1
     var expDate = Date()
-    var purchaseDate = Date()
+    var addedDate = Date()
     var location: Location = .Fridge
     var activeTextField:UITextField?
     var isFavorited:Bool = false
     let lengthLimit = 20
     var category: String = "Other"
     
-    var itemToAdd: String? 
+    var itemToAdd: String?
+    var isFromFavorite: Bool?
     
     let categories = FoodGroups.groceryCategories
     
@@ -59,7 +62,7 @@ class AddScannedItemVC: UIViewController {
         setDelegatesForTextfields()
         formatInitialData()
         customToolBarForPickers()
-
+        
         nameField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
         nameField.addTarget(self, action: #selector(fillCategory), for: .allEditingEvents)
     }
@@ -131,14 +134,14 @@ class AddScannedItemVC: UIViewController {
     }
     
     @IBAction func saveBtnTapped(_ sender: UIButton) {
-    
+        
         guard let name = nameField.text, name != EmptyString.none else { return }
         guard let quantity = quantityLabel.text, quantity != EmptyString.none else { return }
         
         let uuid = UUID().uuidString
         
         try! realm.write {
-            let item = Item(name: name.lowercased().capitalized, uniqueID: uuid, quantity: quantity, exp: expDate, purchaseDate: purchaseDate, location: location.rawValue, category: category)
+            let item = Item(name: name.lowercased().capitalized, uniqueID: uuid, quantity: quantity, exp: expDate, addedDate: addedDate, location: location.rawValue, category: category)
             realm.add(item)
             configureFavorites(item: item)
             deleteFavorites(item: item)
@@ -173,20 +176,17 @@ class AddScannedItemVC: UIViewController {
     func setDelegatesForTextfields(){
         nameField.delegate = self
         expDateField.delegate = self
-        pDateField.delegate = self
         categoryField.delegate = self
     }
     
     func configurePickers(){
         picker.delegate = self
         picker.dataSource = self
-        pDateField.inputView = datePicker1
-        datePicker1.datePickerMode = .date
-        expDateField.inputView = datePicker2
-        datePicker2.datePickerMode = .date
+        expDateField.inputView = datePicker
+        datePicker.datePickerMode = .date
         categoryField.inputView = picker
     }
-
+    
     func fillCategory(){
         guard let name = nameField.text else { return }
         
@@ -206,7 +206,6 @@ class AddScannedItemVC: UIViewController {
     func adjustSpacing(){
         nameField.layer.sublayerTransform = CATransform3DMakeTranslation(15, 0, 0)
         expDateField.layer.sublayerTransform = CATransform3DMakeTranslation(15, 0, 0)
-        pDateField.layer.sublayerTransform = CATransform3DMakeTranslation(15, 0, 0)
         categoryField.layer.sublayerTransform = CATransform3DMakeTranslation(15, 0, 0)
     }
     
@@ -214,7 +213,6 @@ class AddScannedItemVC: UIViewController {
         nameField.layer.cornerRadius = 8
         quantityLabel.layer.cornerRadius = 8
         quantityLabel.layer.masksToBounds = true
-        pDateField.layer.cornerRadius = 8
         expDateField.layer.cornerRadius = 8
         locationView.layer.cornerRadius = 8
         categoryField.layer.cornerRadius = 8
@@ -245,7 +243,11 @@ class AddScannedItemVC: UIViewController {
             
         } else {
             nameField.text = store.scannedItemToAdd
-            
+        }
+        
+        if isFromFavorite != nil {
+            isFavorited = true
+            favButton.isSelected = true
         }
         
         fillCategory()
@@ -256,7 +258,7 @@ class AddScannedItemVC: UIViewController {
         
         saveButton.isEnabled = true
         saveButton.setTitleColor(Colors.tealish, for: .normal)
-
+        
         Helper.formatDates(formatter: formatter)
     }
     
@@ -276,14 +278,12 @@ class AddScannedItemVC: UIViewController {
             saveButton.setTitleColor(Colors.warmGreyFour, for: .normal)
         }
     }
-
+    
     func configurePickersDates(){
-        purchaseDate = Date()
-        datePicker1.setDate(purchaseDate, animated: true)
         let sevenDaysLater = Calendar.current.date(byAdding: .day, value: 7, to: Date())
         if let date = sevenDaysLater {
             expDate = date
-            datePicker2.setDate(expDate, animated: true)
+            datePicker.setDate(expDate, animated: true)
         }
         picker.selectRow(0, inComponent: 0, animated: true)
     }
@@ -297,7 +297,6 @@ class AddScannedItemVC: UIViewController {
         }
         quantity = 1
         quantityLabel.text = String(quantity)
-        pDateField.text =  formatter.string(from: purchaseDate).capitalized
         expDateField.text = formatter.string(from: expDate).capitalized
         categoryField.text = category
     }
@@ -366,10 +365,7 @@ extension AddScannedItemVC : UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func datePickerChanged(sender: UIDatePicker) {
-        if sender == datePicker1 {
-            purchaseDate = sender.date
-            pDateField.text = formatter.string(from: sender.date).capitalized
-        } else if sender == datePicker2 {
+        if sender == datePicker {
             expDate = sender.date
             expDateField.text = formatter.string(from: sender.date).capitalized
         }
@@ -395,7 +391,6 @@ extension AddScannedItemVC : UIPickerViewDelegate, UIPickerViewDataSource {
         toolBar.isUserInteractionEnabled = true
         
         expDateField.inputAccessoryView = toolBar
-        pDateField.inputAccessoryView = toolBar
         categoryField.inputAccessoryView = toolBar
     }
 }
@@ -408,17 +403,13 @@ extension AddScannedItemVC : UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField){
         activeTextField = textField
-        if textField == pDateField {
-            pDateField.inputView = datePicker1
-            datePicker1.datePickerMode = .date
-            datePicker1.addTarget(self, action: #selector(self.datePickerChanged(sender:)) , for: .valueChanged)
-            pDateField.text = formatter.string(from: datePicker1.date).capitalized
-            moveViewDown()
-        } else if textField == expDateField {
-            expDateField.inputView = datePicker2
-            expDate = datePicker2.date
-            datePicker2.datePickerMode = .date
-            datePicker2.addTarget(self, action: #selector(self.datePickerChanged(sender:)), for: .valueChanged)
+        
+        
+        if textField == expDateField {
+            expDateField.inputView = datePicker
+            expDate = datePicker.date
+            datePicker.datePickerMode = .date
+            datePicker.addTarget(self, action: #selector(self.datePickerChanged(sender:)), for: .valueChanged)
             expDateField.text = formatter.string(from: expDate).capitalized
             moveViewDown()
         } else if textField == categoryField {

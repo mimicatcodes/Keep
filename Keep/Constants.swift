@@ -158,6 +158,7 @@ struct Labels {
     static let expiringToday = "Expiring today"
     static let dayLeft = " day left"
     static let daysLeft = " days left"
+    static let addedOn = "Added on "
     static let purchasedOn = "Purchased on "
     static let itemEdited = "Item edited"
     static let itemAdded = "Item added"
@@ -173,11 +174,12 @@ struct Labels {
 
 struct OnBoarding {
     static let checkListTitle = "Stay Organized"
-    static let checkListBody = "Running out of stock? Create a shopping list to remind yourself and start shopping easily"
+    static let checkListBody =
+    "Manage your foods easily. \r\nAdd and move items to your kitchen,\r\ncheck expiration dates easily, and make a shopping list to shop more efficiently!"
     static let piggyBankTitle = "Save Money"
-    static let piggyBankBody = "By keeping track of your food, you are actually reducing chances of  food waste and saving your money."
+    static let piggyBankBody = "Reduce your food waste, and\r\nknow when your foods are about to expire."
     static let produceTitle = "Be Healthy"
-    static let produceBody = "KEEP alerts you before your food expires, so you can always eat your produce at its best condition."
+    static let produceBody = "Know your shopping trends, and\r\nlearn to buy healthier items."
 }
 
 struct LocalNotification {
@@ -199,7 +201,7 @@ struct FoodGroups {
 }
 
 struct FoodItems {
-    static let all  = [vegetables, fruits, pastaAndNoodles, otherGrains, dairy, meatsSeafoodsAndEggs, beansPeaseAndTofu, nutsAndSeeds, alcoholicBeverages, condimentsAndSauce, healthAndPersonalCare, householdAndCleaning]
+    static let all  = [vegetables, fruits, pastaAndNoodles, otherGrains, dairy, meatsSeafoodsAndEggs, beansPeasAndTofu, nutsAndSeeds, beverages, alcoholicBeverages, condimentsAndSauce, healthAndPersonalCare, householdAndCleaning]
 }
 
 struct SearchPlaceholder {

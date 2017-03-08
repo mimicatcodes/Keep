@@ -10,66 +10,67 @@ import UIKit
 import RealmSwift
 
 class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate {
-
-    // Fill category logic - apply to other vc
-    // seperate tv alements from vc
     
-    @IBOutlet weak var favoriteButton: UIButton! //
-    @IBOutlet weak var nameTextField: UITextField! //
-    @IBOutlet weak var quantityLabel: CustomLabel! //
-    @IBOutlet weak var quantityMinusButton: UIButton! //
-    @IBOutlet weak var quantityPlusButton: UIButton! //
-    @IBOutlet weak var purchaseDateField: UITextField! //
-    @IBOutlet weak var expDateField: UITextField! //
+    // seperate tv alements from vc
+    // Custom tool bar fonts - fix!
+    // Exp date - convenient options to be added
+    // Keyboard heigt adjustment
+    // Tableview bug - when editing and there's no string - > tableview not updated or doesnt dismiss
+    // picker - when changing category - other does not stick
+    // Make all the textfiels not editable - prevent copy and paste
+    
+    @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var quantityLabel: CustomLabel!
+    @IBOutlet weak var quantityMinusButton: UIButton!
+    @IBOutlet weak var quantityPlusButton: UIButton!
+    @IBOutlet weak var expDateField: UITextField!
     
     @IBOutlet weak var fridgeButton: UIButton!
     @IBOutlet weak var freezerButton: UIButton!
     @IBOutlet weak var pantryButton: UIButton!
     @IBOutlet weak var otherButton: UIButton!
     
-    @IBOutlet weak var categoryField: CategoryField!//
-    @IBOutlet weak var saveButton: UIButton!//
-    @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!//
-    @IBOutlet weak var locationView: UIView! //
-    @IBOutlet weak var tableView: UITableView! // -
-    @IBOutlet weak var heightConstraint: NSLayoutConstraint! // -
+    @IBOutlet weak var categoryField: CategoryField!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
+    @IBOutlet weak var locationView: UIView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     
-    var labelView: UILabel! // -
-    var locationButtons:[UIButton] = [] //
-    var originTopMargin: CGFloat! //
+    var labelView: UILabel!
+    var locationButtons:[UIButton] = []
+    var originTopMargin: CGFloat!
     
-    let realm = try! Realm() //
-    let store = DataStore.sharedInstance //
-    var nameTitle = EmptyString.none // -
-    var location:Location = .Fridge //
-    var quantity: Int = 1 //
-    var expDate = Date() //
-    var purchaseDate = Date() //
-    var isFavorited = false //
+    let realm = try! Realm()
+    let store = DataStore.sharedInstance
+    var nameTitle = EmptyString.none
+    var location:Location = .Fridge
+    var quantity: Int = 1
+    var expDate = Date()
+    var addedDate = Date()
+    var isFavorited = false
     var category: String = "Other"
     let today = Date()
     
     let picker = UIPickerView()
-    let datePickerOne = UIDatePicker()
-    let datePickerTwo = UIDatePicker()
-    let formatter = DateFormatter() //
+    let datePicker = UIDatePicker()
+    let formatter = DateFormatter()
     
-    var activeTextField:UITextField? //
-    let lengthLimit = 23 //
-    var selectedIndex = 0 //
+    var activeTextField:UITextField?
+    let lengthLimit = 23
+    var selectedIndex = 0
     
     var itemToEdit: Item?
     //var itemToAdd: String?
-    let categories = FoodGroups.groceryCategories //
+    let categories = FoodGroups.groceryCategories
     
-    var allItems = Array(DataStore.sharedInstance.allItems)
     var filteredItemsNames = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         locationButtons = [fridgeButton, freezerButton, pantryButton, otherButton]
         formatInitialData()
-        //customToolBarForPickers()
         nameTextField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
         nameTextField.addTarget(self, action: #selector(fillCategory), for: .allEditingEvents)
     }
@@ -77,7 +78,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         formatInitialData()
-        //Helper.formatDates(formatter: formatter)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -99,7 +99,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
                 item.name = name
                 item.quantity = String(quantity)
                 item.exp = expDate
-                item.purchaseDate = purchaseDate
+                item.addedDate = addedDate
                 item.location = location.rawValue
                 item.category = category
                 configureExpires(item: item)
@@ -110,7 +110,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
             dismiss(animated: true, completion: nil)
             
         } else {
-            let item = Item(name: name.capitalized, uniqueID: UUID().uuidString, quantity: String(self.quantity), exp: expDate, purchaseDate: purchaseDate, location: location.rawValue, category: category)
+            let item = Item(name: name.capitalized, uniqueID: UUID().uuidString, quantity: String(self.quantity), exp: expDate, addedDate: addedDate, location: location.rawValue, category: category)
             
             try! realm.write {
                 configureExpires(item: item)
@@ -186,7 +186,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
             nameTitle = item.name.capitalized
             category = item.category
             quantity = Int(item.quantity)!
-            purchaseDate = item.purchaseDate
+            addedDate = item.addedDate
             expDate = item.exp
             favoriteButton.isSelected = item.isFavorited
             location = Location(rawValue:item.location)!
@@ -247,7 +247,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
             item.isExpired = false
             item.isExpiring = true
             item.isExpiringInAWeek = true
-
+            
         } else {
             item.isExpired = false
             item.isExpiring = false
@@ -255,10 +255,10 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         }
     }
     
+    
     func configureTextfields(){
         nameTextField.text = nameTitle
         quantityLabel.text = String(quantity)
-        purchaseDateField.text = formatter.string(from: purchaseDate).capitalized
         expDateField.text = formatter.string(from: expDate).capitalized
         categoryField.text = category
     }
@@ -276,10 +276,8 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         categoryField.inputView = picker
         picker.delegate = self
         picker.dataSource = self
-        datePickerOne.datePickerMode = .date
-        datePickerTwo.datePickerMode = .date
-        datePickerOne.date = Date()
-        datePickerTwo.date = expDate
+        datePicker.datePickerMode = .date
+        datePicker.date = expDate
     }
     
     
@@ -312,7 +310,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     func adjustSpacing(){
         nameTextField.layer.sublayerTransform = CATransform3DMakeTranslation(15, 0, 0)
         expDateField.layer.sublayerTransform = CATransform3DMakeTranslation(15, 0, 0)
-        purchaseDateField.layer.sublayerTransform = CATransform3DMakeTranslation(15, 0, 0)
         categoryField.layer.sublayerTransform = CATransform3DMakeTranslation(15, 0, 0)
     }
     
@@ -320,7 +317,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         nameTextField.layer.cornerRadius = 8
         quantityLabel.layer.cornerRadius = 8
         quantityLabel.layer.masksToBounds = true
-        purchaseDateField.layer.cornerRadius = 8
         expDateField.layer.cornerRadius = 8
         locationView.layer.cornerRadius = 8
         categoryField.layer.cornerRadius = 8
@@ -358,21 +354,19 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         quantityLabel.text = "1"
         isFavorited = false
         favoriteButton.isSelected = false
-        purchaseDate = today
-        datePickerOne.setDate(purchaseDate, animated: true)
+        addedDate = today
         let sevenDaysLater = Calendar.current.date(byAdding: .day, value: 7, to: today)
         if let date = sevenDaysLater {
             expDate = date
-            datePickerTwo.setDate(expDate, animated: true)
+            datePicker.setDate(expDate, animated: true)
         }
-        purchaseDateField.text = formatter.string(from: purchaseDate).capitalized
         expDateField.text = formatter.string(from: expDate).capitalized
         
         // configureTextifelds?
-
+        
         picker.selectRow(0, inComponent: 0, animated: true)
         categoryField.text = "Other"
-
+        
         location = .Fridge
         selectedIndex = 0
         configureLocationButtons()
@@ -399,7 +393,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if filteredItemsNames.count == 0 {
-            return allItems.count
+            return 0
         }
         return filteredItemsNames.count
     }
@@ -485,17 +479,11 @@ extension AddItemsManuallyVC : UITextFieldDelegate {
             tableView.isHidden = true
         }
         
-        if textField == purchaseDateField {
-            purchaseDateField.inputView = datePickerOne
-            datePickerOne.datePickerMode = .date
-            datePickerOne.addTarget(self, action: #selector(self.datePickerChanged(sender:)) , for: .valueChanged)
-            purchaseDateField.text = formatter.string(from: datePickerOne.date).capitalized
-            moveViewDown()
-        } else if textField == expDateField {
-            expDateField.inputView = datePickerTwo
-            datePickerTwo.datePickerMode = UIDatePickerMode.date
-            datePickerTwo.addTarget(self, action: #selector(self.datePickerChanged(sender:)), for: .valueChanged)
-            expDateField.text = formatter.string(from: datePickerTwo.date).capitalized
+        if textField == expDateField {
+            expDateField.inputView = datePicker
+            datePicker.datePickerMode = UIDatePickerMode.date
+            datePicker.addTarget(self, action: #selector(self.datePickerChanged(sender:)), for: .valueChanged)
+            expDateField.text = formatter.string(from: datePicker.date).capitalized
             moveViewDown()
         } else if textField == categoryField {
             moveViewUp()
@@ -540,10 +528,9 @@ extension AddItemsManuallyVC: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func datePickerChanged(sender: UIDatePicker) {
-        if sender == datePickerOne {
-            purchaseDate = sender.date
-            purchaseDateField.text = formatter.string(from: sender.date).capitalized
-        } else if sender == datePickerTwo {
+        
+        
+        if sender == datePicker {
             expDate = sender.date
             expDateField.text = formatter.string(from: sender.date).capitalized
         }
@@ -569,7 +556,6 @@ extension AddItemsManuallyVC: UIPickerViewDelegate, UIPickerViewDataSource {
         toolBar.isUserInteractionEnabled = true
         
         expDateField.inputAccessoryView = toolBar
-        purchaseDateField.inputAccessoryView = toolBar
         categoryField.inputAccessoryView = toolBar
     }
 }
@@ -585,7 +571,7 @@ extension AddItemsManuallyVC : KeyboardHandling {
     
     func moveViewUp() {
         if topMarginConstraint.constant != originTopMargin { return }
-        topMarginConstraint.constant -= 100
+        topMarginConstraint.constant -= 80
         UIView.animate(withDuration: 0.2, animations: { () -> Void in
             self.view.layoutIfNeeded()
         })

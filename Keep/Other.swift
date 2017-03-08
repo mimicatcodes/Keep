@@ -2,13 +2,13 @@
 //  Other.swift
 //  Keep
 //
-//  Created by Mirim An on 3/6/17.
+//  Created by Luna An on 3/6/17.
 //  Copyright © 2017 Mimicatcodes. All rights reserved.
 //
 
 import Foundation
 
-var beverages = [
+var beverages: Set<String> = [
     "Soy Milk",
     "Rice Milk",
     "Almond Milk",
@@ -104,7 +104,7 @@ var beverages = [
     "Chamomile Tea"
 ]
 
-var alcoholicBeverages = [
+var alcoholicBeverages: Set<String> = [
     
     "Beer",
     "Light Beer",
@@ -140,7 +140,7 @@ var alcoholicBeverages = [
 ]
 
 
-var condimentsAndSauce = [
+var condimentsAndSauce: Set<String> = [
     
     "A-1 Steak Sauce",
     "Agar",
@@ -245,7 +245,7 @@ var condimentsAndSauce = [
     
 ]
 
-var healthAndPersonalCare = [
+var healthAndPersonalCare: Set<String> = [
     "Body Wash",
     "Shampoo",
     "Conditioner",
@@ -285,7 +285,7 @@ var healthAndPersonalCare = [
     
 ]
 
-var householdAndCleaning = [
+var householdAndCleaning: Set<String> = [
     "Coffee Filters",
     "Disinfecting Wipes",
     "Bleach",

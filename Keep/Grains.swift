@@ -8,7 +8,7 @@
 
 import Foundation
 
-var pastaAndNoodles  = [
+var pastaAndNoodles: Set<String>  = [
     
     "Spaghettoni",
     "Spaghetti",
@@ -180,7 +180,7 @@ var pastaAndNoodles  = [
     "Whole Wheat Pasta",
 ]
 
-var otherGrains = [
+var otherGrains: Set<String> = [
     
     "Amaranth",
     "Barley",

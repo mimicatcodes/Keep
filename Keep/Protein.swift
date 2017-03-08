@@ -2,13 +2,13 @@
 //  Protein.swift
 //  Keep
 //
-//  Created by Mirim An on 3/6/17.
+//  Created by Luna An on 3/6/17.
 //  Copyright © 2017 Mimicatcodes. All rights reserved.
 //
 
 import Foundation
 
-var meatsSeafoodsAndEggs = [
+var meatsSeafoodsAndEggs: Set<String> = [
 
     "Sausage",
     "Beef",
@@ -79,7 +79,7 @@ var meatsSeafoodsAndEggs = [
     "Prepped Shellfish"
 ]
 
-var beansPeaseAndTofu = [
+var beansPeasAndTofu: Set<String> = [
     "Azuki Beans",
     "Black Beans",
     "Baked Beans",
@@ -104,7 +104,7 @@ var beansPeaseAndTofu = [
     
 ]
 
-var nutsAndSeeds = [
+var nutsAndSeeds: Set<String> = [
     "Almond",
     "Australian Nut",
     "Beech",

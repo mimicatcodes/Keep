@@ -148,7 +148,6 @@ class ScanReceiptVC: UIViewController, UINavigationControllerDelegate {
     }
 }
 
-//  Pickers
 extension ScanReceiptVC : UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         

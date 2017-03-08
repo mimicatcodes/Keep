@@ -13,6 +13,8 @@ import NotificationCenter
 
 class ShoppingListDetailVC: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
+    // TODO: Share - actionVC
+    
     @IBOutlet weak var tableView: UITableView!
     
     let store = DataStore.sharedInstance

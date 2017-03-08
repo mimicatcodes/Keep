@@ -37,30 +37,30 @@ enum FoodCategories : String {
     case other = "Other"
 }
 
-var grains: [String:[String]] = [
+var grains: [String:Set<String>] = [
     "Pastas And Noodles" : pastaAndNoodles,
     "Other Grains" : otherGrains,
 ]
 
-var vegetable: [String:[String]] = [
+var vegetable: [String : Set<String>] = [
     "Vegetables": vegetables
 ]
 
-var fruit: [String:[String]] = [
+var fruit: [String:Set<String>] = [
     "Fruits": fruits
 ]
 
-var proteins: [String:[String]] = [
+var proteins: [String:Set<String>] = [
     "Meats, Seafoods And Eggs": meatsSeafoodsAndEggs,
-    "Beans, Pease And Tofu": beansPeaseAndTofu,
+    "Beans, Peas And Tofu": beansPeasAndTofu,
     "Nuts And Seeds" : nutsAndSeeds
 ]
 
-var dairies: [String:[String]] = [
+var dairies: [String:Set<String>] = [
     "Dairy": dairy
 ]
 
-var other: [String:[String]] = [
+var other: [String:Set<String>] = [
     "Beverages" : beverages,
     "Alcoholic Beverages" : alcoholicBeverages,
     "Condiments and Sauce" : condimentsAndSauce,
