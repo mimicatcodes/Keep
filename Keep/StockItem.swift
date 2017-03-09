@@ -18,7 +18,8 @@ class Item : Object {
     dynamic var addedDate = Date()
     dynamic var isExpired: Bool = false
     dynamic var isExpiring: Bool = false
-    dynamic var isExpiringInAWeek: Bool = false
+    dynamic var isExpiringToday: Bool = false
+    //dynamic var isExpiringInAWeek: Bool = false
     dynamic var isFavorited: Bool = false
     dynamic var location: String = EmptyString.none
     dynamic var category: String = EmptyString.none

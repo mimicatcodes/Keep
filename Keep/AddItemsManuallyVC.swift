@@ -261,22 +261,19 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         if daysLeft < 0 {
             item.isExpired = true
             item.isExpiring = false
-            item.isExpiringInAWeek = false
-            
-        } else if daysLeft >= 0 && daysLeft < 4  {
+            item.isExpiringToday = false
+        } else if daysLeft == 0 {
             item.isExpired = false
             item.isExpiring = true
-            item.isExpiringInAWeek = true
-            
-        } else if daysLeft > 20000 {
+            item.isExpiringToday = true
+        } else if daysLeft >= 0 && daysLeft < 4  {
+            item.isExpiring = true
             item.isExpired = false
-            item.isExpiring = false
-            item.isExpiringInAWeek = false
-            
+            item.isExpiringToday = false
         } else {
-            item.isExpired = false
             item.isExpiring = false
-            item.isExpiringInAWeek = true
+            item.isExpired = false
+            item.isExpiringToday = false
         }
     }
     
@@ -400,11 +397,11 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         
         if yearComponent > 2100 {
             expDateField.text = "N/A"
+            notApplicableButton.isSelected = true
         } else {
             expDateField.text = formatter.string(from: expDate).capitalized
+            notApplicableButton.isSelected = false
         }
-
-        
         // configureTextifelds?
         
         picker.selectRow(0, inComponent: 0, animated: true)

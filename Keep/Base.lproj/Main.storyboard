@@ -436,7 +436,7 @@
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="in 1 week" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="XQI-RT-3vS">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="in 3 days" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="XQI-RT-3vS">
                                                                 <rect key="frame" x="61.5" y="17" width="122.5" height="17.5"/>
                                                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="14"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -483,7 +483,7 @@
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="in 3 days" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ulO-8m-Nvh">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="today" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ulO-8m-Nvh">
                                                                 <rect key="frame" x="61.5" y="25" width="122.5" height="17.5"/>
                                                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="14"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -692,8 +692,8 @@
                         <outlet property="leftView" destination="mH5-JV-JyT" id="JdO-UP-4WV"/>
                         <outlet property="midView" destination="ZL0-ql-idb" id="OU1-rU-KA5"/>
                         <outlet property="numOfItemsExpiredLabel" destination="9fC-NZ-hl6" id="PeS-Zy-rS3"/>
-                        <outlet property="numOfItemsExpiringLabel" destination="XNY-0U-nEo" id="Kni-Eg-WSF"/>
-                        <outlet property="numOfItemsExpiringThisWeekLabel" destination="zIV-cj-tDO" id="X5V-zz-WTa"/>
+                        <outlet property="numOfItemsExpiringLabel" destination="zIV-cj-tDO" id="LRc-Sw-8R8"/>
+                        <outlet property="numOfItemsExpiringTodayLabel" destination="XNY-0U-nEo" id="NTa-iK-njq"/>
                         <outlet property="numOfItemsLabel" destination="0fq-Rt-VO8" id="zG8-YK-JR3"/>
                         <outlet property="radarChartView" destination="ANj-aL-YaZ" id="ulN-gj-QMx"/>
                         <outlet property="rightBottomView" destination="AcI-WS-3yL" id="MTy-eS-QiD"/>
@@ -2953,7 +2953,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mch-tW-Lsw">
-                                                    <rect key="frame" x="28" y="16" width="188" height="18"/>
+                                                    <rect key="frame" x="28" y="16" width="188" height="19"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                                     <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -2977,7 +2977,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expired" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D2B-0H-R3i">
-                                                    <rect key="frame" x="28" y="36" width="60" height="10"/>
+                                                    <rect key="frame" x="28" y="37" width="60" height="10"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="i7l-ig-4Sg"/>
                                                         <constraint firstAttribute="height" constant="10.5" id="yi3-Ef-Hxk"/>
@@ -3017,7 +3017,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cnI-Ia-Jrp">
-                                        <rect key="frame" x="339" y="16.5" width="21" height="40"/>
+                                        <rect key="frame" x="339" y="16" width="21" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="bwU-gm-lPp"/>
                                         </constraints>
@@ -3042,7 +3042,7 @@
                                 <rect key="frame" x="0.0" y="60" width="375" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I'm looking for" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FuJ-se-cZS">
-                                        <rect key="frame" x="25" y="0.5" width="325.5" height="40"/>
+                                        <rect key="frame" x="25" y="0.0" width="325" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="30"/>
                                         <color key="textColor" red="0.13725490200000001" green="0.83529411760000005" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>

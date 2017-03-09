@@ -27,7 +27,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     @IBOutlet weak var tableView: UITableView!
 
     @IBOutlet weak var numOfItemsLabel: UILabel!
-    @IBOutlet weak var numOfItemsExpiringThisWeekLabel: UILabel!
+    @IBOutlet weak var numOfItemsExpiringTodayLabel: UILabel! // FIX name to Today
     @IBOutlet weak var numOfItemsExpiringLabel: UILabel!
     @IBOutlet weak var numOfItemsExpiredLabel: UILabel!
     
@@ -39,7 +39,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     let store = DataStore.sharedInstance
     var sections:[SettingMenu] = [.reminder, .sendFeedback]
     var numOfItems: Int = 0
-    var numOfItemsExpiringThisWeek: Int = 0
+    var numOfItemsExpiringToday: Int = 0
     var numOfExpiredItems: Int = 0
     var numOfExpiringItems: Int = 0
     let mailComposerVC = MFMailComposeViewController()
@@ -74,7 +74,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     }
     
     func setNumbers(){
-        // 1st Section
+        // 1st Section - all
         numOfItems = store.allItems.count
         if numOfItems < 2 {
              labelOne.text = Labels.singular
@@ -83,16 +83,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         }
         numOfItemsLabel.text = "\(numOfItems)"
         
-        // 2nd Section
-        numOfItemsExpiringThisWeek = store.allItems.filter(Filters.isExpiringInAWeek).count
-        if numOfItemsExpiringThisWeek < 2 {
-            labelTwo.text = Labels.signularExpiring
-        } else {
-            labelTwo.text = Labels.pluralExpiring
-        }
-        numOfItemsExpiringThisWeekLabel.text = "\(numOfItemsExpiringThisWeek)"
-        
-        // 3rd Section
+        // 2nd Section - 3 days
         numOfExpiringItems = store.allItems.filter(Filters.isExpiring).count
         if numOfExpiringItems < 2 {
             labelThree.text = Labels.signularExpiring
@@ -101,7 +92,16 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         }
         numOfItemsExpiringLabel.text = "\(numOfExpiringItems)"
         
-        // 4th Section
+        // 3rd Section - today
+        numOfItemsExpiringToday = store.allItems.filter(Filters.isExpiringToday).count
+        if numOfItemsExpiringToday < 2 {
+            labelTwo.text = Labels.signularExpiring
+        } else {
+            labelTwo.text = Labels.pluralExpiring
+        }
+        numOfItemsExpiringTodayLabel.text = "\(numOfItemsExpiringToday)"
+    
+        // 4th Section - expired
         numOfExpiredItems = store.allItems.filter(Filters.isExpired).count
         if numOfExpiredItems < 2 {
             labelFour.text = Labels.itemIs

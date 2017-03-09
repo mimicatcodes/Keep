@@ -83,9 +83,9 @@ extension AppDelegate {
         if let hour = UserDefaults.standard.value(forKey: Keys.UserDefaults.hour) as? Int, let minute = UserDefaults.standard.value(forKey: Keys.UserDefaults.minute) as? Int {
             print("Hour is \(hour) and minute is \(minute)")
         } else {
-            UserDefaults.standard.set(0, forKey: Keys.UserDefaults.hour)
-            UserDefaults.standard.set(4, forKey: Keys.UserDefaults.minute)
-            Helper.setUpNotification(hour: 0, minute: 4)
+            UserDefaults.standard.set(10, forKey: Keys.UserDefaults.hour)
+            UserDefaults.standard.set(30, forKey: Keys.UserDefaults.minute)
+            Helper.setUpNotification(hour: 10, minute: 30)
         }
     }
     

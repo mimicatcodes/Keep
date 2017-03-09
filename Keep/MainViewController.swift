@@ -192,15 +192,20 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
             if daysLeft < 0 {
                 filteredItem.isExpired = true
                 filteredItem.isExpiring = false
-                filteredItem.isExpiringInAWeek = false
+                filteredItem.isExpiringToday = false
+                //filteredItem.isExpiringInAWeek = false
+            } else if daysLeft == 0 {
+                filteredItem.isExpired = false
+                filteredItem.isExpiring = true
+                filteredItem.isExpiringToday = true
             } else if daysLeft >= 0 && daysLeft < 4  {
                 filteredItem.isExpiring = true
                 filteredItem.isExpired = false
-                filteredItem.isExpiringInAWeek = true
+                filteredItem.isExpiringToday = false
             } else {
-                filteredItem.isExpired = false
                 filteredItem.isExpiring = false
-                filteredItem.isExpiringInAWeek = true
+                filteredItem.isExpired = false
+                filteredItem.isExpiringToday = false
             }
         }
         configureExpireLabels(cell: cell, daysLeft: daysLeft)
@@ -214,17 +219,19 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
         if daysLeft < 0 {
             item.isExpired = true
             item.isExpiring = false
-            item.isExpiringInAWeek = false
-            
-        } else if daysLeft >= 0 && daysLeft < 4  {
+            item.isExpiringToday = false
+        } else if daysLeft == 0 {
             item.isExpired = false
             item.isExpiring = true
-            item.isExpiringInAWeek = true
-            
-        } else {
+            item.isExpiringToday = true
+        } else if daysLeft >= 0 && daysLeft < 4  {
+            item.isExpiring = true
             item.isExpired = false
+            item.isExpiringToday = false
+        } else {
             item.isExpiring = false
-            item.isExpiringInAWeek = true
+            item.isExpired = false
+            item.isExpiringToday = false
         }
     }
 
