@@ -228,22 +228,21 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
         }
     }
 
-    
     func configureExpireLabels(cell: StockCell, daysLeft: Int){
         if daysLeft == 0 {
             cell.expDateLabel.text = Labels.expiringToday
             cell.expDateLabel.textColor = Colors.pastelRed
         } else if daysLeft == 1 {
             cell.expDateLabel.text = "\(daysLeft)" + Labels.dayLeft
-            
             cell.expDateLabel.textColor = Colors.pastelRed
-
         } else if daysLeft == 2 || daysLeft == 3 {
             cell.expDateLabel.text = "\(daysLeft)" + Labels.daysLeft
             cell.expDateLabel.textColor = Colors.pastelRed
-
-        } else if daysLeft > 3 {
+        } else if daysLeft > 3 && daysLeft < 20000 {
             cell.expDateLabel.text = "\(daysLeft)" + Labels.daysLeft
+            cell.expDateLabel.textColor = Colors.warmGreyThree
+        } else if daysLeft > 20000 {
+            cell.expDateLabel.text = "N/A"
             cell.expDateLabel.textColor = Colors.warmGreyThree
         } else  {
             cell.expDateLabel.text = Labels.expired

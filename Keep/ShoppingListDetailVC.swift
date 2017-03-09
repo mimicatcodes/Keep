@@ -178,17 +178,21 @@ extension ShoppingListDetailVC : UITableViewDelegate, UITableViewDataSource {
     func shareList(){
         let predicate = NSPredicate(format: Filters.listUniqueID, uniqueID)
         let filteredItems = store.allShoppingItems.filter(predicate)
-        var emptyArray = String()
+        var emptyString = String()
         
         for item in filteredItems {
-            emptyArray.append(item.name)
+            emptyString += item.name + ("\n")
         }
         
-        let activityController = UIActivityViewController(activityItems: [emptyArray], applicationActivities: nil)
+        print("\n")
+        print(emptyString)
+        print("\n")
         
-        activityController.popoverPresentationController?.sourceView = self.view
+        let activityController = UIActivityViewController(activityItems: [emptyString], applicationActivities: nil)
+        
+        activityController.popoverPresentationController?.sourceView = view
         activityController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
-        self.present(activityController, animated: true, completion: nil)
+        present(activityController, animated: true, completion: nil)
     }
 }
 

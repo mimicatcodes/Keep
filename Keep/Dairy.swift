@@ -45,7 +45,7 @@ var dairy: Set<String> = [
     "Milk - 2%",
     "Milk - 1%",
     "Milk - Low Fat",
-    "Milk - Fat-free",
+    "Skim Milk",
     "Milk - Whole Lactose",
     "Lactose Milk 2%",
     "Lactose Milk Fat-Free",

@@ -22,8 +22,7 @@ class ScanReceiptVC: UIViewController, UINavigationControllerDelegate {
     var textsScanned:String = EmptyString.none
     var emptyArray = [String]()
     let picker = UIImagePickerController()
-    var isFinishedProcessing = false
-    var test = false
+    var cancelled = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,12 +38,12 @@ class ScanReceiptVC: UIViewController, UINavigationControllerDelegate {
     
     @IBAction func cancelTapped(_ sender: UIButton) {
         imageView.image = nil
-        test = true
+        cancelled = true
         dismiss(animated: true, completion: nil)
     }
     
     func shouldCancelImageRecognition(for tesseract: G8Tesseract!) -> Bool {
-        if test == true {
+        if cancelled == true {
             return true
         }
         return false

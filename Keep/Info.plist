@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Keep will access a receipt saved in your library.</string>
-	<key>NSAppleMusicUsageDescription</key>
-	<string>Keep will take a picture of your receipt to scan.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Keep will take a picture of your receipt to scan.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -28,6 +22,12 @@
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Keep will take a picture of your receipt to scan.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Keep will take a picture of your receipt to scan.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Keep will access a receipt saved in your library.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

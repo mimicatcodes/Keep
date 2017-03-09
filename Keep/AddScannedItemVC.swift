@@ -237,7 +237,6 @@ class AddScannedItemVC: UIViewController {
     }
     
     func formatInitialData() {
-        
         if let item = itemToAdd {
             nameField.text = item
             

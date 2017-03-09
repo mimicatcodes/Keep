@@ -11,6 +11,8 @@ import RealmSwift
 import Charts
 import MessageUI
 
+// No categories?!
+
 class SettingsViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     @IBOutlet weak var topView: UIView!

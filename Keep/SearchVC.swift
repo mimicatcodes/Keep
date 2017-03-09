@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 
+// disable selection 
 class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!

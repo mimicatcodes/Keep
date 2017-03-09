@@ -25,6 +25,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     @IBOutlet weak var quantityMinusButton: UIButton!
     @IBOutlet weak var quantityPlusButton: UIButton!
     @IBOutlet weak var expDateField: UITextField!
+    @IBOutlet weak var notApplicableButton: UIButton!
     
     @IBOutlet weak var fridgeButton: UIButton!
     @IBOutlet weak var freezerButton: UIButton!
@@ -156,6 +157,25 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         }
     }
     
+    @IBAction func naBtnTapped(_ sender: Any) {
+        notApplicableButton.isSelected = !notApplicableButton.isSelected
+        if notApplicableButton.isSelected {
+            expDateField.text = "N/A"
+            let hundressYearsLater = Calendar.current.date(byAdding: .year, value: 100, to: today)
+            if let date = hundressYearsLater {
+                expDate = date
+            }
+        } else {
+            let sevenDaysLater = Calendar.current.date(byAdding: .day, value: 7, to: today)
+            if let date = sevenDaysLater {
+                expDate = date
+                datePicker.setDate(expDate, animated: true)
+                expDateField.text = formatter.string(from: expDate).capitalized
+
+            }
+        }
+        
+    }
     @IBAction func locationBtnTapped(_ sender: UIButton) {
         tableView.isHidden = true
         moveViewDown()
@@ -248,6 +268,11 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
             item.isExpiring = true
             item.isExpiringInAWeek = true
             
+        } else if daysLeft > 20000 {
+            item.isExpired = false
+            item.isExpiring = false
+            item.isExpiringInAWeek = false
+            
         } else {
             item.isExpired = false
             item.isExpiring = false
@@ -259,7 +284,16 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     func configureTextfields(){
         nameTextField.text = nameTitle
         quantityLabel.text = String(quantity)
-        expDateField.text = formatter.string(from: expDate).capitalized
+        let calendar = Calendar.current
+        let yearComponent = calendar.component(.year, from: expDate)
+        
+        if yearComponent > 2100 {
+            expDateField.text = "N/A"
+            notApplicableButton.isSelected = true
+        } else {
+            expDateField.text = formatter.string(from: expDate).capitalized
+            notApplicableButton.isSelected = false
+        }
         categoryField.text = category
     }
     
@@ -360,7 +394,16 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
             expDate = date
             datePicker.setDate(expDate, animated: true)
         }
-        expDateField.text = formatter.string(from: expDate).capitalized
+        
+        let calendar = Calendar.current
+        let yearComponent = calendar.component(.year, from: expDate)
+        
+        if yearComponent > 2100 {
+            expDateField.text = "N/A"
+        } else {
+            expDateField.text = formatter.string(from: expDate).capitalized
+        }
+
         
         // configureTextifelds?
         
@@ -386,6 +429,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
             saveButton.setTitleColor(Colors.tealish, for: .normal)
             
         } else {
+            tableView.isHidden = true
             saveButton.isEnabled = false
             saveButton.setTitleColor(Colors.warmGreyFour, for: .normal)
         }
@@ -443,7 +487,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     }
     
     func fillCategory(){
-        print("-------------------------------------------------------------")
         guard let name = nameTextField.text else { return }
         
         for foodGroup in foodGroups {
@@ -484,6 +527,7 @@ extension AddItemsManuallyVC : UITextFieldDelegate {
             datePicker.datePickerMode = UIDatePickerMode.date
             datePicker.addTarget(self, action: #selector(self.datePickerChanged(sender:)), for: .valueChanged)
             expDateField.text = formatter.string(from: datePicker.date).capitalized
+            notApplicableButton.isSelected = false
             moveViewDown()
         } else if textField == categoryField {
             moveViewUp()
@@ -528,8 +572,6 @@ extension AddItemsManuallyVC: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func datePickerChanged(sender: UIDatePicker) {
-        
-        
         if sender == datePicker {
             expDate = sender.date
             expDateField.text = formatter.string(from: sender.date).capitalized
