@@ -93,7 +93,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     
     @IBAction func saveTapped(_ sender: Any) {
         guard let name = nameTextField.text else { return }
-        guard let category = categoryField.text else { return }
         
         if let item = itemToEdit {
             try! realm.write {
@@ -107,9 +106,8 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
                 configureFavorites(item: item)
                 deleteFavorites(item: item)
             }
-            
+            activeTextField?.endEditing(true)
             dismiss(animated: true, completion: nil)
-            
         } else {
             let item = Item(name: name.capitalized, uniqueID: UUID().uuidString, quantity: String(self.quantity), exp: expDate, addedDate: addedDate, location: location.rawValue, category: category)
             
@@ -118,12 +116,11 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
                 configureFavorites(item: item)
                 realm.add(item)
             }
+            activeTextField?.endEditing(true)
+            resetView()
+            showAlert()
         }
-        
         NotificationCenter.default.post(name: NotificationName.refreshCharts, object: nil)
-        activeTextField?.endEditing(true)
-        resetView()
-        showAlert()
     }
     
     @IBAction func favoriteBtnTapped(_ sender: Any) {
@@ -171,11 +168,10 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
                 expDate = date
                 datePicker.setDate(expDate, animated: true)
                 expDateField.text = formatter.string(from: expDate).capitalized
-
             }
         }
-        
     }
+    
     @IBAction func locationBtnTapped(_ sender: UIButton) {
         tableView.isHidden = true
         moveViewDown()
@@ -277,20 +273,10 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         }
     }
     
-    
     func configureTextfields(){
         nameTextField.text = nameTitle
         quantityLabel.text = String(quantity)
-        let calendar = Calendar.current
-        let yearComponent = calendar.component(.year, from: expDate)
-        
-        if yearComponent > 2100 {
-            expDateField.text = "N/A"
-            notApplicableButton.isSelected = true
-        } else {
-            expDateField.text = formatter.string(from: expDate).capitalized
-            notApplicableButton.isSelected = false
-        }
+        configureNA()
         categoryField.text = category
     }
     
@@ -377,10 +363,13 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     }
     
     func resetView(){
+        
         tableView.isHidden = true
         nameTextField.text = EmptyString.none
         nameTextField.autocapitalizationType = .words
-        nameTextField.becomeFirstResponder()
+        if itemToEdit == nil {
+            nameTextField.becomeFirstResponder()
+        }
         quantity = 1
         quantityLabel.text = "1"
         isFavorited = false
@@ -392,6 +381,20 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
             datePicker.setDate(expDate, animated: true)
         }
         
+        configureNA()
+        // configureTextifelds?
+        picker.selectRow(0, inComponent: 0, animated: true)
+        categoryField.text = "Other"
+        
+        location = .Fridge
+        selectedIndex = 0
+        configureLocationButtons()
+        
+        saveButton.isEnabled = false
+        saveButton.setTitleColor(Colors.warmGreyThree, for: .normal)
+    }
+    
+    func configureNA(){
         let calendar = Calendar.current
         let yearComponent = calendar.component(.year, from: expDate)
         
@@ -402,17 +405,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
             expDateField.text = formatter.string(from: expDate).capitalized
             notApplicableButton.isSelected = false
         }
-        // configureTextifelds?
-        
-        picker.selectRow(0, inComponent: 0, animated: true)
-        categoryField.text = "Other"
-        
-        location = .Fridge
-        selectedIndex = 0
-        configureLocationButtons()
-        
-        saveButton.isEnabled = false
-        saveButton.setTitleColor(Colors.warmGreyThree, for: .normal)
     }
     
     func checkTextField(sender: UITextField) {
@@ -434,18 +426,17 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if filteredItemsNames.count == 0 {
+            tableView.isHidden = true
             return 0
         }
+        tableView.isHidden = false
         return filteredItemsNames.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCell: UITableViewCell = tableView.cellForRow(at: indexPath)!
-        
         nameTextField.text = selectedCell.textLabel!.text!.capitalized
-        
         tableView.isHidden = !tableView.isHidden
-        
         nameTextField.endEditing(true)
     }
     
@@ -554,6 +545,7 @@ extension AddItemsManuallyVC: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        category = categories[row].rawValue
         categoryField.text = categories[row].rawValue
         if activeTextField == categoryField {
             pickerView.reloadAllComponents()

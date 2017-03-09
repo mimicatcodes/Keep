@@ -124,6 +124,7 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
             cell.quantityLabel.text = "x \(store.allItems[indexPath.row].quantity)"
             cell.locationLabel.text = store.allItems[indexPath.row].location
         }
+        cell.selectionStyle = .none
         return cell
     }
     

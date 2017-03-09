@@ -24,6 +24,7 @@ class AddScannedItemVC: UIViewController {
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var minusButton: UIButton!
     @IBOutlet weak var plusButton: UIButton!
+    @IBOutlet weak var notApplicableButton: UIButton!
     @IBOutlet var locationView: UIView!
     @IBOutlet var locationButtons: [UIButton]!
     @IBOutlet weak var expDateField: UITextField!
@@ -52,6 +53,7 @@ class AddScannedItemVC: UIViewController {
     var itemToAdd: String?
     var isFromFavorite: Bool?
     
+    let today = Date()
     let categories = FoodGroups.groceryCategories
     
     override func viewDidLoad() {
@@ -95,6 +97,24 @@ class AddScannedItemVC: UIViewController {
         }
     }
     
+    @IBAction func naBtnTapped(_ sender: Any) {
+        notApplicableButton.isSelected = !notApplicableButton.isSelected
+        if notApplicableButton.isSelected {
+            expDateField.text = "N/A"
+            let hundressYearsLater = Calendar.current.date(byAdding: .year, value: 100, to: today)
+            if let date = hundressYearsLater {
+                expDate = date
+            }
+        } else {
+            let sevenDaysLater = Calendar.current.date(byAdding: .day, value: 7, to: today)
+            if let date = sevenDaysLater {
+                expDate = date
+                datePicker.setDate(expDate, animated: true)
+                expDateField.text = formatter.string(from: expDate).capitalized
+            }
+        }
+    }
+    
     @IBAction func locationButtonTapped(_ sender: UIButton) {
         moveViewDown()
         categoryField.endEditing(true)
@@ -134,14 +154,12 @@ class AddScannedItemVC: UIViewController {
     }
     
     @IBAction func saveBtnTapped(_ sender: UIButton) {
-        
         guard let name = nameField.text, name != EmptyString.none else { return }
-        guard let quantity = quantityLabel.text, quantity != EmptyString.none else { return }
-        
+
         let uuid = UUID().uuidString
         
         try! realm.write {
-            let item = Item(name: name.lowercased().capitalized, uniqueID: uuid, quantity: quantity, exp: expDate, addedDate: addedDate, location: location.rawValue, category: category)
+            let item = Item(name: name.lowercased().capitalized, uniqueID: uuid, quantity: String(quantity), exp: expDate, addedDate: addedDate, location: location.rawValue, category: category)
             realm.add(item)
             configureFavorites(item: item)
             deleteFavorites(item: item)
@@ -149,7 +167,9 @@ class AddScannedItemVC: UIViewController {
         
         NotificationCenter.default.post(name: NotificationName.refreshMainTV, object: nil)
         NotificationCenter.default.post(name: NotificationName.refreshScannedItems, object: nil)
+        
         activeTextField?.endEditing(true)
+        activeTextField?.resignFirstResponder()
         dismiss(animated: true, completion: nil)
     }
     
@@ -287,6 +307,19 @@ class AddScannedItemVC: UIViewController {
         picker.selectRow(0, inComponent: 0, animated: true)
     }
     
+    func configureNA(){
+        let calendar = Calendar.current
+        let yearComponent = calendar.component(.year, from: expDate)
+        
+        if yearComponent > 2100 {
+            expDateField.text = "N/A"
+            notApplicableButton.isSelected = true
+        } else {
+            expDateField.text = formatter.string(from: expDate).capitalized
+            notApplicableButton.isSelected = false
+        }
+    }
+    
     func configureTextFields(){
         nameField.autocapitalizationType = .words
         if let item = itemToAdd {
@@ -296,7 +329,8 @@ class AddScannedItemVC: UIViewController {
         }
         quantity = 1
         quantityLabel.text = String(quantity)
-        expDateField.text = formatter.string(from: expDate).capitalized
+        
+        configureNA()
         categoryField.text = category
     }
     
@@ -354,6 +388,7 @@ extension AddScannedItemVC : UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         categoryField.text = categories[row].rawValue
+        category = categories[row].rawValue
         categoryField.resignFirstResponder()
         categoryField.endEditing(true)
         moveViewDown()
@@ -403,13 +438,13 @@ extension AddScannedItemVC : UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField){
         activeTextField = textField
         
-        
         if textField == expDateField {
             expDateField.inputView = datePicker
             expDate = datePicker.date
             datePicker.datePickerMode = .date
             datePicker.addTarget(self, action: #selector(self.datePickerChanged(sender:)), for: .valueChanged)
             expDateField.text = formatter.string(from: expDate).capitalized
+            notApplicableButton.isSelected = false
             moveViewDown()
         } else if textField == categoryField {
             moveViewUp()
