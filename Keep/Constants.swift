@@ -80,6 +80,7 @@ struct Identifiers {
         static let searchCell = "searchCell"
         static let favoriteCell = "favoriteCell"
         static let nameCell = "nameCell"
+        static let settingExpiresCell = "settingExpiresCell"
     }
     struct Segue {
         static let toScannedItems = "toScannedItems"
@@ -156,6 +157,7 @@ struct Labels {
     static let cancel = "Cancel"
     static let expired = "Expired!"
     static let expiring = "Expiring soon"
+    static let expiringInThreeDays = "Expiring in 3 days"
     static let expiringToday = "Expiring today"
     static let dayLeft = " day left"
     static let daysLeft = " days left"
@@ -223,6 +225,10 @@ enum FiveFoodGroups: String {
     case Vegetables
     case Fruits
     case Grains
+}
+
+enum SettingExpire: String {
+    case expired, today, threeDays
 }
 
 enum Location : String {

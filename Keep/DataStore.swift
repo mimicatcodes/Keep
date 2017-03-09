@@ -48,4 +48,5 @@ class DataStore{
     }
     
     var buttonStatus = Locations.fridge
+    var settingExpire = EmptyString.none
 }

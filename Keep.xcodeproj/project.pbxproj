@@ -47,6 +47,8 @@
 		DD7F721F1E66807500BAE511 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7F721E1E66807400BAE511 /* Helper.swift */; };
 		DD7F72251E69FAB600BAE511 /* AddItemsManuallyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7F72241E69FAB600BAE511 /* AddItemsManuallyVC.swift */; };
 		DD8586BB1E580C2A00065DDD /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8586BA1E580C2A00065DDD /* CustomViews.swift */; };
+		DDBEB0E11E71F4DD00B16D15 /* ExpiringItemsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBEB0E01E71F4DD00B16D15 /* ExpiringItemsVC.swift */; };
+		DDBEB0E41E71F82F00B16D15 /* SettingExpiresCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBEB0E31E71F82F00B16D15 /* SettingExpiresCell.swift */; };
 		DDC3E9801E1C76E100459295 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E97F1E1C76E100459295 /* SearchVC.swift */; };
 		DDC3E9821E1C93F400459295 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E9811E1C93F400459295 /* DataStore.swift */; };
 		DDC3E9871E1C957000459295 /* ShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC3E9861E1C957000459295 /* ShoppingListViewController.swift */; };
@@ -112,6 +114,8 @@
 		DD7F721E1E66807400BAE511 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		DD7F72241E69FAB600BAE511 /* AddItemsManuallyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemsManuallyVC.swift; sourceTree = "<group>"; };
 		DD8586BA1E580C2A00065DDD /* CustomViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
+		DDBEB0E01E71F4DD00B16D15 /* ExpiringItemsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpiringItemsVC.swift; sourceTree = "<group>"; };
+		DDBEB0E31E71F82F00B16D15 /* SettingExpiresCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingExpiresCell.swift; sourceTree = "<group>"; };
 		DDC3E97F1E1C76E100459295 /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		DDC3E9811E1C93F400459295 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		DDC3E9861E1C957000459295 /* ShoppingListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
@@ -296,6 +300,7 @@
 				DD515D0C1E5BD5B400415A2B /* AccountCell.swift */,
 				DD515D0E1E5BD60B00415A2B /* FavoriteCell.swift */,
 				DD0639D21E61F0C500BF7609 /* SearchCell.swift */,
+				DDBEB0E31E71F82F00B16D15 /* SettingExpiresCell.swift */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -372,6 +377,7 @@
 			children = (
 				DDC3E98A1E1C958A00459295 /* SettingsViewController.swift */,
 				DD7F721C1E6655AE00BAE511 /* SetTimeForReminderVC.swift */,
+				DDBEB0E01E71F4DD00B16D15 /* ExpiringItemsVC.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -528,6 +534,7 @@
 				DDD7D47A1E403E7200599382 /* AddFavoriteVC.swift in Sources */,
 				DD2BE8541E6D268300EA9180 /* Fruits.swift in Sources */,
 				DD0639CB1E5E961300BF7609 /* KeyboardHandling.swift in Sources */,
+				DDBEB0E11E71F4DD00B16D15 /* ExpiringItemsVC.swift in Sources */,
 				DD786E331E4AED2F00B1F4E3 /* AddScannedItemVC.swift in Sources */,
 				DD4853A11E19920E00BEAC02 /* Dairy.swift in Sources */,
 				DD1EA6381E0CA41D0034C54B /* AppDelegate.swift in Sources */,
@@ -542,6 +549,7 @@
 				DDC3EBA21E31450100459295 /* StockItem.swift in Sources */,
 				DDC3E9871E1C957000459295 /* ShoppingListViewController.swift in Sources */,
 				DD8586BB1E580C2A00065DDD /* CustomViews.swift in Sources */,
+				DDBEB0E41E71F82F00B16D15 /* SettingExpiresCell.swift in Sources */,
 				DDE189A91E354A9A00306449 /* Extensions.swift in Sources */,
 				DDC3E9821E1C93F400459295 /* DataStore.swift in Sources */,
 				DD48539D1E198CCF00BEAC02 /* Grains.swift in Sources */,

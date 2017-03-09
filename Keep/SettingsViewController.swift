@@ -13,7 +13,7 @@ import MessageUI
 
 // No categories?!
 
-class SettingsViewController: UIViewController, MFMailComposeViewControllerDelegate {
+class SettingsViewController: UIViewController, MFMailComposeViewControllerDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var rightTopView: UIView!
@@ -27,7 +27,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     @IBOutlet weak var tableView: UITableView!
 
     @IBOutlet weak var numOfItemsLabel: UILabel!
-    @IBOutlet weak var numOfItemsExpiringTodayLabel: UILabel! // FIX name to Today
+    @IBOutlet weak var numOfItemsExpiringTodayLabel: UILabel!
     @IBOutlet weak var numOfItemsExpiringLabel: UILabel!
     @IBOutlet weak var numOfItemsExpiredLabel: UILabel!
     
@@ -49,10 +49,8 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         super.viewDidLoad()
         tableView.separatorInset = .zero
         setData()
+        addGestureRecognizer()
         print("========= \(numOfItemsInCategory)")
-
-//        numOfItemsInCategory = [store.itemsInVegetables, store.itemsInFruits, store.itemsInGrains, store.itemsInDairy, store.itemsInProtein]
-        //topView.underlinedBorder()
         midView.underlinedBorder()
         setNumbers()
         setChart(dataPoints: FoodGroups.categories, values: self.numOfItemsInCategory)
@@ -71,6 +69,31 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         }
          print("========= \(numOfItemsInCategory)")
 
+    }
+    
+    func addGestureRecognizer(){
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        let gestureRecognizerTwo = UITapGestureRecognizer(target: self, action: #selector(handleTapTwo))
+        let gestureRecognizerThree = UITapGestureRecognizer(target: self, action: #selector(handleTapThree))
+        gestureRecognizer.delegate = self
+        rightTopView.addGestureRecognizer(gestureRecognizer)
+        rightMidView.addGestureRecognizer(gestureRecognizerTwo)
+        rightBottomView.addGestureRecognizer(gestureRecognizerThree)
+    }
+    
+    func handleTap(gestureRecognizer: UIGestureRecognizer) {
+        store.settingExpire = SettingExpire.threeDays.rawValue
+        performSegue(withIdentifier: "showExpires", sender: self)
+    }
+    
+    func handleTapTwo(gestureRecognizer: UIGestureRecognizer) {
+        store.settingExpire = SettingExpire.today.rawValue
+        performSegue(withIdentifier: "showExpires", sender: self)
+    }
+    
+    func handleTapThree(gestureRecognizer: UIGestureRecognizer) {
+        store.settingExpire = SettingExpire.expired.rawValue
+        performSegue(withIdentifier: "showExpires", sender: self)
     }
     
     func setNumbers(){
