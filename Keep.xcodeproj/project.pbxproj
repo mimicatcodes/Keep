@@ -707,7 +707,7 @@
 				);
 				INFOPLIST_FILE = Keep/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mimicat-codes.Keep";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mimicatcodes.keep-virtual-fridge";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Keep-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -732,7 +732,7 @@
 				);
 				INFOPLIST_FILE = Keep/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mimicat-codes.Keep";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mimicatcodes.keep-virtual-fridge";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Keep-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

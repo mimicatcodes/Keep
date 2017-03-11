@@ -119,7 +119,7 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
 //    }
 //    
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        let str = "No item here yet!"
+        let str = "No items here yet!"
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
         return NSAttributedString(string: str, attributes: attrs)
     }

@@ -13,11 +13,11 @@ class DataStore{
     static let sharedInstance = DataStore()
     fileprivate init(){}
     
-    var allItems = try! Realm().objects(Item.self).sorted(byProperty: Keys.name, ascending: true)
-    var fridgeItems = try! Realm().objects(Item.self).filter(Filters.fridge)
-    var freezerItems = try! Realm().objects(Item.self).filter(Filters.freezer)
-    var pantryItems = try! Realm().objects(Item.self).filter(Filters.pantry)
-    var otherItems = try! Realm().objects(Item.self).filter(Filters.other)
+    var allItems = try! Realm().objects(Item.self).sorted(byProperty: Keys.exp, ascending: true)
+    var fridgeItems = try! Realm().objects(Item.self).filter(Filters.fridge).sorted(byProperty: Keys.exp, ascending: true)
+    var freezerItems = try! Realm().objects(Item.self).filter(Filters.freezer).sorted(byProperty: Keys.exp, ascending: true)
+    var pantryItems = try! Realm().objects(Item.self).filter(Filters.pantry).sorted(byProperty: Keys.exp, ascending: true)
+    var otherItems = try! Realm().objects(Item.self).filter(Filters.other).sorted(byProperty: Keys.exp, ascending: true)
 
     var allShopingLists = try! Realm().objects(ShoppingList.self).sorted(byProperty: Keys.title, ascending: true)
     

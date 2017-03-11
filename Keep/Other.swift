@@ -316,6 +316,7 @@ var householdAndCleaning: Set<String> = [
     "Bathroom Cleaner",
     "Carpet/Floor Cleaner",
     "All Purpose Cleaner",
-    "Vacuum Filters"
+    "Vacuum Filters",
+    "Toilet Paper"
 ]
 

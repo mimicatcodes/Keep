@@ -52,6 +52,7 @@ struct Keys {
     static let name = "name"
     static let category = "category"
     static let title = "title"
+    static let exp = "exp"
     
     struct UserDefaults {
         static let hour = "hour"
@@ -163,8 +164,8 @@ struct Labels {
     static let daysLeft = " days left"
     static let addedOn = "Added on "
     static let purchasedOn = "Purchased on "
-    static let itemEdited = "Item edited"
-    static let itemAdded = "Item added"
+    static let itemEdited = "Item has been edited"
+    static let itemAdded = "Item has been added"
     
     static let singular = "item in stock"
     static let plural = "items in stock"

@@ -13,8 +13,6 @@ import RealmSwift
 class AddScannedItemVC: UIViewController {
     
     // TODO: Custom tool bar fonts - fix!
-    // EXp date - convenient options to be added
-    // Keyboard height
     // TODO: Save action - notify it's actually saved
     // Tableview
     
@@ -387,11 +385,15 @@ extension AddScannedItemVC : UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        categoryField.text = categories[row].rawValue
         category = categories[row].rawValue
-        categoryField.resignFirstResponder()
-        categoryField.endEditing(true)
-        moveViewDown()
+        categoryField.text = categories[row].rawValue
+        if activeTextField == categoryField {
+            pickerView.reloadAllComponents()
+            
+        }
+        //categoryField.resignFirstResponder()
+        //categoryField.endEditing(true)
+        //moveViewDown()
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

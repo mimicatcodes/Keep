@@ -11,6 +11,7 @@ import UIKit
 class ExpiringItemsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     let store = DataStore.sharedInstance
     let formatter = DateFormatter()
@@ -37,13 +38,13 @@ class ExpiringItemsVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     func configureNavTitle(){
         switch store.settingExpire {
         case SettingExpire.threeDays.rawValue:
-            navigationItem.title = "Expiring in 3 Days"
+            navigationBar.topItem?.title = "Expiring in 3 Days"
         case SettingExpire.today.rawValue:
-            navigationItem.title = "Expiring Today"
+            navigationBar.topItem?.title = "Expiring Today"
         case SettingExpire.expired.rawValue:
-            navigationItem.title = "Expired Items"
+            navigationBar.topItem?.title = "Expired Items"
         default:
-            navigationItem.title = ""
+            navigationBar.topItem?.title = "Expiring Items"
         }
     }
     
@@ -77,17 +78,17 @@ class ExpiringItemsVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         case SettingExpire.threeDays.rawValue:
             cell.nameLabel.text = store.allItems.filter(Filters.isExpiring)[indexPath.row].name
             cell.locationLabel.text = store.allItems.filter(Filters.isExpiring)[indexPath.row].location
-            cell.quantityLabel.text = store.allItems.filter(Filters.isExpiring)[indexPath.row].quantity
+            cell.quantityLabel.text = "x " + store.allItems.filter(Filters.isExpiring)[indexPath.row].quantity
             cell.expireLabel.text = "Expires on " + formatter.string(from: store.allItems.filter(Filters.isExpiring)[indexPath.row].exp )
         case SettingExpire.today.rawValue:
             cell.nameLabel.text = store.allItems.filter(Filters.isExpiringToday)[indexPath.row].name
             cell.locationLabel.text = store.allItems.filter(Filters.isExpiringToday)[indexPath.row].location
-            cell.quantityLabel.text = store.allItems.filter(Filters.isExpiringToday)[indexPath.row].quantity
+            cell.quantityLabel.text = "x " + store.allItems.filter(Filters.isExpiringToday)[indexPath.row].quantity
             cell.expireLabel.text = "Expires on " + formatter.string(from: store.allItems.filter(Filters.isExpiringToday)[indexPath.row].exp )
         case SettingExpire.expired.rawValue:
             cell.nameLabel.text = store.allItems.filter(Filters.isExpired)[indexPath.row].name
             cell.locationLabel.text = store.allItems.filter(Filters.isExpired)[indexPath.row].location
-            cell.quantityLabel.text = store.allItems.filter(Filters.isExpired)[indexPath.row].quantity
+            cell.quantityLabel.text = "x " + store.allItems.filter(Filters.isExpired)[indexPath.row].quantity
             cell.expireLabel.text = Labels.expired
         default:
             break

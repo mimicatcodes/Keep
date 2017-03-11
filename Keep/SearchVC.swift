@@ -74,7 +74,7 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
         searchController.searchBar.setBackgroundImage(UIImage(), for: .top, barMetrics: .default)
-        searchBarView.underlinedBorder()
+//        searchBarView.underlinedBorder()
         
         tableView.tableFooterView = UIView()
         tableView.separatorInset = .zero

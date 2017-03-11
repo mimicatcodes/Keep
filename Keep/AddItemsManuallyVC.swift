@@ -11,11 +11,8 @@ import RealmSwift
 
 class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate {
     
-    // Keyboard handling - better implementation needed.
     // Custom tool bar fonts - fix!
-    // Make all the textfiels not editable - prevent copy and paste - test
     // fix settings expires VC nav title + UI ...
-    // Scan results - copywriting
     
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
@@ -83,7 +80,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-
+        
         originTopMargin = topMarginConstraint.constant
     }
     
@@ -295,7 +292,16 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         picker.delegate = self
         picker.dataSource = self
         datePicker.datePickerMode = .date
-        datePicker.date = expDate
+        
+        let calendar = Calendar.current
+        let yearComponent = calendar.component(.year, from: expDate)
+        
+        if yearComponent > 2100 {
+            if let sevenDay = Calendar.current.date(byAdding: .day, value: 7, to: today) {
+                datePicker.date = sevenDay
+            }} else {
+            datePicker.date = expDate
+        }
     }
     
     func configureLocationButtons() {
@@ -458,7 +464,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
             cell?.textLabel?.text = self.filteredItemsNames[indexPath.row]
         }
         cell?.textLabel?.font = UIFont(name: Fonts.latoRegular, size: 13)
-        cell?.textLabel?.textColor = Colors.tealishFaded
+        cell?.textLabel?.textColor = Colors.tealish
         
         return cell!
     }
@@ -565,9 +571,6 @@ extension AddItemsManuallyVC: UIPickerViewDelegate, UIPickerViewDataSource {
             pickerView.reloadAllComponents()
             
         }
-        //categoryField.resignFirstResponder()
-        //categoryField.endEditing(true)
-        //moveViewDown()
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -583,8 +586,8 @@ extension AddItemsManuallyVC: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func donePicker(sender:UIBarButtonItem) {
         view.endEditing(true)
-//        activeTextField?.endEditing(true)
-//        activeTextField?.resignFirstResponder()
+        //        activeTextField?.endEditing(true)
+        //        activeTextField?.resignFirstResponder()
         moveViewDown()
     }
     
