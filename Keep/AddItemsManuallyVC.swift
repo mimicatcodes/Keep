@@ -11,11 +11,11 @@ import RealmSwift
 
 class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate {
     
-    // seperate tv alements from vc
-    // Keyboard handling
+    // Keyboard handling - better implementation needed.
     // Custom tool bar fonts - fix!
-    // picker - when changing category - other does not stick
-    // Make all the textfiels not editable - prevent copy and paste
+    // Make all the textfiels not editable - prevent copy and paste - test
+    // fix settings expires VC nav title + UI ...
+    // Scan results - copywriting
     
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
