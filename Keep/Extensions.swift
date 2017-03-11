@@ -40,7 +40,7 @@ extension UIView {
     func underlinedBorder(){
         let border = CALayer()
         let width = CGFloat(1.0)
-        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width:  self.frame.size.width, height: self.frame.size.height)
+        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width:  self.frame.size.width + 100, height: self.frame.size.height)
         border.backgroundColor = Colors.whiteFour.cgColor
         self.layer.addSublayer(border)
         self.layer.masksToBounds = true

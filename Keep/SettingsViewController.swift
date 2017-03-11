@@ -51,13 +51,11 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         setData()
         addGestureRecognizer()
         print("========= \(numOfItemsInCategory)")
-        midView.underlinedBorder()
         setNumbers()
         setChart(dataPoints: FoodGroups.categories, values: self.numOfItemsInCategory)
         NotificationCenter.default.addObserver(forName: NotificationName.refreshCharts, object: nil, queue: nil) { notification in
             self.setChart(dataPoints: FoodGroups.categories, values: self.numOfItemsInCategory)
         }
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,7 +66,6 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
             self.setNumbers()
         }
          print("========= \(numOfItemsInCategory)")
-
     }
     
     func addGestureRecognizer(){

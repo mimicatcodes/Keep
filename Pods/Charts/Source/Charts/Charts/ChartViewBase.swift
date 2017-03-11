@@ -199,7 +199,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
         super.init(frame: frame)
 
 		#if os(iOS)
-			self.backgroundColor = NSUIColor.clear
+			self.backgroundColor = NSUIColor.white
 		#endif
         initialize()
     }
@@ -218,6 +218,11 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     
     internal func initialize()
     {
+        
+        #if os(iOS)
+        self.backgroundColor = NSUIColor.clear
+        #endif
+
         _animator = Animator()
         _animator.delegate = self
 

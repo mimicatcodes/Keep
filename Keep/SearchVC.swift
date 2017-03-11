@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 // disable selection 
-class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
+class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate  {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBarView: UIView!
@@ -27,6 +27,10 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         definesPresentationContext = true
         searchController.loadViewIfNeeded()
         searchFieldStyling()
+        
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
+        tableView.tableFooterView = UIView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -40,6 +44,12 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     
     @IBAction func dismiss(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        let str = "No matching items found."
+        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
+        return NSAttributedString(string: str, attributes: attrs)
     }
     
     func configureSearchControlloer(){
@@ -57,6 +67,7 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
             NSForegroundColorAttributeName : Colors.tealish,
             NSFontAttributeName : UIFont(name: Fonts.montserratRegular, size: 15),
         ]
+        
         searchController.searchBar.setImage(UIImage(named: ImageName.clear), for: .clear, state: .normal)
         
         searchController.searchBar.textColor = Colors.warmGreyThree

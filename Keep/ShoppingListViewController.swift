@@ -38,9 +38,41 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
         tableView.reloadData()
     } 
     
-    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
-        return UIImage(named: "shoppingListDetail_empty")
+//    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
+//        return UIImage(named: "sample3")
+//    }
+    
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        let str = "Welcome to KEEP"
+        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
+        return NSAttributedString(string: str, attributes: attrs)
     }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        let str = "Click ' + ' above to add your first shopping list."
+        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
+    
+    
+    //    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
+    //        return UIImage(named: "sample3")
+    //    }
+    /*
+     func buttonTitle(forEmptyDataSet scrollView: UIScrollView, for state: UIControlState) -> NSAttributedString? {
+     let str = "Add Grokkleglob"
+     let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.callout)]
+     return NSAttributedString(string: str, attributes: attrs)
+     }
+     */
+    
+    //    func emptyDataSet(_ scrollView: UIScrollView, didTap button: UIButton) {
+    //        let ac = UIAlertController(title: "Button tapped!", message: nil, preferredStyle: .alert)
+    //        ac.addAction(UIAlertAction(title: "Hurray", style: .default))
+    //        present(ac, animated: true)
+    //    }
+    
+
     
     func configureSwipeButtons(cell:ShoppingListCell, indexPath: IndexPath){
         

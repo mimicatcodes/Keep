@@ -12,10 +12,8 @@ import RealmSwift
 class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate {
     
     // seperate tv alements from vc
+    // Keyboard handling
     // Custom tool bar fonts - fix!
-    // Exp date - convenient options to be added
-    // Keyboard heigt adjustment
-    // Tableview bug - when editing and there's no string - > tableview not updated or doesnt dismiss
     // picker - when changing category - other does not stick
     // Make all the textfiels not editable - prevent copy and paste
     
@@ -38,6 +36,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     @IBOutlet weak var locationView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     var labelView: UILabel!
     var locationButtons:[UIButton] = []
@@ -83,15 +82,17 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+
         originTopMargin = topMarginConstraint.constant
     }
     
-    @IBAction func cancelTapped(_ sender: Any) {
-        activeTextField?.endEditing(true)
+    @IBAction func cancelTapped(_ sender: UIButton) {
+        view.endEditing(true)
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func saveTapped(_ sender: Any) {
+    @IBAction func saveTapped(_ sender: UIButton) {
         guard let name = nameTextField.text else { return }
         
         if let item = itemToEdit {
@@ -116,6 +117,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
                 configureFavorites(item: item)
                 realm.add(item)
             }
+            view.endEditing(true)
             activeTextField?.endEditing(true)
             resetView()
             showAlert()
@@ -123,7 +125,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         NotificationCenter.default.post(name: NotificationName.refreshCharts, object: nil)
     }
     
-    @IBAction func favoriteBtnTapped(_ sender: Any) {
+    @IBAction func favoriteBtnTapped(_ sender: UIButton) {
         tableView.isHidden = true
         favoriteButton.isSelected = !favoriteButton.isSelected
         
@@ -134,7 +136,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         }
     }
     
-    @IBAction func minustBtnTapped(_ sender: Any) {
+    @IBAction func minustBtnTapped(_ sender: UIButton) {
         tableView.isHidden = true
         if quantity > 1 {
             quantity -= 1
@@ -145,7 +147,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         quantityLabel.text = "\(quantity)"
     }
     
-    @IBAction func plusBtnTapped(_ sender: Any) {
+    @IBAction func plusBtnTapped(_ sender: UIButton) {
         tableView.isHidden = true
         quantity += 1
         quantityLabel.text = "\(quantity)"
@@ -154,7 +156,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         }
     }
     
-    @IBAction func naBtnTapped(_ sender: Any) {
+    @IBAction func naBtnTapped(_ sender: UIButton) {
         notApplicableButton.isSelected = !notApplicableButton.isSelected
         if notApplicableButton.isSelected {
             expDateField.text = "N/A"
@@ -192,7 +194,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         }
         configureLocationButtons()
     }
-    
     
     func formatInitialData(){
         adjustSpacing()
@@ -297,7 +298,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         datePicker.date = expDate
     }
     
-    
     func configureLocationButtons() {
         for (index, button) in locationButtons.enumerated() {
             if index == selectedIndex {
@@ -312,6 +312,15 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
                 button.layer.cornerRadius = 5
             }
         }
+    }
+    
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if activeTextField == expDateField || activeTextField == categoryField {
+            if action == #selector(paste(_:)) {
+                return false
+            }
+        }
+        return true
     }
     
     func configureTableView(){
@@ -382,7 +391,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         }
         
         configureNA()
-        // configureTextifelds?
         picker.selectRow(0, inComponent: 0, animated: true)
         categoryField.text = "Other"
         
@@ -476,7 +484,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     
     func fillCategory(){
         guard let name = nameTextField.text else { return }
-        
         for foodGroup in foodGroups {
             for (key, value) in foodGroup {
                 if value.contains(name) {
@@ -490,7 +497,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         }
     }
 }
-
 
 extension AddItemsManuallyVC : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -506,6 +512,14 @@ extension AddItemsManuallyVC : UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField){
         activeTextField = textField
+        if activeTextField == categoryField {
+            print("CATEGORY")
+        } else if activeTextField == nameTextField {
+            print("NAME")
+        } else if activeTextField == expDateField {
+            print("EXP")
+        }
+        
         if activeTextField != nameTextField {
             tableView.isHidden = true
         }
@@ -551,9 +565,9 @@ extension AddItemsManuallyVC: UIPickerViewDelegate, UIPickerViewDataSource {
             pickerView.reloadAllComponents()
             
         }
-        categoryField.resignFirstResponder()
-        categoryField.endEditing(true)
-        moveViewDown()
+        //categoryField.resignFirstResponder()
+        //categoryField.endEditing(true)
+        //moveViewDown()
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -568,7 +582,9 @@ extension AddItemsManuallyVC: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func donePicker(sender:UIBarButtonItem) {
-        activeTextField?.resignFirstResponder()
+        view.endEditing(true)
+//        activeTextField?.endEditing(true)
+//        activeTextField?.resignFirstResponder()
         moveViewDown()
     }
     
@@ -593,6 +609,7 @@ extension AddItemsManuallyVC: UIPickerViewDelegate, UIPickerViewDataSource {
 
 extension AddItemsManuallyVC : KeyboardHandling {
     func moveViewDown() {
+        
         if topMarginConstraint.constant == originTopMargin { return }
         topMarginConstraint.constant = originTopMargin
         UIView.animate(withDuration: 0.2, animations: { () -> Void in
@@ -602,10 +619,9 @@ extension AddItemsManuallyVC : KeyboardHandling {
     
     func moveViewUp() {
         if topMarginConstraint.constant != originTopMargin { return }
-        topMarginConstraint.constant -= 80
+        topMarginConstraint.constant -= 100
         UIView.animate(withDuration: 0.2, animations: { () -> Void in
             self.view.layoutIfNeeded()
         })
     }
 }
-

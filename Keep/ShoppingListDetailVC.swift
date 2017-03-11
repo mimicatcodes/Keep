@@ -46,6 +46,19 @@ class ShoppingListDetailVC: UIViewController, DZNEmptyDataSetSource, DZNEmptyDat
     @IBAction func addItemBtnTapped(_ sender: Any) {
         performSegue(withIdentifier: Identifiers.Segue.addItemToSL, sender: nil)
     }
+    
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        let str = "This shopping list is empty"
+        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        let str = "Click ' + ' to add an item"
+        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
+    
     /*
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {

@@ -114,10 +114,21 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
         }
     }
     
-    
 //    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
-//        return UIImage(named: "sample_")
+//        return UIImage(named: "produce")
 //    }
+//    
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        let str = "No item here yet!"
+        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        let str = "Click ' + ' to add an item"
+        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
     
     func refreshTableView(){
         tableView.reloadData()

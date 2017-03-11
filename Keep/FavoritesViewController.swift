@@ -35,9 +35,17 @@ class FavoritesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmpty
         tableView.reloadData()
     }
     
-//    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
-//        return UIImage(named: "sample3")
-//    }
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        let str = "No favorites yet!"
+        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        let str = "Click ' + ' to add your favorite items."
+        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
     
     func configureSwipeButtons(cell:FavoriteCell, indexPath: IndexPath){
         let deleteButton = MGSwipeButton(title: EmptyString.none, icon: UIImage(named:ImageName.delete1), backgroundColor: Colors.salmon){ (sender: MGSwipeTableCell) -> Bool in
