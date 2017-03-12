@@ -126,7 +126,6 @@ struct Filters {
     static let uniqueID = "uniqueID contains[c] %@"
     static let listUniqueID = "list.uniqueID contains[c] %@"
     static let name = "name contains[c] %@"
-    //static let isExpiringInAWeek = "isExpiringInAWeek == true"
     static let isExpiring = "isExpiring == true AND isExpired == false"
     static let isExpiringToday = "isExpiringToday == true AND isExpired == false"
     static let isExpired = "isExpired == true"
@@ -136,16 +135,12 @@ struct Filters {
     static let other = "location == 'Other'"
     
     static let vegetables = "category == 'Vegetables'"
-    
     static let fruits = "category == 'Fruits'"
-    
     static let grainsPasta = "category CONTAINS[c] 'Pastas'"
     static let grainsOther = "category CONTAINS[c] 'Grains'"
-    
     static let proteinMeats = "category CONTAINS[c] 'Meats'"
     static let proteinBeans = "category CONTAINS[c] 'Beans'"
     static let proteinNuts = "category CONTAINS[c] 'Nuts'"
-    
     static let dairy = "category == 'Dairy'"
 }
 

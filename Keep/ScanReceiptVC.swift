@@ -207,7 +207,7 @@ extension ScanReceiptVC : G8TesseractDelegate {
         let tesseract:G8Tesseract = G8Tesseract(language: TesseractLang.english)
         tesseract.engineMode = .tesseractCubeCombined
         tesseract.pageSegmentationMode = .auto
-        tesseract.maximumRecognitionTime = 10.0
+        tesseract.maximumRecognitionTime = 15.0
         tesseract.delegate = self
         tesseract.image = img
         tesseract.recognize()
