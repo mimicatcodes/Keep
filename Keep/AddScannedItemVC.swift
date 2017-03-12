@@ -12,10 +12,6 @@ import RealmSwift
 
 class AddScannedItemVC: UIViewController {
     
-    // TODO: Custom tool bar fonts - fix!
-    // TODO: Save action - notify it's actually saved
-    // Tableview
-    
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var favButton: UIButton!
@@ -46,7 +42,7 @@ class AddScannedItemVC: UIViewController {
     var activeTextField:UITextField?
     var isFavorited:Bool = false
     let lengthLimit = 20
-    var category: String = "Other"
+    var category: String = FoodCategories.other.rawValue
     
     var itemToAdd: String?
     var isFromFavorite: Bool?
@@ -62,9 +58,7 @@ class AddScannedItemVC: UIViewController {
         setDelegatesForTextfields()
         formatInitialData()
         customToolBarForPickers()
-        
-        nameField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
-        nameField.addTarget(self, action: #selector(fillCategory), for: .allEditingEvents)
+        checkTextfields()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,7 +92,7 @@ class AddScannedItemVC: UIViewController {
     @IBAction func naBtnTapped(_ sender: Any) {
         notApplicableButton.isSelected = !notApplicableButton.isSelected
         if notApplicableButton.isSelected {
-            expDateField.text = "N/A"
+            expDateField.text = Labels.na
             let hundressYearsLater = Calendar.current.date(byAdding: .year, value: 100, to: today)
             if let date = hundressYearsLater {
                 expDate = date
@@ -147,7 +141,7 @@ class AddScannedItemVC: UIViewController {
     }
     
     @IBAction func cancelBtnTapped(_ sender: UIButton) {
-        activeTextField?.endEditing(true)
+        view.endEditing(true)
         dismiss(animated: true, completion: nil)
     }
     
@@ -166,9 +160,14 @@ class AddScannedItemVC: UIViewController {
         NotificationCenter.default.post(name: NotificationName.refreshMainTV, object: nil)
         NotificationCenter.default.post(name: NotificationName.refreshScannedItems, object: nil)
         
-        activeTextField?.endEditing(true)
-        activeTextField?.resignFirstResponder()
+        view.endEditing(true)
         dismiss(animated: true, completion: nil)
+    }
+    
+    func checkTextfields(){
+        nameField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
+        categoryField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
+        nameField.addTarget(self, action: #selector(fillCategory), for: .allEditingEvents)
     }
     
     func configureFavorites(item: Item) {
@@ -212,10 +211,12 @@ class AddScannedItemVC: UIViewController {
             for (key, value) in foodGroup {
                 if value.contains(name) {
                     DispatchQueue.main.async {
+                        self.category = key
                         self.categoryField.text = key
                     }
                 } else {
-                    self.categoryField.text = "Other"
+                    self.category = FoodCategories.other.rawValue
+                    self.categoryField.text = FoodCategories.other.rawValue
                 }
             }
         }
@@ -294,6 +295,17 @@ class AddScannedItemVC: UIViewController {
             saveButton.isEnabled = false
             saveButton.setTitleColor(Colors.warmGreyFour, for: .normal)
         }
+        
+        if sender == categoryField {
+            if let c = sender.text {
+                for c_ in categories {
+                    if c != c_.rawValue {
+                        sender.text = "Other"
+                        category = "Other"
+                    }
+                }
+            }
+        }
     }
     
     func configurePickersDates(){
@@ -329,7 +341,7 @@ class AddScannedItemVC: UIViewController {
         quantityLabel.text = String(quantity)
         
         configureNA()
-        categoryField.text = category
+        //categoryField.text = category
     }
     
     func configureQuantityButtons(){
@@ -391,9 +403,6 @@ extension AddScannedItemVC : UIPickerViewDelegate, UIPickerViewDataSource {
             pickerView.reloadAllComponents()
             
         }
-        //categoryField.resignFirstResponder()
-        //categoryField.endEditing(true)
-        //moveViewDown()
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

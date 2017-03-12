@@ -10,10 +10,7 @@ import UIKit
 import RealmSwift
 
 class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate {
-    
-    // Custom tool bar fonts - fix!
-    // fix settings expires VC nav title + UI ...
-    
+        
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var quantityLabel: CustomLabel!
@@ -47,7 +44,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     var expDate = Date()
     var addedDate = Date()
     var isFavorited = false
-    var category: String = "Other"
+    var category: String = FoodCategories.other.rawValue
     let today = Date()
     
     let picker = UIPickerView()
@@ -59,7 +56,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     var selectedIndex = 0
     
     var itemToEdit: Item?
-    //var itemToAdd: String?
     let categories = FoodGroups.groceryCategories
     
     var filteredItemsNames = [String]()
@@ -68,8 +64,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         super.viewDidLoad()
         locationButtons = [fridgeButton, freezerButton, pantryButton, otherButton]
         formatInitialData()
-        nameTextField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
-        nameTextField.addTarget(self, action: #selector(fillCategory), for: .allEditingEvents)
+        checkTextfields()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,8 +85,9 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     }
     
     @IBAction func saveTapped(_ sender: UIButton) {
-        guard let name = nameTextField.text else { return }
-        
+        guard let name = nameTextField.text, name != "" else { return }
+//        guard let categoryChosen = categoryField.text, categoryChosen != "" else { return }
+
         if let item = itemToEdit {
             try! realm.write {
                 item.name = name
@@ -140,7 +136,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         } else {
             quantityMinusButton.isEnabled = false
         }
-        
         quantityLabel.text = "\(quantity)"
     }
     
@@ -156,7 +151,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     @IBAction func naBtnTapped(_ sender: UIButton) {
         notApplicableButton.isSelected = !notApplicableButton.isSelected
         if notApplicableButton.isSelected {
-            expDateField.text = "N/A"
+            expDateField.text = Labels.na
             let hundressYearsLater = Calendar.current.date(byAdding: .year, value: 100, to: today)
             if let date = hundressYearsLater {
                 expDate = date
@@ -190,6 +185,12 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
             break
         }
         configureLocationButtons()
+    }
+    
+    func checkTextfields(){
+        nameTextField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
+        categoryField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
+        nameTextField.addTarget(self, action: #selector(fillCategory), for: .allEditingEvents)
     }
     
     func formatInitialData(){
@@ -320,15 +321,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         }
     }
     
-    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        if activeTextField == expDateField || activeTextField == categoryField {
-            if action == #selector(paste(_:)) {
-                return false
-            }
-        }
-        return true
-    }
-    
     func configureTableView(){
         tableView.allowsSelection = true
         tableView.layer.masksToBounds = true
@@ -398,7 +390,8 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         
         configureNA()
         picker.selectRow(0, inComponent: 0, animated: true)
-        categoryField.text = "Other"
+        category = FoodCategories.other.rawValue
+        categoryField.text = FoodCategories.other.rawValue
         
         location = .Fridge
         selectedIndex = 0
@@ -413,7 +406,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
         let yearComponent = calendar.component(.year, from: expDate)
         
         if yearComponent > 2100 {
-            expDateField.text = "N/A"
+            expDateField.text = Labels.na
             notApplicableButton.isSelected = true
         } else {
             expDateField.text = formatter.string(from: expDate).capitalized
@@ -435,6 +428,17 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
             tableView.isHidden = true
             saveButton.isEnabled = false
             saveButton.setTitleColor(Colors.warmGreyFour, for: .normal)
+        }
+        
+        if sender == categoryField {
+            if let c = sender.text {
+                for c_ in categories {
+                    if c != c_.rawValue {
+                        sender.text = FoodCategories.other.rawValue
+                        category = FoodCategories.other.rawValue
+                    }
+                }
+            }
         }
     }
     
@@ -494,10 +498,12 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
             for (key, value) in foodGroup {
                 if value.contains(name) {
                     DispatchQueue.main.async {
+                        self.category = key
                         self.categoryField.text = key
                     }
                 } else {
-                    self.categoryField.text = "Other"
+                    self.category = FoodCategories.other.rawValue
+                    self.categoryField.text = FoodCategories.other.rawValue
                 }
             }
         }
@@ -518,14 +524,7 @@ extension AddItemsManuallyVC : UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField){
         activeTextField = textField
-        if activeTextField == categoryField {
-            print("CATEGORY")
-        } else if activeTextField == nameTextField {
-            print("NAME")
-        } else if activeTextField == expDateField {
-            print("EXP")
-        }
-        
+    
         if activeTextField != nameTextField {
             tableView.isHidden = true
         }
@@ -586,8 +585,6 @@ extension AddItemsManuallyVC: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func donePicker(sender:UIBarButtonItem) {
         view.endEditing(true)
-        //        activeTextField?.endEditing(true)
-        //        activeTextField?.resignFirstResponder()
         moveViewDown()
     }
     

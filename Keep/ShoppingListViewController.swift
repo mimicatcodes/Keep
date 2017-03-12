@@ -43,13 +43,13 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
 //    }
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        let str = "Welcome to KEEP"
+        let str = "No shopping lists yet!"
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
         return NSAttributedString(string: str, attributes: attrs)
     }
     
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        let str = "Click ' + ' above to add your first shopping list."
+        let str = "Click ' + ' to add a shopping list."
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
         return NSAttributedString(string: str, attributes: attrs)
     }

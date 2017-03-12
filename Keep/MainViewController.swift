@@ -114,10 +114,6 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
         }
     }
     
-//    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
-//        return UIImage(named: "produce")
-//    }
-//    
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         let str = "No items here yet!"
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
@@ -125,7 +121,7 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
     }
     
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        let str = "Click ' + ' to add an item"
+        let str = "Click ' + ' to add an item."
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
         return NSAttributedString(string: str, attributes: attrs)
     }
@@ -204,7 +200,6 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
                 filteredItem.isExpired = true
                 filteredItem.isExpiring = false
                 filteredItem.isExpiringToday = false
-                //filteredItem.isExpiringInAWeek = false
             } else if daysLeft == 0 {
                 filteredItem.isExpired = false
                 filteredItem.isExpiring = true

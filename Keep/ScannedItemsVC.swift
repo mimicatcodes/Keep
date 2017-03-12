@@ -23,7 +23,6 @@ class ScannedItemsVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorInset = .zero
-        //topView.underlinedBorder()
 
         if titleString == nil {
         NotificationCenter.default.addObserver(forName: NotificationName.refreshScannedItems, object: nil, queue: nil) { notification in

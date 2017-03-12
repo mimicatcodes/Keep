@@ -30,9 +30,9 @@ class OnboardingViewController: UIViewController, PaperOnboardingDataSource, Pap
         let descriptionFont = UIFont(name: Fonts.montserratRegular, size: 14.0)
         
         return [
-            (UIImage.Asset.checkList.rawValue, OnBoarding.checkListTitle, OnBoarding.checkListBody, UIImage.Asset.checkList.rawValue, backgroundColor, Colors.greyishBrown, Colors.brownishGreyThree, titleFont!,descriptionFont!),
-            (UIImage.Asset.piggyBank.rawValue, OnBoarding.piggyBankTitle, OnBoarding.piggyBankBody, UIImage.Asset.piggyBank.rawValue, backgroundColor, Colors.greyishBrown, Colors.brownishGreyThree, titleFont!,descriptionFont!),
-            (UIImage.Asset.produce.rawValue, OnBoarding.produceTitle, OnBoarding.produceBody, UIImage.Asset.produce.rawValue, backgroundColor, Colors.greyishBrown, Colors.brownishGreyThree, titleFont!,descriptionFont!)
+            (UIImage.Asset.checkList.rawValue, OnBoarding.checkListTitle, OnBoarding.checkListBody, UIImage.Asset.checkListWithBorder.rawValue, backgroundColor, Colors.greyishBrown, Colors.brownishGreyThree, titleFont!,descriptionFont!),
+            (UIImage.Asset.piggyBank.rawValue, OnBoarding.piggyBankTitle, OnBoarding.piggyBankBody, UIImage.Asset.piggyBankWithBorder.rawValue, backgroundColor, Colors.greyishBrown, Colors.brownishGreyThree, titleFont!,descriptionFont!),
+            (UIImage.Asset.produce.rawValue, OnBoarding.produceTitle, OnBoarding.produceBody, UIImage.Asset.produceWithBorder.rawValue, backgroundColor, Colors.greyishBrown, Colors.brownishGreyThree, titleFont!,descriptionFont!)
             ][index]
     }
     

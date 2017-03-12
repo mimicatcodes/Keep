@@ -10,8 +10,7 @@ import UIKit
 
 class CategoryField: UITextField {
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        if action == #selector(paste(_:)) {
-            print("textfield sucks")
+        if action == #selector(paste(_:))  || action == #selector(delete(_:)){
             return false
         }
         return super.canPerformAction(action, withSender: sender)

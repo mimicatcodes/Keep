@@ -12,7 +12,6 @@ enum FoodCategories : String {
     
     // MARK: vegetables
     case vegetables = "Vegetables"
-    
     // MARK: Fruits
     case fruits = "Fruits"
     

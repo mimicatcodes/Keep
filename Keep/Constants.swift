@@ -154,6 +154,7 @@ struct EmptyString {
 }
 
 struct Labels {
+    static let na = "N/A"
     static let done = "Done"
     static let cancel = "Cancel"
     static let expired = "Expired!"
@@ -179,7 +180,7 @@ struct Labels {
 struct OnBoarding {
     static let checkListTitle = "Stay Organized"
     static let checkListBody =
-    "Manage your foods easily. \r\nAdd and move items to your kitchen,\r\ncheck expiration dates easily, and make a shopping list to shop more efficiently!"
+    "Manage your foods easily. \r\nAdd and move items to your kitchen,\r\ncheck expiration dates easily, and make a shopping list to shop more efficiently."
     static let piggyBankTitle = "Save Money"
     static let piggyBankBody = "Reduce your food waste, and\r\nknow when your foods are about to expire."
     static let produceTitle = "Be Healthy"
@@ -245,8 +246,11 @@ enum SettingMenu : String {
 extension UIImage {
     enum Asset: String {
         case checkList = "checkList"
+        case checkListWithBorder = "checkListWithBorder"
         case piggyBank = "piggyBank"
+        case piggyBankWithBorder = "piggyBankWithBorder"
         case produce = "produce"
+        case produceWithBorder = "produceWithBorder"
         
         var image: UIImage {
             return UIImage(asset: self)
