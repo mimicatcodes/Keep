@@ -27,6 +27,7 @@ class ScanReceiptVC: UIViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         imageView.image = nil
+        imageView.contentMode = .scaleAspectFill
         picker.delegate = self
         saveButton.isEnabled = false
         saveButton.backgroundColor = Colors.tealishFaded
@@ -98,7 +99,7 @@ class ScanReceiptVC: UIViewController, UINavigationControllerDelegate {
             print("No camera")
         }
         
-        picker.allowsEditing = false
+        picker.allowsEditing = true
     }
     
     func handleLibraryImage(){
@@ -123,6 +124,30 @@ class ScanReceiptVC: UIViewController, UINavigationControllerDelegate {
         cameraButton.layer.cornerRadius = 8
         libraryButton.layer.cornerRadius = 8
         saveButton.layer.cornerRadius = 8
+    }
+    
+    func scaleImage(image: UIImage, maxDimension: CGFloat) -> UIImage {
+        
+        var scaledSize = CGSize(width: maxDimension, height: maxDimension)
+        var scaleFactor: CGFloat
+        
+        if image.size.width > image.size.height {
+            scaleFactor = image.size.height / image.size.width
+            scaledSize.width = maxDimension
+            scaledSize.height = scaledSize.width * scaleFactor
+        } else {
+            scaleFactor = image.size.width / image.size.height
+            scaledSize.height = maxDimension
+            scaledSize.width = scaledSize.height * scaleFactor
+        }
+        
+        UIGraphicsBeginImageContext(scaledSize)
+        image.draw(in: CGRect(x: 0, y: 0, width: scaledSize.width, height: scaledSize.height))
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return scaledImage!
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -150,19 +175,28 @@ class ScanReceiptVC: UIViewController, UINavigationControllerDelegate {
 extension ScanReceiptVC : UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        var selectedImageFromPicker: UIImage?
+        let selectedPhoto = info[UIImagePickerControllerEditedImage] as? UIImage
         
-        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
-            selectedImageFromPicker = editedImage
-        } else if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            selectedImageFromPicker = originalImage
-        }
-        if let selectedImage = selectedImageFromPicker {
-            imageView.image = selectedImage
+        if let image = selectedPhoto {
+            let scaledImage = scaleImage(image: image, maxDimension: 640)
+            imageView.image = scaledImage
             saveButton.isEnabled = true
             saveButton.backgroundColor = Colors.tealish
-            
         }
+        
+//        var selectedImageFromPicker: UIImage?
+//
+//        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+//            selectedImageFromPicker = editedImage
+//        } else if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+//            selectedImageFromPicker = originalImage
+//        }
+//        if let selectedImage = selectedImageFromPicker {
+//            imageView.image = selectedImage
+//            saveButton.isEnabled = true
+//            saveButton.backgroundColor = Colors.tealish
+//            
+//        }
         dismiss(animated: true, completion: nil)
     }
 }
@@ -173,7 +207,7 @@ extension ScanReceiptVC : G8TesseractDelegate {
         let tesseract:G8Tesseract = G8Tesseract(language: TesseractLang.english)
         tesseract.engineMode = .tesseractCubeCombined
         tesseract.pageSegmentationMode = .auto
-        tesseract.maximumRecognitionTime = 30.0
+        tesseract.maximumRecognitionTime = 10.0
         tesseract.delegate = self
         tesseract.image = img
         tesseract.recognize()
