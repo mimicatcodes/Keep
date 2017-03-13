@@ -50,7 +50,6 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         tableView.separatorInset = .zero
         setData()
         addGestureRecognizer()
-        print("========= \(numOfItemsInCategory)")
         setNumbers()
         setChart(dataPoints: FoodGroups.categories, values: self.numOfItemsInCategory)
         NotificationCenter.default.addObserver(forName: NotificationName.refreshCharts, object: nil, queue: nil) { notification in
@@ -65,7 +64,6 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         DispatchQueue.main.async {
             self.setNumbers()
         }
-         print("========= \(numOfItemsInCategory)")
     }
     
     func addGestureRecognizer(){
@@ -80,17 +78,17 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     
     func handleTap(gestureRecognizer: UIGestureRecognizer) {
         store.settingExpire = SettingExpire.threeDays.rawValue
-        performSegue(withIdentifier: "showExpires", sender: self)
+        performSegue(withIdentifier: Identifiers.Segue.showExpires, sender: self)
     }
     
     func handleTapTwo(gestureRecognizer: UIGestureRecognizer) {
         store.settingExpire = SettingExpire.today.rawValue
-        performSegue(withIdentifier: "showExpires", sender: self)
+        performSegue(withIdentifier: Identifiers.Segue.showExpires, sender: self)
     }
     
     func handleTapThree(gestureRecognizer: UIGestureRecognizer) {
         store.settingExpire = SettingExpire.expired.rawValue
-        performSegue(withIdentifier: "showExpires", sender: self)
+        performSegue(withIdentifier: Identifiers.Segue.showExpires, sender: self)
     }
     
     func setNumbers(){
@@ -135,14 +133,13 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients(["trykeepapp@gmail.com"])
-            mail.setSubject("Hi Keep Team!")
-            mail.setMessageBody("", isHTML: true)
-            
-            mail.navigationBar.tintColor = UIColor.white
+            mail.setToRecipients([Email.address])
+            mail.setSubject(Email.subject)
+            mail.setMessageBody(EmptyString.none, isHTML: true)
+            mail.navigationBar.tintColor = Colors.brownishGreyTwo
             present(mail, animated: true)
         } else {
-            print("Unable to send an email")
+            print(Email.failedMessage)
         }
     }
     
@@ -175,7 +172,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
 extension SettingsViewController {
     func setChart(dataPoints: [String], values: [Double]) {
     
-        radarChartView.noDataText = "No chart data available yet. Please add items in your inventory"
+        radarChartView.noDataText = "No chart data available."
        
         let chartFormatter = ChartFormatter()
         let yAxis = radarChartView.yAxis
@@ -211,9 +208,7 @@ extension SettingsViewController {
         radarChartView.sizeToFit()
         radarChartView.chartDescription?.text = EmptyString.none
         radarChartView.legend.enabled = false
-        
     }
-    
 }
 
 extension SettingsViewController : UITableViewDelegate, UITableViewDataSource {

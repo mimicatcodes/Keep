@@ -37,7 +37,7 @@ var vegetables: Set<String> = [
     "Fiddleheads",
     "Frisee",
     "Fennel",
-    "Herbs and Spices",
+    "Herbs And Spices",
     "Anise",
     "Basil",
     "Caraway",

@@ -9,6 +9,9 @@
 import Foundation
 
 var beverages: Set<String> = [
+    "Water",
+    "Sprite",
+    "Club Soda",
     "Soy Milk",
     "Rice Milk",
     "Almond Milk",

@@ -24,7 +24,6 @@ class AddListVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         listTitle.delegate = self
-        hideKeyboard()
         setupViews()
         listTitle.becomeFirstResponder()
         saveButton.isEnabled = false

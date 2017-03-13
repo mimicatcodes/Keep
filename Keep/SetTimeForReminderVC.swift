@@ -25,20 +25,21 @@ class SetTimeForReminderVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let hr =  userDefaults.value(forKey: "hour") as? Int, let min = userDefaults.value(forKey: "minute") as? Int {
+        if let hr =  userDefaults.value(forKey: Keys.UserDefaults.hour) as? Int, let min = userDefaults.value(forKey: Keys.UserDefaults.minute) as? Int {
             
+            let format = DateFormat.doubleDigitTime
             if hr < 12 && hr > 0 {
-                let m = String(format: "%02d", min)
+                let m = String(format: format, min)
                 selectedTimeLabel.text = "\(hr):\(m) AM"
             } else if hr == 12 {
-                let m = String(format: "%02d", min)
+                let m = String(format: format, min)
                 selectedTimeLabel.text = "\(12):\(m) PM"
             } else if hr == 0 {
-                let m = String(format: "%02d", min)
+                let m = String(format: format, min)
                 selectedTimeLabel.text = "\(12):\(m) AM"
             }else {
-                let m = String(format: "%02d", min)
-                let h = String(format: "%02d", (hr - 12))
+                let m = String(format: format, min)
+                let h = String(format: format, (hr - 12))
                 selectedTimeLabel.text = "\(h):\(m) PM"
             }
         }
@@ -52,13 +53,11 @@ class SetTimeForReminderVC: UIViewController {
         minute = calendar.component(.minute, from: selectedTime)
         
         if let hour = hour, let minute = minute {
-            userDefaults.set(hour, forKey:"hour")
-            userDefaults.set(minute, forKey: "minute")
-            print("newly set hour is \(hour) and minute is \(minute)")
+            userDefaults.set(hour, forKey:Keys.UserDefaults.hour)
+            userDefaults.set(minute, forKey: Keys.UserDefaults.minute)
         }
-        if let hour = UserDefaults.standard.value(forKey: "hour") as? Int, let minute = UserDefaults.standard.value(forKey: "minute") as? Int {
+        if let hour = UserDefaults.standard.value(forKey: Keys.UserDefaults.hour) as? Int, let minute = UserDefaults.standard.value(forKey: Keys.UserDefaults.minute) as? Int {
             Helper.setUpNotification(hour: hour, minute: minute)
-            print("success?")
         }
         dismiss(animated: true, completion: nil)
     }
@@ -77,7 +76,7 @@ class SetTimeForReminderVC: UIViewController {
     }
     
     func formatDate(){
-        formatter.dateFormat =  "hh:mm a"
+        formatter.dateFormat =  DateFormat.time
     }
     
     func datePickerChanged(sender: UIDatePicker) {

@@ -11,7 +11,6 @@
 		DD0639CF1E5FEA7100BF7609 /* CategoryField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0639CE1E5FEA7100BF7609 /* CategoryField.swift */; };
 		DD0639D11E61ECF700BF7609 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0639D01E61ECF700BF7609 /* CustomSearchBar.swift */; };
 		DD0639D31E61F0C500BF7609 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0639D21E61F0C500BF7609 /* SearchCell.swift */; };
-		DD0F51BE1E42DB0E004A6153 /* MoveToVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F51BD1E42DB0E004A6153 /* MoveToVC.swift */; };
 		DD1EA6381E0CA41D0034C54B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EA6371E0CA41D0034C54B /* AppDelegate.swift */; };
 		DD1EA63D1E0CA41D0034C54B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD1EA63B1E0CA41D0034C54B /* Main.storyboard */; };
 		DD1EA6421E0CA41D0034C54B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD1EA6411E0CA41D0034C54B /* Assets.xcassets */; };
@@ -75,7 +74,6 @@
 		DD0639CE1E5FEA7100BF7609 /* CategoryField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryField.swift; sourceTree = "<group>"; };
 		DD0639D01E61ECF700BF7609 /* CustomSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		DD0639D21E61F0C500BF7609 /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
-		DD0F51BD1E42DB0E004A6153 /* MoveToVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveToVC.swift; sourceTree = "<group>"; };
 		DD1EA6341E0CA41D0034C54B /* Keep.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keep.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD1EA6371E0CA41D0034C54B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD1EA63C1E0CA41D0034C54B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -358,7 +356,6 @@
 				DDC3E98E1E1CB87C00459295 /* AddListVC.swift */,
 				DDC3E98C1E1CB86100459295 /* ShoppingListDetailVC.swift */,
 				DDC3E9D01E20580B00459295 /* AddItemVC.swift */,
-				DD0F51BD1E42DB0E004A6153 /* MoveToVC.swift */,
 			);
 			name = "Shopping List";
 			sourceTree = "<group>";
@@ -558,7 +555,6 @@
 				DDD7D47C1E403FFE00599382 /* Favorites.swift in Sources */,
 				DDC3E98B1E1C958A00459295 /* SettingsViewController.swift in Sources */,
 				DD515D071E5BD44500415A2B /* ScannedItemCell.swift in Sources */,
-				DD0F51BE1E42DB0E004A6153 /* MoveToVC.swift in Sources */,
 				DD515D0B1E5BD55900415A2B /* ListDetailCell.swift in Sources */,
 				DD7F72251E69FAB600BAE511 /* AddItemsManuallyVC.swift in Sources */,
 				DD2BE85A1E6D26B000EA9180 /* Other.swift in Sources */,
@@ -697,6 +693,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8E59TDTBWW;
 				ENABLE_BITCODE = NO;
@@ -722,6 +719,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8E59TDTBWW;
 				ENABLE_BITCODE = NO;

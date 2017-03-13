@@ -36,13 +36,13 @@ class FavoritesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmpty
     }
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        let str = "No favorites yet!"
+        let str = emptyState.fav
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
         return NSAttributedString(string: str, attributes: attrs)
     }
     
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        let str = "Click ' + ' to add your favorite items."
+        let str = emptyState.messageForFav
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
         return NSAttributedString(string: str, attributes: attrs)
     }
@@ -55,13 +55,6 @@ class FavoritesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmpty
 
         cell.rightButtons = [deleteButton]
         cell.rightExpansion.buttonIndex = 0
-    }
-    
-    func createAlert(withTitle:String) {
-        let alert = UIAlertController(title: withTitle, message: EmptyString.none, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in }
-        alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
     }
     
     func moveToStock(indexPath: IndexPath){

@@ -30,7 +30,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     @IBOutlet weak var locationView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     var labelView: UILabel!
     var locationButtons:[UIButton] = []
@@ -74,8 +73,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
         originTopMargin = topMarginConstraint.constant
     }
     
@@ -86,7 +83,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     
     @IBAction func saveTapped(_ sender: UIButton) {
         guard let name = nameTextField.text, name != "" else { return }
-//        guard let categoryChosen = categoryField.text, categoryChosen != "" else { return }
 
         if let item = itemToEdit {
             try! realm.write {
@@ -149,6 +145,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     }
     
     @IBAction func naBtnTapped(_ sender: UIButton) {
+        tableView.isHidden = true
         notApplicableButton.isSelected = !notApplicableButton.isSelected
         if notApplicableButton.isSelected {
             expDateField.text = Labels.na
@@ -196,7 +193,8 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     func formatInitialData(){
         adjustSpacing()
         configureAppearances()
-        configureTableView()
+        Helper.configureTableView(tableView: tableView)
+        //configureTableView()
         if let item = itemToEdit {
             nameTitle = item.name.capitalized
             category = item.category
@@ -319,16 +317,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
                 button.layer.cornerRadius = 5
             }
         }
-    }
-    
-    func configureTableView(){
-        tableView.allowsSelection = true
-        tableView.layer.masksToBounds = true
-        tableView.layer.cornerRadius = 8
-        tableView.layer.borderColor = Colors.whiteFour.cgColor
-        tableView.layer.borderWidth = 1.0
-        tableView.separatorInset = .zero
-        tableView.isHidden = true
     }
     
     func adjustSpacing(){
@@ -515,10 +503,7 @@ extension AddItemsManuallyVC : UITextFieldDelegate {
         activeTextField?.resignFirstResponder()
         activeTextField?.endEditing(true)
         moveViewDown()
-        
-        if textField == nameTextField {
-            tableView.isHidden = true
-        }
+        tableView.isHidden = true
         return true
     }
     

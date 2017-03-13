@@ -13,8 +13,6 @@ import NotificationCenter
 
 class ShoppingListDetailVC: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
-    // TODO: Share - actionVC
-    
     @IBOutlet weak var tableView: UITableView!
     
     let store = DataStore.sharedInstance
@@ -48,49 +46,17 @@ class ShoppingListDetailVC: UIViewController, DZNEmptyDataSetSource, DZNEmptyDat
     }
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        let str = "This shopping list is currently empty"
+        let str = emptyState.listItem
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
         return NSAttributedString(string: str, attributes: attrs)
     }
     
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        let str = "Click ' + ' to add items"
+        let str = emptyState.messageForItems
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
         return NSAttributedString(string: str, attributes: attrs)
     }
-    
-    /*
-    
-    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        let str = "Welcome"
-        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
-        return NSAttributedString(string: str, attributes: attrs)
-    }
-    
-    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        let str = "Tap the button below to add your first grokkleglob."
-        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
-        return NSAttributedString(string: str, attributes: attrs)
-    }
- */
-    
-//    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
-//        return UIImage(named: "sample3")
-//    }
-    /*
-    func buttonTitle(forEmptyDataSet scrollView: UIScrollView, for state: UIControlState) -> NSAttributedString? {
-        let str = "Add Grokkleglob"
-        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.callout)]
-        return NSAttributedString(string: str, attributes: attrs)
-    }
- */
-    
-//    func emptyDataSet(_ scrollView: UIScrollView, didTap button: UIButton) {
-//        let ac = UIAlertController(title: "Button tapped!", message: nil, preferredStyle: .alert)
-//        ac.addAction(UIAlertAction(title: "Hurray", style: .default))
-//        present(ac, animated: true)
-//    }
-    
+      
     func configureSwipeButtons(cell:ListDetailCell, indexPath: IndexPath){
         let deleteButton = MGSwipeButton(title: EmptyString.none, icon: UIImage(named:ImageName.delete1), backgroundColor: Colors.salmon) { (sender: MGSwipeTableCell) -> Bool in
             
@@ -192,14 +158,11 @@ extension ShoppingListDetailVC : UITableViewDelegate, UITableViewDataSource {
         let predicate = NSPredicate(format: Filters.listUniqueID, uniqueID)
         let filteredItems = store.allShoppingItems.filter(predicate)
         var emptyString = String()
+        let newLine = Labels.lineBreak
         
         for item in filteredItems {
-            emptyString += item.name + ("\n")
+            emptyString += item.name + (newLine)
         }
-        
-        print("\n")
-        print(emptyString)
-        print("\n")
         
         let activityController = UIActivityViewController(activityItems: [emptyString], applicationActivities: nil)
         

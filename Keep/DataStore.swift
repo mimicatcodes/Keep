@@ -19,6 +19,10 @@ class DataStore{
     var pantryItems = try! Realm().objects(Item.self).filter(Filters.pantry).sorted(byProperty: Keys.exp, ascending: true)
     var otherItems = try! Realm().objects(Item.self).filter(Filters.other).sorted(byProperty: Keys.exp, ascending: true)
 
+    var itemsExpiringToday = try! Realm().objects(Item.self).filter(Filters.isExpiringToday).sorted(byProperty: Keys.location, ascending: true)
+    var itemsExpiring = try! Realm().objects(Item.self).sorted(byProperty: Keys.exp, ascending: true).filter(Filters.isExpiring)
+    var itemsExpired = try! Realm().objects(Item.self).sorted(byProperty: Keys.exp, ascending: true).filter(Filters.isExpired)
+    
     var allShopingLists = try! Realm().objects(ShoppingList.self).sorted(byProperty: Keys.title, ascending: true)
     
     var scannedItemToAdd = EmptyString.none

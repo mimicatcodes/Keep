@@ -53,6 +53,7 @@ struct Keys {
     static let category = "category"
     static let title = "title"
     static let exp = "exp"
+    static let location = "location"
     
     struct UserDefaults {
         static let hour = "hour"
@@ -64,7 +65,6 @@ struct Keys {
 struct NotificationName {
     static let refreshTableview = NSNotification.Name("RefeshTVNotification")
     static let refreshItemList = NSNotification.Name("RefreshItemListNotification")
-    //static let refreshExpList = NSNotification.Name("RefreshExpiredItems")
     static let refreshFavorites = NSNotification.Name("RefreshFavorites")
     static let refreshScannedItems = NSNotification.Name("RefreshScannedItems")
     static let refreshMainTV = NSNotification.Name("RefreshMainTV")
@@ -94,6 +94,7 @@ struct Identifiers {
         static let favToStock = "favToStock"
         static let moveToStock = "moveListItemToStock"
         static let setReminder = "setReminder"
+        static let showExpires = "showExpires"
     }
     
     struct Storyboard {
@@ -142,6 +143,7 @@ struct Filters {
     static let proteinBeans = "category CONTAINS[c] 'Beans'"
     static let proteinNuts = "category CONTAINS[c] 'Nuts'"
     static let dairy = "category == 'Dairy'"
+    static let charSet = "01234567890.,"
 }
 
 struct EmptyString {
@@ -149,6 +151,7 @@ struct EmptyString {
 }
 
 struct Labels {
+    static let lineBreak = "\n"
     static let na = "N/A"
     static let done = "Done"
     static let cancel = "Cancel"
@@ -156,6 +159,11 @@ struct Labels {
     static let expiring = "Expiring soon"
     static let expiringInThreeDays = "Expiring in 3 days"
     static let expiringToday = "Expiring today"
+    static let expiringTodayCap = "Expiring Today"
+    static let expiredItems = "Expired Items"
+    static let expiringItems = "Expiring Items"
+    static let expiredOn = "Expires on "
+    static let xQuantity = "x "
     static let dayLeft = " day left"
     static let daysLeft = " days left"
     static let addedOn = "Added on "
@@ -170,6 +178,7 @@ struct Labels {
     
     static let itemIs = "Item is"
     static let ItemsAre = "Items are"
+    
 }
 
 struct OnBoarding {
@@ -180,6 +189,18 @@ struct OnBoarding {
     static let piggyBankBody = "Reduce your food waste, and\r\nknow when your foods are about to expire."
     static let produceTitle = "Be Healthy"
     static let produceBody = "Know your shopping trends, and\r\nlearn to buy healthier items."
+}
+
+struct emptyState {
+    static let main = "No items here yet!"
+    static let shoppingList = "No shopping lists yet!"
+    static let fav = "No favorites yet!"
+    static let listItem = "No items in this list yet!"
+    static let search = "No matching items found"
+    static let expiringItems = "No expiring items found."
+    static let messageForItems = "Click ' + ' to add items"
+    static let messageForSL = "Click ' + ' to add a shopping list"
+    static let messageForFav = "Click ' + ' to add your favorite items"
 }
 
 struct LocalNotification {
@@ -194,6 +215,9 @@ struct LocalNotification {
 
 struct DateFormat {
     static let monthDayYear = "MMM dd, yyyy"
+    static let time = "hh:mm a"
+    static let doubleDigitTime = "%02d"
+    
 }
 struct FoodGroups {
     static let categories = [FiveFoodGroups.Vegetables.rawValue, FiveFoodGroups.Fruits.rawValue, FiveFoodGroups.Grains.rawValue, FiveFoodGroups.Dairy.rawValue, FiveFoodGroups.Protein.rawValue]
@@ -208,12 +232,25 @@ struct SearchPlaceholder {
     static let search =  "Search                                                            "
 }
 
+struct AlertForSL {
+    static let title = "Are you sure you want to delete this list?"
+    static let message = "All items in the list will be deleted."
+    static let delete = "Delete"
+    static let cancel = "Cancel"
+}
+
 struct ImageName {
     static let clear = "Clear"
     static let delete1 = "Delete1"
     static let delete2 = "Delete2"
     static let editGrey1 = "EditGrey1"
     static let editGrey2 = "EditGrey2"
+}
+
+struct Email {
+    static let address = "trykeepapp@gmail.com"
+    static let subject = "Hi Keep Team!"
+    static let failedMessage = "Unable to send an email"
 }
 
 enum FiveFoodGroups: String {
@@ -256,4 +293,34 @@ extension UIImage {
         self.init(named: asset.rawValue)
     }
 }
+
+enum FoodCategories : String {
+    
+    // MARK: vegetables
+    case vegetables = "Vegetables"
+    
+    // MARK: Fruits
+    case fruits = "Fruits"
+    
+    // MARK: Grain
+    case pastasAndNoodles = "Pastas and Noodles"
+    case otherGrains = "Other Grains"
+    
+    // MARK: Dairy
+    case dairy = "Dairy"
+    
+    // MARK: Protein
+    case meatsSeafoodsAndEggs = "Meats, Seafoods, and Eggs"
+    case beansPeasAndTofu = "Beans, Peas and Tofu"
+    case nutsAndSeeds = "Nuts and Seeds"
+    
+    // MARK: Other
+    case beverages = "Beverages"
+    case alcoholicBeverages = "Alcoholic Beverages"
+    case condimentsAndSauce = "Condiments and Sauce"
+    case healthAndPersonalCare = "Health and Personal Care"
+    case householdAndCleaning = "Household and Cleaning"
+    case other = "Other"
+}
+
 

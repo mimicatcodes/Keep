@@ -178,12 +178,12 @@ var nutsAndSeeds: Set<String> = [
     "Water Caltrop",
     "White Nut",
     "White Walnut",
-    "Chia seeds",
+    "Chia Seeds",
     "Flaxseed",
-    "Hemp seeds",
-    "Poppy seed",
-    "Pumpkin seeds",
-    "Sesame seed",
+    "Hemp Seeds",
+    "Poppy Seed",
+    "Pumpkin Seeds",
+    "Sesame Seed",
     "Safflower",
     "Sunflower"
 ]

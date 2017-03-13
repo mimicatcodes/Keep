@@ -216,7 +216,7 @@ extension ScanReceiptVC : G8TesseractDelegate {
         let newlineChars = NSCharacterSet.newlines
         let elementsArray = textsScanned.components(separatedBy: newlineChars).filter {!$0.isEmpty        }
         for string in elementsArray {
-            let result = string.trimmingCharacters(in: CharacterSet(charactersIn: "01234567890.,"))
+            let result = string.trimmingCharacters(in: CharacterSet(charactersIn: Filters.charSet))
             emptyArray.append(result)
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: Identifiers.Segue.toScannedItems, sender: self)

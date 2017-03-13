@@ -22,10 +22,9 @@ class AddScannedItemVC: UIViewController {
     @IBOutlet var locationView: UIView!
     @IBOutlet var locationButtons: [UIButton]!
     @IBOutlet weak var expDateField: UITextField!
-    @IBOutlet weak var pDateField: UITextField!
     @IBOutlet weak var categoryField: UITextField!
     @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var tableView: UITableView!
     let store = DataStore.sharedInstance
     let realm = try! Realm()
     var originalTopMargin: CGFloat!
@@ -41,7 +40,7 @@ class AddScannedItemVC: UIViewController {
     var location: Location = .Fridge
     var activeTextField:UITextField?
     var isFavorited:Bool = false
-    let lengthLimit = 20
+    let lengthLimit = 23
     var category: String = FoodCategories.other.rawValue
     
     var itemToAdd: String?
@@ -50,9 +49,12 @@ class AddScannedItemVC: UIViewController {
     let today = Date()
     let categories = FoodGroups.groceryCategories
     
+    var filteredItemsNames = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         adjustSpacing()
+        Helper.configureTableView(tableView: tableView)
         configureAppearances()
         configurePickers()
         setDelegatesForTextfields()
@@ -80,6 +82,7 @@ class AddScannedItemVC: UIViewController {
     }
     
     @IBAction func favButtonTapped(_ sender: UIButton) {
+        tableView.isHidden = true
         favButton.isSelected = !favButton.isSelected
         
         if favButton.isSelected {
@@ -90,6 +93,7 @@ class AddScannedItemVC: UIViewController {
     }
     
     @IBAction func naBtnTapped(_ sender: Any) {
+        tableView.isHidden = true
         notApplicableButton.isSelected = !notApplicableButton.isSelected
         if notApplicableButton.isSelected {
             expDateField.text = Labels.na
@@ -108,6 +112,7 @@ class AddScannedItemVC: UIViewController {
     }
     
     @IBAction func locationButtonTapped(_ sender: UIButton) {
+        tableView.isHidden = true
         moveViewDown()
         categoryField.endEditing(true)
         categoryField.resignFirstResponder()
@@ -124,20 +129,7 @@ class AddScannedItemVC: UIViewController {
         default:
             break
         }
-        
-        for (index, button) in locationButtons.enumerated() {
-            if index == selectedIndex {
-                button.isSelected = true
-                button.backgroundColor = Colors.tealish
-                button.setTitleColor(.white, for: .selected)
-                button.layer.cornerRadius = 5
-            } else {
-                button.isSelected = false
-                button.backgroundColor = Colors.whiteTwo
-                button.setTitleColor(Colors.tealish, for: .normal)
-                button.layer.cornerRadius = 5
-            }
-        }
+        configureLocationButtons()
     }
     
     @IBAction func cancelBtnTapped(_ sender: UIButton) {
@@ -190,6 +182,22 @@ class AddScannedItemVC: UIViewController {
         }
     }
     
+    func configureLocationButtons(){
+        for (index, button) in locationButtons.enumerated() {
+            if index == selectedIndex {
+                button.isSelected = true
+                button.backgroundColor = Colors.tealish
+                button.setTitleColor(.white, for: .selected)
+                button.layer.cornerRadius = 5
+            } else {
+                button.isSelected = false
+                button.backgroundColor = Colors.whiteTwo
+                button.setTitleColor(Colors.tealish, for: .normal)
+                button.layer.cornerRadius = 5
+            }
+        }
+    }
+    
     func setDelegatesForTextfields(){
         nameField.delegate = self
         expDateField.delegate = self
@@ -238,6 +246,7 @@ class AddScannedItemVC: UIViewController {
     }
     
     func minus(){
+        tableView.isHidden = true
         if quantity == 1 {
             minusButton.isEnabled = false
         } else {
@@ -248,6 +257,7 @@ class AddScannedItemVC: UIViewController {
     }
     
     func plus(){
+        tableView.isHidden = true
         quantity += 1
         quantityLabel.text = "\(quantity)"
         if minusButton.isEnabled == false {
@@ -256,6 +266,7 @@ class AddScannedItemVC: UIViewController {
     }
     
     func formatInitialData() {
+        tableView.isHidden = true
         if let item = itemToAdd {
             nameField.text = item
             
@@ -292,6 +303,7 @@ class AddScannedItemVC: UIViewController {
             saveButton.setTitleColor(Colors.tealish, for: .normal)
             
         } else {
+            tableView.isHidden = true
             saveButton.isEnabled = false
             saveButton.setTitleColor(Colors.warmGreyFour, for: .normal)
         }
@@ -300,8 +312,8 @@ class AddScannedItemVC: UIViewController {
             if let c = sender.text {
                 for c_ in categories {
                     if c != c_.rawValue {
-                        sender.text = "Other"
-                        category = "Other"
+                        sender.text = FoodCategories.other.rawValue
+                        category = FoodCategories.other.rawValue
                     }
                 }
             }
@@ -322,7 +334,7 @@ class AddScannedItemVC: UIViewController {
         let yearComponent = calendar.component(.year, from: expDate)
         
         if yearComponent > 2100 {
-            expDateField.text = "N/A"
+            expDateField.text = Labels.na
             notApplicableButton.isSelected = true
         } else {
             expDateField.text = formatter.string(from: expDate).capitalized
@@ -352,20 +364,23 @@ class AddScannedItemVC: UIViewController {
         }
     }
     
-    func configureLocationButtons(){
-        for (index,button) in locationButtons.enumerated() {
-            if index == 0 {
-                button.isSelected = true
-                button.backgroundColor = Colors.tealish
-                button.setTitleColor(.white, for: .selected)
-                button.layer.cornerRadius = 5
-            } else {
-                button.isSelected = false
-                button.backgroundColor = Colors.whiteTwo
-                button.setTitleColor(Colors.tealish, for: .normal)
-                button.layer.cornerRadius = 5
+    func searchAutocompleteEntriesWithSubstring(_ substring: String) {
+        
+        filteredItemsNames.removeAll(keepingCapacity: false)
+        
+        for itemArray in FoodItems.all {
+            for item in itemArray {
+                
+                let myString: NSString! = item as NSString
+                let substringRange: NSRange! = myString.range(of: substring)
+                
+                if substringRange.location == 0 {
+                    filteredItemsNames.append(item)
+                }
             }
         }
+        
+        tableView.reloadData()
     }
 }
 
@@ -443,11 +458,16 @@ extension AddScannedItemVC : UIPickerViewDelegate, UIPickerViewDataSource {
 extension AddScannedItemVC : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         activeTextField?.resignFirstResponder()
+        tableView.isHidden = true
         return true
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField){
         activeTextField = textField
+        
+        if activeTextField != nameField {
+            tableView.isHidden = true
+        }
         
         if textField == expDateField {
             expDateField.inputView = datePicker
@@ -463,11 +483,47 @@ extension AddScannedItemVC : UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let text = textField.text else { return true }
-        
-        let newLength = text.characters.count + string.characters.count - range.length
-        
-        return newLength <= lengthLimit
+        if textField == nameField {
+            if let text = textField.text {
+                let newLength = text.characters.count + string.characters.count - range.length
+                let subString = (text as NSString).replacingCharacters(in: range, with: string)
+                searchAutocompleteEntriesWithSubstring(subString)
+                return newLength <= lengthLimit
+            }
+        }
+        return true
     }
 }
 
+extension AddScannedItemVC: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if filteredItemsNames.count == 0 {
+            tableView.isHidden = true
+            return 0
+        }
+        tableView.isHidden = false
+        return filteredItemsNames.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCell: UITableViewCell = tableView.cellForRow(at: indexPath)!
+        nameField.text = selectedCell.textLabel!.text!.capitalized
+        tableView.isHidden = !tableView.isHidden
+        nameField.endEditing(true)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.Cell.nameCell)
+        
+        if filteredItemsNames.count == 0 {
+            tableView.isHidden = true
+        } else {
+            tableView.isHidden = false
+            cell?.textLabel?.text = self.filteredItemsNames[indexPath.row]
+        }
+        cell?.textLabel?.font = UIFont(name: Fonts.latoRegular, size: 13)
+        cell?.textLabel?.textColor = Colors.tealish
+        
+        return cell!
+    }
+}

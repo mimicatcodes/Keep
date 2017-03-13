@@ -36,20 +36,16 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-    } 
-    
-//    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
-//        return UIImage(named: "sample3")
-//    }
+    }
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        let str = "No shopping lists yet!"
+        let str = emptyState.shoppingList
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
         return NSAttributedString(string: str, attributes: attrs)
     }
     
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        let str = "Click ' + ' to add a shopping list."
+        let str = emptyState.messageForSL
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
         return NSAttributedString(string: str, attributes: attrs)
     }
@@ -92,10 +88,9 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
     }
     
     func alertForDelete(indexPath: IndexPath){
-        let alertController = UIAlertController(title: "Are you sure you want to delete this list?",  message: "All items in the list will be deleted.", preferredStyle: .alert)
+        let alertController = UIAlertController(title: AlertForSL.title,  message: AlertForSL.message, preferredStyle: .alert)
     
-        let deleteAction = UIAlertAction(title: "Delete", style: .default, handler: { action in
-            print("Delete pressed")
+        let deleteAction = UIAlertAction(title: AlertForSL.delete, style: .default, handler: { action in
             let uniqueID = self.store.allShopingLists[indexPath.row].uniqueID
             let selectedList = self.store.allShopingLists[indexPath.row]
             
@@ -112,8 +107,7 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
             self.tableView.reloadData()
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
-            print("Cancel Pressed")
+        let cancelAction = UIAlertAction(title: AlertForSL.cancel, style: .cancel) { action in
         }
         
         alertController.addAction(deleteAction)

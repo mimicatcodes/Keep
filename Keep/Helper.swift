@@ -25,6 +25,17 @@ class Helper {
         return end - start
     }
     
+    //Autocompletion tableview styling
+    static func configureTableView(tableView: UITableView){
+        tableView.allowsSelection = true
+        tableView.layer.masksToBounds = true
+        tableView.layer.cornerRadius = 8
+        tableView.layer.borderColor = Colors.whiteFour.cgColor
+        tableView.layer.borderWidth = 1.0
+        tableView.separatorInset = .zero
+        tableView.isHidden = true
+    }
+    
     static func setUpNotification(hour:Int, minute:Int){
         
         let store = DataStore.sharedInstance
