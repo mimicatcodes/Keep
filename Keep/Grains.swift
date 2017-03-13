@@ -189,7 +189,7 @@ var otherGrains: Set<String> = [
     "Brown Rice Tortilla",
     "Buckwheat",
     "Bulgur (Cracked Wheat)",
-    "Farro / Emmer",
+    "Farro",
     "Flaxseed",
     "Grano",
     "Kamut® Grain",
