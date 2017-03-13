@@ -204,11 +204,11 @@ struct emptyState {
 }
 
 struct LocalNotification {
-    static let title = "Spoiler Alert!"
+    static let title = "SPOILER ALERT!"
     static let subtitleSingular = " item is expiring today"
     static let subtitlePlural = " items are expiring today"
-    static let bodySingular = "Use it today before it goes bad!"
-    static let bodyPlular = "Make sure to use them today!"
+    static let bodySingular = "Use it today before it goes bad."
+    static let bodyPlular = "Make sure to use them today."
     static let categoryIdentifier = "reminder"
     static let messageforNoNeed = "no notification needed - no expiring items today"
 }
@@ -269,9 +269,8 @@ enum Location : String {
     case Fridge, Freezer, Pantry, Other
 }
 
-
 enum SettingMenu : String {
-    case reminder = "Set Time for Reminder"
+    case reminder = "Set Reminder"
     case sendFeedback = "Send Feedback"
 }
 
