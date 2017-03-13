@@ -16,6 +16,7 @@ class ShoppingListCell: MGSwipeTableCell {
     @IBOutlet weak var createdAtLabel: UILabel!
     @IBOutlet weak var numOfItemsRemainingLabel: UILabel!
     
+    @IBOutlet weak var itemsLabel: UILabel!
 }
 
 

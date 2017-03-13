@@ -50,26 +50,6 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
         return NSAttributedString(string: str, attributes: attrs)
     }
     
-    
-    //    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
-    //        return UIImage(named: "sample3")
-    //    }
-    /*
-     func buttonTitle(forEmptyDataSet scrollView: UIScrollView, for state: UIControlState) -> NSAttributedString? {
-     let str = "Add Grokkleglob"
-     let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.callout)]
-     return NSAttributedString(string: str, attributes: attrs)
-     }
-     */
-    
-    //    func emptyDataSet(_ scrollView: UIScrollView, didTap button: UIButton) {
-    //        let ac = UIAlertController(title: "Button tapped!", message: nil, preferredStyle: .alert)
-    //        ac.addAction(UIAlertAction(title: "Hurray", style: .default))
-    //        present(ac, animated: true)
-    //    }
-    
-
-    
     func configureSwipeButtons(cell:ShoppingListCell, indexPath: IndexPath){
         
         let rightButton1 = MGSwipeButton(title: EmptyString.none, icon: UIImage(named:ImageName.delete2), backgroundColor: Colors.salmon) { (sender: MGSwipeTableCell) -> Bool in
@@ -145,7 +125,6 @@ extension ShoppingListViewController : UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return store.allShopingLists.count
     }
     
@@ -155,6 +134,11 @@ extension ShoppingListViewController : UITableViewDelegate, UITableViewDataSourc
         cell.numOfItemsView.layer.borderColor = Colors.tealish.cgColor
         cell.numOfItemsView.backgroundColor = UIColor.clear
         cell.numOfItemsRemainingLabel.text = String(describing: store.allShopingLists[indexPath.row].numOfItems)
+        if store.allShopingLists[indexPath.row].numOfItems < 2 {
+            cell.itemsLabel.text = "item"
+        } else {
+            cell.itemsLabel.text = "items"
+        }
         cell.shoppingListTitleLabel.text = store.allShopingLists[indexPath.row].title.capitalized
         let createdAt = formatter.string(from:store.allShopingLists[indexPath.row].isCreatedAt)
         cell.createdAtLabel.text = createdAt

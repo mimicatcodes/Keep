@@ -50,7 +50,10 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         tableView.separatorInset = .zero
         setData()
         addGestureRecognizer()
-        setNumbers()
+        DispatchQueue.main.async {
+            self.setNumbers()
+
+        }
         setChart(dataPoints: FoodGroups.categories, values: self.numOfItemsInCategory)
         NotificationCenter.default.addObserver(forName: NotificationName.refreshCharts, object: nil, queue: nil) { notification in
             self.setChart(dataPoints: FoodGroups.categories, values: self.numOfItemsInCategory)
@@ -102,25 +105,25 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         numOfItemsLabel.text = "\(numOfItems)"
         
         // 2nd Section - 3 days
-        numOfExpiringItems = store.allItems.filter(Filters.isExpiring).count
+        numOfExpiringItems = store.itemsExpiring.count
         if numOfExpiringItems < 2 {
-            labelThree.text = Labels.signularExpiring
-        } else {
-            labelThree.text = Labels.pluralExpiring
-        }
-        numOfItemsExpiringLabel.text = "\(numOfExpiringItems)"
-        
-        // 3rd Section - today
-        numOfItemsExpiringToday = store.allItems.filter(Filters.isExpiringToday).count
-        if numOfItemsExpiringToday < 2 {
             labelTwo.text = Labels.signularExpiring
         } else {
             labelTwo.text = Labels.pluralExpiring
         }
+        numOfItemsExpiringLabel.text = "\(numOfExpiringItems)"
+        
+        // 3rd Section - today
+        numOfItemsExpiringToday = store.itemsExpiringToday.count
+        if numOfItemsExpiringToday < 2 {
+            labelThree.text = Labels.signularExpiring
+        } else {
+            labelThree.text = Labels.pluralExpiring
+        }
         numOfItemsExpiringTodayLabel.text = "\(numOfItemsExpiringToday)"
     
         // 4th Section - expired
-        numOfExpiredItems = store.allItems.filter(Filters.isExpired).count
+        numOfExpiredItems = store.itemsExpired.count
         if numOfExpiredItems < 2 {
             labelFour.text = Labels.itemIs
         } else {
