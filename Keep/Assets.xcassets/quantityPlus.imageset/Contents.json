@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "addQuantity.png",
+      "filename" : "AddQuantity.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "addQuantity@2x.png",
+      "filename" : "AddQuantity@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "addQuantity@3x.png",
+      "filename" : "AddQuantity@3x.png",
       "scale" : "3x"
     }
   ],
