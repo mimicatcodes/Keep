@@ -17,7 +17,6 @@ class ShoppingItem: Object {
     dynamic var list: ShoppingList? 
 
     convenience init(name: String, isPurchased: Bool) {
-        
         self.init()
         self.name = name
         self.isPurchased = isPurchased
@@ -31,10 +30,8 @@ class ShoppingList: Object {
     dynamic var numOfItems: Int = 0
     dynamic var uniqueID: String = EmptyString.none
     let shoppingItems = LinkingObjects(fromType: ShoppingItem.self, property: "list")
-    //let shoppingItems = List<ShoppingItem>() // to-many
     
     convenience init(title: String, isCreatedAt: Date) {
-        
         self.init()
         self.title = title
         self.isCreatedAt = isCreatedAt
