@@ -28,6 +28,9 @@ Get a reminder when an item is about to expire. KEEP only sends you a notificati
 ## Snapshot of Your Food Balance
 When a food item is added to any of the five food groups, vegetables, fruits, grains, protein and dairy, a chart for nutritional balance information will immediately be drawn and show you if your groceries are well balanced. Learn your grocery trends, and plan better to have a healthier diet.
 
+______________________________________________________________________________________________________________________________
+
+
 Currently, KEEP’s data can only be saved to your phone.
 
 KEEP is constantly working on new updates to help more consumers eat and shop smart.
