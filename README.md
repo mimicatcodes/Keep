@@ -36,6 +36,6 @@ The version 1.2 will have an option to store data in the cloud and will allow us
 
 With KEEP, you can now get more organized and enjoy getting the full use out of your food!
 
-From Luna and Wing
+_From Luna and Wing_
 
-This iOS application is developed by Luna An, iOS developer, and designed by Wing Wat, a talented product/UX designer based in New York. You can check out Wing's portfolio at:  www.wingwat.com
+**_This iOS application is developed by Luna An, iOS developer, and designed by Wing Wat, a talented product/UX designer based in New York. You can check out Wing's portfolio at:  www.wingwat.com_**
