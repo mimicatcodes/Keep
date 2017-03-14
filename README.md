@@ -1,8 +1,8 @@
-# Keep
+# KEEP - A Simple Grocery Tracker and Shopping List
 
 ![github 2x](https://cloud.githubusercontent.com/assets/19986066/23880873/ea1e4080-082c-11e7-8eb4-ec065b71bd76.png)
 
-Welcome to KEEP - A Simple Grocery Tracker and Shopping List
+Welcome to KEEP!
 
 KEEP is the easiest way to manage and keep track of your grocery items.
 
