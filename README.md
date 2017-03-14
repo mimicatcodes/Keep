@@ -1,7 +1,6 @@
 # Keep
 
-![github](https://cloud.githubusercontent.com/assets/19986066/23880820/95541dc2-082c-11e7-8df5-3b37300023a5.png)
-
+![github 2x](https://cloud.githubusercontent.com/assets/19986066/23880873/ea1e4080-082c-11e7-8eb4-ec065b71bd76.png)
 
 Welcome to KEEP - A Simple Grocery Tracker and Shopping List
 
