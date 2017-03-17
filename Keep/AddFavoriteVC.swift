@@ -16,6 +16,8 @@ class AddFavoriteVC: UIViewController, UITextFieldDelegate {
     
     let store = DataStore.sharedInstance
     
+    let lengthLimit = 23
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         nameField.becomeFirstResponder()
@@ -75,6 +77,16 @@ class AddFavoriteVC: UIViewController, UITextFieldDelegate {
             saveButton.isEnabled = false
             saveButton.backgroundColor = Colors.whiteTwo
         }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if let text = textField.text {
+            let newLength = text.characters.count + string.characters.count - range.length
+            return newLength <= lengthLimit
+        }
+        
+        return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

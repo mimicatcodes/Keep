@@ -15,10 +15,12 @@ class AddItemVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var saveButton: CustomButton!
     @IBOutlet weak var createItemView: UIView!
     @IBOutlet weak var itemTitleField: UITextField!
-
+    
     let store = DataStore.sharedInstance
     var listTitle:String?
     var uniqueID: String?
+    
+    let lengthLimit = 23
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +32,6 @@ class AddItemVC: UIViewController, UITextFieldDelegate {
         itemTitleField.becomeFirstResponder()
         itemTitleField.autocapitalizationType = .words
         itemTitleField.addTarget(self, action: #selector(checkTextField(sender:)), for: .editingChanged)
-    }
-    
-    @IBAction func dismissVC(_ sender: Any) {
-        //dismiss(animated: true, completion: nil)
     }
     
     @IBAction func cancelBtnTapped(_ sender: Any) {
@@ -75,13 +73,23 @@ class AddItemVC: UIViewController, UITextFieldDelegate {
             saveButton.isEnabled = true
             saveButton.backgroundColor = Colors.tealish
             saveButton.setTitleColor(.white, for: .normal)
-
+            
             
         } else {
             saveButton.isEnabled = false
             saveButton.backgroundColor = Colors.whiteTwo
             saveButton.setTitleColor(Colors.tealish, for: .normal)
         }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if let text = textField.text {
+            let newLength = text.characters.count + string.characters.count - range.length
+            return newLength <= lengthLimit
+        }
+        
+        return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -93,7 +101,7 @@ class AddItemVC: UIViewController, UITextFieldDelegate {
         itemTitleField.resignFirstResponder()
         dismiss(animated: true, completion: nil)
     }
-
+    
     func setupViews(){
         view.backgroundColor = Colors.dawn
     }

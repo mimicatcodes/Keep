@@ -25,6 +25,9 @@ class AddScannedItemVC: UIViewController {
     @IBOutlet weak var categoryField: UITextField!
     @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
+    
+    var labelView: UILabel!
+
     let store = DataStore.sharedInstance
     let realm = try! Realm()
     var originalTopMargin: CGFloat!
@@ -153,7 +156,7 @@ class AddScannedItemVC: UIViewController {
         NotificationCenter.default.post(name: NotificationName.refreshScannedItems, object: nil)
         
         view.endEditing(true)
-        dismiss(animated: true, completion: nil)
+        showAlert(itemName: name)
     }
     
     func checkTextfields(){
@@ -291,7 +294,6 @@ class AddScannedItemVC: UIViewController {
         Helper.formatDates(formatter: formatter)
     }
     
-    
     func checkTextField(sender: UITextField) {
         var textLength = 0
         if let text = sender.text {
@@ -381,6 +383,27 @@ class AddScannedItemVC: UIViewController {
         }
         
         tableView.reloadData()
+    }
+    
+    func showAlert(itemName:String) {
+        labelView = UILabel(frame: CGRect(x: 0, y: 70, width: self.view.frame.width, height: 40))
+        labelView.backgroundColor = Colors.tealish
+        labelView.text = Labels.itemAdded + " to \(location.rawValue)"
+        labelView.textAlignment = .center
+        labelView.textColor = UIColor.white
+        labelView.font = UIFont(name: Fonts.montserratRegular, size: 12)
+        
+        self.view.addSubview(labelView)
+        
+        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.dismissAlert), userInfo: nil, repeats: false)
+    }
+    
+    func dismissAlert(){
+        if labelView != nil {
+            labelView.removeFromSuperview()
+        }
+        //view.endEditing(true)
+        dismiss(animated: true, completion: nil)
     }
 }
 

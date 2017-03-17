@@ -43,10 +43,6 @@ class AddListVC: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func dismissView(_ sender: Any) {
-        //dismiss()
-    }
-    
     @IBAction func addBtnTapped(_ sender: UIButton) {
         save()
     }
@@ -82,7 +78,6 @@ class AddListVC: UIViewController, UITextFieldDelegate {
                 realm.add(list)
             }
         }
-        
         NotificationCenter.default.post(name: NotificationName.refreshTableview, object: nil)
         dismiss()
     }

@@ -10,7 +10,7 @@ import UIKit
 import MGSwipeTableCell
 
 class ScannedItemsVC: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var topView: UIView!
     
@@ -23,11 +23,13 @@ class ScannedItemsVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorInset = .zero
-
+        
         if titleString == nil {
-        NotificationCenter.default.addObserver(forName: NotificationName.refreshScannedItems, object: nil, queue: nil) { notification in
-            self.resultsArray.remove(at: self.store.scannedItemIndex!)
-            self.tableView.reloadData()
+            NotificationCenter.default.addObserver(forName: NotificationName.refreshScannedItems, object: nil, queue: nil) { notification in
+                if let itemIndex = self.store.scannedItemIndex {
+                    self.resultsArray.remove(at: itemIndex)
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -88,7 +90,7 @@ extension ScannedItemsVC : UITableViewDataSource, UITableViewDelegate {
         cell.editAddButton.tag = indexPath.row
         cell.editAddButton.addTarget(self, action: #selector(addToInventory), for: .touchUpInside)
         configureSwipeButtons(cell: cell, indexPath: indexPath)
-
+        
         return cell
     }
     

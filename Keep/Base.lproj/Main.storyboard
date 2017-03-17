@@ -1093,10 +1093,10 @@
                                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="name" rowHeight="20" id="hTp-YD-dGb">
-                                                        <rect key="frame" x="0.0" y="28" width="262.5" height="20"/>
+                                                        <rect key="frame" x="0.0" y="28" width="263" height="20"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hTp-YD-dGb" id="lX7-Ox-ZfW">
-                                                            <rect key="frame" x="0.0" y="0.0" width="262.5" height="19"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="263" height="19"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </tableViewCellContentView>
                                                     </tableViewCell>
@@ -3908,9 +3908,9 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rJ2-sl-0Dc">
-                                                    <rect key="frame" x="326" y="20" width="35" height="35"/>
+                                                    <rect key="frame" x="329" y="12.5" width="35" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="35" id="2IE-22-Vkv"/>
+                                                        <constraint firstAttribute="height" constant="50" id="2IE-22-Vkv"/>
                                                         <constraint firstAttribute="width" constant="35" id="mvu-L9-Fyd"/>
                                                     </constraints>
                                                     <state key="normal" image="MoveToActive"/>
@@ -3924,7 +3924,7 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="Qf5-lw-khM" secondAttribute="trailing" constant="100" id="hTt-yt-Qd1"/>
                                                 <constraint firstItem="Qf5-lw-khM" firstAttribute="centerY" secondItem="V4a-8z-6qy" secondAttribute="centerY" id="iwA-x0-CYU"/>
                                                 <constraint firstItem="Qf5-lw-khM" firstAttribute="leading" secondItem="Dbu-9K-mn5" secondAttribute="trailing" constant="8" id="qWS-vG-rLV"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="rJ2-sl-0Dc" secondAttribute="trailing" constant="6" id="t1a-Is-cpq"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="rJ2-sl-0Dc" secondAttribute="trailing" constant="3" id="t1a-Is-cpq"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <constraints>
@@ -4121,9 +4121,6 @@
                                     <constraint firstItem="Bin-Tx-kWY" firstAttribute="centerY" secondItem="lVe-Rd-chG" secondAttribute="centerY" multiplier="0.6" id="gXf-Mk-7U5"/>
                                     <constraint firstItem="lk5-Og-SRp" firstAttribute="top" secondItem="Bin-Tx-kWY" secondAttribute="bottom" constant="7" id="zTR-Hg-c6t"/>
                                 </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="U7l-HG-6H3" appends="YES" id="hLe-b3-2ky"/>
-                                </connections>
                             </view>
                         </subviews>
                         <constraints>
@@ -4140,11 +4137,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b2B-nN-LL3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="U7l-HG-6H3">
-                    <connections>
-                        <action selector="dismissView:" destination="rYQ-hn-FK9" id="09o-Jx-kNK"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="6179.7101449275369" y="-277.17391304347831"/>
         </scene>
@@ -4289,9 +4281,6 @@
                                     <constraint firstItem="EjC-Ns-7K7" firstAttribute="centerY" secondItem="jeE-bd-BtX" secondAttribute="centerY" multiplier="0.6" id="UK0-fd-NaU"/>
                                     <constraint firstItem="o9p-pr-ShM" firstAttribute="width" secondItem="EjC-Ns-7K7" secondAttribute="width" id="dOb-ji-hIe"/>
                                 </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Hsa-87-hsW" appends="YES" id="TMV-Hp-6ec"/>
-                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -4309,11 +4298,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V5m-Wl-rs3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Hsa-87-hsW">
-                    <connections>
-                        <action selector="dismissVC:" destination="Ncx-UL-xUg" id="fWe-0E-DOl"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="6913.04347826087" y="-279.61956521739131"/>
         </scene>
@@ -4683,7 +4667,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="aUh-rU-OJW"/>
-        <segue reference="Isj-Gn-S8M"/>
         <segue reference="ySJ-cl-QQz"/>
+        <segue reference="hsJ-u3-V6W"/>
     </inferredMetricsTieBreakers>
 </document>
