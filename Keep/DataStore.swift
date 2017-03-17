@@ -28,7 +28,7 @@ class DataStore{
     var scannedItemToAdd = EmptyString.none
     var scannedItemIndex:Int?
 
-    var listToEdit:ShoppingList?
+    //var listToEdit:ShoppingList?
     var tappedSLItemToSendToLocation = EmptyString.none
     var listID = EmptyString.none
 

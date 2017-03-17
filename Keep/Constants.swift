@@ -179,6 +179,9 @@ struct Labels {
     static let itemIs = "Item is"
     static let ItemsAre = "Items are"
     
+    static let item = "item"
+    static let items = "items"
+    
 }
 
 struct OnBoarding {

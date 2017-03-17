@@ -135,9 +135,9 @@ extension ShoppingListViewController : UITableViewDelegate, UITableViewDataSourc
         cell.numOfItemsView.backgroundColor = UIColor.clear
         cell.numOfItemsRemainingLabel.text = String(describing: store.allShopingLists[indexPath.row].numOfItems)
         if store.allShopingLists[indexPath.row].numOfItems < 2 {
-            cell.itemsLabel.text = "item"
+            cell.itemsLabel.text = Labels.item
         } else {
-            cell.itemsLabel.text = "items"
+            cell.itemsLabel.text = Labels.items
         }
         cell.shoppingListTitleLabel.text = store.allShopingLists[indexPath.row].title.capitalized
         let createdAt = formatter.string(from:store.allShopingLists[indexPath.row].isCreatedAt)
