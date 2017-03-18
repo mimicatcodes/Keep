@@ -86,6 +86,7 @@ class AddScannedItemVC: UIViewController {
     
     @IBAction func favButtonTapped(_ sender: UIButton) {
         tableView.isHidden = true
+        activeTextField?.endEditing(true)
         favButton.isSelected = !favButton.isSelected
         
         if favButton.isSelected {
@@ -96,6 +97,8 @@ class AddScannedItemVC: UIViewController {
     }
     
     @IBAction func naBtnTapped(_ sender: Any) {
+        moveViewDown()
+        activeTextField?.endEditing(true)
         tableView.isHidden = true
         notApplicableButton.isSelected = !notApplicableButton.isSelected
         if notApplicableButton.isSelected {
@@ -117,8 +120,8 @@ class AddScannedItemVC: UIViewController {
     @IBAction func locationButtonTapped(_ sender: UIButton) {
         tableView.isHidden = true
         moveViewDown()
-        categoryField.endEditing(true)
-        categoryField.resignFirstResponder()
+        activeTextField?.endEditing(true)
+        
         selectedIndex = sender.tag
         switch selectedIndex {
         case 0:
@@ -249,6 +252,8 @@ class AddScannedItemVC: UIViewController {
     }
     
     func minus(){
+        activeTextField?.endEditing(true)
+        moveViewDown()
         tableView.isHidden = true
         if quantity == 1 {
             minusButton.isEnabled = false
@@ -260,6 +265,8 @@ class AddScannedItemVC: UIViewController {
     }
     
     func plus(){
+        activeTextField?.endEditing(true)
+        moveViewDown()
         tableView.isHidden = true
         quantity += 1
         quantityLabel.text = "\(quantity)"

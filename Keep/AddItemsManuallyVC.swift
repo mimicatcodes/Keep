@@ -116,6 +116,7 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     
     @IBAction func favoriteBtnTapped(_ sender: UIButton) {
         tableView.isHidden = true
+        activeTextField?.endEditing(true)
         favoriteButton.isSelected = !favoriteButton.isSelected
         
         if favoriteButton.isSelected {
@@ -126,6 +127,8 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     }
     
     @IBAction func minustBtnTapped(_ sender: UIButton) {
+        moveViewDown()
+        activeTextField?.endEditing(true)
         tableView.isHidden = true
         if quantity > 1 {
             quantity -= 1
@@ -136,6 +139,8 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     }
     
     @IBAction func plusBtnTapped(_ sender: UIButton) {
+        moveViewDown()
+        activeTextField?.endEditing(true)
         tableView.isHidden = true
         quantity += 1
         quantityLabel.text = "\(quantity)"
@@ -145,6 +150,8 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     }
     
     @IBAction func naBtnTapped(_ sender: UIButton) {
+        moveViewDown()
+        activeTextField?.endEditing(true)
         tableView.isHidden = true
         notApplicableButton.isSelected = !notApplicableButton.isSelected
         if notApplicableButton.isSelected {
@@ -166,8 +173,8 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     @IBAction func locationBtnTapped(_ sender: UIButton) {
         tableView.isHidden = true
         moveViewDown()
-        categoryField.endEditing(true)
-        categoryField.resignFirstResponder()
+        activeTextField?.endEditing(true)
+        
         selectedIndex = sender.tag
         switch selectedIndex {
         case 0:
