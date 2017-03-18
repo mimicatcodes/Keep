@@ -187,11 +187,11 @@ struct Labels {
 struct OnBoarding {
     static let checkListTitle = "Stay Organized"
     static let checkListBody =
-    "Manage your foods easily. \r\nAdd and move items to your kitchen,\r\ncheck expiration dates easily, and make a shopping list to shop more efficiently."
+    "Manage your foods easily.\r\nAdd and move items to Stock.\r\nMake a shopping list to shop efficiently."
     static let piggyBankTitle = "Save Money"
-    static let piggyBankBody = "Reduce your food waste, and\r\nknow when your foods are about to expire."
+    static let piggyBankBody = "Reduce your food waste.\r\nKnow when your foods are about to expire."
     static let produceTitle = "Be Healthy"
-    static let produceBody = "Know your shopping trends, and\r\nlearn to buy healthier items."
+    static let produceBody = "Know your shopping trends.\r\nLearn to buy healthier items."
 }
 
 struct emptyState {
@@ -256,6 +256,11 @@ struct Email {
     static let failedMessage = "Unable to send an email"
 }
 
+struct AppID {
+    static let ituensAddress = "https://itunes.apple.com/us/app/"
+    static let appID = "keep-simple-grocery-tracker-and-shopping-list/id1214634700?ls=1&mt=8"
+}
+
 enum FiveFoodGroups: String {
     case Protein
     case Dairy
@@ -275,16 +280,18 @@ enum Location : String {
 enum SettingMenu : String {
     case reminder = "Set Reminder"
     case sendFeedback = "Send Feedback"
+    case rateUs = "Rate Us on the App Store"
 }
 
 extension UIImage {
     enum Asset: String {
         case checkList = "checkList"
-        case checkListWithBorder = "checkListWithBorder"
+        case checkListWithBorder = "bullet1"
         case piggyBank = "piggyBank"
-        case piggyBankWithBorder = "piggyBankWithBorder"
+        case piggyBankWithBorder = "bullet2"
         case produce = "produce"
-        case produceWithBorder = "produceWithBorder"
+        case produceWithBorder = "bullet3"
+        //case circle = "circle"
         
         var image: UIImage {
             return UIImage(asset: self)

@@ -402,7 +402,6 @@ class AddScannedItemVC: UIViewController {
         if labelView != nil {
             labelView.removeFromSuperview()
         }
-        //view.endEditing(true)
         dismiss(animated: true, completion: nil)
     }
 }

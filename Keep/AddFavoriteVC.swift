@@ -40,7 +40,7 @@ class AddFavoriteVC: UIViewController, UITextFieldDelegate {
     @IBAction func cancel(_ sender: Any) {
         nameField.endEditing(true)
         nameField.resignFirstResponder()
-        dismiss(animated: false, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     func save() {

@@ -11,8 +11,6 @@ import RealmSwift
 import Charts
 import MessageUI
 
-// No categories?!
-
 class SettingsViewController: UIViewController, MFMailComposeViewControllerDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var topView: UIView!
@@ -37,7 +35,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     @IBOutlet weak var labelFour: UILabel!
     
     let store = DataStore.sharedInstance
-    var sections:[SettingMenu] = [.reminder, .sendFeedback]
+    var sections:[SettingMenu] = [.reminder, .sendFeedback, .rateUs]
     var numOfItems: Int = 0
     var numOfItemsExpiringToday: Int = 0
     var numOfExpiredItems: Int = 0
@@ -150,6 +148,18 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
         controller.dismiss(animated: true)
     }
     
+    func rateApp(appId: String, completion: @escaping ((_ success: Bool)->())) {
+        guard let url = URL(string : AppID.ituensAddress + appId) else {
+            completion(false)
+            return
+        }
+        guard #available(iOS 10, *) else {
+            completion(UIApplication.shared.openURL(url))
+            return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: completion)
+    }
+    
     func setData(){
         let itemsInVegetables = Double(store.allItems.filter(Filters.vegetables).count)
         print(store.allItems.filter(Filters.vegetables))
@@ -233,8 +243,12 @@ extension SettingsViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             performSegue(withIdentifier: Identifiers.Segue.setReminder, sender: self)
-        } else {
+        } else if indexPath.row == 1 {
             sendFeedback()
+        } else {
+            rateApp(appId: AppID.appID, completion: { (success) in
+                print("RateApp \(success)")
+            })
         }
     }
 }

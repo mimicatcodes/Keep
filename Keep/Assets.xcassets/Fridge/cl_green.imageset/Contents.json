@@ -6,12 +6,11 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "produceWithBorder@2x.png",
+      "filename" : "cl_green.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "produceWithBorder@3x.png",
       "scale" : "3x"
     }
   ],
