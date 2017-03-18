@@ -37,7 +37,7 @@ Currently, KEEP’s data can only be saved to your phone.
 
 KEEP is constantly working on new updates to help more consumers eat and shop smart.
 
-The version 1.2 will have an option to store data in the cloud and will allow users to share their data with family, friends and roommates.
+The version 2.0 will have an option to store data in the cloud and will allow users to share their data with family, friends and roommates.
 
 With KEEP, you can now get more organized and enjoy getting the full use out of your food!
 
