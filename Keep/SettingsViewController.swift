@@ -140,9 +140,24 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
             mail.navigationBar.tintColor = Colors.brownishGreyTwo
             present(mail, animated: true)
         } else {
+            alertForNoMail()
             print(Email.failedMessage)
         }
     }
+    
+    func alertForNoMail(){
+        let alertController = UIAlertController(title: "No Mail Accounts!",  message: "Unable to send email due to no Mail accounts set up. Please email directly us at trykeepapp@gmail.com\r\nThank you!", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: { action in
+            
+        })
+        
+        alertController.addAction(okAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)

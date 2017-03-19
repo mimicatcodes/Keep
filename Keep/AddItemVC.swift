@@ -19,9 +19,7 @@ class AddItemVC: UIViewController, UITextFieldDelegate {
     let store = DataStore.sharedInstance
     var listTitle:String?
     var uniqueID: String?
-    
-    let lengthLimit = 23
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -80,16 +78,6 @@ class AddItemVC: UIViewController, UITextFieldDelegate {
             saveButton.backgroundColor = Colors.whiteTwo
             saveButton.setTitleColor(Colors.tealish, for: .normal)
         }
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        if let text = textField.text {
-            let newLength = text.characters.count + string.characters.count - range.length
-            return newLength <= lengthLimit
-        }
-        
-        return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

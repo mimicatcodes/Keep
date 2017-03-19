@@ -183,20 +183,6 @@ extension ScanReceiptVC : UIImagePickerControllerDelegate {
             saveButton.isEnabled = true
             saveButton.backgroundColor = Colors.tealish
         }
-        
-//        var selectedImageFromPicker: UIImage?
-//
-//        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
-//            selectedImageFromPicker = editedImage
-//        } else if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-//            selectedImageFromPicker = originalImage
-//        }
-//        if let selectedImage = selectedImageFromPicker {
-//            imageView.image = selectedImage
-//            saveButton.isEnabled = true
-//            saveButton.backgroundColor = Colors.tealish
-//            
-//        }
         dismiss(animated: true, completion: nil)
     }
 }

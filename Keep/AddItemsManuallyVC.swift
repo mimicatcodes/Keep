@@ -51,7 +51,6 @@ class AddItemsManuallyVC: UIViewController, UINavigationControllerDelegate, UITa
     let formatter = DateFormatter()
     
     var activeTextField:UITextField?
-    let lengthLimit = 23
     var selectedIndex = 0
     
     var itemToEdit: Item?
@@ -536,10 +535,8 @@ extension AddItemsManuallyVC : UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == nameTextField {
             if let text = textField.text {
-                let newLength = text.characters.count + string.characters.count - range.length
                 let subString = (text as NSString).replacingCharacters(in: range, with: string)
                 searchAutocompleteEntriesWithSubstring(subString)
-                return newLength <= lengthLimit
             }
         }
         return true

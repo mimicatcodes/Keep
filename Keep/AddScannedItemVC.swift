@@ -43,7 +43,6 @@ class AddScannedItemVC: UIViewController {
     var location: Location = .Fridge
     var activeTextField:UITextField?
     var isFavorited:Bool = false
-    let lengthLimit = 23
     var category: String = FoodCategories.other.rawValue
     
     var itemToAdd: String?
@@ -514,10 +513,8 @@ extension AddScannedItemVC : UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == nameField {
             if let text = textField.text {
-                let newLength = text.characters.count + string.characters.count - range.length
                 let subString = (text as NSString).replacingCharacters(in: range, with: string)
                 searchAutocompleteEntriesWithSubstring(subString)
-                return newLength <= lengthLimit
             }
         }
         return true

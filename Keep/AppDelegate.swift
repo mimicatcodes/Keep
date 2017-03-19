@@ -96,6 +96,10 @@ extension AppDelegate {
         if let font = UIFont(name: Fonts.montserratSemiBold, size: 16) {
             let navigationBarAppearace = UINavigationBar.appearance()
             navigationBarAppearace.titleTextAttributes = [NSFontAttributeName: font,  NSForegroundColorAttributeName: Colors.brownishGreyTwo]
+            
+            navigationBarAppearace.backIndicatorImage = UIImage(named: ImageName.back)
+            navigationBarAppearace.backIndicatorTransitionMaskImage = UIImage(named: ImageName.back)
+            
             navigationBarAppearace.barTintColor = .white
             navigationBarAppearace.tintColor = Colors.warmGreyThree
             navigationBarAppearace.layer.borderColor = Colors.whiteFour.cgColor

@@ -201,9 +201,9 @@ struct emptyState {
     static let listItem = "No items in this list yet!"
     static let search = "No matching items found"
     static let expiringItems = "No expiring items found."
-    static let messageForItems = "Click ' + ' to add items"
-    static let messageForSL = "Click ' + ' to add a shopping list"
-    static let messageForFav = "Click ' + ' to add your favorite items"
+    static let messageForItems = "Tap ' + ' to add items"
+    static let messageForSL = "Tap ' + ' to add a shopping list"
+    static let messageForFav = "Tap ' + ' to add your favorite items"
 }
 
 struct LocalNotification {
@@ -248,6 +248,7 @@ struct ImageName {
     static let delete2 = "Delete2"
     static let editGrey1 = "EditGrey1"
     static let editGrey2 = "EditGrey2"
+    static let back = "Back"
 }
 
 struct Email {
