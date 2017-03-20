@@ -38,6 +38,10 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
         tableView.reloadData()
     }
     
+    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
+        return UIImage(named: "tipsShoppingList")
+    }
+    
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         let str = emptyState.shoppingList
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
