@@ -56,7 +56,7 @@ class ShoppingListDetailVC: UIViewController, DZNEmptyDataSetSource, DZNEmptyDat
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
         return NSAttributedString(string: str, attributes: attrs)
     }
-      
+    
     func configureSwipeButtons(cell:ListDetailCell, indexPath: IndexPath){
         let deleteButton = MGSwipeButton(title: EmptyString.none, icon: UIImage(named:ImageName.delete1), backgroundColor: Colors.salmon) { (sender: MGSwipeTableCell) -> Bool in
             
