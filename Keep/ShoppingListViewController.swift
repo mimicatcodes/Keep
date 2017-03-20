@@ -38,10 +38,6 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
         tableView.reloadData()
     }
     
-    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
-        return UIImage(named: "tipsShoppingList")
-    }
-    
     func verticalOffset(forEmptyDataSet scrollView: UIScrollView) -> CGFloat {
         return 22.0
     }
