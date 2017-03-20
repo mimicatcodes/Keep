@@ -42,6 +42,10 @@ class ShoppingListViewController: UIViewController, DZNEmptyDataSetSource, DZNEm
         return UIImage(named: "tipsShoppingList")
     }
     
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView) -> CGFloat {
+        return 22.0
+    }
+    
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         let str = emptyState.shoppingList
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]

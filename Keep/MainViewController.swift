@@ -127,7 +127,7 @@ class MainViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataS
     }
     
     func verticalOffset(forEmptyDataSet scrollView: UIScrollView) -> CGFloat {
-        return -47.0
+        return -26.0
     }
     
     func refreshTableView(){

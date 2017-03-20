@@ -45,6 +45,10 @@ class ShoppingListDetailVC: UIViewController, DZNEmptyDataSetSource, DZNEmptyDat
         performSegue(withIdentifier: Identifiers.Segue.addItemToSL, sender: nil)
     }
     
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView) -> CGFloat {
+        return -10.0
+    }
+    
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         let str = emptyState.listItem
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]

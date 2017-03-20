@@ -45,6 +45,10 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         dismiss(animated: true, completion: nil)
     }
     
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView) -> CGFloat {
+        return -45.00
+    }
+    
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         let str = emptyState.search
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
