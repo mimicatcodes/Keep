@@ -38,6 +38,9 @@ class Helper {
     
     static func setUpNotification(hour:Int, minute:Int){
         
+        let center = UNUserNotificationCenter.current()
+        center.removeAllPendingNotificationRequests()
+        
         let store = DataStore.sharedInstance
         
         var itemsExpiringToday:[Item] = []
@@ -53,9 +56,6 @@ class Helper {
             dateComponents.minute = minute
             
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-            
-            let center = UNUserNotificationCenter.current()
-            center.removeAllPendingNotificationRequests()
             
             let content = UNMutableNotificationContent()
             

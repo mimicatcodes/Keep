@@ -68,7 +68,7 @@ class SetTimeForReminderVC: UIViewController {
     
     func configureDatePicker(){
         datePicker.datePickerMode = .time
-        datePicker.minuteInterval = 10
+        datePicker.minuteInterval = 1
         datePicker.layer.borderWidth = 1.0
         datePicker.layer.borderColor = Colors.tealish.cgColor
         datePicker.layer.cornerRadius = 8.0
