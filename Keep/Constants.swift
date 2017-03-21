@@ -255,6 +255,9 @@ struct Email {
     static let address = "trykeepapp@gmail.com"
     static let subject = "Hi Keep Team!"
     static let failedMessage = "Unable to send an email"
+    static let noMail = "No Mail Accounts!"
+    static let unableToEmailMessage = "Unable to send email due to no Mail accounts set up. Please email directly us at trykeepapp@gmail.com\r\nThank you!"
+    static let ok = "OK"
 }
 
 struct AppID {

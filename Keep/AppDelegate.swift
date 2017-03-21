@@ -98,6 +98,7 @@ extension AppDelegate {
             navigationBarAppearace.titleTextAttributes = [NSFontAttributeName: font,  NSForegroundColorAttributeName: Colors.brownishGreyTwo]
             
             navigationBarAppearace.backIndicatorImage = UIImage(named: ImageName.back)
+            //.withRenderingMode(.alwaysOriginal).withAlignmentRectInsets(UIEdgeInsetsMake(0, -3, 0, 0))
             navigationBarAppearace.backIndicatorTransitionMaskImage = UIImage(named: ImageName.back)
             
             navigationBarAppearace.barTintColor = .white
